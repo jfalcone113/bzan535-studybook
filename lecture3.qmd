@@ -1,0 +1,242 @@
+# Descriptive Analytics for Time Series Data
+
+```{r}
+#| label: setup
+#| include: false
+library(lubridate)
+library(tidyverse)
+library(ggplot2)
+```
+
+## Overview
+
+For descriptive analysis, the focus was on questions such as: What is typical? How spread out is the data? What shape does the distribution have? With time series data, an additional question becomes important: When did it happen? 
+
+Time series data is a sequence of observations collected or recorded at successive points in time. Because observations are ordered chronologically, time series data provides a dynamic view of how a variable changes over time, rather than a static snapshot.
+
+- Chronological order: Observations occur sequentially over time so ordering of the data matters.
+- Time index: Each oberservation is associated with a specific point in time.
+- Dependence over time: Earlier and later observations may be related, meaning observations may not be independent.
+- Temporal patterns: The ordering of observations allows patterns like trend, seasonality, and short term variation to be identified.
+
+Suppose a CFO says"
+    "Sales dropped 15% from Q3 to Q4."
+
+That number by itself doesn't necessarily mean the business suddently got worse. Maybe sales normally decline from Q3 to Q4 and this is just a regular reoccurring observation.
+
+With time series data, there are three things to be distinguished:
+
+- Trend $\rightarrow$ Is there a long-term upward/downward movement?
+- Seasonality $\rightarrow$ Does a pattern repeat at regular intervals?
+- Noise $\rightarrow$ Is a movement just short-term random variation?
+- Level Change $\rightarrow$ Did the series actually shift to a different level?
+
+## Working with Lubridate
+
+Why do dates matter in analytics? Dates can be used for several things, for example:
+
+- Time aware filtering (e.g. time based filtering), time aware grouping (group a time period), and trend/seasonality detection.
+- Aligning events (comparing before and afters).
+- Preparing for forecasting.
+
+Dates need to actually be dates! A date stored as text like: 
+
+`'2025-08-21'`
+
+is much different from an `R Date` object actually representing August 21, 2025. The main package used when working with dates is `lubridate`.
+
+### Parsing Dates
+
+Parsing dates is the process of converting raw string dates to an actual date/time object, which can then be converted into useful time components.
+Raw string dates may not always be written in a consistent way, therefore different functions are used based on what the text format is.
+
+- `ymd()` when string = YEAR $\rightarrow$ MONTH $\rightarrow$ DAY
+- `mdy()` when string = MONTH $\rightarrow$ DAY $\rightarrow$ YEAR
+- `dmy()` when string = DAY $\rightarrow$ MONTH $\rightarrow$ YEAR
+- `ymd_hms()` when string = YEAR $\rightarrow$ MONTH $\rightarrow$ DAY `:` HH:MM:SS
+
+Example:
+```{r}
+ymd("2025-08-21")
+mdy("08/21/2025")
+dmy("21-Aug-2025")
+ymd_hms("2025-08-21 14:30:00")
+```
+
+Once the date is in the correct format, R can extract pieces:
+
+- `year(x)` = extract year
+- `month(x)` = extract month
+- `quarter(x)` = extract quarter
+- `wday(x)` = extract weekday
+- `hour(x)` = extract hour
+- `isoweek(x)` = extract week number of year
+
+```{r}
+x <- ymd_hms("2025-08-21 14:30:00")
+x
+year(x)
+month(x)
+quarter(x)
+wday(x)
+hour(x)
+isoweek(x)
+
+```
+
+Esssentially the process is **raw date string → actual date/time object → useful time components**
+
+Dates can also be created from combining variables that already exist. For example if you have `year = 2025`
+and `month = 8` you can construct an actual date.
+
+`make_date()` use when year/month columns exist because it avoids rounding problems associated with fractional-year representations
+
+```{r}
+# Before: year and month are separate variables
+txhousing |>
+    select(year, month) |>
+    head(2)
+
+# Create an actual date from year and month
+TX <- txhousing |>
+    mutate(
+        date_actual = make_date(
+            year = year,
+            month = month,
+            day = 1
+        )
+    )
+
+# After: year and month have been combined into a date
+TX |>
+    select(year, month, date_actual) |>
+    head(2)
+```
+
+### Calendar Arithmetic
+
+Leap years can screw up calculation of dates. For example `ymd("2024-02-29")` is a leap year. If you subtract five years you'd get `2019-02-29` which doesn't exist. 
+
+```{r}
+d1 <- ymd("2024-02-29")
+```
+
+lubridate has calendar awareness operators:
+```{r}
+d1 %m-% years(5)
+ymd("2023-01-31") %m+% months(1)
+```
+
+### Time Windows
+
+Once dates are represented properly, normal comparisons work:
+
+```{r}
+filter(
+    date_actual >= as.Date("2005-01-01"),
+    date_actual <= as.Date("2010-12-31")
+)
+```
+
+You can also make relative windows.
+
+For example, find the most recent date:
+
+```{r}
+max_date <- max(txhousing$date_actual, na.rm = TRUE)
+
+```
+
+Then go five years backward:
+
+```{r}
+start_5y <- max_date %m-% years(5)
+```
+
+Then 
+
+```{r}
+recent <- txhousing |>
+    filter(date_actual > start_5y)
+```
+
+So instead of hard-coding a five-year range, you’re saying:
+
+Give me observations from the final five years of the dataset.
+
+For time-series data, the standard visualization is a line chart.
+
+The lecture calculates statewide median sales for each month:
+
+```{r}
+txhousing |>
+    group_by(date_actual) |>
+    summarise(
+        median_sales = median(sales, na.rm = TRUE)
+    ) |>
+    ggplot(aes(date_actual, median_sales)) +
+    geom_line()
+```
+
+The conceptual structure is:
+Date → x-axis
+Value → y-axis
+
+Connecting observations makes the evolution of the variable visible.
+
+`scale_x_date()` then controls how frequently dates are displayed so that a long time horizon doesn’t produce an unreadable x-axis.
+
+
+### Seasonality
+
+**Seasonality** is one of the central concepts of time series data.
+
+Seasonality is a pattern that systematically repeats according to the calendar.
+
+It can be viewed by:
+
+Lines by year:
+```{r}
+ggplot(aes(
+    x = month(date_actual, label = TRUE),
+    y = sales,
+    group = year,
+    color = as.factor(year)
+)) +
+    geom_line()
+```
+
+Boxplots by month
+
+What does a typical January look like across years? What does a typical July look like?
+
+```{r}
+ggplot(aes(month_lab, sales)) +
+    geom_boxplot()
+```
+
+Heatmaps are another view of seasonality
+
+       2005  2006  2007  2008 ...
+Jan      ■     ■     ■     ■
+Feb      ■     ■     ■     ■
+Mar      ■     ■     ■     ■
+...
+Dec      ■     ■     ■     ■
+
+where the fill intensity represents sales.
+
+### Moving Averages
+
+Month-to-month fluctuations can make the underlying trend difficult to see. A rolling average smooths those fluctuations.
+
+```{r}
+rollmean(
+    median,
+    k = 12,
+    fill = NA,
+    align = "right"
+)
+```
+
+k = 12 means a 12-observation window. Because the data are monthly, that’s a 12-month moving average.

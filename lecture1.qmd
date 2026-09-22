@@ -1,0 +1,106 @@
+# Role of Statistics and Key Concepts
+
+## Overview
+
+- A decision before definitions
+- Role of statistics in business
+- Data types and measurement scales
+- Populations vs. Samples
+- Parameters vs. Statistics
+- Study Designs: Observational vs. Experimental
+
+**Statistics: Business Question $\rightarrow$ Data $\rightarrow$ Analysis $\rightarrow$ Decision**
+
+The goal is to make that pipeline rigorous, not a simple "gut call." There should be some method behind the process.
+
+- Precisely describe what the data shows. *What was the average order value?*
+- Estimate what's outside the data with honest uncertainty. *What does our sample tell us about customers in general?*
+- Compare groups within data and decide if differences are real or noise. *Do customers exposed to different policies actualy behave differently?*
+- Model relationships and determine if they're causal. *What variables are related to spending and do they actually cause some sort of change?*
+
+## Types of Data
+
+**Categorical:** qualitative values relating to characteristics.
+
+- **Nomimal:** categories with **no meaniningful order**. There's no mathematical sense in which is greater or less than another. *e.g. red, blue, green*
+- **Ordinal:** categories **with an order** to them. Certain categories correspond to higher or lower rankings, places, etc. *e.g. one star, two star, three star*
+
+**Numerical**
+
+- **Interval:** numerical values with meaningful differences but no true zero. A value of zero doesn't neccessarily mean "none", rather it's just a 'label' similar to any other number. *e.g. 0°F, 53°F*
+- **Ratio:** numerical values with a true equal spacing and a true zero. In this case, a value of zero literally means "none" or "nothing there". *e.g. $0, $5* Because zero has an actual meaning, comparisons (or ratios) like "twice as much" are relevant.
+
+## Population vs. Sample
+
+- Population: entire group of interest. This is the true group in question.
+- Sample: the limited subset being observed.
+- Parameter: a description of the population. Because it involves the entire group of interest, it's unknown (it's impossible to actually include everyone).
+- Statistic: a computed description of the sample. Because the sample is only a part of the group, meaning it's an inference that it represents the true group, it's a predicted value.
+
+|  | Population | Sample |
+|---|---:|---:|
+| **Described by** | Parameter | Statistic |
+| **Center** | $\mu$ | $\bar{x}$ |
+| **Proportion** | $p$ | $\hat{p}$ |
+| **Spread** | $\sigma$ | $s$ |
+
+
+Say in reality there's 50,000 customers and you survey 40. The average satisfaction score of the survey is 4.2. What you really want to know is $\mu = ?$ – the average satisfaction of all 50,000 customers. 
+
+Because only 40 were surveyed, you're using $\text{statistic} \rightarrow \text{estimate parameter}$ to estimate $\mu$. That's the foundation of **statistical inference**.
+
+Taste a spoon of soup (sample) to judge the pot (population), but only if you stirred it first (representative sample).
+
+## Two Broad Branches of Statistics
+
+**Descriptive vs. Inferenential – that distinction becomes important.**
+
+**Descriptive**: describe the data actually observed. Things like mean, median, standard deviation, histogram, boxplot.
+
+    *The customers in our sample spent an average of $75.*
+
+That's descriptive
+
+**Inferential:** use your sample to say something about a larger population. Things liek confidence intervals, hypothesis tests, regression, experiments.
+
+    *Based on the sample, we estimate RetailCo customers spend...*
+
+Assuming reality: inferential.
+
+| Goal | Tools | Output Examples |
+|---|---|---|
+| **Describe** | Tables, histograms, boxplots | Center, spread, shape |
+| **Infer / Predict** | Confidence intervals, hypothesis tests, regression, machine learning | Effects, forecasts |
+
+## Statistical Tools
+
+| Question | Data | Tool |
+|---|---|---|
+| **What’s typical/variable?** | Quantitative | Mean, SD, IQR, histogram, boxplot |
+| **How many are in each group?** | Categorical | Frequency table, bar chart |
+| **Do groups differ?** | Categorical + quantitative | Side-by-side boxplots, summaries |
+| **Are two quantities associated?** | Two quantitative variables | Scatterplot, correlation |
+
+So you don't just randomly choose the statistical technique, the business question and variable types determine the appropriate tool.
+
+## Study Designs: Observational vs. Experimental
+
+Suppose a company claims customers who use our app spend 40% more. Does that mean our app causes customers to spend more? Not neccessarily. Many people who download the app could already be the company's most loyal customers.
+This is the problem of **confounding**.
+
+**Observational:** observe what people already chose/did.
+Here, you can establish an association, but causality isn't established merely by observing a difference.
+
+**Experiment (A/B):** random assignment of subjects. This randomization helps balance other characteristics (lurking variables) between groups. Therefore, differences in outcomes can support a causal interpretation, assuming everything else in the experiement is valid.
+
+Randomized experiments can support cause-and-effect inference, whereas observational studies do not by themselves; random sampling is separately what supports inference to a population.
+
+Random Sampling and random assignment are **not** the same thing. 
+
+- Random sampling answers "Can I generalize this result to the population.".
+- Random Assignment answers "Can I make a causal claim?"
+
+| Concept | What Is Randomized? | When? | Purpose |
+|---|---|---|---|
+| **Random Sampling** | Which people from the population are selected for the sample | When selecting a sample | Makes the sample more representative of the population and supports **generalizing to the population** |
+| **Random Assignment** | Which treatment/group participants receive | When conducting an experiment | Makes treatment groups more comparable and supports stronger **causal conclusions** |

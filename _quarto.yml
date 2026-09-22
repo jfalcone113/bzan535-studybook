@@ -1,0 +1,31 @@
+project:
+  type: book
+
+book:
+  title: "BZAN 535: Statistical Methods"
+  author: "Joseph Falcone"
+  date: "9/17/2026"
+  chapters:
+    - index.qmd
+    - lecture1.qmd
+    - lecture2.qmd
+    - lecture3.qmd
+    - lecture4.qmd
+    - lecture5.qmd
+    - lecture6.qmd
+    - lecture7.qmd
+    - lecture8.qmd
+    - lecture10.qmd
+    
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+
