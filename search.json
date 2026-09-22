@@ -1,0 +1,242 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BZAN 535: Statistical Methods",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "lecture1.html",
+    "href": "lecture1.html",
+    "title": "1  Role of Statistics and Key Concepts",
+    "section": "",
+    "text": "1.1 Overview\nStatistics: Business Question \\(\\rightarrow\\) Data \\(\\rightarrow\\) Analysis \\(\\rightarrow\\) Decision\nThe goal is to make that pipeline rigorous, not a simple “gut call.” There should be some method behind the process.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Role of Statistics and Key Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "lecture1.html#overview",
+    "href": "lecture1.html#overview",
+    "title": "1  Role of Statistics and Key Concepts",
+    "section": "",
+    "text": "A decision before definitions\nRole of statistics in business\nData types and measurement scales\nPopulations vs. Samples\nParameters vs. Statistics\nStudy Designs: Observational vs. Experimental\n\n\n\n\nPrecisely describe what the data shows. What was the average order value?\nEstimate what’s outside the data with honest uncertainty. What does our sample tell us about customers in general?\nCompare groups within data and decide if differences are real or noise. Do customers exposed to different policies actualy behave differently?\nModel relationships and determine if they’re causal. What variables are related to spending and do they actually cause some sort of change?",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Role of Statistics and Key Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "lecture1.html#types-of-data",
+    "href": "lecture1.html#types-of-data",
+    "title": "1  Role of Statistics and Key Concepts",
+    "section": "1.2 Types of Data",
+    "text": "1.2 Types of Data\nCategorical: qualitative values relating to characteristics.\n\nNomimal: categories with no meaniningful order. There’s no mathematical sense in which is greater or less than another. e.g. red, blue, green\nOrdinal: categories with an order to them. Certain categories correspond to higher or lower rankings, places, etc. e.g. one star, two star, three star\n\nNumerical\n\nInterval: numerical values with meaningful differences but no true zero. A value of zero doesn’t neccessarily mean “none”, rather it’s just a ‘label’ similar to any other number. e.g. 0°F, 53°F\nRatio: numerical values with a true equal spacing and a true zero. In this case, a value of zero literally means “none” or “nothing there”. e.g. $0, $5 Because zero has an actual meaning, comparisons (or ratios) like “twice as much” are relevant.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Role of Statistics and Key Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "lecture1.html#population-vs.-sample",
+    "href": "lecture1.html#population-vs.-sample",
+    "title": "1  Role of Statistics and Key Concepts",
+    "section": "1.3 Population vs. Sample",
+    "text": "1.3 Population vs. Sample\n\nPopulation: entire group of interest. This is the true group in question.\nSample: the limited subset being observed.\nParameter: a description of the population. Because it involves the entire group of interest, it’s unknown (it’s impossible to actually include everyone).\nStatistic: a computed description of the sample. Because the sample is only a part of the group, meaning it’s an inference that it represents the true group, it’s a predicted value.\n\n\n\n\n\nPopulation\nSample\n\n\n\n\nDescribed by\nParameter\nStatistic\n\n\nCenter\n\\(\\mu\\)\n\\(\\bar{x}\\)\n\n\nProportion\n\\(p\\)\n\\(\\hat{p}\\)\n\n\nSpread\n\\(\\sigma\\)\n\\(s\\)\n\n\n\nSay in reality there’s 50,000 customers and you survey 40. The average satisfaction score of the survey is 4.2. What you really want to know is \\(\\mu = ?\\) – the average satisfaction of all 50,000 customers.\nBecause only 40 were surveyed, you’re using \\(\\text{statistic} \\rightarrow \\text{estimate parameter}\\) to estimate \\(\\mu\\). That’s the foundation of statistical inference.\nTaste a spoon of soup (sample) to judge the pot (population), but only if you stirred it first (representative sample).",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Role of Statistics and Key Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "lecture1.html#two-broad-branches-of-statistics",
+    "href": "lecture1.html#two-broad-branches-of-statistics",
+    "title": "1  Role of Statistics and Key Concepts",
+    "section": "1.4 Two Broad Branches of Statistics",
+    "text": "1.4 Two Broad Branches of Statistics\nDescriptive vs. Inferenential – that distinction becomes important.\nDescriptive: describe the data actually observed. Things like mean, median, standard deviation, histogram, boxplot.\n*The customers in our sample spent an average of $75.*\nThat’s descriptive\nInferential: use your sample to say something about a larger population. Things liek confidence intervals, hypothesis tests, regression, experiments.\n*Based on the sample, we estimate RetailCo customers spend...*\nAssuming reality: inferential.\n\n\n\n\n\n\n\n\nGoal\nTools\nOutput Examples\n\n\n\n\nDescribe\nTables, histograms, boxplots\nCenter, spread, shape\n\n\nInfer / Predict\nConfidence intervals, hypothesis tests, regression, machine learning\nEffects, forecasts",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Role of Statistics and Key Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "lecture1.html#statistical-tools",
+    "href": "lecture1.html#statistical-tools",
+    "title": "1  Role of Statistics and Key Concepts",
+    "section": "1.5 Statistical Tools",
+    "text": "1.5 Statistical Tools\n\n\n\n\n\n\n\n\nQuestion\nData\nTool\n\n\n\n\nWhat’s typical/variable?\nQuantitative\nMean, SD, IQR, histogram, boxplot\n\n\nHow many are in each group?\nCategorical\nFrequency table, bar chart\n\n\nDo groups differ?\nCategorical + quantitative\nSide-by-side boxplots, summaries\n\n\nAre two quantities associated?\nTwo quantitative variables\nScatterplot, correlation\n\n\n\nSo you don’t just randomly choose the statistical technique, the business question and variable types determine the appropriate tool.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Role of Statistics and Key Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "lecture1.html#study-designs-observational-vs.-experimental",
+    "href": "lecture1.html#study-designs-observational-vs.-experimental",
+    "title": "1  Role of Statistics and Key Concepts",
+    "section": "1.6 Study Designs: Observational vs. Experimental",
+    "text": "1.6 Study Designs: Observational vs. Experimental\nSuppose a company claims customers who use our app spend 40% more. Does that mean our app causes customers to spend more? Not neccessarily. Many people who download the app could already be the company’s most loyal customers. This is the problem of confounding.\nObservational: observe what people already chose/did. Here, you can establish an association, but causality isn’t established merely by observing a difference.\nExperiment (A/B): random assignment of subjects. This randomization helps balance other characteristics (lurking variables) between groups. Therefore, differences in outcomes can support a causal interpretation, assuming everything else in the experiement is valid.\nRandomized experiments can support cause-and-effect inference, whereas observational studies do not by themselves; random sampling is separately what supports inference to a population.\nRandom Sampling and random assignment are not the same thing.\n\nRandom sampling answers “Can I generalize this result to the population.”.\nRandom Assignment answers “Can I make a causal claim?”\n\n\n\n\n\n\n\n\n\n\nConcept\nWhat Is Randomized?\nWhen?\nPurpose\n\n\n\n\nRandom Sampling\nWhich people from the population are selected for the sample\nWhen selecting a sample\nMakes the sample more representative of the population and supports generalizing to the population\n\n\nRandom Assignment\nWhich treatment/group participants receive\nWhen conducting an experiment\nMakes treatment groups more comparable and supports stronger causal conclusions",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Role of Statistics and Key Concepts</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html",
+    "href": "lecture2.html",
+    "title": "2  Descriptive Analysis",
+    "section": "",
+    "text": "2.1 Overview\nRaw data can be messy and overwhelming, making it difficult to interpret and work with. Descriptive analysis helps solve this problem by summarizing and exploring data in a way that turns raw numbers into patterns and insights that can be understood accurately and easily.\nThere are three key questions to consider:\nHow do we answer these questions? By examining the center, spread, and shape of the data – each of which describes a different aspect of the observations and together, helps us draw accurate conclusions about what the data is telling us.\nDescriptive Analysis is organized around several key ideas:\nThe first three, center, spread, and shape, describe the distribution itself. Groups lets you compare distributions, while visualization is how you explore and communicate those characteristics. And all are equally important.\nA Quick Example: Suppose two products both sell an average of 100 units per week:\nBoth products have the same average, but their weekly sales behave very differently. Knowing the average alone does not necessarily tell us what sales actually look like.\nThey have the same center, but very different spread.\nTogether, these tools help answer the key questions needed to understand a dataset before moving on to deeper analysis.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html#overview",
+    "href": "lecture2.html#overview",
+    "title": "2  Descriptive Analysis",
+    "section": "",
+    "text": "What’s typical?\nHow spread out is it?\nWhat shape does it have?\n\n\n\n\nCenter — What is typical?\nSpread — How much does the data vary?\nShape — What does the distribution look like?\nGroups — How do different categories or populations compare?\nVisualization — How can we make patterns easier to see?\n\n\n\n\nProduct A: 98, 101, 102, 99, 100 → extremely consistent\nProduct B: 20, 180, 40, 160, 100 → highly variable",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html#center",
+    "href": "lecture2.html#center",
+    "title": "2  Descriptive Analysis",
+    "section": "2.2 Center",
+    "text": "2.2 Center\nWhat’s a typical value?\nCenter is the measure that represents the typical or central value of a dataset. It describes the location around which the data tends to lie.\nThere are two main measures of center: mean and median.\n\n2.2.1 Mean\nThe mean is the arithmetic average of a dataset. It is calculated by adding all observations together and dividing by the number of observations.\n\\(\\bar{x} = \\frac{\\sum{x_i}}{n}\\)\nPros:\n\nUses every observation in dataset.\nEasy to calculate and interpret.\n\nCons:\n\nSensitive to outliers.\nCan be misleading for highly skewed distributions.\n\n\n\n2.2.2 Median\nMedian is the middle value of a dataset after the observations have been ordered. It is more robust to outliers than the mean. For a odd number of observations, sort the data and take the middle value. For an even number of observations (i.e. two middle values) take the two middle values and average them.\nPros:\n\nRobust to outliers and extreme values.\nOften better represents the center of skewed data.\n\nCons:\n\nDoes not incorportate the magnitude of every observation the same way the mean does.\nCan ignore meaningful differences in the values away from the middle.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html#spread",
+    "href": "lecture2.html#spread",
+    "title": "2  Descriptive Analysis",
+    "section": "2.3 Spread",
+    "text": "2.3 Spread\nHow much do values vary?\nSpread describes how much the observations in a dataset vary or differ from one another. In other words, it tells us how dispersed the data is around its center.\n\n2.3.1 Range\nThe range measures the distance between the smallest and largest observations.\n\\(\\text{range} = \\text{maximum} - \\text{minimum}\\)\nPros:\n\nExtremely simple to calculate or understand.\n\nCons:\n\nOnly considers two observations – the largest and smallest – so it is highly sensitive to outliers.\n\n\n\n2.3.2 IQR\nThe IQR measures the spread of the middle 50% of the observations. In other words, how much do the middle 50% of values span? Because it ignores the extreme ends, it’s resilient to outliers.\n\\(\\text{IQR} = Q_3 - Q_1\\)\n\\(Q_1\\) is the 25th percentile. \\(Q_3\\) is the 75h percentile.\nConceptually, IQR looks at: \\[\n\\underbrace{\\text{lowest 25\\%}}_{\\phantom{x}}\n\\quad|\\quad\n\\underbrace{Q_1\\; \\longleftrightarrow\\; Q_3}_{\\text{middle 50\\%}}\n\\quad|\\quad\n\\underbrace{\\text{highest 25\\%}}_{\\phantom{x}}\n\\]\nPros:\n\nRobust to outliers.\n\nCons:\n\nDoes not incorportate all observations.\n\n\n\n2.3.3 Variance\nVariance measures how spread out observations are around the mean using their squared deviations from the mean. The deviations are squared so that negative and positive deviations do not cancel each other out.\nTo calculate:\n\nFind the mean.\nFind how far each observation is from the mean.\nSquare each difference.\nAdd the squared differences.\nDivide by n-1.\n\n\\(s^2 = \\frac{\\sum{(x_i - \\bar{x})^2}}{n-1}\\)\nPros:\n\nUses every observation in the dataset.\nMeasures spread specifically around the mean, so it pairs naturally with the mean.\n\nCons: - Expressed in squared units, meaning it is less intuitive.\n\n\n2.3.4 Standard Deviation\nStandard Deviation is the square root of the variance. It allows for an interpretable scale of how much values differ from mean by putting variance back into original units.\n\\(s = \\sqrt{s^2}\\)\nPros:\n\nEasy to interpret.\n\nCons:\n\nIts magnitude depends on the scale of the data and can be misleading when comparing two variables of different scales.\nSensitive to outliers.\n\n\n\n2.3.5 Coefficient of Variation\nThe Coefficient of Variation measures the standard deviation relative to the mean. In other words, it tells you how large the standard deviation is compared to the mean (how big is distance based on mean).\n\\(\\text{CV} = \\frac{\\text{SD}}{\\bar{x}}\\)\nPros:\n\nCan accurately compare spread of variables with different scales.\n\nCons:\n\nNot useful when mean is zero, because you cannot divide by zero.\nCan be sensitive to outliers.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html#shape",
+    "href": "lecture2.html#shape",
+    "title": "2  Descriptive Analysis",
+    "section": "2.4 Shape",
+    "text": "2.4 Shape\nWhat does the distribution look like?\nShape describes the overall pattern or form of a distribution. It helps us understand how observations are distributed around the center, including whether the data is symmetric, skewed, or contains outliers.\n\n2.4.1 Symmetric\nA symmetric distribution has approximately the same shape on both sides of its center. Neither side has a substantially longer tail than the other.\nIn a symmetric distribution, the mean and median tend to be relatively close.\n\n\n2.4.2 Right Skewed\nA right-skewed distribution has a long tail extending to the right, toward larger values.\nA relatively small number of large observations stretch the distribution to the right and can pull the mean upward.\nTypically: \\(\\text{right skewed} \\rightarrow \\text{mean}&gt;\\text{median}\\)\n\n\n2.4.3 Left Skewed\nA left-skewed distribution has a long tail extending to the left, toward smaller values.\nA relatively small number of small observations stretch the distribution to the left and can pull the mean downward.\nLeft tail \\(\\rightarrow\\) mean pulled left \\(\\rightarrow\\) Mean &lt; Median Right tail \\(\\rightarrow\\) mean pulled right \\(\\rightarrow\\) Mean &gt; Median\n\n\n2.4.4 Outliers\nAn outlier is an observation that is unusually far from the rest of the data.\nThe IQR rule can be used to identify potential outliers.\n\\(\\text{lower bound}=Q_1-1.5(IQR)\\)\n\\(\\text{upper bound}=Q_3+1.5(IQR)\\)\nIf the observation is outside of these bounds it can be flagged as a potential outlier.\nAn outlier should not automatically be deleted. It is important to investigate its cause first. For example, an extreme observation could represent a data-entry error, a legitimate unusual observation, or a measurement/unit issue.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html#frequency-tables",
+    "href": "lecture2.html#frequency-tables",
+    "title": "2  Descriptive Analysis",
+    "section": "2.5 Frequency Tables",
+    "text": "2.5 Frequency Tables\nA frequency table summarizes a categorical variable by showing the count and/or proportion of observations in each category. It helps identify common and rare categories and understand the overall category mix.\n\n\n\nDepartment\nCount\nPercent\n\n\n\n\nGrocery\n39,021\n42.3%\n\n\nDrug GM\n31,529\n34.1%\n\n\nProduce\n3,118\n3.4%",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html#visualizations",
+    "href": "lecture2.html#visualizations",
+    "title": "2  Descriptive Analysis",
+    "section": "2.6 Visualizations",
+    "text": "2.6 Visualizations\n\n\n\n\n\n\n\n\nPlot\nData\nMain Question\n\n\n\n\nHistogram\n1 quantitative variable\nWhat does the distribution look like?\n\n\nBoxplot\nQuantitative, often by category\nHow does the distribution/spread compare?\n\n\nScatterplot\n2 quantitative variables\nAre the variables related?\n\n\nBar chart\nCategorical\nHow do category counts/proportions compare?\n\n\nPie chart\nCategorical proportions\nHow is the whole divided among categories?\n\n\n\n\n2.6.1 Histograms\nA histogram shows the distribution of a single quantitative variable by grouping numerical values into intervals called bins and showing how many observations fall into each bin.\nUseful for identifying:\n\nShape of a distribution\nSkewness\nModes or peaks\nGaps\n\nThe bin width determines how wide each interval is and therefore how much detail the histogram shows\n\nggplot(mtcars, aes(x = mpg)) +\n    geom_histogram(binwidth = 2)\n\n\n\n\n\n\n\n\nUse when: You want to see what the distribution of one quantitative variable looks like.\n\n\n2.6.2 Boxplots\nA boxplot provides a compact summary of the distribution of a quantitative variable using the five-number summary: \\(\\text{Min},\\ Q_1,\\ \\text{Median},\\ Q_3,\\ \\text{Max}\\)\nIt is useful for examining:\n\nCenter\nSpread\nSkewness\nPotential outliers\nDifferences between groups\n\nBoxplots are especially useful when you want to compare distributions across categories.\n\nggplot(mtcars, aes(x = factor(cyl), y = mpg)) +\n    geom_boxplot()\n\n\n\n\n\n\n\n\nUse when: You want to examine or compare the distributions of quantitative data, particularly across groups.\n\n\n2.6.3 Scatterplots\nA scatterplot shows the relationship between two quantitative variables. Each point represents one observation.\nUseful for identifying:\n\nDirection — positive or negative relationship\nStrength — how closely the variables are related\nForm — linear, nonlinear, etc.\nOutliers\n\n\nggplot(mtcars, aes(x = wt, y = mpg)) +\n    geom_point()\n\n\n\n\n\n\n\n\nUse when: You want to know whether two quantitative variables are related.\n\n\n2.6.4 Bar Charts\nA bar chart displays the counts or proportions of categories for a categorical variable. It is essentially the graphical version of a frequency table.\nThe categories are represented by bars, and the height of each bar represents its count.\n\nggplot(mtcars, aes(x = factor(cyl))) +\n    geom_bar()\n\n\n\n\n\n\n\n\nUse when: You want to compare counts or proportions across categories.\n\n\n2.6.5 Pie Charts\nA pie chart displays proportions of a whole as slices of a circle. Larger slices represent larger proportions.\nPie charts work best when there are only a small number of categories. Similar-sized slices can be difficult to compare visually, so a bar chart is often easier to interpret.\n\nmtcars |&gt;\n    count(cyl) |&gt;\n    ggplot(aes(x = \"\", y = n, fill = factor(cyl))) +\n    geom_col(width = 1) +\n    coord_polar(theta = \"y\")\n\n\n\n\n\n\n\n\nUse when: You want to show how a small number of categories make up a whole.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture2.html#ggplot2",
+    "href": "lecture2.html#ggplot2",
+    "title": "2  Descriptive Analysis",
+    "section": "2.7 ggplot2",
+    "text": "2.7 ggplot2\nggplot2 is a data visualization package in R built by combining data, aesthetics, and layers.\ndata + aesthetics + layers\nData = what you’re plotting aes() = which variables control visual properties geom_*() = how the observations are drawn scale_*() = how values are displayed facet_*() = split into groups labs() = titles and labels theme_*() = appearance\n\n2.7.1 Aesthetics\nAesthetics, specified with aes(), determine how variables in the data are mapped to visual properties of the graph.\nCommon aesthetics include:\n\nx — horizontal position\ny — vertical position\ncolor — color\nsize — size\nshape — shape\nalpha — transparency\n\n\nggplot(mtcars, aes(\n    x = wt,\n    y = mpg,\n    color = factor(cyl)\n))\n\n\n\n\n\n\n\n\n\n\n2.7.2 Layers\nLayers determine how the data is actually displayed. They are usually added with geom_*() functions using +.\n\nggplot(mtcars, aes(x = wt, y = mpg)) +\n    geom_point()\n\n\n\n\n\n\n\n\nExamples include:\ngeom_point() geom_histogram() geom_boxplot() geom_col()\n\n\n2.7.3 Mapping vs. Setting\nMapping means a visual property varies according to a variable in the data. Put it inside aes()\n\nggplot(mtcars, aes(\n    x = wt,\n    y = mpg,\n    color = factor(cyl)\n)) +\n    geom_point()\n\n\n\n\n\n\n\n\nDifferent household-size categories receive different colors.\nSetting means giving a visual property one fixed value. Put it outside aes()\n\nggplot(mtcars, aes(\n    x = wt,\n    y = mpg\n    )) +\n    geom_point(color = \"steelblue\")\n\n\n\n\n\n\n\n\nNow every point is steel blue.\n\n\n2.7.4 Scales\nScales control how mapped data values are displayed, such as transforming or formatting an axis.\n\nggplot(mtcars, aes(x = wt, y = mpg)) +\n    geom_point() +\n    scale_y_log10()\n\n\n\n\n\n\n\n\nscale_y_log10() cisplays the y-axis on a logarithmic scale.\n\n\n2.7.5 Facets\nFacets split one visualization into separate plots for different groups.\n\nggplot(mtcars, aes(x = wt, y = mpg)) +\n    geom_point() +\n    facet_wrap(~ cyl)\n\n\n\n\n\n\n\n\nInstead of showing every household-size group on one graph, you get a separate panel for each household size.\n\n\n2.7.6 Labels\nlabs() controls the descriptive text on the visualization:\n\nggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +\n    geom_point() +\n    labs(\n        title = \"Vehicle Weight vs. Fuel Efficiency\",\n        subtitle = \"1973–74 Motor Trend road tests\",\n        x = \"Weight (1,000 lbs)\",\n        y = \"Miles per Gallon\",\n        color = \"Cylinders\"\n    )\n\n\n\n\n\n\n\n\n\n\n2.7.7 Themes\nThemes control the overall appearance of the plot rather than the underlying data.\n\nggplot(mtcars, aes(x = wt, y = mpg)) +\n    geom_point() +\n    theme_minimal()",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Analysis</span>"
+    ]
+  },
+  {
+    "objectID": "lecture3.html",
+    "href": "lecture3.html",
+    "title": "3  Descriptive Analytics for Time Series Data",
+    "section": "",
+    "text": "3.1 Overview\nFor descriptive analysis, the focus was on questions such as: What is typical? How spread out is the data? What shape does the distribution have? With time series data, an additional question becomes important: When did it happen?\nTime series data is a sequence of observations collected or recorded at successive points in time. Because observations are ordered chronologically, time series data provides a dynamic view of how a variable changes over time, rather than a static snapshot.\nSuppose a CFO says” “Sales dropped 15% from Q3 to Q4.”\nThat number by itself doesn’t necessarily mean the business suddently got worse. Maybe sales normally decline from Q3 to Q4 and this is just a regular reoccurring observation.\nWith time series data, there are three things to be distinguished:",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Descriptive Analytics for Time Series Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture3.html#overview",
+    "href": "lecture3.html#overview",
+    "title": "3  Descriptive Analytics for Time Series Data",
+    "section": "",
+    "text": "Chronological order: Observations occur sequentially over time so ordering of the data matters.\nTime index: Each oberservation is associated with a specific point in time.\nDependence over time: Earlier and later observations may be related, meaning observations may not be independent.\nTemporal patterns: The ordering of observations allows patterns like trend, seasonality, and short term variation to be identified.\n\n\n\n\n\nTrend \\(\\rightarrow\\) Is there a long-term upward/downward movement?\nSeasonality \\(\\rightarrow\\) Does a pattern repeat at regular intervals?\nNoise \\(\\rightarrow\\) Is a movement just short-term random variation?\nLevel Change \\(\\rightarrow\\) Did the series actually shift to a different level?",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Descriptive Analytics for Time Series Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture3.html#working-with-lubridate",
+    "href": "lecture3.html#working-with-lubridate",
+    "title": "3  Descriptive Analytics for Time Series Data",
+    "section": "3.2 Working with Lubridate",
+    "text": "3.2 Working with Lubridate\nWhy do dates matter in analytics? Dates can be used for several things, for example:\n\nTime aware filtering (e.g. time based filtering), time aware grouping (group a time period), and trend/seasonality detection.\nAligning events (comparing before and afters).\nPreparing for forecasting.\n\nDates need to actually be dates! A date stored as text like:\n'2025-08-21'\nis much different from an R Date object actually representing August 21, 2025. The main package used when working with dates is lubridate.\n\n3.2.1 Parsing Dates\nParsing dates is the process of converting raw string dates to an actual date/time object, which can then be converted into useful time components. Raw string dates may not always be written in a consistent way, therefore different functions are used based on what the text format is.\n\nymd() when string = YEAR \\(\\rightarrow\\) MONTH \\(\\rightarrow\\) DAY\nmdy() when string = MONTH \\(\\rightarrow\\) DAY \\(\\rightarrow\\) YEAR\ndmy() when string = DAY \\(\\rightarrow\\) MONTH \\(\\rightarrow\\) YEAR\nymd_hms() when string = YEAR \\(\\rightarrow\\) MONTH \\(\\rightarrow\\) DAY : HH:MM:SS\n\nExample:\n\nymd(\"2025-08-21\")\n\n[1] \"2025-08-21\"\n\nmdy(\"08/21/2025\")\n\n[1] \"2025-08-21\"\n\ndmy(\"21-Aug-2025\")\n\n[1] \"2025-08-21\"\n\nymd_hms(\"2025-08-21 14:30:00\")\n\n[1] \"2025-08-21 14:30:00 UTC\"\n\n\nOnce the date is in the correct format, R can extract pieces:\n\nyear(x) = extract year\nmonth(x) = extract month\nquarter(x) = extract quarter\nwday(x) = extract weekday\nhour(x) = extract hour\nisoweek(x) = extract week number of year\n\n\nx &lt;- ymd_hms(\"2025-08-21 14:30:00\")\nx\n\n[1] \"2025-08-21 14:30:00 UTC\"\n\nyear(x)\n\n[1] 2025\n\nmonth(x)\n\n[1] 8\n\nquarter(x)\n\n[1] 3\n\nwday(x)\n\n[1] 5\n\nhour(x)\n\n[1] 14\n\nisoweek(x)\n\n[1] 34\n\n\nEsssentially the process is raw date string → actual date/time object → useful time components\nDates can also be created from combining variables that already exist. For example if you have year = 2025 and month = 8 you can construct an actual date.\nmake_date() use when year/month columns exist because it avoids rounding problems associated with fractional-year representations\n\n# Before: year and month are separate variables\ntxhousing |&gt;\n    select(year, month) |&gt;\n    head(2)\n\n# A tibble: 2 × 2\n   year month\n  &lt;int&gt; &lt;int&gt;\n1  2000     1\n2  2000     2\n\n# Create an actual date from year and month\nTX &lt;- txhousing |&gt;\n    mutate(\n        date_actual = make_date(\n            year = year,\n            month = month,\n            day = 1\n        )\n    )\n\n# After: year and month have been combined into a date\nTX |&gt;\n    select(year, month, date_actual) |&gt;\n    head(2)\n\n# A tibble: 2 × 3\n   year month date_actual\n  &lt;int&gt; &lt;int&gt; &lt;date&gt;     \n1  2000     1 2000-01-01 \n2  2000     2 2000-02-01 \n\n\n\n\n3.2.2 Calendar Arithmetic\nLeap years can screw up calculation of dates. For example ymd(\"2024-02-29\") is a leap year. If you subtract five years you’d get 2019-02-29 which doesn’t exist.\n\nd1 &lt;- ymd(\"2024-02-29\")\n\nlubridate has calendar awareness operators:\n\nd1 %m-% years(5)\n\n[1] \"2019-02-28\"\n\nymd(\"2023-01-31\") %m+% months(1)\n\n[1] \"2023-02-28\"\n\n\n\n\n3.2.3 Time Windows\nOnce dates are represented properly, normal comparisons work:\n\nTX |&gt;\n    filter(\n        date_actual &gt;= as.Date(\"2005-01-01\"),\n        date_actual &lt;= as.Date(\"2010-12-31\")\n    )\n\n# A tibble: 3,312 × 10\n   city     year month sales  volume median listings inventory  date date_actual\n   &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;     \n 1 Abilene  2005     1   119  1.03e7  74200      570       3.7 2005  2005-01-01 \n 2 Abilene  2005     2   130  1.18e7  74300      581       3.7 2005. 2005-02-01 \n 3 Abilene  2005     3   170  1.45e7  71300      661       4.3 2005. 2005-03-01 \n 4 Abilene  2005     4   171  1.64e7  80300      650       4.2 2005. 2005-04-01 \n 5 Abilene  2005     5   176  1.81e7  87100      660       4.2 2005. 2005-05-01 \n 6 Abilene  2005     6   230  2.41e7  92500      664       4.1 2005. 2005-06-01 \n 7 Abilene  2005     7   177  1.85e7  93500      657       4.1 2006. 2005-07-01 \n 8 Abilene  2005     8   216  2.41e7  97500      638       3.9 2006. 2005-08-01 \n 9 Abilene  2005     9   165  1.71e7  92800      644       3.9 2006. 2005-09-01 \n10 Abilene  2005    10   161  1.64e7  92300      601       3.6 2006. 2005-10-01 \n# ℹ 3,302 more rows\n\n\nYou can also make relative windows.\nFor example, find the most recent date:\n\nmax_date &lt;- max(TX$date_actual, na.rm = TRUE)\nmax_date\n\n[1] \"2015-07-01\"\n\n\nThen go five years backward:\n\nstart_5y &lt;- max_date %m-% years(5)\nstart_5y\n\n[1] \"2010-07-01\"\n\n\nThen:\n\nrecent &lt;- TX |&gt;\n    filter(date_actual &gt; start_5y)\n\nhead(recent)\n\n# A tibble: 6 × 10\n  city     year month sales   volume median listings inventory  date date_actual\n  &lt;chr&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;     \n1 Abilene  2010     8   144 17504580 122000      936       6.7 2011. 2010-08-01 \n2 Abilene  2010     9   116 15475763 121300      899       6.5 2011. 2010-09-01 \n3 Abilene  2010    10   111 14570529 111900      863       6.4 2011. 2010-10-01 \n4 Abilene  2010    11   115 11422741  87900      851       6.4 2011. 2010-11-01 \n5 Abilene  2010    12   116 15289470 118300      830       6.3 2011. 2010-12-01 \n6 Abilene  2011     1    68  8834493 123300      809       6.1 2011  2011-01-01 \n\n\nSo instead of hard-coding a five-year range, you’re saying:\nGive me observations from the final five years of the dataset.\nFor time-series data, the standard visualization is a line chart.\nThe lecture calculates statewide median sales for each month:\n\nTX |&gt;\n    group_by(date_actual) |&gt;\n    summarise(\n        median_sales = median(sales, na.rm = TRUE)\n    ) |&gt;\n    ggplot(aes(date_actual, median_sales)) +\n    geom_line()\n\n\n\n\n\n\n\n\nThe conceptual structure is:\n\nDate → x-axis\nValue → y-axis\n\nConnecting observations makes the evolution of the variable visible.\nscale_x_date() then controls how frequently dates are displayed so that a long time horizon doesn’t produce an unreadable x-axis.\n\n\n3.2.4 Seasonality\nSeasonality is one of the central concepts of time series data.\nSeasonality is a pattern that systematically repeats according to the calendar.\nIt can be viewed by:\nLines by year:\n\nTX |&gt;\n    ggplot(aes(\n        x = month(date_actual, label = TRUE),\n        y = sales,\n        group = year,\n        color = as.factor(year)\n    )) +\n    geom_line()\n\n\n\n\n\n\n\n\nBoxplots by month\nWhat does a typical January look like across years? What does a typical July look like?\n\nTX |&gt;\n    ggplot(aes(\n        x = month(date_actual, label = TRUE),\n        y = sales\n    )) +\n    geom_boxplot()\n\nWarning: Removed 568 rows containing non-finite outside the scale range\n(`stat_boxplot()`).\n\n\n\n\n\n\n\n\n\nHeatmaps are another view of seasonality\n   2005  2006  2007  2008 ...\nJan ■ ■ ■ ■ Feb ■ ■ ■ ■ Mar ■ ■ ■ ■ … Dec ■ ■ ■ ■\nwhere the fill intensity represents sales.\n\n\n3.2.5 Moving Averages\nMonth-to-month fluctuations can make the underlying trend difficult to see. A rolling average smooths those fluctuations.\n\nmonthly_sales &lt;- TX |&gt;\n    group_by(date_actual) |&gt;\n    summarise(\n        median_sales = median(sales, na.rm = TRUE)\n    ) |&gt;\n    arrange(date_actual) |&gt;\n    mutate(\n        moving_average = rollmean(\n            median_sales,\n            k = 12,\n            fill = NA,\n            align = \"right\"\n        )\n    )\n\nmonthly_sales\n\n# A tibble: 187 × 3\n   date_actual median_sales moving_average\n   &lt;date&gt;             &lt;dbl&gt;          &lt;dbl&gt;\n 1 2000-01-01            99             NA\n 2 2000-02-01           134             NA\n 3 2000-03-01           167             NA\n 4 2000-04-01           153             NA\n 5 2000-05-01           165             NA\n 6 2000-06-01           188             NA\n 7 2000-07-01           181             NA\n 8 2000-08-01           182             NA\n 9 2000-09-01           152             NA\n10 2000-10-01           124             NA\n# ℹ 177 more rows\n\n\nk = 12 means a 12-observation window. Because the data are monthly, that’s a 12-month moving average.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Descriptive Analytics for Time Series Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture4.html",
+    "href": "lecture4.html",
+    "title": "4  Probability Rules and Distributions",
+    "section": "",
+    "text": "So far, we’ve covered descriptive analytics, where tools and methods are used to describe",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Probability Rules and Distributions</span>"
+    ]
+  },
+  {
+    "objectID": "lecture5.html",
+    "href": "lecture5.html",
+    "title": "5  Lecture 5",
+    "section": "",
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lecture 5</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html",
+    "href": "lecture6.html",
+    "title": "6  Lecture 6",
+    "section": "",
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lecture 6</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html",
+    "href": "lecture7.html",
+    "title": "7  Lecture 7",
+    "section": "",
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lecture 7</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html",
+    "href": "lecture8.html",
+    "title": "8  Lecture 8",
+    "section": "",
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lecture 8</span>"
+    ]
+  }
+]
