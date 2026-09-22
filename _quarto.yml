@@ -5,6 +5,7 @@ book:
   title: "BZAN 535: Statistical Methods"
   author: "Joseph Falcone"
   date: "9/17/2026"
+  page-footer: "© 2026 Joseph Falcone. All rights reserved."
   chapters:
     - index.qmd
     - lecture1.qmd
