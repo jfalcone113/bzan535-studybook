@@ -6,6 +6,7 @@
 library(lubridate)
 library(tidyverse)
 library(ggplot2)
+library(zoo)
 ```
 
 ## Overview
@@ -132,10 +133,11 @@ ymd("2023-01-31") %m+% months(1)
 Once dates are represented properly, normal comparisons work:
 
 ```{r}
-filter(
-    date_actual >= as.Date("2005-01-01"),
-    date_actual <= as.Date("2010-12-31")
-)
+TX |>
+    filter(
+        date_actual >= as.Date("2005-01-01"),
+        date_actual <= as.Date("2010-12-31")
+    )
 ```
 
 You can also make relative windows.
@@ -143,24 +145,27 @@ You can also make relative windows.
 For example, find the most recent date:
 
 ```{r}
-max_date <- max(txhousing$date_actual, na.rm = TRUE)
-
+max_date <- max(TX$date_actual, na.rm = TRUE)
+max_date
 ```
 
 Then go five years backward:
 
 ```{r}
 start_5y <- max_date %m-% years(5)
+start_5y
 ```
 
-Then 
+Then:
 
 ```{r}
-recent <- txhousing |>
+recent <- TX |>
     filter(date_actual > start_5y)
+
+head(recent)
 ```
 
-So instead of hard-coding a five-year range, you’re saying:
+So instead of hard-coding a five-year range, you're saying:
 
 Give me observations from the final five years of the dataset.
 
@@ -169,7 +174,7 @@ For time-series data, the standard visualization is a line chart.
 The lecture calculates statewide median sales for each month:
 
 ```{r}
-txhousing |>
+TX |>
     group_by(date_actual) |>
     summarise(
         median_sales = median(sales, na.rm = TRUE)
@@ -179,13 +184,13 @@ txhousing |>
 ```
 
 The conceptual structure is:
-Date → x-axis
-Value → y-axis
+
+- Date → x-axis
+- Value → y-axis
 
 Connecting observations makes the evolution of the variable visible.
 
-`scale_x_date()` then controls how frequently dates are displayed so that a long time horizon doesn’t produce an unreadable x-axis.
-
+`scale_x_date()` then controls how frequently dates are displayed so that a long time horizon doesn't produce an unreadable x-axis.
 
 ### Seasonality
 
@@ -197,12 +202,13 @@ It can be viewed by:
 
 Lines by year:
 ```{r}
-ggplot(aes(
-    x = month(date_actual, label = TRUE),
-    y = sales,
-    group = year,
-    color = as.factor(year)
-)) +
+TX |>
+    ggplot(aes(
+        x = month(date_actual, label = TRUE),
+        y = sales,
+        group = year,
+        color = as.factor(year)
+    )) +
     geom_line()
 ```
 
@@ -211,7 +217,11 @@ Boxplots by month
 What does a typical January look like across years? What does a typical July look like?
 
 ```{r}
-ggplot(aes(month_lab, sales)) +
+TX |>
+    ggplot(aes(
+        x = month(date_actual, label = TRUE),
+        y = sales
+    )) +
     geom_boxplot()
 ```
 
@@ -231,12 +241,22 @@ where the fill intensity represents sales.
 Month-to-month fluctuations can make the underlying trend difficult to see. A rolling average smooths those fluctuations.
 
 ```{r}
-rollmean(
-    median,
-    k = 12,
-    fill = NA,
-    align = "right"
-)
+monthly_sales <- TX |>
+    group_by(date_actual) |>
+    summarise(
+        median_sales = median(sales, na.rm = TRUE)
+    ) |>
+    arrange(date_actual) |>
+    mutate(
+        moving_average = rollmean(
+            median_sales,
+            k = 12,
+            fill = NA,
+            align = "right"
+        )
+    )
+
+monthly_sales
 ```
 
 k = 12 means a 12-observation window. Because the data are monthly, that’s a 12-month moving average.
