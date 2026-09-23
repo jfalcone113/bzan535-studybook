@@ -1,7 +1,7 @@
 project:
   type: book
   resources:
-  - CNAME
+    - CNAME
 
 book:
   title: "BZAN 535: Statistical Methods"
@@ -18,8 +18,7 @@ book:
     - lecture6.qmd
     - lecture7.qmd
     - lecture8.qmd
-    - lecture10.qmd
-    
+
 bibliography: references.bib
 
 format:
@@ -29,6 +28,3 @@ format:
       - brand
   pdf:
     documentclass: scrreprt
-
-
-
