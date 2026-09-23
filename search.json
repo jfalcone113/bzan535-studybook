@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "BZAN 535: Statistical Methods",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "text": "Preface\nBZAN 535 Study Book\nBased on slides, arranged by yours truly.\n© 2026 Joseph Falcone. All rights reserved. This material is provided for educational and personal study purposes. No part of this publication may be reproduced, distributed, or transmitted without prior written permission from the author, except as permitted by applicable copyright law.",
     "crumbs": [
       "Preface"
     ]
@@ -194,7 +194,7 @@
     "href": "lecture4.html",
     "title": "4  Probability Rules and Distributions",
     "section": "",
-    "text": "So far, we’ve covered descriptive analytics, where tools and methods are used to describe",
+    "text": "4.1 Overview\nSo far, we’ve covered descriptive analytics – describing and understanding observed data based on understanding its exhibited characteristics.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Probability Rules and Distributions</span>"
     ]
@@ -204,7 +204,7 @@
     "href": "lecture5.html",
     "title": "5  Lecture 5",
     "section": "",
-    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "text": "In progress…give me some time",
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lecture 5</span>"
     ]
@@ -224,7 +224,7 @@
     "href": "lecture7.html",
     "title": "7  Lecture 7",
     "section": "",
-    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "text": "In progress…give me some time!",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lecture 7</span>"
     ]
@@ -234,9 +234,19 @@
     "href": "lecture8.html",
     "title": "8  Lecture 8",
     "section": "",
-    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
+    "text": "In progress…give me some time!",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lecture 8</span>"
+    ]
+  },
+  {
+    "objectID": "lecture10.html",
+    "href": "lecture10.html",
+    "title": "9  Lecture 10",
+    "section": "",
+    "text": "In progress…give me some time!",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Lecture 10</span>"
     ]
   }
 ]
