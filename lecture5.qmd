@@ -1,3 +1,1931 @@
-# Lecture 5
+# One-Parameter Statistical Inference
 
-In progress...give me some time
+## Overview
+
+So far, the focus has been on describing observed data and modeling uncertainty.
+
+Descriptive statistics summarize the data we actually observe. Probability distributions describe how uncertain outcomes behave. **Statistical inference** takes the next step:
+
+> **What can a sample tell us about a population we cannot fully observe?**
+
+Suppose a company reports:
+
+> *Average household spending last month was $1,793.*
+
+That number may sound precise, but suppose it came from a sample of 2,500 households rather than every household.
+
+The sample mean:
+
+$$
+\bar{x} = 1793
+$$
+
+is known, but the population mean:
+
+$$
+\mu
+$$
+
+is unknown.
+
+The goal of statistical inference is to use the observed **sample statistic** to learn about the unknown **population parameter**, while explicitly accounting for sampling uncertainty.
+
+The general process is:
+
+$$
+\text{Population}
+\rightarrow
+\text{Sample}
+\rightarrow
+\text{Statistic}
+\rightarrow
+\text{Inference about Parameter}
+$$
+
+There are two major tools for doing this:
+
+- **Confidence intervals** → estimate a population parameter
+- **Hypothesis tests** → evaluate a claim about a population parameter
+
+Before either one works, however, we need to understand **sampling variability**.
+
+---
+
+# Sampling
+
+## Why Sampling Matters
+
+Usually, observing an entire population is impractical or impossible.
+
+Instead, we collect a **sample** and use it to learn about the population.
+
+For example:
+
+- Population → all customers
+- Sample → 2,500 selected customers
+- Parameter → true average spending, $\mu$
+- Statistic → sample average spending, $\bar{x}$
+
+But the quality of an inference depends on **how the sample was obtained**.
+
+A huge sample does not automatically mean a good sample.
+
+Suppose a company surveys 50,000 customers about satisfaction, but only sends the survey to customers enrolled in its loyalty program.
+
+Even though:
+
+$$
+n = 50,000
+$$
+
+the sample may systematically overrepresent highly engaged customers.
+
+Increasing the sample size does not fix a poorly designed sampling process.
+
+---
+
+## Bias vs. Variance
+
+Two major sources of uncertainty in sampling are **bias** and **variance**.
+
+### Bias
+
+**Bias** is a systematic tendency for a sampling process to produce estimates that differ from the true population value.
+
+Bias generally comes from the **design of the data collection process**.
+
+Examples include:
+
+- Coverage bias
+- Selection bias
+- Self-selection bias
+- Nonresponse bias
+
+### Coverage Bias
+
+**Coverage bias** occurs when the sampling frame fails to include some parts of the population.
+
+For example, surveying only loyalty-program members excludes customers who never joined the program.
+
+### Selection Bias
+
+**Selection bias** occurs when the method used to select observations systematically favors certain types of observations.
+
+Convenience samples are a common example.
+
+### Self-Selection Bias
+
+**Self-selection bias** occurs when individuals choose whether to participate.
+
+For example, online reviews may disproportionately represent customers with extremely positive or extremely negative experiences.
+
+### Nonresponse Bias
+
+**Nonresponse bias** occurs when individuals who do not respond differ systematically from those who do.
+
+For example, highly dissatisfied customers may be less willing to complete a company survey.
+
+---
+
+### Variance
+
+**Variance** in sampling refers to the natural sample-to-sample fluctuation that occurs even when the sampling design is good.
+
+Imagine randomly sampling 100 customers and calculating their average spending.
+
+Then repeat the process with another 100 customers.
+
+The two samples probably will not produce exactly the same mean.
+
+That difference is **sampling variability**.
+
+Increasing sample size reduces this variability.
+
+The key distinction is:
+
+| Problem | Meaning | Main Solution |
+|---|---|---|
+| **Bias** | Systematically wrong | Better sampling design |
+| **Variance** | Naturally unstable across samples | Larger sample size |
+
+A larger sample can reduce variance.
+
+A larger sample **cannot fix systematic bias**.
+
+> **Bad design + huge sample = precise estimate of the wrong thing.**
+
+---
+
+## Sampling Methods
+
+### Simple Random Sampling
+
+In **simple random sampling**, every member of the population has an equal chance of being selected.
+
+Example:
+
+> Randomly select transactions from a database for an audit.
+
+Simple random sampling is conceptually straightforward and helps reduce selection bias.
+
+---
+
+### Stratified Sampling
+
+In **stratified sampling**, the population is divided into meaningful subgroups called **strata**, and observations are sampled within each subgroup.
+
+Examples of strata might include:
+
+- Region
+- Customer segment
+- Age group
+- Store type
+
+For example, a company might sample customers separately from each geographic region so that all regions are appropriately represented.
+
+---
+
+### Cluster Sampling
+
+In **cluster sampling**, entire groups are randomly selected rather than individual observations.
+
+For example:
+
+> Randomly select 20 stores and analyze customers from those stores.
+
+Clusters might include:
+
+- Stores
+- Branches
+- Schools
+- Geographic areas
+
+Cluster sampling can be cheaper and easier to implement, but observations within the same cluster may be similar, which can reduce precision.
+
+---
+
+### Systematic Sampling
+
+In **systematic sampling**, observations are selected at regular intervals after a random starting point.
+
+For example:
+
+> Inspect every 20th item produced on an assembly line.
+
+If the random starting point is item 7, the sample might contain:
+
+$$
+7,27,47,67,\ldots
+$$
+
+---
+
+## Sampling Method Comparison
+
+| Method | Main Idea | Example |
+|---|---|---|
+| Simple Random | Randomly select individuals | Randomly audit transactions |
+| Stratified | Sample within known subgroups | Sample customers within each region |
+| Cluster | Randomly select entire groups | Select stores, then observe customers |
+| Systematic | Select every $k$th observation | Inspect every 20th product |
+
+---
+
+# Sampling Distributions
+
+Suppose the population mean household spending is:
+
+$$
+\mu
+$$
+
+We randomly select a sample and calculate:
+
+$$
+\bar{x}
+$$
+
+If we selected another random sample, we would probably get a slightly different value of $\bar{x}$.
+
+Suppose we repeated this process 1,000 times:
+
+1. Draw a random sample of size $n$
+2. Calculate $\bar{x}$
+3. Store the result
+4. Repeat 1,000 times
+
+We would now have 1,000 different sample means.
+
+The distribution of those sample means is called the **sampling distribution of the sample mean**.
+
+### Sampling Distribution
+
+A **sampling distribution** is the probability distribution of a statistic across repeated samples of the same size.
+
+This is different from the distribution of the raw observations.
+
+For example:
+
+- Distribution of household spending → distribution of individual household values
+- Sampling distribution of $\bar{x}$ → distribution of sample averages
+
+That distinction is fundamental.
+
+> **Population distribution:** How do individual observations vary?
+>
+> **Sampling distribution:** How would a statistic vary if we repeatedly sampled from the population?
+
+---
+
+## Center of the Sampling Distribution
+
+For independent and identically distributed observations:
+
+$$
+X_1,X_2,\ldots,X_n
+$$
+
+with population mean:
+
+$$
+\mu
+$$
+
+the expected value of the sample mean is:
+
+$$
+E[\bar{X}] = \mu
+$$
+
+This means that the sampling distribution of $\bar{X}$ is centered at the true population mean.
+
+Therefore, $\bar{X}$ is an **unbiased estimator** of $\mu$.
+
+Across many repeated random samples, the sample mean does not systematically overestimate or underestimate the population mean.
+
+---
+
+# Standard Error
+
+The spread of a sampling distribution is measured by the **standard error**.
+
+For the sample mean:
+
+$$
+SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}
+$$
+
+where:
+
+$\sigma$ = population standard deviation  
+$n$ = sample size
+
+Usually, $\sigma$ is unknown, so we estimate it using the sample standard deviation:
+
+$$
+SE(\bar{X}) \approx \frac{s}{\sqrt{n}}
+$$
+
+The standard error therefore measures:
+
+> **How much would the sample mean naturally vary from sample to sample?**
+
+This is different from standard deviation.
+
+### Standard Deviation vs. Standard Error
+
+**Standard deviation** describes variation among **individual observations**:
+
+$$
+s
+$$
+
+**Standard error** describes variation in a **sample statistic across repeated samples**:
+
+$$
+SE(\bar{X})=\frac{s}{\sqrt{n}}
+$$
+
+| Measure | What Varies? | Interpretation |
+|---|---|---|
+| Standard Deviation | Individual observations | How spread out are the data? |
+| Standard Error | Sample statistic | How precise is the estimate? |
+
+---
+
+## Effect of Sample Size on Standard Error
+
+Because:
+
+$$
+SE(\bar{X})=\frac{s}{\sqrt{n}}
+$$
+
+increasing $n$ decreases the standard error.
+
+Therefore:
+
+$$
+n \uparrow
+\quad\Rightarrow\quad
+SE \downarrow
+\quad\Rightarrow\quad
+\text{more precise estimate}
+$$
+
+However, the relationship involves the **square root** of $n$.
+
+To cut the standard error in half, the sample size must be multiplied by four.
+
+For example:
+
+$$
+SE=\frac{s}{\sqrt{100}}=\frac{s}{10}
+$$
+
+while:
+
+$$
+SE=\frac{s}{\sqrt{400}}=\frac{s}{20}
+$$
+
+So increasing the sample from 100 to 400 cuts the standard error in half.
+
+---
+
+# Central Limit Theorem
+
+The **Central Limit Theorem (CLT)** explains why the Normal distribution becomes so important in statistical inference.
+
+Suppose the original population is not Normal.
+
+It could be:
+
+- Right-skewed
+- Left-skewed
+- Bounded
+- Irregular
+
+As the sample size becomes sufficiently large, the **sampling distribution of the sample mean** becomes approximately Normal.
+
+Mathematically:
+
+$$
+\bar{X}
+\approx
+N\left(
+\mu,
+\frac{\sigma^2}{n}
+\right)
+$$
+
+for sufficiently large $n$.
+
+Equivalently:
+
+$$
+E[\bar{X}]=\mu
+$$
+
+and:
+
+$$
+SE(\bar{X})=\frac{\sigma}{\sqrt{n}}
+$$
+
+The important idea is:
+
+> **The raw data do not have to be Normally distributed for the sample mean to have an approximately Normal sampling distribution.**
+
+---
+
+## What the CLT Does Not Say
+
+The Central Limit Theorem does **not** say that increasing the sample size makes the raw data Normal.
+
+Suppose customer spending is strongly right-skewed.
+
+Collecting more customers does not necessarily make the individual spending values bell-shaped.
+
+Instead:
+
+$$
+\text{Raw data may remain skewed}
+$$
+
+while:
+
+$$
+\text{Distribution of sample means becomes approximately Normal}
+$$
+
+This distinction is critical.
+
+The lecture demonstrates this using a badly right-skewed population. Sample means with $n=3$ remain visibly skewed, while the sampling distributions at $n=30$ and especially $n=100$ become increasingly bell-shaped.
+
+---
+
+## How Large Does $n$ Need to Be?
+
+A common rule of thumb is:
+
+$$
+n \geq 30
+$$
+
+However, this is only a guideline.
+
+The amount of data needed depends on the underlying population.
+
+A population with:
+
+- Strong skewness
+- Heavy tails
+- Extreme outliers
+
+may require a substantially larger sample before the sampling distribution becomes approximately Normal.
+
+---
+
+## Why the CLT Matters
+
+The Central Limit Theorem allows us to use Normal-based statistical methods even when the underlying population itself is not Normal.
+
+This provides the foundation for:
+
+- Confidence intervals
+- Hypothesis tests
+- A/B testing
+- Estimating business KPIs
+- Operational thresholds
+
+The conceptual chain is:
+
+$$
+\text{Random Sample}
+\rightarrow
+\text{Sampling Distribution}
+\rightarrow
+\text{CLT}
+\rightarrow
+\text{Standard Error}
+\rightarrow
+\text{Statistical Inference}
+$$
+
+---
+
+# Inference for a Population Mean
+
+Suppose we want to estimate an unknown population mean:
+
+$$
+\mu
+$$
+
+We observe a sample and calculate:
+
+$$
+\bar{x}
+$$
+
+The sample mean is our **point estimate** of the population mean.
+
+$$
+\boxed{\text{Point Estimate}=\bar{x}}
+$$
+
+But a point estimate alone does not communicate uncertainty.
+
+For example:
+
+> Average household spending is estimated to be $1,793.
+
+How precise is that estimate?
+
+Could the true population mean reasonably be $1,790?
+
+What about $1,500?
+
+To quantify this uncertainty, we construct a **confidence interval**.
+
+---
+
+# Confidence Intervals
+
+A **confidence interval** gives a range of plausible values for an unknown population parameter.
+
+The general structure is:
+
+$$
+\boxed{
+\text{Estimate}
+\pm
+\text{Margin of Error}
+}
+$$
+
+and:
+
+$$
+\text{Margin of Error}
+=
+\text{Critical Value}
+\times
+\text{Standard Error}
+$$
+
+Therefore:
+
+$$
+\boxed{
+\text{Confidence Interval}
+=
+\text{Estimate}
+\pm
+(\text{Critical Value})(\text{SE})
+}
+$$
+
+---
+
+## Confidence Interval for a Mean
+
+When estimating $\mu$, the population standard deviation $\sigma$ is usually unknown.
+
+Therefore, we substitute:
+
+$$
+s
+$$
+
+for:
+
+$$
+\sigma
+$$
+
+and use the **t distribution** rather than the standard Normal distribution.
+
+The confidence interval is:
+
+$$
+\boxed{
+\bar{x}
+\pm
+t_{\alpha/2,n-1}
+\frac{s}{\sqrt{n}}
+}
+$$
+
+where:
+
+$\bar{x}$ = sample mean  
+$s$ = sample standard deviation  
+$n$ = sample size  
+$n-1$ = degrees of freedom  
+$t_{\alpha/2,n-1}$ = critical value from the t distribution
+
+For a 95% confidence interval:
+
+$$
+\alpha=0.05
+$$
+
+so the critical value corresponds to:
+
+$$
+1-\frac{\alpha}{2}
+=
+0.975
+$$
+
+---
+
+# The t Distribution
+
+The **t distribution** is similar to the standard Normal distribution but has **heavier tails**.
+
+Why?
+
+Because when $\sigma$ is unknown, we estimate it using:
+
+$$
+s
+$$
+
+That introduces additional uncertainty.
+
+Therefore:
+
+$$
+\frac{\bar{X}-\mu}{s/\sqrt{n}}
+\sim
+t_{n-1}
+$$
+
+rather than:
+
+$$
+N(0,1)
+$$
+
+The degrees of freedom are:
+
+$$
+df=n-1
+$$
+
+As the sample size increases:
+
+$$
+t_{n-1}
+\rightarrow
+N(0,1)
+$$
+
+So for large samples, the t and z critical values become nearly identical.
+
+---
+
+## Confidence Level
+
+For a 95% confidence interval:
+
+$$
+1-\alpha=0.95
+$$
+
+so:
+
+$$
+\alpha=0.05
+$$
+
+Because a two-sided interval splits this probability across both tails:
+
+$$
+\frac{\alpha}{2}=0.025
+$$
+
+Therefore the middle 95% of the reference distribution lies between the two critical values.
+
+---
+
+## Interpreting a Confidence Interval
+
+Suppose the estimated 95% confidence interval for average household spending is:
+
+$$
+[1716,1869]
+$$
+
+A standard interpretation is:
+
+> **We are 95% confident that the interval from $1,716 to $1,869 contains the population mean household spending.**
+
+The precise frequentist interpretation refers to the **procedure**, not probability assigned to the fixed parameter.
+
+If we repeatedly:
+
+1. Drew random samples
+2. Constructed a 95% confidence interval from each sample
+
+then approximately 95% of those intervals would contain the true population mean.
+
+Therefore, technically, we should not say:
+
+> There is a 95% probability that $\mu$ is inside this specific interval.
+
+Once the interval has been calculated, both its endpoints and the population parameter are fixed. The 95% refers to the **long-run success rate of the procedure**.
+
+---
+
+## Confidence Interval Example: Household Spending
+
+Suppose the sample produces:
+
+$$
+\bar{x}=1792.77
+$$
+
+$$
+s=1947.92
+$$
+
+and:
+
+$$
+SE=39.12
+$$
+
+The resulting 95% confidence interval is approximately:
+
+$$
+[1716,1869]
+$$
+
+So instead of reporting only:
+
+> Average household spending is $1,793.
+
+we can report:
+
+> Average household spending is estimated at approximately $1,793, with a 95% confidence interval from approximately $1,716 to $1,869.
+
+The second statement communicates both the estimate and its uncertainty.
+
+---
+
+## Confidence Interval for a Mean in R
+
+R can calculate the confidence interval directly using:
+
+```{r}
+t.test(x)
+```
+
+The calculation can also be performed manually:
+
+```{r}
+mean(x) +
+    c(-1, 1) *
+    qt(0.975, length(x) - 1) *
+    sd(x) / sqrt(length(x))
+```
+
+The structure corresponds directly to:
+
+$$
+\bar{x}
+\pm
+t^*
+\frac{s}{\sqrt{n}}
+$$
+
+---
+
+## What Determines Confidence Interval Width?
+
+The width of a confidence interval depends primarily on:
+
+- Sample size
+- Variability
+- Confidence level
+
+### Larger Sample Size
+
+$$
+n\uparrow
+\Rightarrow
+SE\downarrow
+\Rightarrow
+\text{narrower CI}
+$$
+
+### Greater Variability
+
+$$
+s\uparrow
+\Rightarrow
+SE\uparrow
+\Rightarrow
+\text{wider CI}
+$$
+
+### Higher Confidence Level
+
+Increasing the confidence level requires a larger critical value.
+
+Therefore:
+
+$$
+\text{Confidence Level}\uparrow
+\Rightarrow
+\text{Critical Value}\uparrow
+\Rightarrow
+\text{wider CI}
+$$
+
+There is therefore a tradeoff between **confidence** and **precision**.
+
+---
+
+# Hypothesis Testing
+
+A **hypothesis test** evaluates whether sample evidence is sufficiently inconsistent with a claim about a population parameter.
+
+Instead of asking:
+
+> What values of $\mu$ are plausible?
+
+as in a confidence interval, a hypothesis test asks:
+
+> Is the sample evidence strong enough to challenge a specific claim about $\mu$?
+
+---
+
+## Null and Alternative Hypotheses
+
+A hypothesis test begins with two competing hypotheses.
+
+### Null Hypothesis
+
+The **null hypothesis**, $H_0$, represents the baseline or status-quo claim.
+
+For example:
+
+$$
+H_0:\mu=325
+$$
+
+### Alternative Hypothesis
+
+The **alternative hypothesis**, $H_a$, represents the claim being investigated.
+
+For an increase:
+
+$$
+H_a:\mu>325
+$$
+
+For a decrease:
+
+$$
+H_a:\mu<325
+$$
+
+For any difference:
+
+$$
+H_a:\mu\neq325
+$$
+
+The form of the alternative determines whether the test is:
+
+| Alternative | Test |
+|---|---|
+| $H_a:\mu>\mu_0$ | Right-tailed |
+| $H_a:\mu<\mu_0$ | Left-tailed |
+| $H_a:\mu\neq\mu_0$ | Two-tailed |
+
+---
+
+# Hypothesis Testing Workflow
+
+A hypothesis test follows six major steps:
+
+1. State the hypotheses
+2. Choose the significance level, $\alpha$
+3. Calculate the test statistic
+4. Calculate the p-value
+5. Make a statistical decision
+6. State the conclusion in context
+
+The process can be summarized as:
+
+$$
+H_0/H_a
+\rightarrow
+\alpha
+\rightarrow
+\text{Test Statistic}
+\rightarrow
+p\text{-value}
+\rightarrow
+\text{Decision}
+\rightarrow
+\text{Conclusion}
+$$
+
+---
+
+# Test Statistic for a Mean
+
+For a one-sample test of:
+
+$$
+H_0:\mu=\mu_0
+$$
+
+the test statistic is:
+
+$$
+\boxed{
+t=
+\frac{\bar{x}-\mu_0}
+{s/\sqrt{n}}
+}
+$$
+
+The numerator:
+
+$$
+\bar{x}-\mu_0
+$$
+
+measures the observed difference between the sample mean and the hypothesized population mean.
+
+The denominator:
+
+$$
+\frac{s}{\sqrt{n}}
+$$
+
+measures the expected sampling variability.
+
+Therefore, the t statistic can be interpreted as:
+
+> **How many standard errors away is the observed sample mean from the value claimed by the null hypothesis?**
+
+Under $H_0$:
+
+$$
+t\sim t_{n-1}
+$$
+
+---
+
+# P-Values
+
+The **p-value** measures how surprising the observed result would be if the null hypothesis were true.
+
+More precisely:
+
+> The p-value is the probability, assuming $H_0$ is true, of obtaining a test statistic at least as extreme as the one observed in the direction(s) specified by $H_a$.
+
+A small p-value means the observed data would be relatively unusual under the null hypothesis.
+
+The standard decision rule is:
+
+$$
+p \leq \alpha
+\Rightarrow
+\text{Reject }H_0
+$$
+
+and:
+
+$$
+p > \alpha
+\Rightarrow
+\text{Fail to reject }H_0
+$$
+
+---
+
+## What a P-Value Is Not
+
+A p-value is **not**:
+
+$$
+P(H_0\text{ is true})
+$$
+
+It is also not:
+
+$$
+P(H_a\text{ is true})
+$$
+
+The p-value is calculated **assuming the null hypothesis is true**.
+
+It tells us how compatible the observed data are with that assumption.
+
+---
+
+# Reject vs. Fail to Reject
+
+Suppose:
+
+$$
+\alpha=0.05
+$$
+
+If:
+
+$$
+p=0.02
+$$
+
+then:
+
+$$
+p<\alpha
+$$
+
+so we **reject $H_0$**.
+
+If:
+
+$$
+p=0.13
+$$
+
+then:
+
+$$
+p>\alpha
+$$
+
+so we **fail to reject $H_0$**.
+
+Importantly:
+
+> **Fail to reject does not mean accept $H_0$.**
+
+It means the available sample does not provide sufficient evidence against $H_0$ at the chosen significance level.
+
+Absence of sufficient evidence is not proof that the null hypothesis is true.
+
+---
+
+# Worked Example: Food Expenditure
+
+Suppose last year's average monthly food expenditure was:
+
+$$
+\$325
+$$
+
+A researcher wants to determine whether average spending has increased.
+
+The sample contains:
+
+$$
+n=25
+$$
+
+$$
+\bar{x}=355
+$$
+
+$$
+s=128
+$$
+
+The hypotheses are:
+
+$$
+H_0:\mu=325
+$$
+
+$$
+H_a:\mu>325
+$$
+
+The test statistic is:
+
+$$
+t=
+\frac{355-325}
+{128/\sqrt{25}}
+$$
+
+$$
+t\approx1.172
+$$
+
+The resulting p-value is:
+
+$$
+p\approx0.126
+$$
+
+At:
+
+$$
+\alpha=0.05
+$$
+
+we have:
+
+$$
+0.126>0.05
+$$
+
+Therefore:
+
+> **Fail to reject $H_0$.**
+
+There is not sufficient statistical evidence at the 5% significance level to conclude that mean monthly food expenditure has increased above $325.
+
+Notice that:
+
+$$
+\bar{x}=355>325
+$$
+
+but the result is still not statistically significant.
+
+The observed difference must be considered relative to its **sampling uncertainty**.
+
+---
+
+## Hypothesis Test in R
+
+The test can be performed manually:
+
+```{r}
+t_statistic <- (355 - 325) / (128 / sqrt(25))
+
+p_value <- 1 - pt(
+    t_statistic,
+    df = 24
+)
+
+t_statistic
+p_value
+```
+
+Or directly:
+
+```{r}
+t.test(
+    FoodCosts$Monthly_Food_Cost,
+    alternative = "greater",
+    mu = 325
+)
+```
+
+---
+
+# Statistical Significance vs. Practical Significance
+
+A statistically significant result does not automatically mean the effect is important in practice.
+
+Suppose a hospital claims that average ER waiting time is:
+
+$$
+10\text{ minutes}
+$$
+
+A sample produces:
+
+$$
+n=40
+$$
+
+$$
+\bar{x}=11
+$$
+
+$$
+s=3
+$$
+
+Testing:
+
+$$
+H_0:\mu=10
+$$
+
+against:
+
+$$
+H_a:\mu>10
+$$
+
+produces approximately:
+
+$$
+t=2.11
+$$
+
+and:
+
+$$
+p=0.021
+$$
+
+Since:
+
+$$
+p<0.05
+$$
+
+the result is statistically significant.
+
+But the estimated difference is only:
+
+$$
+11-10=1\text{ minute}
+$$
+
+Whether that one-minute difference is operationally important is a **business or practical question**, not something determined solely by the p-value.
+
+Therefore:
+
+> **Statistical significance asks whether an observed effect is difficult to explain by sampling variation under $H_0$.**
+>
+> **Practical significance asks whether the size of the effect actually matters.**
+
+Both should be considered.
+
+---
+
+# Errors in Hypothesis Testing
+
+Because hypothesis tests make decisions using uncertain samples, errors are possible.
+
+There are two major types.
+
+## Type I Error
+
+A **Type I error** occurs when we reject the null hypothesis even though it is actually true.
+
+$$
+P(\text{Type I Error})=\alpha
+$$
+
+Conceptually:
+
+> **False positive**
+
+Example:
+
+> Concluding a new marketing strategy increases sales when it actually does not.
+
+---
+
+## Type II Error
+
+A **Type II error** occurs when we fail to reject the null hypothesis even though the alternative is actually true.
+
+$$
+P(\text{Type II Error})=\beta
+$$
+
+Conceptually:
+
+> **False negative**
+
+Example:
+
+> Failing to detect that a marketing strategy really does increase sales.
+
+---
+
+## Decision Table
+
+| Reality | Fail to Reject $H_0$ | Reject $H_0$ |
+|---|---|---|
+| $H_0$ true | Correct decision | **Type I Error** |
+| $H_a$ true | **Type II Error** | Correct detection |
+
+---
+
+# Significance Level
+
+The significance level:
+
+$$
+\alpha
+$$
+
+controls the probability of a Type I error.
+
+A common choice is:
+
+$$
+\alpha=0.05
+$$
+
+meaning the testing procedure allows a 5% probability of rejecting $H_0$ when it is actually true.
+
+Reducing $\alpha$ makes the test more conservative.
+
+However, for a fixed sample size, reducing $\alpha$ generally increases the chance of a Type II error.
+
+Therefore, there is a tradeoff:
+
+$$
+\alpha\downarrow
+\Rightarrow
+\beta\uparrow
+$$
+
+when the other components of the test remain fixed.
+
+---
+
+# Statistical Power
+
+**Power** is the probability that a hypothesis test correctly rejects the null hypothesis when the alternative hypothesis is true.
+
+$$
+\boxed{
+\text{Power}
+=
+P(\text{Reject }H_0\mid H_a\text{ true})
+}
+$$
+
+Since:
+
+$$
+\beta
+=
+P(\text{Fail to reject }H_0\mid H_a\text{ true})
+$$
+
+we have:
+
+$$
+\boxed{
+\text{Power}=1-\beta
+}
+$$
+
+Power measures the ability of a statistical test to **detect a real effect**.
+
+---
+
+## What Determines Power?
+
+Power depends on:
+
+- Sample size
+- Effect size
+- Variability
+- Significance level
+
+### Larger Sample Size
+
+$$
+n\uparrow
+\Rightarrow
+SE\downarrow
+\Rightarrow
+\text{Power}\uparrow
+$$
+
+### Larger Effect
+
+A larger true difference from the null value is easier to detect.
+
+$$
+|\mu_1-\mu_0|\uparrow
+\Rightarrow
+\text{Power}\uparrow
+$$
+
+### Lower Variability
+
+Less noisy data make real differences easier to distinguish.
+
+$$
+\sigma\downarrow
+\Rightarrow
+\text{Power}\uparrow
+$$
+
+### Significance Level
+
+For fixed $n$:
+
+$$
+\alpha\downarrow
+\Rightarrow
+\text{harder to reject }H_0
+\Rightarrow
+\text{Power}\downarrow
+$$
+
+---
+
+## Food Expenditure Power Example
+
+In the earlier example:
+
+$$
+n=25
+$$
+
+and:
+
+$$
+s=128
+$$
+
+Suppose the true mean were actually:
+
+$$
+\mu_1=350
+$$
+
+instead of the null value:
+
+$$
+\mu_0=325
+$$
+
+The lecture's power calculation gives approximately:
+
+$$
+\text{Power}=0.243
+$$
+
+or about:
+
+$$
+24\%
+$$
+
+So even if the true population mean really were $350, a study of this size and variability would detect the increase only about 24% of the time using this testing setup.
+
+That helps explain why:
+
+> **Failing to reject $H_0$ does not necessarily mean there is no real effect.**
+
+The study may simply have low power.
+
+---
+
+# Inference for a Population Proportion
+
+The same inferential framework can be applied when the variable is **binary** rather than quantitative.
+
+Suppose each customer either:
+
+$$
+X_i=
+\begin{cases}
+1 & \text{customer converts}\\
+0 & \text{customer does not convert}
+\end{cases}
+$$
+
+Then:
+
+$$
+X_i\sim\text{Bernoulli}(p)
+$$
+
+where:
+
+$$
+p
+$$
+
+is the true population probability of conversion.
+
+The sample proportion is:
+
+$$
+\hat{p}
+=
+\frac{1}{n}
+\sum_{i=1}^{n}X_i
+$$
+
+Because the values are 0 and 1, the sample proportion is literally the **sample mean of binary observations**.
+
+---
+
+# Sampling Distribution of a Proportion
+
+For a population proportion $p$:
+
+$$
+E[\hat{p}]=p
+$$
+
+and:
+
+$$
+SE(\hat{p})
+=
+\sqrt{
+\frac{p(1-p)}{n}
+}
+$$
+
+For sufficiently large samples, the Central Limit Theorem gives:
+
+$$
+\frac{
+\hat{p}-p
+}{
+\sqrt{p(1-p)/n}
+}
+\approx
+N(0,1)
+$$
+
+Therefore, the sampling distribution of $\hat{p}$ is approximately Normal when the sample is sufficiently large.
+
+---
+
+# Confidence Interval for a Proportion
+
+Because the true population proportion $p$ is unknown, we estimate the standard error using:
+
+$$
+\hat{p}
+$$
+
+Therefore:
+
+$$
+SE(\hat{p})
+\approx
+\sqrt{
+\frac{
+\hat{p}(1-\hat{p})
+}{
+n
+}
+}
+$$
+
+A confidence interval is:
+
+$$
+\boxed{
+\hat{p}
+\pm
+z_{\alpha/2}
+\sqrt{
+\frac{
+\hat{p}(1-\hat{p})
+}{
+n
+}
+}
+}
+$$
+
+For a 95% confidence interval:
+
+$$
+z^*\approx1.96
+$$
+
+---
+
+## Example: E-Commerce Conversion Rate
+
+Suppose an e-commerce company observes whether visitors convert:
+
+- `1` = converted
+- `0` = did not convert
+
+Then:
+
+```{r}
+x <- subset(
+    ab_data,
+    landing_page == "old_page"
+)$converted
+```
+
+The sample conversion rate is:
+
+```{r}
+p_hat <- mean(x)
+```
+
+The estimated standard error is:
+
+```{r}
+se_p_hat <- sqrt(
+    p_hat * (1 - p_hat) / length(x)
+)
+```
+
+The 95% confidence interval is:
+
+```{r}
+p_hat +
+    c(-1, 1) *
+    qnorm(0.975) *
+    se_p_hat
+```
+
+Interpretation:
+
+> **We are 95% confident that the resulting interval contains the true conversion rate for old-page visitors.**
+
+Just as with the mean:
+
+$$
+n\uparrow
+\Rightarrow
+SE\downarrow
+\Rightarrow
+\text{narrower CI}
+$$
+
+---
+
+# Hypothesis Test for a Proportion
+
+Suppose we want to test:
+
+$$
+H_0:p=p_0
+$$
+
+against an alternative such as:
+
+$$
+H_a:p>p_0
+$$
+
+The test statistic is:
+
+$$
+\boxed{
+z=
+\frac{
+\hat{p}-p_0
+}{
+\sqrt{
+p_0(1-p_0)/n
+}
+}
+}
+$$
+
+Notice an important difference.
+
+For the **confidence interval**, the standard error uses:
+
+$$
+\hat{p}
+$$
+
+because we are estimating the unknown population proportion.
+
+For the **hypothesis test**, the standard error uses:
+
+$$
+p_0
+$$
+
+because the calculation asks what sampling variability would look like **assuming the null hypothesis is true**.
+
+Therefore:
+
+### Confidence Interval
+
+$$
+SE=
+\sqrt{
+\frac{
+\hat{p}(1-\hat{p})
+}{
+n
+}
+}
+$$
+
+### Hypothesis Test
+
+$$
+SE_0=
+\sqrt{
+\frac{
+p_0(1-p_0)
+}{
+n
+}
+}
+$$
+
+That distinction is important.
+
+---
+
+# Why Proportions Use z Instead of t
+
+Inference for a mean uses the t distribution because the population standard deviation:
+
+$$
+\sigma
+$$
+
+is unknown and must be estimated using:
+
+$$
+s
+$$
+
+For a Bernoulli variable:
+
+$$
+Var(X)=p(1-p)
+$$
+
+so the variance is determined directly by the proportion itself.
+
+Therefore, proportion inference uses the **Normal/z reference distribution** rather than a t distribution.
+
+| Parameter | Reference Distribution |
+|---|---|
+| Mean $\mu$ | t |
+| Proportion $p$ | z / Normal |
+
+---
+
+# Approximate vs. Exact Proportion Inference
+
+The Normal-based confidence interval for a proportion relies on a **large-sample approximation**.
+
+That approximation may become unreliable when:
+
+- $n$ is small
+- $\hat{p}$ is very close to 0
+- $\hat{p}$ is very close to 1
+- There are very few successes or failures
+
+In those situations, an exact Binomial method may be preferable.
+
+In R:
+
+```{r}
+binom.test(
+    sum(ab_data$converted),
+    length(ab_data$converted),
+    conf.level = 0.95
+)
+```
+
+`binom.test()` performs inference using the Binomial distribution rather than relying entirely on the Normal approximation.
+
+---
+
+# Mean vs. Proportion Inference
+
+The formulas differ, but the underlying logic is the same.
+
+| | Population Mean $\mu$ | Population Proportion $p$ |
+|---|---|---|
+| **Point Estimate** | $\bar{x}$ | $\hat{p}$ |
+| **Estimated SE for CI** | $\frac{s}{\sqrt{n}}$ | $\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ |
+| **Reference Distribution** | $t_{n-1}$ | $z$ / Normal |
+| **Confidence Interval** | $\bar{x}\pm t^*SE$ | $\hat{p}\pm z^*SE$ |
+| **Null Hypothesis** | $H_0:\mu=\mu_0$ | $H_0:p=p_0$ |
+| **Test Statistic** | $\frac{\bar{x}-\mu_0}{s/\sqrt{n}}$ | $\frac{\hat{p}-p_0}{\sqrt{p_0(1-p_0)/n}}$ |
+
+Despite the different formulas, both follow the same basic process:
+
+$$
+\boxed{
+\text{Estimate}
+\rightarrow
+\text{Quantify Uncertainty}
+\rightarrow
+\text{Compare to Reference Distribution}
+\rightarrow
+\text{Draw Conclusion}
+}
+$$
+
+---
+
+# Confidence Intervals vs. Hypothesis Tests
+
+Confidence intervals and hypothesis tests are two ways of performing statistical inference.
+
+### Confidence Interval
+
+A confidence interval asks:
+
+> **What values of the population parameter are reasonably compatible with the sample?**
+
+The result is a range:
+
+$$
+[\text{Lower Bound},\text{Upper Bound}]
+$$
+
+### Hypothesis Test
+
+A hypothesis test asks:
+
+> **Is the sample sufficiently inconsistent with a specific hypothesized population value?**
+
+The result involves:
+
+- Test statistic
+- p-value
+- Reject or fail to reject decision
+- Contextual conclusion
+
+Both rely on the same underlying concepts:
+
+- Sampling distributions
+- Standard errors
+- Reference distributions
+- Sampling uncertainty
+
+---
+
+# Overall Inference Framework
+
+The central idea of this lecture is that **sample statistics vary**.
+
+A sample statistic such as:
+
+$$
+\bar{x}
+$$
+
+or:
+
+$$
+\hat{p}
+$$
+
+is not expected to equal the population parameter exactly.
+
+Instead:
+
+$$
+\text{Observed Statistic}
+=
+\text{Population Signal}
++
+\text{Sampling Noise}
+$$
+
+Statistical inference provides a framework for determining how much uncertainty that sampling noise creates.
+
+The full workflow is:
+
+$$
+\text{Population Question}
+\rightarrow
+\text{Sampling Design}
+\rightarrow
+\text{Sample}
+\rightarrow
+\text{Point Estimate}
+\rightarrow
+\text{Standard Error}
+\rightarrow
+\text{Reference Distribution}
+\rightarrow
+\begin{cases}
+\text{Confidence Interval}\\
+\text{Hypothesis Test}
+\end{cases}
+\rightarrow
+\text{Business Conclusion}
+$$
+
+The major ideas connect as follows:
+
+- **Sampling design** determines whether the sample is trustworthy.
+- **Bias** creates systematic error and cannot be fixed simply by increasing $n$.
+- **Sampling variability** causes statistics to differ naturally across samples.
+- **Standard error** quantifies that sample-to-sample variability.
+- **The Central Limit Theorem** explains why many sampling distributions become approximately Normal.
+- **Confidence intervals** use the estimate and its standard error to quantify plausible values for the population parameter.
+- **Hypothesis tests** compare the observed estimate with a hypothesized parameter value.
+- **P-values** quantify how unusual the observed evidence would be under $H_0$.
+- **Type I and Type II errors** describe the two possible inferential mistakes.
+- **Power** measures the probability of detecting an effect when one actually exists.
+- The same overall logic applies to both **means** and **proportions**.

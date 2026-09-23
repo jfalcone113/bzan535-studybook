@@ -1,3 +1,1911 @@
-# Lecture 8
+# Inference for Categorical Data
 
-In progress...give me some time!
+## Overview
+
+Previous inference methods focused primarily on **quantitative outcomes**.
+
+For example:
+
+- One population mean → $\mu$
+- Paired mean difference → $\mu_d$
+- Difference between two independent means → $\mu_1-\mu_2$
+
+Lecture 8 shifts the focus to **categorical outcomes**.
+
+Examples include:
+
+- Purchase vs. no purchase
+- Homeowner vs. renter
+- Married vs. unmarried
+- Store vs. website vs. app
+- Current page vs. new page vs. third page
+
+Instead of asking questions about **means**, we now ask questions about:
+
+- **Proportions**
+- **Counts**
+- **Associations between categorical variables**
+- **Whether observed category frequencies match an expected distribution**
+
+The main methods are:
+
+1. **Two-proportion inference**
+2. **Chi-square test of independence**
+3. **Chi-square goodness-of-fit test**
+
+The appropriate method depends on the business question and structure of the categorical data.
+
+---
+
+# Two-Proportion Inference
+
+Suppose a retailer conducts an A/B experiment.
+
+Each visitor is randomly assigned to either:
+
+- Current page
+- New page
+
+The outcome is whether the visitor:
+
+- Purchases
+- Does not purchase
+
+Suppose the results are:
+
+| Page | Visitors | Purchases | Conversion Rate |
+|---|---:|---:|---:|
+| Current | 10,000 | 1,200 | 12.0% |
+| New | 10,000 | 1,230 | 12.3% |
+
+The sample proportions are:
+
+$$
+\hat{p}_{Current}
+=
+\frac{1200}{10000}
+=
+0.120
+$$
+
+and:
+
+$$
+\hat{p}_{New}
+=
+\frac{1230}{10000}
+=
+0.123
+$$
+
+The estimated difference is:
+
+$$
+\hat{p}_{New}-\hat{p}_{Current}
+=
+0.123-0.120
+=
+0.003
+$$
+
+or:
+
+$$
+\boxed{0.3\text{ percentage points}}
+$$
+
+Notice that this is **0.3 percentage points**, not 0.3%.
+
+---
+
+## Population Parameter
+
+The population parameter is:
+
+$$
+\boxed{
+p_{New}-p_{Current}
+}
+$$
+
+where:
+
+$p_{New}$ = population conversion rate for the new page  
+$p_{Current}$ = population conversion rate for the current page
+
+The sample estimate is:
+
+$$
+\boxed{
+\hat{p}_{New}-\hat{p}_{Current}
+}
+$$
+
+This follows the same general inference framework used previously:
+
+$$
+\text{Sample Statistic}
+\rightarrow
+\text{Estimate Population Parameter}
+$$
+
+Here:
+
+$$
+\hat{p}_{New}-\hat{p}_{Current}
+\rightarrow
+p_{New}-p_{Current}
+$$
+
+---
+
+# Confidence Interval for Two Proportions
+
+A confidence interval estimates the possible values of:
+
+$$
+p_1-p_2
+$$
+
+using the observed sample proportions.
+
+The standard error is:
+
+$$
+SE
+=
+\sqrt{
+\frac{
+\hat{p}_1(1-\hat{p}_1)
+}{
+n_1
+}
++
+\frac{
+\hat{p}_2(1-\hat{p}_2)
+}{
+n_2
+}
+}
+$$
+
+A 95% confidence interval is approximately:
+
+$$
+\boxed{
+(\hat{p}_1-\hat{p}_2)
+\pm
+1.96(SE)
+}
+$$
+
+For the page experiment, the estimated difference is:
+
+$$
+0.30\text{ percentage points}
+$$
+
+and the 95% confidence interval is:
+
+$$
+\boxed{
+(-0.61,\ 1.21)
+\text{ percentage points}
+}
+$$
+
+This interval includes:
+
+$$
+0
+$$
+
+so a population difference of zero is compatible with the data.
+
+The interval also tells us much more than simply whether the result is statistically significant.
+
+It describes the **range of plausible population differences**.
+
+---
+
+# Practical Importance
+
+Suppose the retailer decides that implementing the new page would only be worthwhile if conversion improves by at least:
+
+$$
+0.5\text{ percentage points}
+$$
+
+The confidence interval is:
+
+$$
+(-0.61,\ 1.21)
+$$
+
+This interval includes:
+
+- Negative effects
+- No effect
+- Improvements smaller than 0.5 percentage points
+- Improvements larger than 0.5 percentage points
+
+Therefore, the data do not precisely establish whether the improvement reaches the business threshold.
+
+This illustrates an important distinction:
+
+> **Statistical uncertainty and business importance are separate questions.**
+
+A confidence interval allows us to compare the estimated effect with a practically meaningful threshold rather than looking only at whether:
+
+$$
+p<0.05
+$$
+
+---
+
+# Hypothesis Test for Two Proportions
+
+To test whether the population conversion rates differ:
+
+$$
+H_0:
+p_{New}=p_{Current}
+$$
+
+which is equivalent to:
+
+$$
+H_0:
+p_{New}-p_{Current}=0
+$$
+
+Against the two-sided alternative:
+
+$$
+H_a:
+p_{New}\neq p_{Current}
+$$
+
+In R:
+
+```{r}
+ab_test <- prop.test(
+    x = c(1230, 1200),
+    n = c(10000, 10000),
+    alternative = "two.sided",
+    correct = FALSE
+)
+
+ab_test
+```
+
+Here:
+
+- `x` contains the number of successes
+- `n` contains the total number of observations
+- `alternative = "two.sided"` tests for any difference
+- `correct = FALSE` disables the continuity correction
+
+For the example:
+
+$$
+p\text{-value}=0.516
+$$
+
+Because:
+
+$$
+0.516>0.05
+$$
+
+we fail to reject:
+
+$$
+H_0
+$$
+
+The experiment does not provide sufficient evidence that the population conversion rates differ.
+
+This does **not** prove:
+
+$$
+p_{New}=p_{Current}
+$$
+
+It means the observed data do not provide sufficient evidence of a difference.
+
+---
+
+# Why Proportions Are Pooled for the Hypothesis Test
+
+There is an important difference between constructing a confidence interval and conducting the hypothesis test.
+
+## Confidence Interval
+
+When constructing the confidence interval, we are **not assuming the population proportions are equal**.
+
+Therefore, we estimate their variability separately using:
+
+$$
+\hat{p}_1
+$$
+
+and:
+
+$$
+\hat{p}_2
+$$
+
+The standard error is:
+
+$$
+SE_{CI}
+=
+\sqrt{
+\frac{\hat{p}_1(1-\hat{p}_1)}{n_1}
++
+\frac{\hat{p}_2(1-\hat{p}_2)}{n_2}
+}
+$$
+
+## Hypothesis Test
+
+Under the null hypothesis:
+
+$$
+H_0:p_1=p_2
+$$
+
+we are explicitly assuming that both groups share **one common population proportion**.
+
+Therefore, we estimate that common proportion using the pooled sample proportion:
+
+$$
+\boxed{
+\hat{p}_{pool}
+=
+\frac{x_1+x_2}{n_1+n_2}
+}
+$$
+
+The hypothesis-test standard error uses:
+
+$$
+\hat{p}_{pool}
+$$
+
+because the test asks:
+
+> If the null hypothesis of equal population proportions were true, how much difference between the sample proportions would we expect from sampling variation alone?
+
+So:
+
+> **Confidence interval → keep proportions separate.**
+
+> **Hypothesis test under $H_0:p_1=p_2$ → pool the proportions.**
+
+---
+
+# From Two Groups to Several Groups
+
+Suppose the retailer introduces a third page.
+
+The results are now:
+
+| Page | Visitors | Purchases | Conversion Rate |
+|---|---:|---:|---:|
+| Current | 10,000 | 1,200 | 12.0% |
+| New | 10,000 | 1,230 | 12.3% |
+| Third | 15,000 | 2,100 | 14.0% |
+
+Now the question becomes:
+
+> **Do conversion rates differ across the three pages?**
+
+The null hypothesis is:
+
+$$
+\boxed{
+H_0:
+p_{Current}
+=
+p_{New}
+=
+p_{Third}
+}
+$$
+
+The alternative is:
+
+$$
+\boxed{
+H_a:
+\text{Not all population conversion rates are equal}
+}
+$$
+
+With more than two groups, we can organize the data into a **contingency table** and use a **chi-square test**.
+
+---
+
+# Contingency Tables
+
+A **contingency table**, also called a **two-way table**, displays the counts corresponding to combinations of two categorical variables.
+
+For the page experiment, the two variables are:
+
+1. Page
+2. Purchase outcome
+
+The table is:
+
+| Page | Purchased | Did Not Purchase |
+|---|---:|---:|
+| Current | 1,200 | 8,800 |
+| New | 1,230 | 8,770 |
+| Third | 2,100 | 12,900 |
+
+In R:
+
+```{r}
+page_table <- cbind(
+    Purchased = pages$Purchases,
+    `Did not purchase` = pages$Visitors - pages$Purchases
+)
+
+rownames(page_table) <- pages$Page
+
+page_table
+```
+
+Each visitor contributes to exactly **one cell** in the table.
+
+---
+
+# Why Raw Counts Alone Can Be Misleading
+
+Notice that the third page has:
+
+$$
+2100
+$$
+
+purchases compared with:
+
+$$
+1200
+$$
+
+for the current page.
+
+But the third page also has:
+
+$$
+15000
+$$
+
+visitors instead of:
+
+$$
+10000
+$$
+
+Therefore, comparing raw purchase counts alone would be misleading.
+
+The relevant quantities are the **conditional proportions**:
+
+$$
+\frac{\text{Purchases}}{\text{Visitors}}
+$$
+
+which give:
+
+- Current: 12.0%
+- New: 12.3%
+- Third: 14.0%
+
+When group sizes differ, counts must be interpreted relative to the corresponding totals.
+
+---
+
+# Chi-Square Test of Independence
+
+The **chi-square test of independence** determines whether two categorical variables are associated.
+
+For the page experiment, the variables are:
+
+- Page assignment
+- Purchase outcome
+
+The null hypothesis is:
+
+$$
+\boxed{
+H_0:
+\text{Page and purchase outcome are independent}
+}
+$$
+
+This can equivalently be written as:
+
+$$
+\boxed{
+H_0:
+p_{Current}
+=
+p_{New}
+=
+p_{Third}
+}
+$$
+
+The alternative is:
+
+$$
+\boxed{
+H_a:
+\text{Page and purchase outcome are associated}
+}
+$$
+
+or equivalently:
+
+$$
+H_a:
+\text{Not all population conversion rates are equal}
+$$
+
+---
+
+# What Does Independence Mean?
+
+Two categorical variables are **independent** if knowing the value of one does not change the distribution of the other.
+
+In this example:
+
+> Page and purchase outcome are independent if knowing which page a visitor sees does not change their probability of purchasing.
+
+If:
+
+$$
+P(\text{Purchase}\mid\text{Current})
+=
+P(\text{Purchase}\mid\text{New})
+=
+P(\text{Purchase}\mid\text{Third})
+$$
+
+then page and purchase are independent.
+
+If these probabilities differ, the variables are associated.
+
+---
+
+# Observed vs. Expected Counts
+
+The chi-square test compares:
+
+- **Observed counts** — what actually occurred
+- **Expected counts** — what we would expect if the null hypothesis of independence were true
+
+The observed counts are denoted:
+
+$$
+O_{ij}
+$$
+
+and the expected counts are denoted:
+
+$$
+E_{ij}
+$$
+
+The core question is:
+
+> **If these variables were really independent, what would this table approximately look like?**
+
+---
+
+# Expected Counts Under Independence
+
+Across all three pages:
+
+$$
+1200+1230+2100
+=
+4530
+$$
+
+visitors purchased.
+
+There are:
+
+$$
+10000+10000+15000
+=
+35000
+$$
+
+total visitors.
+
+Therefore, the overall purchase rate is:
+
+$$
+\frac{4530}{35000}
+\approx
+0.1294
+$$
+
+or:
+
+$$
+12.94\%
+$$
+
+If page and purchase outcome are independent, each page should have approximately this same conversion rate.
+
+For the current page:
+
+$$
+E_{\text{Current,Purchased}}
+=
+10000(0.1294)
+\approx
+1294.3
+$$
+
+More generally, expected counts are calculated as:
+
+$$
+\boxed{
+E_{ij}
+=
+\frac{
+(\text{Row Total}_i)
+(\text{Column Total}_j)
+}{
+\text{Grand Total}
+}
+}
+$$
+
+This formula preserves the observed row and column totals while constructing the table we would expect under independence.
+
+---
+
+# Why Expected Counts Can Differ Across Groups
+
+Independence does **not** mean that every group should have identical counts.
+
+The third page has:
+
+$$
+15000
+$$
+
+visitors while the other pages have:
+
+$$
+10000
+$$
+
+each.
+
+Even if all three pages have exactly the same underlying conversion probability, we would expect more purchases from the third page simply because more people saw it.
+
+Therefore:
+
+> **Independence implies comparable proportions, not necessarily identical counts.**
+
+---
+
+# Pearson Chi-Square Statistic
+
+The Pearson chi-square statistic measures how far the observed counts are from the counts expected under the null hypothesis.
+
+$$
+\boxed{
+X^2
+=
+\sum_{i,j}
+\frac{
+(O_{ij}-E_{ij})^2
+}{
+E_{ij}
+}
+}
+$$
+
+Each cell contributes:
+
+$$
+\frac{(O-E)^2}{E}
+$$
+
+to the total statistic.
+
+The logic is:
+
+### $O-E$
+
+Measures how far the observed count is from the expected count.
+
+### Squaring
+
+$$
+(O-E)^2
+$$
+
+prevents positive and negative differences from canceling each other out.
+
+### Dividing by $E$
+
+$$
+\frac{(O-E)^2}{E}
+$$
+
+scales the discrepancy relative to the size of the expected count.
+
+Therefore:
+
+> **Larger $X^2$ values indicate greater disagreement between the observed data and the null model.**
+
+---
+
+# Degrees of Freedom
+
+For a contingency table with:
+
+- $r$ rows
+- $c$ columns
+
+the degrees of freedom are:
+
+$$
+\boxed{
+df=(r-1)(c-1)
+}
+$$
+
+For the page experiment:
+
+$$
+r=3
+$$
+
+and:
+
+$$
+c=2
+$$
+
+so:
+
+$$
+df
+=
+(3-1)(2-1)
+=
+2
+$$
+
+Therefore:
+
+$$
+\boxed{df=2}
+$$
+
+Under the null hypothesis and appropriate conditions:
+
+$$
+X^2
+\sim
+\chi^2_{(r-1)(c-1)}
+$$
+
+approximately.
+
+---
+
+# Chi-Square Test in R
+
+The test can be conducted using:
+
+```{r}
+page_test <- chisq.test(
+    page_table,
+    correct = FALSE
+)
+
+page_test
+```
+
+For the three-page example:
+
+$$
+X^2=26.435
+$$
+
+with:
+
+$$
+df=2
+$$
+
+and:
+
+$$
+p\text{-value}
+=
+1.819\times10^{-6}
+$$
+
+The p-value is extremely small, so we reject:
+
+$$
+H_0
+$$
+
+and conclude that page assignment and purchase outcome are associated.
+
+Equivalently:
+
+> **There is evidence that at least two of the population conversion rates differ.**
+
+---
+
+# What an Overall Chi-Square Test Does Not Tell You
+
+A significant chi-square test tells us:
+
+$$
+\boxed{
+\text{Some association exists}
+}
+$$
+
+or:
+
+$$
+\boxed{
+\text{Not all population proportions are equal}
+}
+$$
+
+It does **not** automatically tell us:
+
+- Every group differs from every other group
+- Which specific groups differ
+- Which group should be selected by the business
+- Whether the differences are practically important
+
+For the page example, rejecting:
+
+$$
+H_0:
+p_{Current}=p_{New}=p_{Third}
+$$
+
+means the equality of all three proportions is inconsistent with the data.
+
+It does **not** mean:
+
+$$
+p_{Current}\neq p_{New}\neq p_{Third}
+$$
+
+in every pairwise comparison.
+
+The next step is to investigate **where the association appears**.
+
+---
+
+# Two-Proportion Test and Chi-Square Connection
+
+With exactly two groups and two outcomes, the contingency table is:
+
+$$
+2\times2
+$$
+
+For example:
+
+| Page | Purchased | Did Not Purchase |
+|---|---:|---:|
+| New | 1230 | 8770 |
+| Current | 1200 | 8800 |
+
+The chi-square test can be run using:
+
+```{r}
+two_page_table <- page_table[
+    c("New", "Current"),
+]
+
+two_page_test <- chisq.test(
+    two_page_table,
+    correct = FALSE
+)
+```
+
+For a two-sided comparison without continuity correction, the two-proportion test and chi-square test are mathematically connected:
+
+$$
+\boxed{
+X^2=z^2
+}
+$$
+
+Therefore, they produce the same p-value in this setting.
+
+For this example:
+
+$$
+p\approx0.516
+$$
+
+from either method.
+
+So the two-proportion test and chi-square test are not unrelated techniques.
+
+The two-proportion test is closely connected to the chi-square framework when the table is:
+
+$$
+2\times2
+$$
+
+---
+
+# Finding Where the Association Occurs
+
+After obtaining a significant overall chi-square test, first examine the category proportions.
+
+For the page experiment:
+
+| Page | Conversion Rate |
+|---|---:|
+| Current | 12.0% |
+| New | 12.3% |
+| Third | 14.0% |
+
+The pooled conversion rate is approximately:
+
+$$
+12.94\%
+$$
+
+The third page appears noticeably higher than the other two.
+
+This provides a descriptive indication of where the association may be occurring.
+
+However, we can investigate individual cells more formally using **standardized residuals**.
+
+---
+
+# Standardized Residuals
+
+A **standardized residual** measures how far an observed cell count differs from what would be expected under independence, accounting for the cell's variability.
+
+In R:
+
+```{r}
+round(
+    page_test$stdres,
+    2
+)
+```
+
+For the page example:
+
+| Page | Purchased | Did Not Purchase |
+|---|---:|---:|
+| Current | -3.32 | 3.32 |
+| New | -2.27 | 2.27 |
+| Third | 5.10 | -5.10 |
+
+Interpretation:
+
+- **Positive residual** → more observations than expected
+- **Negative residual** → fewer observations than expected
+- **Large absolute residual** → stronger departure from independence
+
+For the third page:
+
+$$
+5.10
+$$
+
+for purchases means substantially **more purchases occurred than expected under independence**.
+
+Its non-purchase residual is:
+
+$$
+-5.10
+$$
+
+meaning substantially **fewer non-purchases occurred than expected**.
+
+This pattern helps explain the significant overall chi-square statistic.
+
+---
+
+# Why Residuals Come in Opposite Directions
+
+Within a row, the total number of visitors is fixed.
+
+If a page has more purchases than expected, those additional observations must come from somewhere.
+
+Therefore, it will also have fewer non-purchases than expected.
+
+For example:
+
+$$
+O_{\text{Purchased}}
+>
+E_{\text{Purchased}}
+$$
+
+will correspond with:
+
+$$
+O_{\text{Not Purchased}}
+<
+E_{\text{Not Purchased}}
+$$
+
+when there are only two outcome categories.
+
+---
+
+# Conditions for the Chi-Square Approximation
+
+Before trusting a chi-square test, check whether its assumptions are reasonable.
+
+## Independent Observations
+
+Observations should contribute independently.
+
+For example, each visitor should contribute one independent observation rather than the same visitor appearing repeatedly and being treated as independent observations.
+
+A huge dataset does not solve a violation of independence.
+
+> **More rows do not fix dependence among observations.**
+
+---
+
+## Mutually Exclusive Categories
+
+Each observational unit should contribute to exactly one cell.
+
+For example, a visitor cannot simultaneously be classified as both:
+
+- Purchased
+- Did not purchase
+
+The categories must be mutually exclusive for the table being analyzed.
+
+---
+
+## Expected Counts
+
+Expected counts should be sufficiently large for the chi-square approximation to be reliable.
+
+A simple conservative rule is:
+
+$$
+\boxed{
+E_{ij}\geq5
+}
+$$
+
+for every cell.
+
+Expected counts can be inspected in R using:
+
+```{r}
+round(
+    page_test$expected,
+    1
+)
+```
+
+For the page example:
+
+| Page | Purchased | Did Not Purchase |
+|---|---:|---:|
+| Current | 1294.3 | 8705.7 |
+| New | 1294.3 | 8705.7 |
+| Third | 1941.4 | 13058.6 |
+
+All expected counts are far greater than 5.
+
+---
+
+# Chi-Square Test of Independence: Workflow
+
+When determining whether two categorical variables are associated:
+
+## Step 1: Identify the Observational Unit
+
+Determine what one observation represents.
+
+---
+
+## Step 2: Identify the Two Categorical Variables
+
+For example:
+
+- Page
+- Purchase outcome
+
+---
+
+## Step 3: Construct a Contingency Table
+
+```{r}
+table(
+    Variable1 = data$variable1,
+    Variable2 = data$variable2
+)
+```
+
+---
+
+## Step 4: Examine Counts and Proportions
+
+Do not rely only on raw counts.
+
+Compare relevant percentages or conditional proportions.
+
+---
+
+## Step 5: State the Hypotheses
+
+$$
+H_0:
+\text{The variables are independent}
+$$
+
+$$
+H_a:
+\text{The variables are associated}
+$$
+
+---
+
+## Step 6: Calculate Expected Counts
+
+Conceptually:
+
+$$
+E_{ij}
+=
+\frac{
+(\text{Row Total})
+(\text{Column Total})
+}{
+\text{Grand Total}
+}
+$$
+
+---
+
+## Step 7: Check Conditions
+
+Verify:
+
+- Independent observations
+- Mutually exclusive categories
+- Adequate expected counts
+
+---
+
+## Step 8: Conduct the Test
+
+```{r}
+test <- chisq.test(
+    contingency_table,
+    correct = FALSE
+)
+```
+
+---
+
+## Step 9: Interpret the Overall Result
+
+If the p-value is small:
+
+> There is evidence of an association between the categorical variables.
+
+If the p-value is not small:
+
+> The data do not provide sufficient evidence of an association.
+
+---
+
+## Step 10: Investigate the Pattern
+
+If the overall test is significant, examine:
+
+- Conditional proportions
+- Observed vs. expected counts
+- Standardized residuals
+
+```{r}
+test$expected
+test$stdres
+```
+
+This helps determine which categories appear to contribute most strongly to the overall association.
+
+---
+
+# Example: Homeownership and Marital Status
+
+Suppose we ask:
+
+> Is homeownership associated with marital status among the households in these data?
+
+The two categorical variables are:
+
+### Homeownership
+
+Possible categories include:
+
+- Homeowner
+- Probable Owner
+- Probable Renter
+- Renter
+- Unknown
+
+### Marital Status
+
+The codes are:
+
+- A = Married
+- B = Unmarried
+- U = Unknown
+
+A contingency table might be created using:
+
+```{r}
+table(
+    Homeownership = hh$homeowner_desc,
+    Marital_status = hh$marital_status_code
+)
+```
+
+The hypotheses are:
+
+$$
+H_0:
+\text{Homeownership and marital status are independent}
+$$
+
+$$
+H_a:
+\text{Homeownership and marital status are associated}
+$$
+
+Before running the test, however, we must decide which categories should be included.
+
+---
+
+# Category Definitions Matter
+
+Suppose the data contain categories such as:
+
+- Unknown homeownership
+- Unknown marital status
+- Probable owner
+- Probable renter
+
+The decision to include, combine, or exclude these categories changes the population represented by the analysis and therefore changes the interpretation.
+
+For example, removing unknown marital status means the analysis is no longer about:
+
+> All households in the dataset.
+
+It becomes an analysis of:
+
+> Households with known marital status.
+
+Therefore:
+
+> **Data-cleaning decisions are part of the statistical analysis because they determine what population the resulting inference describes.**
+
+Categories should not be removed simply because they are inconvenient.
+
+The decision should follow from the research question and the meaning of the categories.
+
+---
+
+# Association Does Not Imply Causation
+
+Suppose the chi-square analysis finds an association between:
+
+- Marital status
+- Homeownership
+
+Can we conclude:
+
+> Getting married causes people to become homeowners?
+
+No.
+
+The chi-square test establishes statistical evidence of an **association**.
+
+It does not establish the causal mechanism behind that association.
+
+Other variables might affect both marital status and homeownership, such as:
+
+- Age
+- Income
+- Household size
+- Employment
+- Geographic location
+
+Therefore:
+
+$$
+\boxed{
+\text{Association}
+\neq
+\text{Causation}
+}
+$$
+
+The study design determines whether causal conclusions are justified.
+
+---
+
+# Chi-Square Goodness-of-Fit Test
+
+The chi-square framework can also answer a different type of categorical question.
+
+Suppose a retailer expects customers to make their first purchase through:
+
+- Store: 50%
+- Website: 30%
+- App: 20%
+
+These percentages represent a **specified benchmark distribution**.
+
+An independent sample of 500 customers produces:
+
+| Channel | Observed Customers | Benchmark Share |
+|---|---:|---:|
+| Store | 240 | 50% |
+| Website | 160 | 30% |
+| App | 100 | 20% |
+
+The question is:
+
+> **Does the observed channel mix match the retailer's specified benchmark distribution?**
+
+This is a **chi-square goodness-of-fit test**.
+
+---
+
+# Independence vs. Goodness-of-Fit
+
+These two chi-square procedures answer different questions.
+
+## Chi-Square Test of Independence
+
+Uses **two categorical variables**.
+
+Example:
+
+> Is page assignment associated with purchase outcome?
+
+The data form a two-way contingency table.
+
+---
+
+## Chi-Square Goodness-of-Fit Test
+
+Uses **one categorical variable** and compares its observed distribution with specified benchmark probabilities.
+
+Example:
+
+> Does customer channel mix match 50% store, 30% website, and 20% app?
+
+The distinction is:
+
+| Method | Variables | Question |
+|---|---:|---|
+| Chi-square independence | 2 categorical variables | Are the variables associated? |
+| Chi-square goodness-of-fit | 1 categorical variable | Does its distribution match specified proportions? |
+
+---
+
+# Expected Counts for Goodness-of-Fit
+
+Suppose:
+
+$$
+n=500
+$$
+
+and the benchmark probabilities are:
+
+$$
+p_{Store}=0.50
+$$
+
+$$
+p_{Website}=0.30
+$$
+
+$$
+p_{App}=0.20
+$$
+
+Expected counts are:
+
+$$
+E_i=np_{i,0}
+$$
+
+Therefore:
+
+### Store
+
+$$
+E_{Store}
+=
+500(0.50)
+=
+250
+$$
+
+### Website
+
+$$
+E_{Website}
+=
+500(0.30)
+=
+150
+$$
+
+### App
+
+$$
+E_{App}
+=
+500(0.20)
+=
+100
+$$
+
+So under the benchmark:
+
+| Channel | Observed | Expected |
+|---|---:|---:|
+| Store | 240 | 250 |
+| Website | 160 | 150 |
+| App | 100 | 100 |
+
+The chi-square statistic again measures how far observed counts are from expected counts.
+
+---
+
+# Goodness-of-Fit Chi-Square Statistic
+
+The statistic is:
+
+$$
+\boxed{
+X^2
+=
+\sum_i
+\frac{
+(O_i-E_i)^2
+}{
+E_i
+}
+}
+$$
+
+where:
+
+$$
+E_i=np_{i,0}
+$$
+
+The logic is identical to the independence test:
+
+> Compare what we observed with what we would expect if the null model were correct.
+
+---
+
+# Goodness-of-Fit Hypotheses
+
+For the channel example:
+
+$$
+H_0:
+\begin{cases}
+p_{Store}=0.50\\
+p_{Website}=0.30\\
+p_{App}=0.20
+\end{cases}
+$$
+
+The alternative is:
+
+$$
+H_a:
+\text{The population distribution differs from the benchmark in at least one category}
+$$
+
+---
+
+# Goodness-of-Fit Degrees of Freedom
+
+If there are:
+
+$$
+k
+$$
+
+categories and their probabilities are specified in advance, then:
+
+$$
+\boxed{
+df=k-1
+}
+$$
+
+For three channels:
+
+$$
+df=3-1=2
+$$
+
+---
+
+# Goodness-of-Fit in R
+
+Suppose:
+
+```{r}
+channel_counts <- c(
+    Store = 240,
+    Website = 160,
+    App = 100
+)
+```
+
+The test can be performed with:
+
+```{r}
+chisq.test(
+    channel_counts,
+    p = c(0.50, 0.30, 0.20)
+)
+```
+
+For the example:
+
+$$
+X^2=1.0667
+$$
+
+$$
+df=2
+$$
+
+and:
+
+$$
+p\text{-value}=0.5866
+$$
+
+Because the p-value is not small, we fail to reject the null hypothesis.
+
+The data do not provide sufficient evidence that the population channel distribution differs from:
+
+$$
+50\%,30\%,20\%
+$$
+
+This does **not** prove that the true population proportions are exactly:
+
+$$
+50\%,30\%,20\%
+$$
+
+It means the observed differences are not sufficiently inconsistent with the benchmark to reject it.
+
+---
+
+# One Logic Behind Both Chi-Square Tests
+
+Both chi-square procedures follow the same basic structure:
+
+$$
+\boxed{
+\text{Observed}
+\quad\text{vs.}\quad
+\text{Expected under }H_0
+}
+$$
+
+and both use:
+
+$$
+\boxed{
+X^2
+=
+\sum
+\frac{(O-E)^2}{E}
+}
+$$
+
+What changes is **where the expected counts come from**.
+
+### Test of Independence
+
+Expected counts are determined from the row and column totals:
+
+$$
+E_{ij}
+=
+\frac{
+(\text{Row Total}_i)
+(\text{Column Total}_j)
+}{
+\text{Grand Total}
+}
+$$
+
+### Goodness-of-Fit
+
+Expected counts come from specified benchmark probabilities:
+
+$$
+E_i=np_{i,0}
+$$
+
+So the mathematical logic is the same, but the null model is different.
+
+---
+
+# Choosing the Appropriate Categorical Method
+
+The first step is identifying the business question.
+
+| Business Question | Analysis |
+|---|---|
+| How much do two conversion rates differ? | Two-proportion CI and test |
+| Does conversion differ across three pages? | Chi-square test on a two-way table |
+| Are homeownership and marital status associated? | Chi-square test of independence |
+| Does channel mix match specified shares? | Chi-square goodness-of-fit test |
+
+A useful decision process is:
+
+### Are You Comparing Two Population Proportions?
+
+For example:
+
+> Does the new page have a different conversion rate from the current page?
+
+Use:
+
+$$
+\boxed{\text{Two-Proportion Inference}}
+$$
+
+---
+
+### Are You Examining Two Categorical Variables?
+
+For example:
+
+> Is purchase outcome associated with which page a customer sees?
+
+or:
+
+> Is homeownership associated with marital status?
+
+Use:
+
+$$
+\boxed{\text{Chi-Square Test of Independence}}
+$$
+
+---
+
+### Are You Comparing One Categorical Variable to Predetermined Proportions?
+
+For example:
+
+> Does the observed channel mix match the expected 50/30/20 split?
+
+Use:
+
+$$
+\boxed{\text{Chi-Square Goodness-of-Fit Test}}
+$$
+
+---
+
+# Categorical Inference Workflow
+
+When working with categorical data:
+
+## Step 1: Identify the Business Question
+
+Determine what comparison is actually being requested.
+
+---
+
+## Step 2: Identify the Observational Unit
+
+Ask:
+
+> What does one observation represent?
+
+This is essential for determining whether observations are independent.
+
+---
+
+## Step 3: Identify the Categorical Variables
+
+Determine whether the problem contains:
+
+- One categorical variable
+- Two categorical variables
+- Two groups with a binary outcome
+
+---
+
+## Step 4: Examine Counts and Proportions
+
+Construct:
+
+- Frequency tables
+- Contingency tables
+- Conditional proportions
+- Bar charts when useful
+
+Do not interpret raw counts without considering group sizes.
+
+---
+
+## Step 5: Choose the Appropriate Method
+
+$$
+\begin{array}{c}
+\text{Categorical Outcome}\\
+\downarrow\\
+\begin{cases}
+\text{Two proportions}
+\rightarrow
+\text{Two-proportion inference}\\[6pt]
+\text{Two categorical variables}
+\rightarrow
+\chi^2\text{ independence}\\[6pt]
+\text{One categorical variable vs. benchmark}
+\rightarrow
+\chi^2\text{ goodness-of-fit}
+\end{cases}
+\end{array}
+$$
+
+---
+
+## Step 6: State the Null Model
+
+For two proportions:
+
+$$
+H_0:p_1=p_2
+$$
+
+For independence:
+
+$$
+H_0:
+\text{The categorical variables are independent}
+$$
+
+For goodness-of-fit:
+
+$$
+H_0:
+\text{The category probabilities equal the specified benchmark}
+$$
+
+---
+
+## Step 7: Check Conditions
+
+Depending on the method, examine:
+
+- Independence of observations
+- Mutually exclusive categories
+- Expected counts
+- Sample sizes
+
+---
+
+## Step 8: Conduct the Analysis
+
+Use the appropriate R function:
+
+```{r}
+prop.test()
+```
+
+or:
+
+```{r}
+chisq.test()
+```
+
+---
+
+## Step 9: Interpret in Context
+
+Translate the statistical result back into the business question.
+
+Avoid saying only:
+
+> The p-value is significant.
+
+Instead explain **what statistical relationship the data support**.
+
+---
+
+## Step 10: Separate Association from Causation
+
+A statistically significant association does not automatically establish causality.
+
+Ask:
+
+> **How were the data generated?**
+
+Random assignment can support causal interpretation.
+
+Observational association by itself cannot.
+
+---
+
+# Connecting Lectures 5–8
+
+The inferential methods covered so far can now be organized according to the **type of outcome and study design**.
+
+| Question | Parameter / Structure | Method |
+|---|---|---|
+| What is one population mean? | $\mu$ | One-sample t |
+| What is the mean difference for linked observations? | $\mu_d$ | Paired t |
+| How do two independent population means differ? | $\mu_1-\mu_2$ | Welch two-sample t |
+| How do two population proportions differ? | $p_1-p_2$ | Two-proportion inference |
+| Are two categorical variables associated? | Contingency table | Chi-square independence |
+| Does one categorical distribution match specified shares? | $p_1,\ldots,p_k$ | Chi-square goodness-of-fit |
+
+The broader decision process is:
+
+$$
+\boxed{
+\text{Business Question}
+\rightarrow
+\text{Outcome Type}
+\rightarrow
+\text{Study Design}
+\rightarrow
+\text{Parameter}
+\rightarrow
+\text{Statistical Method}
+\rightarrow
+\text{Interpretation}
+}
+$$
+
+The key idea remains the same:
+
+> **Do not start by choosing a statistical test. Start by understanding what the variables represent, how the data were generated, and what population question you are trying to answer.**

@@ -8,12 +8,13 @@ This section marks the transition from **describing observed data** to **reasoni
 
 Answering this requires more than descriptive statistics. It requires looking at **probabilities and probability distributions**.
 
-For example, suppose a call center receives an average of 12 calls per hour. Knowing the average is useful, but it doesn't necessarily answer a question such as:
+For example, suppose a call center receives an average of 12 calls per hour. Knowing the average is useful, but it does not necessarily answer a question such as:
 
-    What is the probability that the call center receives 20 or more calls in the next hour?*
+> *What is the probability that the call center receives 20 or more calls in the next hour?*
 
+The actual number of calls is uncertain. It could be 8 calls, 12 calls, 15 calls, 20 calls, and so on.
 
-The actual number of calls is uncertain. It could be 8 calls, 12 calls, 15 calls, 20 calls, and so on. A **probability** answers a specific question about this value. A **probability distribution** describes how probability is distributed across the different possible values.
+A **probability** answers a specific question about this uncertain value. A **probability distribution** describes how probability is distributed across the different possible values.
 
 Different types of random processes produce different patterns of possible outcomes. This leads to different **probability distributions**, including:
 
@@ -24,6 +25,7 @@ Different types of random processes produce different patterns of possible outco
 
 The key task is therefore not simply calculating a probability, but first determining **which probability distribution appropriately models the situation**.
 
+---
 
 ## Probability Terminology
 
@@ -31,10 +33,10 @@ Probability
 : A single number between 0 and 1 describing how likely a particular event is.
 
 Probability Distribution
-: A model that describes the possible values of a random variable and their probabilities.
+: A model that describes the possible values of a random variable and how probability is distributed across those values.
 
 Experiment
-: A process that produces an uncertain outcome (random process).
+: A process that produces an uncertain outcome, also called a random process.
 
 Outcome
 : A single possible result of an experiment.
@@ -52,19 +54,98 @@ Conditional Probability
 : The probability that event $A$ occurs given that event $B$ has already occurred, denoted $P(A \mid B)$.
 
 Random Variable
-: A numerical variable whose value is determined by the outcome of a random process (experiment).
+: A numerical variable whose value is determined by the outcome of a random process.
 
-*Note: **random** does not mean that all possible outcomes are equally likely. It simply means that the outcome is **unknown** in advance.*
+*Note: **random** does not mean that all possible outcomes are equally likely. It simply means that the outcome is **unknown in advance**.*
 
-When determining probabilties involving multiple events or variables, there are two questions to consider:
+### Example: Experiment, Outcome, Event, and Sample Space
 
-Can A and B happen together?
+Suppose the experiment is:
 
-Events being **mutually exclusive** means they cannot happen together. If one event occurs, it is not possible for another to occur. Suppose a customer's response to an email is classified as "click" or "ignore". It's physically impossible for the customer to both click the email and ignore it. 
+> Send a marketing email to a customer and record the customer's response.
 
-Events that are **indepdendent** mean the outcome of one event has no effect on another. For example, say the outcome of Customer A clicking or ignoring the email has no effect on whether Customer B clicks. Knowing Customer A clicked doesn't change the probability of Customer B clicking. 
+A possible sample space might be:
 
-Independence and mutually exclusivity are two separate dimensions; the only contradiction is "independent and mutually exclusive". While other combinations are possible, events cannot be both independent and mutually exclusive because the occurrence of one makes the probability of the other 0, so the events are necessarily dependent.
+$$
+S = \{\text{Click, Open Without Click, Ignore, Unsubscribe}\}
+$$
+
+An **outcome** is one individual result, such as:
+
+$$
+\text{Click}
+$$
+
+An **event** may contain one or more outcomes.
+
+For example, the event "customer engages with the email" might include:
+
+$$
+A = \{\text{Click, Open Without Click}\}
+$$
+
+---
+
+## Relationships Between Events
+
+When considering probabilities involving multiple events, there are two separate questions:
+
+1. **Can the events happen together?**
+2. **Does knowing one event occurred change the probability of the other?**
+
+These correspond to **mutual exclusivity** and **independence**.
+
+### Mutually Exclusive Events
+
+Two events are **mutually exclusive** if they cannot occur at the same time.
+
+If $A$ and $B$ are mutually exclusive:
+
+$$
+P(A \cap B)=0
+$$
+
+For example, suppose a customer's email response is classified as exactly one of:
+
+- Click
+- Open without clicking
+- Ignore
+- Unsubscribe
+
+A customer cannot simultaneously be classified as both **Click** and **Ignore**, so those outcomes are mutually exclusive.
+
+### Independent Events
+
+Two events are **independent** if the occurrence of one event does not change the probability of the other.
+
+Mathematically:
+
+$$
+P(A \mid B)=P(A)
+$$
+
+For example, suppose whether Customer A clicks an email has no effect on whether Customer B clicks it.
+
+Knowing that Customer A clicked does not change the probability that Customer B clicks, so the events are independent.
+
+### Mutually Exclusive vs. Independent
+
+Mutual exclusivity and independence describe **different relationships**.
+
+- **Mutually exclusive** asks whether the events can occur together.
+- **Independent** asks whether one event changes the probability of another.
+
+For events with positive probability, mutually exclusive events cannot also be independent.
+
+If $A$ and $B$ are mutually exclusive and $A$ occurs, then $B$ becomes impossible:
+
+$$
+P(B \mid A)=0
+$$
+
+which is different from $P(B)$ whenever $P(B)>0$.
+
+---
 
 ## Probability Rules
 
@@ -72,7 +153,23 @@ Independence and mutually exclusivity are two separate dimensions; the only cont
 
 The **complement** of event $A$, denoted $A^c$, is the event that $A$ does **not** occur.
 
-$P(A^c) = 1 - P(A)$
+$$
+P(A^c)=1-P(A)
+$$
+
+For example, if:
+
+$$
+P(\text{Purchase})=0.30
+$$
+
+then:
+
+$$
+P(\text{No Purchase})=1-0.30=0.70
+$$
+
+---
 
 ### Addition Rule
 
@@ -81,54 +178,339 @@ The **addition rule** calculates the probability that event $A$ **or** event $B$
 For any two events:
 
 $$
-P(A \cup B) = P(A) + P(B) - P(A \cap B)
+P(A \cup B)
+=
+P(A)+P(B)-P(A \cap B)
 $$
 
-If $A$ and $B$ are **mutually exclusive**, they cannot occur together, so $P(A \cap B)=0$:
+The intersection is subtracted because outcomes belonging to both events would otherwise be counted twice.
+
+If $A$ and $B$ are **mutually exclusive**, then:
 
 $$
-P(A \cup B) = P(A) + P(B)
+P(A \cap B)=0
 $$
+
+so:
+
+$$
+P(A \cup B)=P(A)+P(B)
+$$
+
+---
 
 ### Multiplication Rule
 
-For **independent events**, the probability that event $A$ **and** event $B$ both occur is:
+For **independent events**, the probability that both event $A$ and event $B$ occur is:
 
 $$
-P(A \cap B) = P(A)P(B)
+P(A \cap B)=P(A)P(B)
 $$
+
+For example, if two customers independently have a 20% probability of clicking an email:
+
+$$
+P(\text{Both Click})
+=
+(0.20)(0.20)
+=
+0.04
+$$
+
+---
 
 ### Conditional Probability
 
 **Conditional probability** is the probability that event $A$ occurs given that event $B$ has already occurred.
 
 $$
-P(A \mid B) = \frac{P(A \cap B)}{P(B)}
+P(A \mid B)
+=
+\frac{P(A \cap B)}{P(B)}
 $$
 
-## Distributions
+For example:
 
-A probability distribution is a model describing the possible values of a random variable and how likely those values are.
+$$
+P(\text{Purchase} \mid \text{Coupon})
+$$
 
-### Binomial Distribution
+represents the probability that a customer makes a purchase **among customers who received a coupon**.
 
-A **binomial distribution** models the number of **successes** in a **fixed** or known number of **independent trials**. Each trial has **only two possible outcomes**, classified as success or failure, with a **constant probability of success**, $p$. Trials are independent, meaning the outcome of one trial does not change the probability of success on another. The random variable $X$ is **discrete** and represents the total number of successes across the $n$ trials.
+Conditional probabilities are important because the probability of an outcome may change once additional information is known.
+
+---
+
+## Random Variables
+
+A **random variable** assigns a numerical value to the result of a random process.
+
+Random variables can be either **discrete** or **continuous**.
+
+### Discrete Random Variables
+
+A **discrete random variable** takes separate, countable values.
+
+Examples include:
+
+- Number of customers who click an advertisement
+- Number of calls received in an hour
+- Number of defective products in a batch
+- Number of customers who renew a subscription
+
+Possible values are typically counts such as:
+
+$$
+0,1,2,3,\ldots
+$$
+
+### Continuous Random Variables
+
+A **continuous random variable** can take any numerical value within an interval.
+
+Examples include:
+
+- Waiting time
+- Call duration
+- Revenue
+- Product weight
+- Delivery time
+
+For example, a call might last:
+
+$$
+5.2,\ 5.21,\ 5.213,\ldots
+$$
+
+minutes.
+
+| Type | Possible Values | Examples |
+|---|---|---|
+| Discrete | Separate, countable values | Number of calls, defects, clicks |
+| Continuous | Any value within an interval | Time, weight, revenue |
+
+The distributions covered in this section can therefore be classified as:
+
+| Distribution | Type |
+|---|---|
+| Binomial | Discrete |
+| Normal | Continuous |
+| Poisson | Discrete |
+| Exponential | Continuous |
+
+---
+
+## PMF, PDF, and CDF
+
+Probability distributions can be described using several related functions.
+
+### Probability Mass Function
+
+A **probability mass function (PMF)** applies to **discrete random variables**.
+
+It gives the probability of observing an exact value:
+
+$$
+P(X=x)
+$$
+
+For example:
+
+$$
+P(X=4)
+$$
+
+might represent the probability that exactly 4 customers purchase a product.
+
+Because the variable is discrete, an individual value can have positive probability.
+
+---
+
+### Probability Density Function
+
+A **probability density function (PDF)** applies to **continuous random variables**.
+
+For continuous random variables, probability is represented by **area under the density curve**.
+
+The height of the density curve itself is not a probability.
+
+For a continuous random variable:
+
+$$
+P(X=x)=0
+$$
+
+because an individual point has zero width.
+
+Instead, probabilities are calculated over intervals:
+
+$$
+P(a<X<b)
+$$
+
+For example:
+
+$$
+P(5<X<8)
+$$
+
+represents the area under the density curve between 5 and 8.
+
+---
+
+### Cumulative Distribution Function
+
+The **cumulative distribution function (CDF)** gives the probability that a random variable is less than or equal to a particular value.
+
+$$
+F(x)=P(X\leq x)
+$$
+
+For example:
+
+$$
+P(X\leq3)
+$$
+
+is the probability that the random variable takes a value of 3 or less.
+
+---
+
+## Probability Distributions in R
+
+R uses a consistent naming system for probability-distribution functions.
+
+| Prefix | Meaning |
+|---|---|
+| `d` | Density or exact probability |
+| `p` | Cumulative probability |
+| `q` | Quantile or cutoff |
+| `r` | Generate random observations |
+
+The four distributions covered here use the following functions:
+
+| Distribution | `d` | `p` | `q` | `r` |
+|---|---|---|---|---|
+| Binomial | `dbinom()` | `pbinom()` | `qbinom()` | `rbinom()` |
+| Normal | `dnorm()` | `pnorm()` | `qnorm()` | `rnorm()` |
+| Poisson | `dpois()` | `ppois()` | `qpois()` | `rpois()` |
+| Exponential | `dexp()` | `pexp()` | `qexp()` | `rexp()` |
+
+For a **discrete distribution**, the `d` function gives an exact probability.
+
+For example:
+
+```{r}
+dbinom(4, size = 10, prob = 0.30)
+```
+
+calculates:
+
+$$
+P(X=4)
+$$
+
+The `p` function gives cumulative probability.
+
+```{r}
+pbinom(3, size = 10, prob = 0.30)
+```
+
+calculates:
+
+$$
+P(X\leq3)
+$$
+
+For an upper-tail probability:
+
+```{r}
+pbinom(119, size = 1000, prob = 0.08, lower.tail = FALSE)
+```
+
+calculates:
+
+$$
+P(X>119)
+$$
+
+which is equivalent to:
+
+$$
+P(X\geq120)
+$$
+
+For discrete random variables, pay careful attention to whether the question asks for:
+
+$$
+>,\ \geq,\ <,\ \text{or}\ \leq
+$$
+
+because discrete values occur in separate steps.
+
+---
+
+## Distribution Properties
+
+Each probability distribution has parameters that determine its center and spread.
+
+| Distribution | Mean | Variance |
+|---|---:|---:|
+| Binomial$(n,p)$ | $np$ | $np(1-p)$ |
+| Normal$(\mu,\sigma^2)$ | $\mu$ | $\sigma^2$ |
+| Poisson$(\lambda)$ | $\lambda$ | $\lambda$ |
+| Exponential$(\lambda)$ | $\frac{1}{\lambda}$ | $\frac{1}{\lambda^2}$ |
+
+These relationships are useful for interpreting the behavior of each distribution.
+
+---
+
+# Distributions
+
+A probability distribution is a model describing the possible values of a random variable and how probability is distributed across those values.
+
+## Binomial Distribution
+
+A **binomial distribution** models the number of **successes** in a **fixed number of independent trials**.
+
+A binomial setting has four important characteristics:
+
+1. A **fixed number of trials**, $n$
+2. Each trial has **two possible outcomes**, success or failure
+3. The probability of success, $p$, remains constant
+4. Trials are independent
+
+The random variable $X$ is **discrete** and represents the total number of successes across the $n$ trials.
 
 $$
 X \sim \text{Binomial}(n,p)
 $$
 
-Where...
+Where:
 
 $n$ = number of trials  
 $p$ = probability of success on each trial  
 $X$ = number of successes
 
+The expected number of successes is:
+
+$$
+E[X]=np
+$$
+
+and the variance is:
+
+$$
+Var(X)=np(1-p)
+$$
+
 > **Example:** A retailer sends a promotion to 1,000 customers. Each customer has an 8% probability of clicking.
 >
-> $X \sim \text{Binomial}(1000, 0.08)$
+> $$
+> X \sim \text{Binomial}(1000,0.08)
+> $$
 >
-> Here, a **trial** is sending the promotion to one customer, a **success** is a click, $n = 1000$, $p = 0.08$, and $X$ is the number of customers who click.
+> Here, a **trial** is sending the promotion to one customer, a **success** is a click, $n=1000$, $p=0.08$, and $X$ is the number of customers who click.
 
 ```{r}
 #| echo: false
@@ -146,32 +528,101 @@ plot(
   main = "Binomial Distribution"
 )
 
-points(x, dbinom(x, size = 10, prob = 0.30), pch = 16)
+points(
+  x,
+  dbinom(x, size = 10, prob = 0.30),
+  pch = 16
+)
 ```
 
-A binomial distribution is **discrete**, so it consists of separate probabilities for each possible number of successes. Each bar represents $P(X=x)$, the probability of observing exactly $x$ successes.
+A binomial distribution is **discrete**, so it consists of separate probabilities for each possible number of successes.
 
-
-### Normal Distribution
-
-A **normal distribution** models **continuous numerical values** that follow a **symmetric, bell-shaped distribution** centered around a mean, $\mu$. The **standard deviation**, $\sigma$, determines how spread out the values are around the mean. Because the distribution is symmetric, the **mean, median, and mode are equal**. The random variable $X$ is **continuous** and represents the numerical value being measured.
+Each bar represents:
 
 $$
-X \sim N(\mu, \sigma^2)
+P(X=x)
 $$
 
-Where...
+the probability of observing exactly $x$ successes.
 
-$\mu$ = population mean (center)  
-$\sigma$ = population standard deviation (spread)  
+### Binomial Probabilities in R
+
+For an exact value:
+
+```{r}
+dbinom(100, size = 1000, prob = 0.08)
+```
+
+calculates:
+
+$$
+P(X=100)
+$$
+
+For a cumulative probability:
+
+```{r}
+pbinom(100, size = 1000, prob = 0.08)
+```
+
+calculates:
+
+$$
+P(X\leq100)
+$$
+
+For:
+
+$$
+P(X\geq120)
+$$
+
+use:
+
+```{r}
+pbinom(119, size = 1000, prob = 0.08, lower.tail = FALSE)
+```
+
+The cutoff is 119 because:
+
+$$
+P(X\geq120)=P(X>119)
+$$
+
+---
+
+## Normal Distribution
+
+A **normal distribution** models **continuous numerical values** that follow an approximately **symmetric, bell-shaped distribution** centered around a mean, $\mu$.
+
+The **standard deviation**, $\sigma$, determines how spread out the values are around the mean.
+
+Because the distribution is symmetric:
+
+$$
+\text{Mean}=\text{Median}=\text{Mode}
+$$
+
+The random variable $X$ is **continuous** and represents the numerical value being measured.
+
+$$
+X \sim N(\mu,\sigma^2)
+$$
+
+Where:
+
+$\mu$ = population mean  
+$\sigma$ = population standard deviation  
 $\sigma^2$ = population variance  
 $X$ = value of the continuous random variable
 
 > **Example:** Call durations have a mean of 6 minutes and a standard deviation of 1.5 minutes.
 >
-> $X \sim N(6, 1.5^2)$
+> $$
+> X \sim N(6,1.5^2)
+> $$
 >
-> Here, $X$ is the duration of a call in minutes, $\mu = 6$ is the average call duration, and $\sigma = 1.5$ is the standard deviation of call durations.
+> Here, $X$ is the duration of a call in minutes, $\mu=6$ is the average call duration, and $\sigma=1.5$ is the standard deviation.
 
 ```{r}
 #| echo: false
@@ -192,26 +643,354 @@ plot(
 abline(v = 6, lty = 2)
 ```
 
-A normal distribution is **continuous**, so it is represented by a smooth curve rather than separate probabilities. The curve is **symmetric and bell-shaped**, centered at the mean, $\mu$, while the standard deviation, $\sigma$, determines its spread. Approximately **68%** of values fall within $\mu \pm 1\sigma$, **95%** within $\mu \pm 2\sigma$, and **99.7%** within $\mu \pm 3\sigma$.
+A normal distribution is **continuous**, so it is represented by a smooth curve rather than separate probabilities.
 
-### Poisson Distribution
+Probability corresponds to **area under the curve**.
 
-A **Poisson distribution** models the **number of events** that occur within a **fixed interval of time or space**. Events are assumed to occur **independently** and at a **constant average rate**, $\lambda$. The random variable $X$ is **discrete** and represents the total number of events that occur within the interval.
+### Empirical Rule
+
+For a Normal distribution:
+
+- Approximately **68%** of values fall within $\mu \pm 1\sigma$
+- Approximately **95%** fall within $\mu \pm 2\sigma$
+- Approximately **99.7%** fall within $\mu \pm 3\sigma$
+
+This is known as the **68–95–99.7 rule**.
+
+---
+
+### Standardization and Z-Scores
+
+A **z-score** measures how many standard deviations a value lies above or below the mean.
+
+$$
+Z=\frac{X-\mu}{\sigma}
+$$
+
+Interpretation:
+
+- $z=0$ → exactly at the mean
+- $z=1$ → one standard deviation above the mean
+- $z=-1$ → one standard deviation below the mean
+- $z=2$ → two standard deviations above the mean
+
+Standardization converts a Normal random variable to the **standard Normal distribution**:
+
+$$
+Z \sim N(0,1)
+$$
+
+> **Example:** Call durations have:
+>
+> $$
+> \mu=6
+> $$
+>
+> and:
+>
+> $$
+> \sigma=1.5
+> $$
+>
+> For an 8-minute call:
+>
+> $$
+> z=\frac{8-6}{1.5}=1.33
+> $$
+>
+> The call is approximately **1.33 standard deviations above the mean**.
+
+---
+
+### Normal Probabilities in R
+
+The `pnorm()` function calculates areas under a Normal distribution.
+
+For example:
+
+```{r}
+pnorm(8, mean = 6, sd = 1.5)
+```
+
+calculates:
+
+$$
+P(X\leq8)
+$$
+
+To calculate:
+
+$$
+P(X>8)
+$$
+
+use:
+
+```{r}
+pnorm(
+  8,
+  mean = 6,
+  sd = 1.5,
+  lower.tail = FALSE
+)
+```
+
+The `qnorm()` function works in the opposite direction.
+
+Instead of asking:
+
+> What probability corresponds to this value?
+
+it asks:
+
+> What value corresponds to this probability?
+
+For example:
+
+```{r}
+qnorm(
+  0.90,
+  mean = 6,
+  sd = 1.5
+)
+```
+
+returns the **90th percentile** of the distribution.
+
+---
+
+### Checking the Normal Assumption
+
+Before using a Normal distribution to model observed data, check whether a Normal model is reasonable.
+
+Common approaches include:
+
+1. Histogram
+2. Q–Q plot
+3. Shapiro–Wilk test
+
+#### Histogram
+
+A histogram can be used to look for an approximately:
+
+- Symmetric distribution
+- Bell-shaped distribution
+- Lack of extreme skewness or unusual outliers
+
+#### Q–Q Plot
+
+A **Q–Q plot** compares the observed quantiles of the data with the quantiles expected under a Normal distribution.
+
+```{r}
+qqnorm(x)
+qqline(x)
+```
+
+If the points approximately follow the reference line, a Normal model may be reasonable.
+
+Systematic curvature or strong departures from the line suggest that the data may not follow a Normal distribution.
+
+#### Shapiro–Wilk Test
+
+The Shapiro–Wilk test can also be used to test for departures from normality.
+
+```{r}
+shapiro.test(x)
+```
+
+Interpretation:
+
+- $p \leq 0.05$ → evidence against the Normal model
+- $p > 0.05$ → fail to reject normality
+
+A large p-value does **not prove** that the data are Normal. It simply means there is not sufficient evidence to reject the Normal model.
+
+A general workflow is therefore:
+
+1. Check whether the data appear approximately Normal
+2. Estimate $\mu$ and $\sigma$
+3. Use the fitted Normal model to calculate probabilities or percentiles
+
+For example:
+
+```{r}
+mu_hat <- mean(x)
+sigma_hat <- sd(x)
+
+pnorm(
+  98.5,
+  mean = mu_hat,
+  sd = sigma_hat
+)
+
+qnorm(
+  0.99,
+  mean = mu_hat,
+  sd = sigma_hat
+)
+```
+
+---
+
+## Normal Approximation to the Binomial
+
+When the number of Binomial trials is sufficiently large, the Binomial distribution can sometimes be approximated using a Normal distribution.
+
+If:
+
+$$
+X \sim \text{Binomial}(n,p)
+$$
+
+and:
+
+$$
+np \geq 10
+$$
+
+and:
+
+$$
+n(1-p)\geq10
+$$
+
+then approximately:
+
+$$
+X
+\approx
+N\left(
+np,\,
+np(1-p)
+\right)
+$$
+
+The approximate Normal distribution therefore has:
+
+$$
+\mu=np
+$$
+
+and:
+
+$$
+\sigma=\sqrt{np(1-p)}
+$$
+
+### Example
+
+Suppose:
+
+$$
+X \sim \text{Binomial}(5000,0.12)
+$$
+
+Then:
+
+$$
+\mu=np
+=
+5000(0.12)
+=
+600
+$$
+
+and:
+
+$$
+\sigma
+=
+\sqrt{5000(0.12)(0.88)}
+\approx22.98
+$$
+
+So the Binomial distribution can be approximated by:
+
+$$
+Y \sim N(600,528)
+$$
+
+---
+
+### Continuity Correction
+
+The Binomial distribution is **discrete**, while the Normal distribution is **continuous**.
+
+A **continuity correction** adjusts for this difference.
+
+For example:
+
+$$
+P(X\geq k)
+$$
+
+can be approximated by:
+
+$$
+P(Y\geq k-0.5)
+$$
+
+Similarly:
+
+$$
+P(X\leq k)
+$$
+
+can be approximated by:
+
+$$
+P(Y\leq k+0.5)
+$$
+
+The extra $0.5$ helps the continuous Normal distribution better approximate the discrete Binomial distribution.
+
+---
+
+## Poisson Distribution
+
+A **Poisson distribution** models the **number of events** that occur within a **fixed interval of time or space**.
+
+Events are assumed to occur:
+
+- Independently
+- At a constant average rate
+
+The random variable $X$ is **discrete** and represents the number of events that occur within the interval.
 
 $$
 X \sim \text{Poisson}(\lambda)
 $$
 
-Where...
+Where:
 
 $\lambda$ = expected number of events per interval  
-$X$ = number of events that occur in the interval
+$X$ = number of events occurring in the interval
+
+For a Poisson distribution:
+
+$$
+E[X]=\lambda
+$$
+
+and:
+
+$$
+Var(X)=\lambda
+$$
+
+Therefore:
+
+$$
+\text{Mean}=\text{Variance}=\lambda
+$$
 
 > **Example:** A call center receives an average of 12 calls per hour.
 >
-> $X \sim \text{Poisson}(12)$
+> $$
+> X \sim \text{Poisson}(12)
+> $$
 >
-> Here, the **interval** is one hour, $\lambda = 12$ is the expected number of calls per hour, and $X$ is the number of calls received during one hour.
+> Here, the **interval** is one hour, $\lambda=12$ is the expected number of calls per hour, and $X$ is the number of calls received during one hour.
 
 ```{r}
 #| echo: false
@@ -229,29 +1008,219 @@ plot(
   main = "Poisson Distribution"
 )
 
-points(x, dpois(x, lambda = 4), pch = 16)
+points(
+  x,
+  dpois(x, lambda = 4),
+  pch = 16
+)
 ```
 
-A Poisson distribution is **discrete**, so it consists of separate probabilities for each possible number of events. Each bar represents $P(X=x)$, the probability of observing exactly $x$ events within the interval. The shape of the distribution depends on the average event rate, $\lambda$.
+A Poisson distribution is **discrete**, so it consists of separate probabilities for each possible number of events.
 
-### Exponential Distribution
+Each bar represents:
 
-An **exponential distribution** models the **waiting time between events** in a Poisson process. Events are assumed to occur **independently** and at a **constant average rate**, $\lambda$. The random variable $T$ is **continuous** and represents the time until the next event or the time between consecutive events.
+$$
+P(X=x)
+$$
+
+the probability of observing exactly $x$ events within the interval.
+
+---
+
+### Poisson Probabilities in R
+
+For exactly 8 calls when the average rate is 5:
+
+```{r}
+dpois(8, lambda = 5)
+```
+
+calculates:
+
+$$
+P(X=8)
+$$
+
+For at most 3 calls:
+
+```{r}
+ppois(3, lambda = 5)
+```
+
+calculates:
+
+$$
+P(X\leq3)
+$$
+
+For more than 10 calls:
+
+```{r}
+ppois(
+  10,
+  lambda = 5,
+  lower.tail = FALSE
+)
+```
+
+calculates:
+
+$$
+P(X>10)
+$$
+
+For the original call-center example, where:
+
+$$
+\lambda=12
+$$
+
+the probability of receiving at least 20 calls is:
+
+```{r}
+ppois(
+  19,
+  lambda = 12,
+  lower.tail = FALSE
+)
+```
+
+which calculates:
+
+$$
+P(X\geq20)
+$$
+
+---
+
+### Checking the Poisson Assumption
+
+A Poisson model assumes that:
+
+- Events occur independently
+- Events occur at a constant average rate
+- Counts are measured over a fixed interval
+- The variance is approximately equal to the mean
+
+Because:
+
+$$
+E[X]=Var(X)=\lambda
+$$
+
+a useful diagnostic is:
+
+$$
+\frac{\text{Variance}}{\text{Mean}}
+$$
+
+For data consistent with a Poisson model, this ratio should be approximately:
+
+$$
+1
+$$
+
+In R:
+
+```{r}
+var(calls) / mean(calls)
+```
+
+A ratio substantially greater than 1 indicates **overdispersion**, meaning the observed counts vary more than the Poisson model would predict.
+
+A formal **chi-square goodness-of-fit test** can also be used to assess whether the observed distribution is reasonably consistent with a Poisson model.
+
+---
+
+## Binomial vs. Poisson
+
+Binomial and Poisson distributions both model **counts**, but the setups are different.
+
+### Binomial
+
+Use Binomial when there is a **fixed number of trials**.
+
+> Of the next 200 customers, how many will purchase?
+
+The number of opportunities is fixed:
+
+$$
+n=200
+$$
+
+### Poisson
+
+Use Poisson when counting how many events occur during a **fixed interval of time or space**.
+
+> How many customers will arrive during the next hour?
+
+There is no fixed number of customers being tested. Instead, events occur over an interval.
+
+| Question | Distribution |
+|---|---|
+| How many successes out of $n$ trials? | Binomial |
+| How many events during an interval? | Poisson |
+
+---
+
+## Exponential Distribution
+
+An **exponential distribution** models the **waiting time between events** in a Poisson process.
+
+Events are assumed to occur:
+
+- Independently
+- At a constant average rate, $\lambda$
+
+The random variable $T$ is **continuous** and represents the time until the next event or the time between consecutive events.
 
 $$
 T \sim \text{Exponential}(\lambda)
 $$
 
-Where...
+Where:
 
 $\lambda$ = average rate at which events occur  
 $T$ = waiting time until or between events
 
+The expected waiting time is:
+
+$$
+E[T]
+=
+\frac{1}{\lambda}
+$$
+
+and the variance is:
+
+$$
+Var(T)
+=
+\frac{1}{\lambda^2}
+$$
+
 > **Example:** Customers arrive at an average rate of 6 customers per hour.
 >
-> $T \sim \text{Exponential}(6)$
+> $$
+> T \sim \text{Exponential}(6)
+> $$
 >
-> Here, $\lambda = 6$ is the average arrival rate per hour, and $T$ is the waiting time in hours until the next customer arrives. The expected waiting time is $E[T] = 1/\lambda = 1/6$ hour, or 10 minutes.
+> Here, $\lambda=6$ is the average arrival rate per hour, and $T$ is the waiting time in hours until the next customer arrives.
+
+The expected waiting time is:
+
+$$
+E[T]
+=
+\frac{1}{6}
+\text{ hour}
+$$
+
+which is:
+
+$$
+10\text{ minutes}
+$$
 
 ```{r}
 #| echo: false
@@ -270,18 +1239,180 @@ plot(
 )
 ```
 
-An exponential distribution is **continuous and right-skewed**, so it is represented by a smooth, decreasing curve. Short waiting times have the highest density, while increasingly long waiting times become less likely. The distribution is **memoryless**, meaning how long you have already waited does not change the distribution of how much longer you will wait.
+An exponential distribution is **continuous and right-skewed**, so it is represented by a smooth, decreasing density curve.
 
+Short waiting times have the highest density, while increasingly long waiting times become less likely.
 
-Poisson and Exponential model **two different aspects of the same event process**:
+---
+
+### Exponential Probabilities in R
+
+The density at a particular waiting time can be calculated using:
+
+```{r}
+dexp(
+  0.25,
+  rate = 6
+)
+```
+
+The probability of waiting at most 30 minutes, or 0.5 hours, is:
+
+```{r}
+pexp(
+  0.5,
+  rate = 6
+)
+```
+
+which calculates:
+
+$$
+P(T\leq0.5)
+$$
+
+The probability of waiting more than one hour is:
+
+```{r}
+pexp(
+  1,
+  rate = 6,
+  lower.tail = FALSE
+)
+```
+
+which calculates:
+
+$$
+P(T>1)
+$$
+
+---
+
+### Memoryless Property
+
+The Exponential distribution has a special property called the **memoryless property**.
+
+Mathematically:
+
+$$
+P(T>s+t\mid T>s)
+=
+P(T>t)
+$$
+
+This means that how long you have already waited does not change the distribution of how much longer you will wait.
+
+For example, suppose customers arrive according to an Exponential model and you have already waited 10 minutes without seeing a customer.
+
+The next customer is not suddenly "due."
+
+The process does not remember how long you have already waited.
+
+---
+
+## Poisson and Exponential Connection
+
+Poisson and Exponential distributions describe **two different aspects of the same event process**.
 
 - **Poisson** → How **many** events occur during an interval?
-- **Exponential** → How **long** between events?
+- **Exponential** → How **long** until or between events?
 
 For example, if customers arrive at a constant average rate:
 
 - Number of customers arriving per hour → **Poisson**
 - Time until the next customer arrives → **Exponential**
 
-Q–Q Plot
-: A graphical method for checking whether data are approximately normally distributed. If the points roughly follow the reference line, a Normal model may be reasonable. Systematic deviations from the line suggest the data are not Normal.
+Both use the same underlying rate:
+
+$$
+\lambda
+$$
+
+but answer different questions.
+
+---
+
+## Choosing a Probability Distribution
+
+The most important step is identifying **what the random variable represents**.
+
+| Question | Distribution |
+|---|---|
+| How many successes occur out of a fixed number of trials? | **Binomial** |
+| What value does a continuous, approximately symmetric variable take? | **Normal** |
+| How many events occur during a fixed interval? | **Poisson** |
+| How long until or between events? | **Exponential** |
+
+A useful decision process is:
+
+### Are You Counting Something?
+
+If **yes**, ask:
+
+**Is there a fixed number of trials?**
+
+- Yes → **Binomial**
+- No, events are occurring during time or space → **Poisson**
+
+### Are You Measuring Something Continuous?
+
+If **yes**, ask:
+
+**Is the variable approximately symmetric and bell-shaped?**
+
+- Yes → **Normal**
+
+**Is the variable a waiting time between events occurring at a constant rate?**
+
+- Yes → **Exponential**
+
+---
+
+## Distribution Comparison
+
+| Distribution | Type | Random Variable | Key Parameters | Main Question |
+|---|---|---|---|---|
+| Binomial | Discrete | Number of successes | $n,p$ | How many successes out of $n$ trials? |
+| Normal | Continuous | Continuous measurement | $\mu,\sigma$ | How unusual is a continuous value? |
+| Poisson | Discrete | Number of events | $\lambda$ | How many events occur in an interval? |
+| Exponential | Continuous | Waiting time | $\lambda$ | How long until the next event? |
+
+Another useful way to remember them is:
+
+> **Binomial:** fixed number of opportunities → count successes  
+>
+> **Poisson:** fixed amount of time or space → count events  
+>
+> **Exponential:** fixed event process → measure waiting time  
+>
+> **Normal:** continuous measurements clustered symmetrically around a mean
+
+---
+
+## Overall Probability Workflow
+
+When solving a probability problem:
+
+1. **Identify the random variable.**
+2. Determine whether it is **discrete or continuous**.
+3. Identify the structure of the random process.
+4. Select an appropriate probability distribution.
+5. Identify the distribution's parameters.
+6. Determine the probability statement being requested.
+7. Use the appropriate probability rule or R function.
+8. Interpret the result in the context of the problem.
+
+The general process is:
+
+$$
+\text{Scenario}
+\rightarrow
+\text{Random Variable}
+\rightarrow
+\text{Distribution}
+\rightarrow
+\text{Probability}
+\rightarrow
+\text{Decision}
+$$

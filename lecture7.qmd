@@ -1,3 +1,1479 @@
-# Lecture 7
+# Comparing Two Population Means: Independent Samples
 
-In progress...give me some time!
+## Overview
+
+Lecture 6 considered situations where observations from two conditions were **meaningfully linked**.
+
+For paired data, each pair produced one difference:
+
+$$
+d_i=X_{1i}-X_{2i}
+$$
+
+and the analysis became a one-sample inference problem involving:
+
+$$
+\mu_d
+$$
+
+Now consider a different situation.
+
+Suppose we want to compare:
+
+- Spending by homeowners vs. renters
+- Sales of national-brand vs. private-brand products
+- Customers assigned to Website A vs. Website B
+- Employees receiving one training program vs. employees receiving another
+
+In these situations, the observations in one group do not have a meaningful one-to-one connection with observations in the other group.
+
+These are **independent samples**.
+
+Instead of analyzing within-pair differences, we compare the two sample means:
+
+$$
+\bar{X}_1-\bar{X}_2
+$$
+
+to learn about the difference between the two population means:
+
+$$
+\boxed{\mu_1-\mu_2}
+$$
+
+The major distinction is:
+
+> **Paired samples compare within-pair differences. Independent samples compare two separate group means.**
+
+---
+
+# Why Study Design Still Matters
+
+Statistical analysis involves more than calculating a p-value.
+
+Suppose a retailer asks:
+
+> Would offering more coupons increase customer spending?
+
+There are several different questions hidden inside this problem.
+
+### Describe
+
+How does spending differ between customers who use coupons and customers who do not?
+
+### Quantify Uncertainty
+
+How precisely can we estimate the difference in population mean spending?
+
+### Evaluate Causality
+
+Does the difference actually result from coupons, or are customers who use coupons already different from customers who do not?
+
+A hypothesis test addresses **sampling uncertainty**.
+
+It does not automatically eliminate:
+
+- Confounding
+- Selection bias
+- Differences in the underlying groups
+
+Therefore:
+
+> **Statistical significance and causal evidence are different questions.**
+
+The study design determines what conclusions the statistical analysis can support.
+
+---
+
+# Paired vs. Independent Samples
+
+Before comparing two means, determine whether the observations are **paired or independent**.
+
+## Paired Samples
+
+Observations are paired when each observation in one condition has a meaningful one-to-one connection with an observation in the other condition.
+
+Examples:
+
+- Same customer before and after treatment
+- Same store before and after a redesign
+- Identical twins
+- Matched treatment and control stores
+
+Each pair produces:
+
+$$
+d_i=X_{1i}-X_{2i}
+$$
+
+and inference is performed on:
+
+$$
+\mu_d
+$$
+
+---
+
+## Independent Samples
+
+Samples are independent when the groups contain **different observational units** and there is no meaningful one-to-one link between observations across groups.
+
+Examples:
+
+- 20 randomly selected men vs. 20 independently selected women
+- Homeowners vs. renters
+- National-brand products vs. private-brand products
+- Customers assigned to two different website versions
+
+Each observational unit contributes to only **one group**.
+
+The parameter of interest is:
+
+$$
+\boxed{\mu_1-\mu_2}
+$$
+
+---
+
+# The Observational Unit Determines the Design
+
+The **observational unit** is the individual entity on which a measurement is taken.
+
+Before choosing a statistical test, ask:
+
+> **What is the observational unit?**
+
+and then:
+
+> **Does each observational unit contribute one measurement or a linked pair of measurements?**
+
+If each unit contributes to only one group:
+
+$$
+\boxed{\text{Independent Samples}}
+$$
+
+If the same unit contributes measurements under both conditions, or units are intentionally matched:
+
+$$
+\boxed{\text{Paired Samples}}
+$$
+
+---
+
+## Example: Taste Test
+
+Suppose a company wants to compare mean taste ratings for Coke and Pepsi.
+
+### Independent-Samples Design
+
+Randomly assign participants to one of two groups:
+
+- Group 1 tastes Coke
+- Group 2 tastes Pepsi
+
+Each participant tastes only one product.
+
+The groups are independent.
+
+### Paired Design
+
+Every participant tastes both Coke and Pepsi.
+
+Each participant provides:
+
+$$
+(\text{Coke Rating}_i,\text{Pepsi Rating}_i)
+$$
+
+The observations are paired because both ratings come from the same person.
+
+The two designs answer similar questions but use different information.
+
+The paired design controls for individual differences in taste preferences because each participant acts as their own comparison.
+
+However, the study would need to prevent **order effects**.
+
+For example, tasting Coke first might affect a participant's Pepsi rating.
+
+A common solution would be to randomize which product each participant tastes first.
+
+---
+
+# Independent Samples and the Population Difference
+
+Suppose Group 1 has population mean:
+
+$$
+\mu_1
+$$
+
+and Group 2 has population mean:
+
+$$
+\mu_2
+$$
+
+The parameter of interest is:
+
+$$
+\boxed{\Delta=\mu_1-\mu_2}
+$$
+
+The sample estimate is:
+
+$$
+\boxed{\hat{\Delta}=\bar{X}_1-\bar{X}_2}
+$$
+
+Therefore:
+
+$$
+\bar{X}_1-\bar{X}_2
+\rightarrow
+\text{estimate of }
+\mu_1-\mu_2
+$$
+
+The direction must be defined **before interpreting the result**.
+
+For example, suppose:
+
+$$
+\Delta
+=
+\mu_{\text{Homeowners}}
+-
+\mu_{\text{Renters}}
+$$
+
+Then:
+
+- $\Delta>0$ means homeowners spend more on average
+- $\Delta<0$ means renters spend more on average
+- $\Delta=0$ means the population means are equal
+
+Reversing the order reverses the sign:
+
+$$
+\mu_1-\mu_2
+=
+-(\mu_2-\mu_1)
+$$
+
+Therefore:
+
+> **Always define the direction of the difference before interpreting it.**
+
+---
+
+# Hypotheses for Two Independent Means
+
+The most common null hypothesis is:
+
+$$
+H_0:\mu_1-\mu_2=0
+$$
+
+which is equivalent to:
+
+$$
+H_0:\mu_1=\mu_2
+$$
+
+The alternative depends on the research question.
+
+### Two-Sided
+
+To determine whether the population means differ:
+
+$$
+H_a:\mu_1-\mu_2\neq0
+$$
+
+### Right-Tailed
+
+To determine whether Population 1 has a larger mean:
+
+$$
+H_a:\mu_1-\mu_2>0
+$$
+
+### Left-Tailed
+
+To determine whether Population 1 has a smaller mean:
+
+$$
+H_a:\mu_1-\mu_2<0
+$$
+
+Again, the meaning of positive and negative depends on how Group 1 and Group 2 were defined.
+
+---
+
+# Two Samples, Two Sources of Uncertainty
+
+With paired samples, uncertainty comes from the variation among the within-pair differences.
+
+With independent samples, we estimate:
+
+$$
+\mu_1
+$$
+
+using:
+
+$$
+\bar{X}_1
+$$
+
+and independently estimate:
+
+$$
+\mu_2
+$$
+
+using:
+
+$$
+\bar{X}_2
+$$
+
+Both estimates contain sampling uncertainty.
+
+Therefore:
+
+$$
+\bar{X}_1-\bar{X}_2
+$$
+
+has uncertainty from **both samples**.
+
+For independent samples:
+
+$$
+SE(\bar{X}_1-\bar{X}_2)
+=
+\sqrt{
+\frac{\sigma_1^2}{n_1}
++
+\frac{\sigma_2^2}{n_2}
+}
+$$
+
+In practice, the population standard deviations are usually unknown, so they must be estimated from the samples.
+
+An important consequence is:
+
+> **The less precise group contributes more uncertainty to the comparison.**
+
+For example, if:
+
+$$
+n_1=10{,}000
+$$
+
+but:
+
+$$
+n_2=20
+$$
+
+the second sample will generally contribute much more uncertainty to the estimated difference.
+
+A huge sample in one group does not eliminate uncertainty created by a small sample in the other.
+
+---
+
+# Two-Sample t-Tests
+
+There are two major approaches for comparing two independent population means:
+
+1. **Welch's two-sample t-test**
+2. **Pooled two-sample t-test**
+
+Both estimate the same population quantity:
+
+$$
+\mu_1-\mu_2
+$$
+
+The difference is how they estimate the uncertainty.
+
+---
+
+# Welch's Two-Sample t-Test
+
+**Welch's t-test** estimates the variance of each population separately.
+
+It does **not** assume that the two populations have equal variances.
+
+The estimated population difference is:
+
+$$
+\hat{\Delta}
+=
+\bar{X}_1-\bar{X}_2
+$$
+
+The standard error is:
+
+$$
+\boxed{
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+$$
+
+where:
+
+$s_1$ = sample standard deviation of Group 1  
+$s_2$ = sample standard deviation of Group 2  
+$n_1$ = sample size of Group 1  
+$n_2$ = sample size of Group 2
+
+The test statistic is:
+
+$$
+\boxed{
+t=
+\frac{
+(\bar{X}_1-\bar{X}_2)-0
+}{
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+}
+$$
+
+More generally, if the null hypothesis specifies some difference:
+
+$$
+\Delta_0
+$$
+
+then:
+
+$$
+t=
+\frac{
+\hat{\Delta}-\Delta_0
+}{
+SE(\hat{\Delta})
+}
+$$
+
+As before, the t-statistic represents:
+
+> **How many estimated standard errors the observed difference lies from the null value.**
+
+---
+
+## Welch's Test in R
+
+R uses Welch's method by default when performing an independent two-sample t-test.
+
+```{r}
+t.test(
+    outcome ~ group,
+    data = my_data
+)
+```
+
+For example:
+
+```{r}
+t.test(
+    spending ~ homeowner_desc,
+    data = households
+)
+```
+
+Unless otherwise specified, `t.test()` does **not** assume equal population variances.
+
+This makes Welch's method the standard default when there is no strong reason to assume that the two population variances are equal.
+
+---
+
+# Pooled Two-Sample t-Test
+
+The **pooled t-test** makes an additional assumption:
+
+$$
+\boxed{
+\sigma_1^2=\sigma_2^2=\sigma^2
+}
+$$
+
+In other words, the two populations are assumed to have the **same variance**.
+
+Because both samples are assumed to estimate the same population variance, their information can be combined into a single **pooled variance estimate**.
+
+The pooled variance is:
+
+$$
+\boxed{
+s_p^2
+=
+\frac{
+(n_1-1)s_1^2
++
+(n_2-1)s_2^2
+}{
+n_1+n_2-2
+}
+}
+$$
+
+The pooled standard deviation is:
+
+$$
+s_p=\sqrt{s_p^2}
+$$
+
+The standard error becomes:
+
+$$
+\boxed{
+SE_{\text{pooled}}
+=
+s_p
+\sqrt{
+\frac{1}{n_1}
++
+\frac{1}{n_2}
+}
+}
+$$
+
+The degrees of freedom are:
+
+$$
+df=n_1+n_2-2
+$$
+
+---
+
+## Pooled Test in R
+
+Unlike Welch's method, pooling must be requested explicitly:
+
+```{r}
+t.test(
+    outcome ~ group,
+    data = my_data,
+    var.equal = TRUE
+)
+```
+
+The argument:
+
+```{r}
+var.equal = TRUE
+```
+
+tells R to assume equal population variances.
+
+---
+
+# Welch vs. Pooled t-Test
+
+Both methods estimate:
+
+$$
+\mu_1-\mu_2
+$$
+
+but they make different assumptions about variability.
+
+| Feature | Welch | Pooled |
+|---|---|---|
+| Compares two independent means | Yes | Yes |
+| Assumes equal population variances | No | Yes |
+| Estimates variances separately | Yes | No |
+| Combines variance estimates | No | Yes |
+| R `t.test()` default | Yes | No |
+
+The practical rule is:
+
+> **Use Welch's method by default unless there is a defensible reason to assume equal population variances.**
+
+The pooled method is appropriate only when the equal-variance assumption has a reasonable basis.
+
+---
+
+# Why Unequal Sample Sizes Matter
+
+Unequal sample sizes are especially important when the groups also have different variances.
+
+Recall Welch's standard error:
+
+$$
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+$$
+
+Each group's contribution depends on both:
+
+- Its variability
+- Its sample size
+
+A group with:
+
+- High variability
+- Small sample size
+
+can contribute substantial uncertainty.
+
+Therefore, before comparing two means, examine:
+
+$$
+n_1,\ n_2,\ s_1,\ s_2
+$$
+
+rather than looking only at the two means.
+
+---
+
+# Examine the Data Before Testing
+
+Before running a two-sample t-test, summarize and visualize both groups.
+
+Important features include:
+
+- Sample size
+- Mean
+- Median
+- Standard deviation
+- Skewness
+- Outliers or unusual observations
+
+For example:
+
+```{r}
+my_data |>
+    group_by(group) |>
+    summarise(
+        n = n(),
+        mean = mean(outcome, na.rm = TRUE),
+        median = median(outcome, na.rm = TRUE),
+        sd = sd(outcome, na.rm = TRUE)
+    )
+```
+
+A useful visualization is a boxplot:
+
+```{r}
+ggplot(
+    my_data,
+    aes(
+        x = group,
+        y = outcome
+    )
+) +
+    geom_boxplot()
+```
+
+The statistical test should not replace descriptive analysis.
+
+Instead:
+
+$$
+\text{Describe}
+\rightarrow
+\text{Check}
+\rightarrow
+\text{Infer}
+$$
+
+---
+
+# Example: National vs. Private-Brand Soft Drinks
+
+Suppose we compare total observed sales for:
+
+- National-brand 2-liter soft drinks
+- Private-brand 2-liter soft drinks
+
+The observational unit is a:
+
+> **Soft-drink product**
+
+Each product belongs to either:
+
+- National brand
+
+or:
+
+- Private brand
+
+A national-brand product is not meaningfully paired with one particular private-brand product.
+
+Therefore, the samples are:
+
+$$
+\boxed{\text{Independent}}
+$$
+
+---
+
+## Descriptive Statistics
+
+Suppose the data show:
+
+| Brand | Products | Mean | Median | SD |
+|---|---:|---:|---:|---:|
+| National | 175 | 203.9 | 4.5 | 664.7 |
+| Private | 57 | 170.4 | 62.1 | 263.9 |
+
+Several features immediately deserve attention.
+
+### Unequal Sample Sizes
+
+$$
+n_{\text{National}}=175
+$$
+
+while:
+
+$$
+n_{\text{Private}}=57
+$$
+
+### Unequal Variability
+
+$$
+s_{\text{National}}=664.7
+$$
+
+while:
+
+$$
+s_{\text{Private}}=263.9
+$$
+
+The national-brand group is much more variable.
+
+### Strong Skewness
+
+For national brands:
+
+$$
+\text{Mean}=203.9
+$$
+
+while:
+
+$$
+\text{Median}=4.5
+$$
+
+The enormous difference between the mean and median indicates a highly right-skewed distribution with some extremely large observations.
+
+This is why descriptive analysis should occur **before** inferential analysis.
+
+---
+
+# Applying Welch's Test
+
+Define the population difference as:
+
+$$
+\Delta
+=
+\mu_{\text{National}}
+-
+\mu_{\text{Private}}
+$$
+
+Suppose the estimated means are:
+
+$$
+\bar{X}_{\text{National}}
+=
+203.89
+$$
+
+and:
+
+$$
+\bar{X}_{\text{Private}}
+=
+170.41
+$$
+
+Then:
+
+$$
+\hat{\Delta}
+=
+203.89-170.41
+$$
+
+$$
+\boxed{
+\hat{\Delta}=33.48
+}
+$$
+
+So national-brand products have an observed mean sales value approximately 33.48 units higher than private-brand products.
+
+But the estimate alone does not tell us how uncertain that difference is.
+
+---
+
+# Confidence Interval for Two Independent Means
+
+A confidence interval for the population mean difference has the general form:
+
+$$
+\boxed{
+\hat{\Delta}
+\pm
+t^*SE(\hat{\Delta})
+}
+$$
+
+For Welch's method:
+
+$$
+\boxed{
+(\bar{X}_1-\bar{X}_2)
+\pm
+t^*
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+$$
+
+Suppose the soft-drink example produces:
+
+$$
+95\%\text{ CI}
+=
+(-87.14,\ 154.10)
+$$
+
+This means the data are compatible with population mean differences ranging from approximately:
+
+$$
+-87.14
+$$
+
+to:
+
+$$
+154.10
+$$
+
+under the method's assumptions.
+
+Because the interval contains:
+
+$$
+0
+$$
+
+a population mean difference of zero remains compatible with the data.
+
+---
+
+# Confidence Intervals and Hypothesis Tests
+
+For the two-sided hypotheses:
+
+$$
+H_0:\mu_1-\mu_2=0
+$$
+
+$$
+H_a:\mu_1-\mu_2\neq0
+$$
+
+the confidence interval and hypothesis test communicate closely related information.
+
+### If the 95% Confidence Interval Excludes 0
+
+There is evidence against:
+
+$$
+H_0:\mu_1-\mu_2=0
+$$
+
+at the corresponding 5% significance level.
+
+### If the 95% Confidence Interval Contains 0
+
+We fail to reject:
+
+$$
+H_0:\mu_1-\mu_2=0
+$$
+
+at the corresponding 5% significance level.
+
+For the soft-drink example:
+
+$$
+(-87.14,\ 154.10)
+$$
+
+contains:
+
+$$
+0
+$$
+
+so we fail to reject the null hypothesis.
+
+---
+
+# Failing to Reject Does Not Prove Equality
+
+This distinction is essential.
+
+Suppose:
+
+$$
+p=0.58
+$$
+
+and:
+
+$$
+95\%\text{ CI}
+=
+(-87.14,\ 154.10)
+$$
+
+We can say:
+
+> The data do not provide sufficient evidence that the two population means differ.
+
+We should **not** say:
+
+> The population means are equal.
+
+Why?
+
+Because the confidence interval contains many possible differences besides zero.
+
+For example, values such as:
+
+$$
+-50,\ 25,\ 100
+$$
+
+are also inside the interval.
+
+The data are therefore compatible with:
+
+- Negative differences
+- No difference
+- Positive differences
+
+The analysis has not demonstrated equality.
+
+> **Failing to find evidence of a difference is not the same as finding evidence of no difference.**
+
+---
+
+# Statistical Significance vs. Practical Importance
+
+Suppose a test finds:
+
+$$
+p<0.05
+$$
+
+That tells us the observed difference would be difficult to explain purely through sampling variation under the null model.
+
+It does **not** tell us whether the difference is important for the business.
+
+For example, a very large sample might detect:
+
+$$
+\$0.03
+$$
+
+of additional average spending.
+
+That difference might be statistically detectable but operationally irrelevant.
+
+Therefore, interpretation should consider:
+
+1. Estimated difference
+2. Confidence interval
+3. Statistical evidence
+4. Practical magnitude
+5. Study design
+
+A p-value alone does not answer all of these questions.
+
+---
+
+# Statistical Evidence vs. Causal Evidence
+
+Suppose observational data show:
+
+$$
+\bar{X}_{\text{Coupon}}
+>
+\bar{X}_{\text{No Coupon}}
+$$
+
+Even if a two-sample t-test finds a statistically significant difference, we cannot automatically conclude:
+
+> Coupons caused customers to spend more.
+
+Customers who use coupons may systematically differ from customers who do not.
+
+For example, coupon users might:
+
+- Shop more frequently
+- Purchase larger baskets
+- Be more loyal customers
+- Differ demographically
+
+A hypothesis test quantifies **sampling uncertainty**.
+
+It does not automatically remove **confounding**.
+
+Therefore:
+
+> **Inference about a difference and inference about causation are separate issues.**
+
+---
+
+# Example: Homeowners vs. Renters
+
+Suppose the business question is:
+
+> How does annual Kroger spending differ between households that own their home and households that rent?
+
+First define the populations.
+
+Population 1:
+
+> Kroger households that own their home
+
+Population 2:
+
+> Kroger households that rent their home
+
+Define:
+
+$$
+\Delta
+=
+\mu_{\text{Owner}}
+-
+\mu_{\text{Renter}}
+$$
+
+The observational unit is:
+
+> **Household**
+
+Each household belongs to one group.
+
+There is no natural one-to-one relationship between an owner household and a renter household.
+
+Therefore:
+
+$$
+\boxed{\text{Independent Samples}}
+$$
+
+---
+
+## Analysis Workflow in R
+
+First summarize the groups:
+
+```{r}
+households |>
+    group_by(homeowner_desc) |>
+    summarise(
+        n = n(),
+        mean_spend = mean(spend, na.rm = TRUE),
+        median_spend = median(spend, na.rm = TRUE),
+        sd_spend = sd(spend, na.rm = TRUE)
+    )
+```
+
+Then visualize:
+
+```{r}
+ggplot(
+    households,
+    aes(
+        x = homeowner_desc,
+        y = spend
+    )
+) +
+    geom_boxplot()
+```
+
+Then perform Welch's two-sample t-test:
+
+```{r}
+t.test(
+    spend ~ homeowner_desc,
+    data = households
+)
+```
+
+The output provides:
+
+- Group means
+- Estimated difference
+- t-statistic
+- Degrees of freedom
+- p-value
+- Confidence interval
+
+The final interpretation should report the estimated population difference and its uncertainty in the context of homeowner and renter households.
+
+---
+
+# Paired vs. Independent t-Tests
+
+The two procedures are closely related but solve different problems.
+
+| Feature | Paired t-Test | Independent t-Test |
+|---|---|---|
+| Groups | Meaningfully linked | Separate |
+| Observational units | Same/matched units | Different units |
+| Parameter | $\mu_d$ | $\mu_1-\mu_2$ |
+| Statistic | $\bar{d}$ | $\bar{X}_1-\bar{X}_2$ |
+| Source of uncertainty | Variation in differences | Variation from both samples |
+| Analysis | One-sample t-test on differences | Two-sample t-test |
+| Typical R argument | `paired = TRUE` | Welch default |
+
+The first question should therefore **not** be:
+
+> Which t-test formula do I use?
+
+It should be:
+
+> **How were the data generated, and are these observations meaningfully linked?**
+
+---
+
+# Independent-Samples Assumptions
+
+For a two-sample t procedure, the analysis requires the observations to have an appropriate independence structure.
+
+Most importantly:
+
+### Independence Between Groups
+
+The observations in one group should not be paired with observations in the other group.
+
+If meaningful pairing exists, use a paired analysis instead.
+
+### Independence Within Groups
+
+Observations should represent independent observational units rather than repeated or clustered measurements being incorrectly treated as separate independent observations.
+
+### Distribution Shape
+
+The behavior of the t procedure also depends on sample size and the distributions of the data.
+
+Before inference, inspect:
+
+- Skewness
+- Extreme observations
+- Sample sizes
+- Variability
+
+Large samples generally make inference about means more robust to moderate non-Normality, but extreme skewness and unusual observations should still be investigated.
+
+### Variance Assumption
+
+Welch's test does **not** require:
+
+$$
+\sigma_1^2=\sigma_2^2
+$$
+
+The pooled test does.
+
+This is one reason Welch's method is generally preferred as the default.
+
+---
+
+# Independent-Means Analysis: Full Workflow
+
+When comparing two population means from separate groups:
+
+## Step 1: Identify the Observational Unit
+
+Ask:
+
+> What does one row or measurement represent?
+
+Determine whether the two groups contain genuinely separate observational units.
+
+---
+
+## Step 2: Determine Whether the Samples Are Paired or Independent
+
+Ask:
+
+> Can each observation in one group be meaningfully linked to exactly one observation in the other?
+
+If yes:
+
+$$
+\text{Paired}
+$$
+
+If no:
+
+$$
+\text{Independent}
+$$
+
+---
+
+## Step 3: Define the Population Difference
+
+Explicitly define:
+
+$$
+\Delta=\mu_1-\mu_2
+$$
+
+before calculating or interpreting the estimate.
+
+This establishes what positive and negative values mean.
+
+---
+
+## Step 4: Examine the Data
+
+For each group, examine:
+
+- Sample size
+- Mean
+- Median
+- Standard deviation
+- Distribution shape
+- Skewness
+- Unusual observations
+
+Use both numerical summaries and visualizations.
+
+---
+
+## Step 5: Estimate the Difference
+
+Calculate:
+
+$$
+\hat{\Delta}
+=
+\bar{X}_1-\bar{X}_2
+$$
+
+---
+
+## Step 6: Quantify the Uncertainty
+
+Using Welch's method:
+
+$$
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+$$
+
+Construct a confidence interval:
+
+$$
+\hat{\Delta}
+\pm
+t^*SE(\hat{\Delta})
+$$
+
+---
+
+## Step 7: Perform the Hypothesis Test
+
+Usually:
+
+$$
+H_0:\mu_1-\mu_2=0
+$$
+
+against an appropriate alternative.
+
+Use Welch's method by default:
+
+```{r}
+t.test(
+    outcome ~ group,
+    data = my_data
+)
+```
+
+Use the pooled method only when the equal-population-variance assumption has a defensible basis:
+
+```{r}
+t.test(
+    outcome ~ group,
+    data = my_data,
+    var.equal = TRUE
+)
+```
+
+---
+
+## Step 8: Interpret in Context
+
+Report:
+
+1. The direction of the comparison
+2. The estimated mean difference
+3. The confidence interval
+4. The statistical evidence
+5. Practical importance when relevant
+6. Whether the study design supports a causal interpretation
+
+The statistical result should always be translated back into the original business question.
+
+---
+
+# Overall Framework
+
+The sequence from Lectures 5–7 can now be viewed as one unified framework.
+
+### One Population Mean
+
+Parameter:
+
+$$
+\mu
+$$
+
+Estimate:
+
+$$
+\bar{X}
+$$
+
+Method:
+
+$$
+\text{One-Sample }t
+$$
+
+### Two Linked Conditions
+
+Parameter:
+
+$$
+\mu_d
+$$
+
+Estimate:
+
+$$
+\bar{d}
+$$
+
+Method:
+
+$$
+\text{Paired }t
+=
+\text{One-Sample }t\text{ on Differences}
+$$
+
+### Two Independent Populations
+
+Parameter:
+
+$$
+\mu_1-\mu_2
+$$
+
+Estimate:
+
+$$
+\bar{X}_1-\bar{X}_2
+$$
+
+Method:
+
+$$
+\text{Welch Two-Sample }t
+$$
+
+The decision process is therefore:
+
+$$
+\boxed{
+\begin{array}{c}
+\text{What population quantity are we studying?}\\[6pt]
+\downarrow\\
+\text{One Mean}
+\rightarrow
+\mu
+\rightarrow
+\text{One-Sample }t\\[8pt]
+\text{Two Means}
+\rightarrow
+\begin{cases}
+\text{Linked observations}
+\rightarrow
+\mu_d
+\rightarrow
+\text{Paired }t\\[6pt]
+\text{Separate observations}
+\rightarrow
+\mu_1-\mu_2
+\rightarrow
+\text{Welch Two-Sample }t
+\end{cases}
+\end{array}
+}
+$$
+
+The key principle is:
+
+> **The study design determines the statistical method.**
+
+Do not begin by choosing a formula.
+
+Begin by identifying:
+
+1. The business question
+2. The observational unit
+3. The populations being compared
+4. Whether observations are linked or independent
+5. The population parameter being estimated
+
+Then choose the statistical method that matches that structure.

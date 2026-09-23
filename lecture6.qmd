@@ -1,3 +1,1268 @@
-# Lecture 6
+# Comparing Two Population Means: Paired Samples
 
-In progress...give me some time!
+## Overview
+
+Lecture 5 introduced inference for **one population parameter**.
+
+For example, we could ask whether a population mean differs from some benchmark:
+
+$$
+H_0:\mu=\mu_0
+$$
+
+Now suppose we have **two sets of measurements** and want to compare their means.
+
+Examples include:
+
+- Customer spending before vs. after joining a loyalty program
+- Store sales before vs. after a layout change
+- Measurements from matched treatment and control stores
+- Measurements from twins or other naturally matched subjects
+
+Before choosing a statistical test, the most important question is:
+
+> **Are the observations in the two conditions independent, or are they meaningfully connected?**
+
+If observations can be meaningfully linked one-to-one, we have **paired data**.
+
+If no meaningful one-to-one relationship exists, we instead have **independent samples**.
+
+This distinction determines how the data should be analyzed.
+
+---
+
+# Paired vs. Independent Samples
+
+Suppose a retailer measures checkout time at 20 stores.
+
+The company then installs a new checkout layout and measures checkout time at the **same 20 stores again**.
+
+For every store, there are two measurements:
+
+$$
+(\text{Before}_i,\text{After}_i)
+$$
+
+These observations are **paired** because each after measurement corresponds to the same store's before measurement.
+
+It would be inappropriate to ignore this connection and treat the 40 measurements as unrelated observations.
+
+Instead, calculate the change within each store:
+
+$$
+d_i=\text{After}_i-\text{Before}_i
+$$
+
+Now the original problem:
+
+$$
+\text{Before vs. After}
+$$
+
+becomes:
+
+$$
+d_1,d_2,\ldots,d_n
+$$
+
+which is a **one-sample problem involving the differences**.
+
+---
+
+## What Creates a Pair?
+
+A pair exists when an observation in one condition can be meaningfully linked to exactly one observation in another condition.
+
+Common forms of pairing include:
+
+### Repeated Measurements
+
+The same observational unit is measured twice.
+
+Examples:
+
+- Same customer before and after a program
+- Same employee before and after training
+- Same store before and after a redesign
+
+### Natural Pairs
+
+Different observational units have a meaningful natural relationship.
+
+Examples:
+
+- Identical twins
+- Siblings
+- Matched geographic locations
+
+### Matched Pairs
+
+Researchers intentionally match similar observational units before comparing treatments.
+
+Examples:
+
+- Match two stores with similar historical sales
+- Match customers with similar demographics
+- Match patients with similar baseline characteristics
+
+One member of each pair may then receive one treatment while the other receives another.
+
+---
+
+# Why Pairing Matters
+
+Suppose we have measurements:
+
+$$
+X_i
+$$
+
+and:
+
+$$
+Y_i
+$$
+
+for pair $i$.
+
+Instead of analyzing the two sets separately, calculate:
+
+$$
+d_i=X_i-Y_i
+$$
+
+Each pair now contributes **one difference**.
+
+The pair, rather than each individual measurement, becomes the **unit of analysis**.
+
+Pairing can improve precision because characteristics shared within a pair are removed before the two conditions are compared.
+
+For example, stores may naturally differ because of:
+
+- Store size
+- Customer traffic
+- Location
+- Neighborhood demographics
+- Historical sales
+
+If the same store is measured before and after a change, much of this store-to-store variation is automatically controlled because each store is compared with itself.
+
+Conceptually:
+
+$$
+\text{Observed Difference}
+=
+\text{Condition Effect}
++
+\text{Within-Pair Noise}
+$$
+
+rather than comparing two groups containing all of the between-unit variation.
+
+When the measurements within pairs are meaningfully related, pairing can therefore reduce noise and improve precision.
+
+---
+
+# Defining the Difference
+
+The direction of the difference matters.
+
+Suppose:
+
+$$
+d_i=\text{After}_i-\text{Before}_i
+$$
+
+Then:
+
+- $d_i>0$ means the measurement increased
+- $d_i<0$ means the measurement decreased
+- $d_i=0$ means there was no change
+
+If the outcome is checkout time, for example:
+
+$$
+d_i<0
+$$
+
+would represent an improvement because checkout time decreased.
+
+But if we instead defined:
+
+$$
+d_i=\text{Before}_i-\text{After}_i
+$$
+
+then improvement would produce:
+
+$$
+d_i>0
+$$
+
+There is nothing inherently correct about one direction over the other.
+
+The important thing is to:
+
+1. Define the difference explicitly
+2. Keep the direction consistent
+3. Interpret the sign in context
+
+---
+
+# The Population Parameter
+
+Once the differences are defined:
+
+$$
+d_1,d_2,\ldots,d_n
+$$
+
+the parameter of interest is:
+
+$$
+\boxed{\mu_d}
+$$
+
+where:
+
+$$
+\mu_d
+=
+\text{population mean difference}
+$$
+
+The corresponding sample statistic is:
+
+$$
+\boxed{\bar{d}}
+$$
+
+where:
+
+$$
+\bar{d}
+=
+\frac{\sum d_i}{n}
+$$
+
+Therefore:
+
+$$
+\bar{d}
+\rightarrow
+\text{estimate of }
+\mu_d
+$$
+
+This is exactly the same logic used in one-sample inference:
+
+$$
+\bar{x}\rightarrow\mu
+$$
+
+except the observations are now **within-pair differences**.
+
+---
+
+# Hypotheses for Paired Data
+
+If the question is whether the two conditions differ on average, the null hypothesis is:
+
+$$
+H_0:\mu_d=0
+$$
+
+A mean difference of zero means:
+
+> **There is no average difference between the two conditions.**
+
+The alternative depends on the research question.
+
+### Two-Sided
+
+To test whether the conditions differ:
+
+$$
+H_a:\mu_d\neq0
+$$
+
+### Right-Tailed
+
+If positive differences represent the effect of interest:
+
+$$
+H_a:\mu_d>0
+$$
+
+### Left-Tailed
+
+If negative differences represent the effect of interest:
+
+$$
+H_a:\mu_d<0
+$$
+
+The direction depends entirely on how:
+
+$$
+d_i
+$$
+
+was defined.
+
+---
+
+# Paired t-Test
+
+A **paired t-test** compares the population mean difference to a hypothesized value, usually zero.
+
+The important insight is:
+
+> **A paired t-test is mathematically a one-sample t-test performed on the within-pair differences.**
+
+Once we calculate:
+
+$$
+d_i=X_i-Y_i
+$$
+
+we no longer need to think of the analysis as two separate samples.
+
+We have one sample:
+
+$$
+d_1,d_2,\ldots,d_n
+$$
+
+and ask whether its population mean differs from zero.
+
+---
+
+## Standard Error of the Mean Difference
+
+Let:
+
+$$
+s_d
+$$
+
+represent the sample standard deviation of the differences.
+
+Then:
+
+$$
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+$$
+
+where:
+
+$n$ = number of **pairs**
+
+Notice that $n$ is not the total number of individual measurements.
+
+If there are 15 pairs, then:
+
+$$
+n=15
+$$
+
+even though there are:
+
+$$
+30
+$$
+
+individual measurements.
+
+---
+
+## Paired t-Test Statistic
+
+To test:
+
+$$
+H_0:\mu_d=0
+$$
+
+the test statistic is:
+
+$$
+\boxed{
+t=
+\frac{\bar{d}-0}
+{s_d/\sqrt{n}}
+}
+$$
+
+More generally:
+
+$$
+t=
+\frac{\bar{d}-\mu_{d,0}}
+{s_d/\sqrt{n}}
+$$
+
+The degrees of freedom are:
+
+$$
+df=n-1
+$$
+
+The test statistic tells us:
+
+> **How many standard errors the observed mean difference lies from the value specified by the null hypothesis.**
+
+A large absolute value of $t$ means the observed mean difference is far from the null value relative to the amount of sampling uncertainty.
+
+---
+
+# Example: Identical Twin Study
+
+Suppose a study compares left hippocampal volume for **15 pairs of identical twins**.
+
+Within each pair:
+
+- One twin was diagnosed with schizophrenia
+- The other twin was not
+
+Define:
+
+$$
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+$$
+
+The observed differences have:
+
+$$
+\bar{d}=0.1987
+$$
+
+and:
+
+$$
+s_d=0.2383
+$$
+
+Because:
+
+$$
+n=15
+$$
+
+the standard error is:
+
+$$
+SE(\bar{d})
+=
+\frac{0.2383}{\sqrt{15}}
+$$
+
+$$
+SE(\bar{d})
+\approx0.0615
+$$
+
+Under:
+
+$$
+H_0:\mu_d=0
+$$
+
+the test statistic is:
+
+$$
+t=
+\frac{0.1987-0}
+{0.0615}
+$$
+
+$$
+t\approx3.23
+$$
+
+with:
+
+$$
+df=15-1=14
+$$
+
+So the observed mean difference is approximately:
+
+$$
+3.23
+$$
+
+standard errors above the null value of zero.
+
+---
+
+## Paired t-Test in R
+
+If the differences have already been calculated:
+
+```{r}
+t.test(
+    pairs$Difference,
+    mu = 0
+)
+```
+
+This is simply a **one-sample t-test on the differences**.
+
+The example produces approximately:
+
+$$
+t=3.23
+$$
+
+$$
+df=14
+$$
+
+$$
+p=0.006
+$$
+
+and a 95% confidence interval of approximately:
+
+$$
+(0.067,\ 0.331)
+$$
+
+Because:
+
+$$
+p<0.05
+$$
+
+we reject:
+
+$$
+H_0:\mu_d=0
+$$
+
+The data provide evidence that the population mean difference is not zero.
+
+---
+
+## Using `paired = TRUE`
+
+R can also calculate the differences internally.
+
+For example:
+
+```{r}
+t.test(
+    pairs$Unaffected,
+    pairs$Affected,
+    paired = TRUE
+)
+```
+
+This performs the same conceptual analysis:
+
+$$
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+$$
+
+followed by a one-sample t-test on those differences.
+
+---
+
+# Confidence Interval for a Mean Difference
+
+The confidence interval for the population mean difference follows the same structure as the confidence interval for a single population mean:
+
+$$
+\boxed{
+\bar{d}
+\pm
+t^*
+\frac{s_d}{\sqrt{n}}
+}
+$$
+
+For the twin example, the 95% confidence interval is approximately:
+
+$$
+(0.067,\ 0.331)
+$$
+
+Because the entire interval lies above zero, the data are consistent with a positive population mean difference under the chosen definition:
+
+$$
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+$$
+
+The confidence interval also communicates the estimated **magnitude** of the difference, rather than merely whether the difference is statistically significant.
+
+---
+
+# Statistical Evidence vs. Causality
+
+A statistically significant difference does **not automatically establish causation**.
+
+In the twin example, the analysis provides evidence that mean left hippocampal volume differs between twins with and without a schizophrenia diagnosis.
+
+That supports a statement about **association**:
+
+> Mean hippocampal volume differs between the two conditions.
+
+It does not, by itself, establish:
+
+> Schizophrenia caused the difference in hippocampal volume.
+
+Causal conclusions depend on the **study design**, not simply on obtaining a small p-value.
+
+This connects back to the distinction between observational and experimental studies:
+
+> **Statistical significance does not turn an observational study into a randomized experiment.**
+
+---
+
+# Matched-Pairs Experimental Design
+
+Pairing can also be intentionally incorporated into an experiment.
+
+Suppose Kroger has candidate stores for an endcap-display experiment.
+
+Some stores will receive:
+
+- **Treatment:** endcap display
+
+while others receive:
+
+- **Control:** usual shelf placement
+
+Instead of randomly assigning stores without considering their characteristics, Kroger could use a **matched-pairs design**.
+
+---
+
+## Step 1: Match Similar Units
+
+Before treatment assignment, form pairs of similar stores using pre-experiment characteristics such as:
+
+- Baseline sales
+- Store size
+- Customer traffic
+- Neighborhood characteristics
+
+The goal is to make the stores within each pair as comparable as possible before the treatment occurs.
+
+---
+
+## Step 2: Randomize Within Each Pair
+
+Within each matched pair:
+
+- Randomly assign one store to treatment
+- Randomly assign the other to control
+
+Randomization remains important.
+
+Matching improves comparability and precision, while random assignment supports causal inference.
+
+---
+
+## Step 3: Calculate One Difference Per Pair
+
+For pair $i$, calculate:
+
+$$
+d_i
+=
+\text{Sales}_{\text{endcap},i}
+-
+\text{Sales}_{\text{control},i}
+$$
+
+Then analyze:
+
+$$
+d_1,d_2,\ldots,d_n
+$$
+
+and test:
+
+$$
+H_0:\mu_d=0
+$$
+
+The key distinction is:
+
+> **Matching improves precision. Random assignment supports causality.**
+
+They serve different purposes.
+
+---
+
+# Assumptions of the Paired t-Test
+
+Once paired data are converted into differences:
+
+$$
+(X_i,Y_i)
+\rightarrow
+d_i=X_i-Y_i
+$$
+
+the assumptions of the paired t-test apply primarily to the **differences**.
+
+The main assumptions are:
+
+1. There is a meaningful reason for the observations to be paired
+2. The differences are independent across pairs
+3. The differences contain no severe outliers
+4. The distribution of the differences is approximately Normal when the number of pairs is small
+
+---
+
+## Independence Within a Pair Is Not Required
+
+The two observations within a pair do **not** need to be independent.
+
+In fact, the reason for using a paired analysis is usually that they are related.
+
+For example:
+
+$$
+(\text{Before}_i,\text{After}_i)
+$$
+
+for the same store are naturally connected.
+
+That relationship is exactly what the paired analysis preserves.
+
+What needs to be independent is:
+
+$$
+d_1,d_2,\ldots,d_n
+$$
+
+across separate pairs.
+
+---
+
+## Normality Applies to the Differences
+
+A paired t-test does **not** require both original variables to be Normally distributed.
+
+You do not separately need:
+
+$$
+X\sim N
+$$
+
+and:
+
+$$
+Y\sim N
+$$
+
+Instead, the relevant quantity is:
+
+$$
+D=X-Y
+$$
+
+For small samples, we want the distribution of:
+
+$$
+d_1,d_2,\ldots,d_n
+$$
+
+to be reasonably consistent with a Normal distribution and free of severe outliers.
+
+Therefore:
+
+> **Check the differences, not the two original columns separately.**
+
+---
+
+# Checking the Differences
+
+After calculating:
+
+```{r}
+pairs <- pairs |>
+    mutate(
+        Difference = Unaffected - Affected
+    )
+```
+
+we can inspect the differences directly.
+
+### Histogram
+
+```{r}
+ggplot(pairs, aes(x = Difference)) +
+    geom_histogram()
+```
+
+Look for:
+
+- Severe skewness
+- Extreme outliers
+- Unusual shape
+
+### Q–Q Plot
+
+```{r}
+qqnorm(pairs$Difference)
+qqline(pairs$Difference)
+```
+
+For a small sample, strong departures from the line may indicate that the Normality assumption is questionable.
+
+However, with only a small number of pairs, visual diagnostics themselves are uncertain.
+
+For example, with:
+
+$$
+n=15
+$$
+
+there are relatively few observations available for judging the shape of the difference distribution.
+
+---
+
+# Pairing Does Not Automatically Mean Independence
+
+Paired data can introduce another important issue.
+
+Suppose two stores are observed every week for 104 weeks.
+
+For each week:
+
+$$
+d_t
+=
+\text{Sales}_{8,t}
+-
+\text{Sales}_{208,t}
+$$
+
+It might be tempting to treat the 104 weekly differences as:
+
+$$
+d_1,d_2,\ldots,d_{104}
+$$
+
+independent observations.
+
+But these differences occur **over time**.
+
+Consecutive weeks may be related.
+
+This creates a potential violation of the independence assumption.
+
+---
+
+# Time Structure in Paired Differences
+
+Suppose the difference between two stores changes systematically over time.
+
+A single overall mean:
+
+$$
+\bar{d}
+$$
+
+might conceal that pattern.
+
+For example, the differences might begin mostly negative and become increasingly positive.
+
+Then the statement:
+
+> The average difference is 10.
+
+does not fully describe what is happening.
+
+The relationship may instead involve a **time trend**.
+
+This connects paired inference back to time-series analysis:
+
+> Before reducing repeated measurements to one overall mean difference, check whether the difference itself changes systematically over time.
+
+---
+
+# Autocorrelation
+
+**Autocorrelation** measures whether observations are related to observations from earlier time periods.
+
+For weekly differences:
+
+$$
+d_t
+$$
+
+we might ask whether:
+
+$$
+d_t
+$$
+
+is related to:
+
+$$
+d_{t-1}
+$$
+
+or:
+
+$$
+d_{t-2}
+$$
+
+and so on.
+
+An **autocorrelation function (ACF)** examines these relationships at different lags.
+
+For example:
+
+```{r}
+acf(differences)
+```
+
+A bar at lag:
+
+$$
+k
+$$
+
+measures the relationship between observations separated by:
+
+$$
+k
+$$
+
+time periods.
+
+If substantial autocorrelation exists, the observations do not provide completely independent pieces of information.
+
+That matters because the usual paired t-test standard error:
+
+$$
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+$$
+
+assumes independent differences.
+
+If observations are strongly dependent, treating all of them as independent can make the estimated uncertainty misleading.
+
+---
+
+# Changing Means vs. Autocorrelation
+
+Time-series diagnostics can reveal different problems.
+
+A **time plot** can reveal whether the mean difference changes over time.
+
+An **ACF** can reveal whether observations are serially dependent.
+
+These are not the same issue.
+
+For example:
+
+- A time trend means the expected difference is changing
+- Autocorrelation means observations at different times are related
+
+A dataset can have:
+
+- A changing mean with little autocorrelation
+- Autocorrelation around a stable mean
+- Both
+- Neither
+
+Therefore, both the **structure of the mean** and the **dependence between observations** matter.
+
+---
+
+# Unit of Replication
+
+One of the most important questions in statistical inference is:
+
+> **What is the independent unit of replication?**
+
+Suppose we compare two study designs.
+
+### Study A: Many Matched Store Pairs
+
+Suppose many pairs of similar stores participate in an experiment.
+
+Each store is observed for six weeks.
+
+We calculate one sales summary for each store and then one difference for each matched pair.
+
+If there are:
+
+$$
+n
+$$
+
+independent store pairs, then the sample size is:
+
+$$
+n
+$$
+
+The independent replication comes from the **different store pairs**.
+
+---
+
+### Study B: One Store Pair for 104 Weeks
+
+Suppose instead that only two stores are studied, but they are observed for:
+
+$$
+104
+$$
+
+weeks.
+
+There are 104 weekly differences, but they all come from the **same two stores**.
+
+Those 104 weeks are not equivalent to having 104 independent store pairs.
+
+They provide more information about those particular stores, but not necessarily more independent replication across a population of stores.
+
+This distinction is critical:
+
+> **More repeated observations of the same units are not the same as more independent observational units.**
+
+---
+
+# Pseudoreplication
+
+Treating repeated or dependent measurements as though they were independent observations can create **pseudoreplication**.
+
+For example:
+
+> Two stores observed for 104 weeks
+
+does not automatically provide the same inferential information as:
+
+> 104 independent pairs of stores.
+
+Repeated observations may increase information about the particular units being studied, but they do not necessarily increase the number of independent units available for population-level inference.
+
+The effective sample size depends on the study design and dependence structure, not simply the number of rows in the dataset.
+
+---
+
+# Choosing Paired vs. Independent Analysis
+
+Before comparing two means, ask:
+
+> **Can each observation in one condition be meaningfully linked to one observation in the other condition?**
+
+### If Yes
+
+The observations are paired.
+
+Calculate:
+
+$$
+d_i=X_i-Y_i
+$$
+
+and perform **one-sample inference on the differences**.
+
+### If No
+
+The observations are independent samples.
+
+Compare the two population means directly using an independent-samples method.
+
+---
+
+## Examples
+
+### Same Customers Before and After
+
+Monthly spending is recorded for the same customers before and after they join a loyalty program.
+
+**Paired**
+
+Each customer's before measurement is linked to that same customer's after measurement.
+
+---
+
+### Randomized Website Experiment
+
+One group of customers sees the current website.
+
+A different group sees a redesigned website.
+
+**Independent**
+
+There is no one-to-one correspondence between customers in the two groups.
+
+---
+
+### Matched Stores
+
+Treatment stores are intentionally matched with similar control stores before an experiment.
+
+**Paired**
+
+Each treatment store has a specific matched control store.
+
+---
+
+### Different Orders Across Months
+
+Delivery times from one group of orders this month are compared with a different group of orders last month.
+
+**Independent**
+
+An order this month does not correspond to one specific order from last month.
+
+---
+
+# Paired-Samples Workflow
+
+When analyzing two conditions, use the following process:
+
+1. **Identify the observational unit.**
+2. Determine whether observations can be meaningfully paired.
+3. If paired, define the within-pair difference:
+
+$$
+d_i=X_i-Y_i
+$$
+
+4. Determine the population parameter:
+
+$$
+\mu_d
+$$
+
+5. State the hypotheses:
+
+$$
+H_0:\mu_d=0
+$$
+
+and the appropriate alternative.
+
+6. Check the distribution and independence of the differences.
+7. Calculate:
+
+$$
+\bar{d}
+$$
+
+$$
+s_d
+$$
+
+and:
+
+$$
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+$$
+
+8. Calculate:
+
+$$
+t=
+\frac{\bar{d}}
+{s_d/\sqrt{n}}
+$$
+
+9. Obtain the p-value and confidence interval.
+10. Interpret the result in the context of the study.
+11. Make causal conclusions only if the study design supports them.
+
+---
+
+# Overall Framework
+
+The key idea is that a paired analysis preserves information about **which observations belong together**.
+
+Instead of:
+
+$$
+\text{Mean of Group 1}
+-
+\text{Mean of Group 2}
+$$
+
+while ignoring the relationships between observations, paired analysis first calculates:
+
+$$
+d_i=X_i-Y_i
+$$
+
+for each pair.
+
+The problem then becomes:
+
+$$
+\boxed{
+\text{Two Paired Conditions}
+\rightarrow
+\text{Within-Pair Differences}
+\rightarrow
+\text{One-Sample Inference}
+}
+$$
+
+The major ideas are:
+
+- **Study design determines the statistical test.**
+- Pair observations only when there is a meaningful one-to-one connection.
+- A paired t-test is a **one-sample t-test on differences**.
+- The parameter of interest is the population mean difference:
+
+$$
+\mu_d
+$$
+
+- The sample size is the number of **independent pairs**, not the total number of measurements.
+- Pairing can improve precision by removing variation between matched units.
+- The assumptions apply primarily to the **differences**, not the two original columns.
+- Independence is required **across pairs**, not within each pair.
+- Repeated observations over time may introduce trends or dependence that a basic paired t-test does not capture.
+- More repeated measurements are not equivalent to more independent units.
+- Matching can improve precision, while **random assignment** is what supports a causal interpretation.
+
+The decision rule for comparing two conditions is therefore:
+
+$$
+\boxed{
+\begin{array}{c}
+\text{Can observations be meaningfully linked?}\\[4pt]
+\downarrow\\
+\text{Yes}
+\rightarrow
+\text{Paired}
+\rightarrow
+d_i=X_i-Y_i
+\rightarrow
+\text{One-Sample }t\text{-Test}\\[6pt]
+\text{No}
+\rightarrow
+\text{Independent Samples}
+\end{array}
+}
+$$
