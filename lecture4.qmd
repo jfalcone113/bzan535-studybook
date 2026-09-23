@@ -1,3 +1,5 @@
 # Probability Rules and Distributions
 
-So far, we've covered descriptive analytics, where tools and methods are used to describe 
+## Overview
+
+So far, we've covered descriptive analytics – describing and understanding observed data based on understanding its exhibited characteristics.

@@ -1,5 +1,8 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+BZAN 535 Study Book
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Based on slides, arranged by yours truly.
+
+© 2026 Joseph Falcone. All rights reserved.
+This material is provided for educational and personal study purposes. No part of this publication may be reproduced, distributed, or transmitted without prior written permission from the author, except as permitted by applicable copyright law.
