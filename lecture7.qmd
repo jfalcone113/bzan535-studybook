@@ -482,6 +482,7 @@ As before, the t-statistic represents:
 R uses Welch's method by default when performing an independent two-sample t-test.
 
 ```{r}
+#| eval: false
 t.test(
     outcome ~ group,
     data = my_data
@@ -491,6 +492,7 @@ t.test(
 For example:
 
 ```{r}
+#| eval: false
 t.test(
     spending ~ homeowner_desc,
     data = households
