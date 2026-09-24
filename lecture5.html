@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -208,7 +243,17 @@ window.Quarto = {
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">5.1</span> Overview</a></li>
   <li><a href="#sampling" id="toc-sampling" class="nav-link" data-scroll-target="#sampling"><span class="header-section-number">5.2</span> Sampling</a></li>
-  <li><a href="#sampling-distribution-and-the-clt" id="toc-sampling-distribution-and-the-clt" class="nav-link" data-scroll-target="#sampling-distribution-and-the-clt"><span class="header-section-number">5.3</span> Sampling Distribution and the CLT</a></li>
+  <li><a href="#sampling-distribution-and-the-clt" id="toc-sampling-distribution-and-the-clt" class="nav-link" data-scroll-target="#sampling-distribution-and-the-clt"><span class="header-section-number">5.3</span> Sampling Distribution and the CLT</a>
+  <ul class="collapse">
+  <li><a href="#sampling-distribution-and-se" id="toc-sampling-distribution-and-se" class="nav-link" data-scroll-target="#sampling-distribution-and-se"><span class="header-section-number">5.3.1</span> Sampling Distribution and SE</a></li>
+  <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link" data-scroll-target="#central-limit-theorem"><span class="header-section-number">5.3.2</span> Central Limit Theorem</a></li>
+  </ul></li>
+  <li><a href="#inference-for-the-mean" id="toc-inference-for-the-mean" class="nav-link" data-scroll-target="#inference-for-the-mean"><span class="header-section-number">5.4</span> Inference for the Mean</a>
+  <ul class="collapse">
+  <li><a href="#t-vs-z" id="toc-t-vs-z" class="nav-link" data-scroll-target="#t-vs-z"><span class="header-section-number">5.4.1</span> t vs z</a></li>
+  <li><a href="#hypothesis-testing-for-the-mean" id="toc-hypothesis-testing-for-the-mean" class="nav-link" data-scroll-target="#hypothesis-testing-for-the-mean"><span class="header-section-number">5.4.2</span> Hypothesis Testing for the Mean</a></li>
+  </ul></li>
+  <li><a href="#inference-for-a-proportion" id="toc-inference-for-a-proportion" class="nav-link" data-scroll-target="#inference-for-a-proportion"><span class="header-section-number">5.5</span> Inference for a Proportion</a></li>
   </ul>
 </nav>
     </div>
@@ -300,7 +345,257 @@ every <span class="math inline">\(k\)</span>-th unit after a random start
 </section>
 <section id="sampling-distribution-and-the-clt" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="sampling-distribution-and-the-clt"><span class="header-section-number">5.3</span> Sampling Distribution and the CLT</h2>
-<p>In progress…</p>
+<section id="sampling-distribution-and-se" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="sampling-distribution-and-se"><span class="header-section-number">5.3.1</span> Sampling Distribution and SE</h3>
+<p>Suppose you drew a different random sample of 2,500 households and recomputed the average spend each time, 1000 times. What would the distributions of those averages be? How would that be different from the the distribution of the raw values themselves?</p>
+<p>The sampling distribution is the distribution of a statistic (e.g., <span class="math inline">\(\bar{X}\)</span>) across all possible repeated samples of the same size from a population.</p>
+<dl>
+<dt>Center</dt>
+<dd>
+tells us where the statistic tends to fall and whether it is centered on the true population parameter.
+</dd>
+</dl>
+<p>If <span class="math inline">\(E(\bar X) = \mu\)</span>, <span class="math inline">\(\bar{X}\)</span> is an unbiased estimator of <span class="math inline">\(\mu\)</span>, the true value (in this case the mean).</p>
+<dl>
+<dt>Spread</dt>
+<dd>
+tells us the precision of the statistic across samples.
+</dd>
+</dl>
+<p>For sample mean: <span class="math inline">\(SE(\bar{X})=\frac{\sigma}{\sqrt{n}}\)</span> where smaller SE (standard error) means less sample-to-sample variability.</p>
+<p>Standard Error measures how much a statistic would typically vary from sample to sample.</p>
+</section>
+<section id="central-limit-theorem" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="central-limit-theorem"><span class="header-section-number">5.3.2</span> Central Limit Theorem</h3>
+<p>The central limit theorem says as the sample size, <span class="math inline">\(n\)</span>, gets larger, the sampling distribution of the sample mean, <span class="math inline">\(bar{X}\)</span> becomes approximately normal, regardless of the shape of the population distribution.</p>
+<p>*Rule of thumb, <span class="math inline">\(n \geq 30\)</span> is often “large enough” though more skew may require a larger <span class="math inline">\(n\)</span>.</p>
+<p>The CLT allows us to build <strong>confidence intervals</strong> and <strong>hypothesis tests</strong> even when the raw data isn’t normal.</p>
+</section>
+</section>
+<section id="inference-for-the-mean" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="inference-for-the-mean"><span class="header-section-number">5.4</span> Inference for the Mean</h2>
+<p>When trying to estimate the mean of a population, we use a point estimate for the mean <span class="math inline">\(\bar{X}\)</span>.</p>
+<p>A point estimate is a single value calculated from a sample that is used to estimate an unknown population parameter.</p>
+<p>When doing interference, the true standard deviation, <span class="math inline">\(\sigma\)</span>, is unknown. Because of this, we use the <strong>t-distribution</strong> to model it (<span class="math inline">\(t_{n-1}\)</span>).</p>
+<p><span class="math display">\[\bar{X} \pm t_{\alpha/2,\;n-1}\frac{s}{\sqrt{n}}\]</span> Where:</p>
+<ul>
+<li><span class="math inline">\(\bar{X} \rightarrow\)</span> point estimate of </li>
+<li><span class="math inline">\(t_{\alpha/2,n-1} \rightarrow\)</span> critical t-value with n-1 degrees of freedom (desired confidence level)</li>
+<li><span class="math inline">\(\frac{s}{\sqrt n} \rightarrow\)</span> standard error</li>
+<li><span class="math inline">\(t_{\alpha/2,n-1}\frac{s}{\sqrt n} \rightarrow\)</span> margin of error</li>
+</ul>
+<blockquote class="blockquote">
+<p>Interpretation: the procedure covers <span class="math inline">\(\mu\)</span> in <span class="math inline">\(100(1-\alpha)%\)</span> of repeated samples. e.g.&nbsp;We are 95% confident that the mean is within…</p>
+</blockquote>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">9</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="sc">-</span><span class="dv">4</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">4</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"t"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"t Distribution"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lecture5_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="t-vs-z" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="t-vs-z"><span class="header-section-number">5.4.1</span> t vs z</h3>
+<p>A t-statistic is like a z-statistic when the population standard deviation <span class="math inline">\(\sigma\)</span> is unknown and must be estimated using <span class="math inline">\(s\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 72%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(z\)</span></th>
+<th><span class="math inline">\(t\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Distribution</strong></td>
+<td>Standard normal <span class="math inline">\(N(0,1)\)</span></td>
+<td><span class="math inline">\(t\)</span>-distribution</td>
+</tr>
+<tr class="even">
+<td><strong>Population SD <span class="math inline">\(\sigma\)</span></strong></td>
+<td>Known</td>
+<td>Unknown</td>
+</tr>
+<tr class="odd">
+<td><strong>Standard error</strong></td>
+<td><span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span></td>
+<td><span class="math inline">\(\frac{s}{\sqrt{n}}\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Degrees of freedom</strong></td>
+<td>None</td>
+<td><span class="math inline">\(n-1\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Shape</strong></td>
+<td>Normal</td>
+<td>Normal-like, heavier tails</td>
+</tr>
+<tr class="even">
+<td><strong>Critical value for 95%</strong></td>
+<td><span class="math inline">\(1.96\)</span></td>
+<td>Depends on <span class="math inline">\(df\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Common use for means</strong></td>
+<td>Less common</td>
+<td>Most common</td>
+</tr>
+</tbody>
+</table>
+<p>As <span class="math inline">\(n\)</span> gets larger, the difference between <span class="math inline">\(t\)</span> and <span class="math inline">\(z\)</span> becomes smaller and eventually negligible because <span class="math inline">\(s\)</span> becomes a more precise estimate of <span class="math inline">\(\sigma\)</span>.</p>
+<hr>
+<p>Helpful Definitions:</p>
+<dl>
+<dt>Distribution</dt>
+<dd>
+a z-statistic follows the standard normal distribution <span class="math inline">\(N(0,1)\)</span>. A t-statistic follows a <span class="math inline">\(t-distribution\)</span>.
+</dd>
+<dt>Population SD <span class="math inline">\(\sigma\)</span></dt>
+<dd>
+if the true population SD <span class="math inline">\(\sigma\)</span> is known, use <span class="math inline">\(z\)</span>. If <span class="math inline">\(\sigma\)</span> is unknown, estimate it with the sample SD <span class="math inline">\(s\)</span> and use <span class="math inline">\(t\)</span>.
+</dd>
+<dt>Standard error</dt>
+<dd>
+measures how much <span class="math inline">\(\bar{X}\)</span> varies across samples. With <span class="math inline">\(z\)</span>, <span class="math inline">\(SE=\frac{\sigma}{\sqrt{n}}\)</span>. With <span class="math inline">\(t\)</span>, because <span class="math inline">\(\sigma\)</span> is unknown, we estimate it with <span class="math inline">\(SE=\frac{\sigma}{\sqrt{n}}\)</span>.
+</dd>
+<dt>Degrees of freedom</dt>
+<dd>
+<span class="math inline">\(z\)</span> doesn’t need degrees of freedom because <span class="math inline">\(\sigma\)</span> is known. <span class="math inline">\(t\)</span> uses <span class="math inline">\(df=n-1\)</span>, which accounts for estimating variability using the sample.
+</dd>
+<dt>Shape</dt>
+<dd>
+both are bell-shaped and centered at 0. The <span class="math inline">\(t-distribution\)</span> has heavier tails because estimating <span class="math inline">\(\sigma\)</span> with <span class="math inline">\(s\)</span> introduces additional uncertainty.
+</dd>
+<dt>Critical value for 95%</dt>
+<dd>
+for <span class="math inline">\(z\)</span>, the middle 95% is always between -1.96 and +1.96; for t, it depends on <span class="math inline">\(n\)</span> (<span class="math inline">\(n-1\)</span>).
+</dd>
+<dt>Common use for means</dt>
+<dd>
+knowing the true population <span class="math inline">\(\sigma\)</span> is uncommon, so <span class="math inline">\(z\)</span> is less common for inference about means. Usually <span class="math inline">\(\sigma\)</span> is unknown, making <span class="math inline">\(t\)</span> the standard choice.
+</dd>
+</dl>
+</section>
+<section id="hypothesis-testing-for-the-mean" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="hypothesis-testing-for-the-mean"><span class="header-section-number">5.4.2</span> Hypothesis Testing for the Mean</h3>
+<p><span class="math inline">\(H_0 \rightarrow\)</span> the Null Hypothesis: the baseline/default claim. <span class="math inline">\(H_a \rightarrow\)</span> the Alternative Hypothesis: what we are looking for evidence of (represents a difference/effect/change from null)</p>
+<p>Steps: hypothesis <span class="math inline">\(\rightarrow\)</span> significance level <span class="math inline">\(\alpha\)</span> test statistic <span class="math inline">\(\rightarrow\)</span> <span class="math inline">\(p-value\)</span> <span class="math inline">\(\rightarrow\)</span> decision <span class="math inline">\(\rightarrow\)</span> conclusion</p>
+<ul>
+<li><span class="math inline">\(\alpha\)</span> = probability of a <strong>Type I error</strong> (rejecting a true <span class="math inline">\(H_0\)</span>)</li>
+<li><span class="math inline">\(\beta\)</span> = probability of a <strong>Type II error</strong> (failing to reject a false <span class="math inline">\(H_0\)</span>)</li>
+<li><span class="math inline">\(\text{Power} = 1-\beta\)</span> is the probability that a hypothesis test correctly detects a real effect.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>What Happens</th>
+<th>Probability</th>
+<th>Think</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Type I</strong></td>
+<td>Reject a true <span class="math inline">\(H_0\)</span></td>
+<td><span class="math inline">\(\alpha\)</span></td>
+<td>False positive</td>
+</tr>
+<tr class="even">
+<td><strong>Type II</strong></td>
+<td>Fail to reject a false <span class="math inline">\(H_0\)</span></td>
+<td><span class="math inline">\(\beta\)</span></td>
+<td>False negative</td>
+</tr>
+</tbody>
+</table>
+<section id="one-sided-t-test-and-power" class="level4" data-number="5.4.2.1">
+<h4 data-number="5.4.2.1" class="anchored" data-anchor-id="one-sided-t-test-and-power"><span class="header-section-number">5.4.2.1</span> One-Sided t-Test and Power</h4>
+<p>A <strong>one-sided t-test</strong> tests whether a population mean is <strong>larger than or smaller than</strong> a hypothesized value, depending on the specified direction.</p>
+<ul>
+<li>Right-tailed: <span class="math inline">\(H_A: \mu &gt; \mu_0\)</span></li>
+<li>Left-tailed: <span class="math inline">\(H_A: \mu &lt; \mu_0\)</span></li>
+</ul>
+<p>Reject <span class="math inline">\(H_0\)</span> when: <span class="math inline">\(p\text{-value} \leq \alpha\)</span></p>
+</section>
+</section>
+</section>
+<section id="inference-for-a-proportion" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="inference-for-a-proportion"><span class="header-section-number">5.5</span> Inference for a Proportion</h2>
+<p><strong>Inference for a proportion</strong> uses essentially the same inference framework as inference for a mean, but the <strong>population parameter changes</strong>.</p>
+<p>For means, the population parameter is: <span class="math inline">\(\mu = \text{population mean}\)</span></p>
+<p>For proportions, the population parameter is: <span class="math inline">\(p = \text{population proportion}\)</span></p>
+<blockquote class="blockquote">
+<p><strong>Same inference process, new parameter.</strong></p>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Mean <span class="math inline">\(\mu\)</span></th>
+<th>Proportion <span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Point Estimate</strong></td>
+<td><span class="math inline">\(\bar{X}\)</span></td>
+<td><span class="math inline">\(\hat{p}\)</span></td>
+</tr>
+<tr class="even">
+<td><strong>Standard Error</strong></td>
+<td><span class="math inline">\(\frac{s}{\sqrt{n}}\)</span></td>
+<td><span class="math inline">\(\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Reference Distribution</strong></td>
+<td><span class="math inline">\(t_{n-1}\)</span></td>
+<td><span class="math inline">\(z\)</span> (Normal)</td>
+</tr>
+<tr class="even">
+<td><strong>Confidence Interval</strong></td>
+<td><span class="math inline">\(\bar{X} \pm t_{\alpha/2,n-1} \cdot SE\)</span></td>
+<td><span class="math inline">\(\hat{p} \pm z_{\alpha/2} \cdot SE\)</span></td>
+</tr>
+<tr class="odd">
+<td><strong>Test Statistic (<span class="math inline">\(H_0\)</span>)</strong></td>
+<td><span class="math inline">\(\frac{\bar{X}-\mu_0}{s/\sqrt{n}}\)</span></td>
+<td><span class="math inline">\(\frac{\hat{p}-p_0}{\sqrt{p_0(1-p_0)/n}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>For proportion inference, each observation is a <strong>binary outcome</strong>:</p>
+<p><span class="math inline">\(X_i = \begin{cases}1 &amp; \text{success} \\ 0 &amp; \text{failure} \end{cases}\)</span></p>
+<p>Each observation follows a Bernoulli distribution:</p>
+<p><span class="math inline">\(X_i \sim \text{Bernoulli}(p)\)</span> where <span class="math inline">\(p\)</span> is the true population probability or proportion of success.</p>
 
 
 </section>
