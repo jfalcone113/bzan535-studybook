@@ -175,25 +175,25 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-Parameter Statistical Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lecture 6</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Paired Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lecture 8</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inference for Categorical Data</span></span></a>
   </div>
 </li>
     </ul>
@@ -207,20 +207,18 @@ window.Quarto = {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">4.1</span> Overview</a></li>
-  <li><a href="#probability-terminology" id="toc-probability-terminology" class="nav-link" data-scroll-target="#probability-terminology"><span class="header-section-number">4.2</span> Probability Terminology</a></li>
-  <li><a href="#probability-rules" id="toc-probability-rules" class="nav-link" data-scroll-target="#probability-rules"><span class="header-section-number">4.3</span> Probability Rules</a>
+  <li><a href="#probability" id="toc-probability" class="nav-link" data-scroll-target="#probability"><span class="header-section-number">4.2</span> Probability</a>
   <ul class="collapse">
-  <li><a href="#complement-rule" id="toc-complement-rule" class="nav-link" data-scroll-target="#complement-rule"><span class="header-section-number">4.3.1</span> Complement Rule</a></li>
-  <li><a href="#addition-rule" id="toc-addition-rule" class="nav-link" data-scroll-target="#addition-rule"><span class="header-section-number">4.3.2</span> Addition Rule</a></li>
-  <li><a href="#multiplication-rule" id="toc-multiplication-rule" class="nav-link" data-scroll-target="#multiplication-rule"><span class="header-section-number">4.3.3</span> Multiplication Rule</a></li>
-  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability"><span class="header-section-number">4.3.4</span> Conditional Probability</a></li>
+  <li><a href="#probability-terminology" id="toc-probability-terminology" class="nav-link" data-scroll-target="#probability-terminology"><span class="header-section-number">4.2.1</span> Probability Terminology</a></li>
+  <li><a href="#basic-probability-rules" id="toc-basic-probability-rules" class="nav-link" data-scroll-target="#basic-probability-rules"><span class="header-section-number">4.2.2</span> Basic Probability Rules</a></li>
+  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability"><span class="header-section-number">4.2.3</span> Conditional Probability</a></li>
   </ul></li>
-  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="header-section-number">4.4</span> Distributions</a>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="header-section-number">4.3</span> Distributions</a>
   <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">4.4.1</span> Binomial Distribution</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">4.4.2</span> Normal Distribution</a></li>
-  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">4.4.3</span> Poisson Distribution</a></li>
-  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution"><span class="header-section-number">4.4.4</span> Exponential Distribution</a></li>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">4.3.1</span> Binomial Distribution</a></li>
+  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">4.3.2</span> Normal Distribution</a></li>
+  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">4.3.3</span> Poisson Distribution</a></li>
+  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution"><span class="header-section-number">4.3.4</span> Exponential Distribution</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -249,229 +247,202 @@ window.Quarto = {
 
 <section id="overview" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">4.1</span> Overview</h2>
-<p>This section marks the transition from <strong>describing observed data</strong> to <strong>reasoning about uncertain outcomes</strong>. In earlier sections, the focus was on concepts such as center, spread, shape, and trends. Now we extend that framework by asking:</p>
-<blockquote class="blockquote">
-<p><em>What could happen, and how likely is each outcome?</em></p>
-</blockquote>
-<p>Answering this requires more than descriptive statistics. It requires looking at <strong>probabilities and probability distributions</strong>.</p>
-<p>For example, suppose a call center receives an average of 12 calls per hour. Knowing the average is useful, but it doesn’t necessarily answer a question such as:</p>
-<pre><code>What is the probability that the call center receives 20 or more calls in the next hour?*</code></pre>
-<p>The actual number of calls is uncertain. It could be 8 calls, 12 calls, 15 calls, 20 calls, and so on. A <strong>probability</strong> answers a specific question about this value. A <strong>probability distribution</strong> describes how probability is distributed across the different possible values.</p>
-<p>Different types of random processes produce different patterns of possible outcomes. This leads to different <strong>probability distributions</strong>, including:</p>
+<p>This section marks the transition from <strong>describing observed data</strong> to <strong>reasoning about uncertain outcomes</strong>. In earlier sections, the focus was on concepts such as center, spread, shape, and trends. Now we extend that framework by asking: “What could happen, and how likely is each outcome?” Answering this requires more than descriptive statistics. It requires looking at <strong>probabilities and probability distributions</strong>.</p>
+<p>Things to cover:</p>
 <ul>
-<li>Binomial</li>
-<li>Normal</li>
-<li>Poisson</li>
-<li>Exponential</li>
+<li>Probability Rules</li>
+<li>Binomial Distribution</li>
+<li>Normal Distribution</li>
+<li>Poisson Distribution</li>
+<li>Exponential Distribution</li>
 </ul>
-<p>The key task is therefore not simply calculating a probability, but first determining <strong>which probability distribution appropriately models the situation</strong>.</p>
 </section>
-<section id="probability-terminology" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="probability-terminology"><span class="header-section-number">4.2</span> Probability Terminology</h2>
+<section id="probability" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="probability"><span class="header-section-number">4.2</span> Probability</h2>
+<section id="probability-terminology" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="probability-terminology"><span class="header-section-number">4.2.1</span> Probability Terminology</h3>
+<p>A probability is a number from 0 to 1 describing how likely an event is.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Experiment</strong></td>
+<td>Random process</td>
+<td>Send a marketing email</td>
+</tr>
+<tr class="even">
+<td><strong>Outcome</strong></td>
+<td>One possible result</td>
+<td>Customer clicks</td>
+</tr>
+<tr class="odd">
+<td><strong>Event</strong></td>
+<td>One or more outcomes you’re interested in</td>
+<td>Customer engages</td>
+</tr>
+<tr class="even">
+<td><strong>Sample Space</strong></td>
+<td>All possible outcomes</td>
+<td>{Click, Open, Ignore, Unsubscribe}</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="basic-probability-rules" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="basic-probability-rules"><span class="header-section-number">4.2.2</span> Basic Probability Rules</h3>
+<section id="complement-rule" class="level4" data-number="4.2.2.1">
+<h4 data-number="4.2.2.1" class="anchored" data-anchor-id="complement-rule"><span class="header-section-number">4.2.2.1</span> Complement Rule</h4>
+<p>The complement rule finds the probability that an event does not happen.</p>
+<p><span class="math display">\[
+P(A^c)=1-P(A)
+\]</span> If event A happens with probability P(A), its complement, written A^c, means “not A.”</p>
+<p>For example:</p>
+<p>If there’s a 20% chance of clicking: <span class="math inline">\(P(\text{No click})=1-.20=.80\)</span></p>
+</section>
+<section id="addition-rule" class="level4" data-number="4.2.2.2">
+<h4 data-number="4.2.2.2" class="anchored" data-anchor-id="addition-rule"><span class="header-section-number">4.2.2.2</span> Addition Rule</h4>
+<p>The addition rule finds the probability that event A OR event B occurs.</p>
+<p><span class="math display">\[P(A\cup B)=P(A)+P(B) - P(A)\]</span></p>
+<p>However, that only works if Event A and Event B can occur simultaneously.</p>
+<p>If A and B are Mututally Exclusive: <span class="math display">\[P(A\cup B)=P(A)+P(B)\]</span></p>
+<p>For example:</p>
+<p>Suppose:</p>
+<ul>
+<li><span class="math inline">\(P(\text{opens email})=0.50\)</span></li>
+<li><span class="math inline">\(P(\text{clicks link})=0.20\)</span></li>
+<li><span class="math inline">\(P(\text{opens AND clicks})=0.15\)</span></li>
+</ul>
+<p>Then:</p>
+<p><span class="math inline">\(P(\text{opens OR clicks})=0.50+0.20-0.15=0.55\)</span></p>
+<p>Note: if mutually exclusive: <span class="math inline">\(P(\text{opens OR clicks})=0.50+0.20=0.70\)</span></p>
+</section>
+<section id="multiplication" class="level4" data-number="4.2.2.3">
+<h4 data-number="4.2.2.3" class="anchored" data-anchor-id="multiplication"><span class="header-section-number">4.2.2.3</span> Multiplication</h4>
+<p>The multiplication rule finds the probability that event A AND event B occur.</p>
+<p>If A and B are Dependent Events:</p>
+<p><span class="math display">\[P(A\cap B)=P(A)\times P(B\mid A)\]</span></p>
+<p>If A and B are Independent Events:</p>
+<p><span class="math display">\[P(A\cap B)=P(A)\cdot P(B)\]</span></p>
+</section>
+</section>
+<section id="conditional-probability" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="conditional-probability"><span class="header-section-number">4.2.3</span> Conditional Probability</h3>
+<p>Conditional Probability is the probability an event occurs given another has occured (i.e.&nbsp;probability of Event A given Event B occurred)</p>
+<p><span class="math display">\[P(A\mid B)\]</span></p>
+</section>
+</section>
+<section id="distributions" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="distributions"><span class="header-section-number">4.3</span> Distributions</h2>
+<section id="binomial-distribution" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">4.3.1</span> Binomial Distribution</h3>
+<p>A binomial distribution models the number of successes in a fixed number trials, where each trial has two possible outcomes: success or failure. Each trial is independent and the probability of success remains constant.</p>
+<p><strong>Discrete</strong></p>
+<p><span class="math display">\[X\sim\text{Binomial}(n,p)\]</span></p>
+<ul>
+<li><span class="math inline">\(X \rightarrow \text{a discrete random variable}\)</span></li>
+<li><span class="math inline">\(n \rightarrow \text{number of independent trials}\)</span></li>
+<li><span class="math inline">\(p \rightarrow \text{probability of success}\)</span></li>
+</ul>
+<p><code>dbinom(k, n, p)</code> probability exactly k successes <code>pbinom(k, n, p)</code> probability less than or equal to k successes</p>
+</section>
+<section id="normal-distribution" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">4.3.2</span> Normal Distribution</h3>
+<p>A normal distribution models a continuous random variable with values that are distributed symmetrically around a mean, with values closer to the mean occurring more frequently than values farther from the mean.</p>
+<p><strong>mean = median = mode</strong></p>
+<p><strong>Continuous</strong></p>
+<p><span class="math display">\[X\sim\text{Normal}(\mu,\sigma)\]</span></p>
+<ul>
+<li><span class="math inline">\(X \rightarrow \text{a continuous random variable}\)</span></li>
+<li><span class="math inline">\(\mu \rightarrow \text{mean}\)</span></li>
+<li><span class="math inline">\(\sigma \rightarrow \text{standard deviation}\)</span></li>
+</ul>
+<p><code>dnorm(x, mu, sigma)</code> height of the curve at 100, not probability (continuous variable) <code>pnorm(x, mu, sigma)</code> area to the left of 100, which is a probability</p>
 <dl>
-<dt>Probability</dt>
+<dt>Z-score</dt>
 <dd>
-A single number between 0 and 1 describing how likely a particular event is.
-</dd>
-<dt>Probability Distribution</dt>
-<dd>
-A model that describes the possible values of a random variable and their probabilities.
-</dd>
-<dt>Experiment</dt>
-<dd>
-A process that produces an uncertain outcome (random process).
-</dd>
-<dt>Outcome</dt>
-<dd>
-A single possible result of an experiment.
-</dd>
-<dt>Event</dt>
-<dd>
-A set of one or more outcomes from the sample space.
-</dd>
-<dt>Sample Space</dt>
-<dd>
-The set of all possible outcomes of an experiment, typically denoted by <span class="math inline">\(S\)</span>.
-</dd>
-<dt>Complement</dt>
-<dd>
-The event that <span class="math inline">\(A\)</span> does not occur, denoted <span class="math inline">\(A^c\)</span>.
-</dd>
-<dt>Conditional Probability</dt>
-<dd>
-The probability that event <span class="math inline">\(A\)</span> occurs given that event <span class="math inline">\(B\)</span> has already occurred, denoted <span class="math inline">\(P(A \mid B)\)</span>.
-</dd>
-<dt>Random Variable</dt>
-<dd>
-A numerical variable whose value is determined by the outcome of a random process (experiment).
+How many standard deviations away from mean.
 </dd>
 </dl>
-<p><em>Note: <strong>random</strong> does not mean that all possible outcomes are equally likely. It simply means that the outcome is <strong>unknown</strong> in advance.</em></p>
-<p>When determining probabilties involving multiple events or variables, there are two questions to consider:</p>
-<p>Can A and B happen together?</p>
-<p>Events being <strong>mutually exclusive</strong> means they cannot happen together. If one event occurs, it is not possible for another to occur. Suppose a customer’s response to an email is classified as “click” or “ignore”. It’s physically impossible for the customer to both click the email and ignore it.</p>
-<p>Events that are <strong>indepdendent</strong> mean the outcome of one event has no effect on another. For example, say the outcome of Customer A clicking or ignoring the email has no effect on whether Customer B clicks. Knowing Customer A clicked doesn’t change the probability of Customer B clicking.</p>
-<p>Independence and mutually exclusivity are two separate dimensions; the only contradiction is “independent and mutually exclusive”. While other combinations are possible, events cannot be both independent and mutually exclusive because the occurrence of one makes the probability of the other 0, so the events are necessarily dependent.</p>
+<p><span class="math inline">\(z=\frac{x-\mu}{\sigma}\)</span></p>
+<p>Empirical Rule</p>
+<ul>
+<li>68% are within one standard deviation away from mean </li>
+<li>95% are within two standard deviations away from mean </li>
+<li>99.7% are within two standard deviations away from mean </li>
+</ul>
+<p>Three ways to assess whether data are approximately normally distributed</p>
+<ul>
+<li>Histogram: Shows the shape of the data (roughly symmetric, bell-shaped)</li>
+<li>Q-Q plot: Compares observed data to what we’d expect from a normal distribution (points roughly follow a straight line)</li>
+<li>Shapiro-Wilk test: Formal hypothesis test for normality (p &gt; 0.05: do not reject normality)</li>
+</ul>
 </section>
-<section id="probability-rules" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="probability-rules"><span class="header-section-number">4.3</span> Probability Rules</h2>
-<section id="complement-rule" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="complement-rule"><span class="header-section-number">4.3.1</span> Complement Rule</h3>
-<p>The <strong>complement</strong> of event <span class="math inline">\(A\)</span>, denoted <span class="math inline">\(A^c\)</span>, is the event that <span class="math inline">\(A\)</span> does <strong>not</strong> occur.</p>
-<p><span class="math inline">\(P(A^c) = 1 - P(A)\)</span></p>
-</section>
-<section id="addition-rule" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="addition-rule"><span class="header-section-number">4.3.2</span> Addition Rule</h3>
-<p>The <strong>addition rule</strong> calculates the probability that event <span class="math inline">\(A\)</span> <strong>or</strong> event <span class="math inline">\(B\)</span> occurs.</p>
-<p>For any two events:</p>
+<section id="poisson-distribution" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">4.3.3</span> Poisson Distribution</h3>
+<p>A Poisson distribution models the number of times an event occurs within a fixed interval of time.</p>
+<p><strong>expected number of events (<span class="math inline">\(\lambda\)</span>) = mean = variance</strong></p>
+<p>Discrete</p>
+<p><span class="math display">\[X\sim\text{Poisson}(\lambda)\]</span></p>
+<ul>
+<li><span class="math inline">\(X \rightarrow \text{number of events in the interval}\)</span></li>
+<li><span class="math inline">\(\lambda \rightarrow \text{average number of events per interval}\)</span></li>
+</ul>
+<p>Function</p>
+<p>Calculates</p>
+<p>Meaning</p>
+<ul>
+<li><code>dpois(k, lambda)</code> exactly k events</li>
+<li><code>ppois(k, lambda)</code> k or fewer events</li>
+</ul>
+<dl>
+<dt>Chi-Square Goodness-of-Fit Test</dt>
+<dd>
+A chi-square goodness-of-fit test compares the <strong>observed event counts</strong> to the <strong>expected counts under a Poisson distribution</strong>.
+</dd>
+</dl>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: The data are consistent with a Poisson distribution.</p></li>
+<li><p><span class="math inline">\(H_A\)</span>: The data are not consistent with a Poisson distribution.</p></li>
+<li><p><span class="math inline">\(p &gt; 0.05\)</span>: Fail to reject <span class="math inline">\(H_0\)</span> → data are reasonably consistent with Poisson.</p></li>
+<li><p><span class="math inline">\(p &lt; 0.05\)</span>: Reject <span class="math inline">\(H_0\)</span> → evidence that the data do not fit a Poisson distribution.</p></li>
+</ul>
+<dl>
+<dt>Overdispersion Check</dt>
+<dd>
+For a Poisson distribution, the mean and variance should be approximately equal.
+</dd>
+</dl>
 <p><span class="math display">\[
-P(A \cup B) = P(A) + P(B) - P(A \cap B)
-\]</span></p>
-<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>mutually exclusive</strong>, they cannot occur together, so <span class="math inline">\(P(A \cap B)=0\)</span>:</p>
-<p><span class="math display">\[
-P(A \cup B) = P(A) + P(B)
+\frac{\text{Variance}}{\text{Mean}} \approx 1
 \]</span></p>
 </section>
-<section id="multiplication-rule" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="multiplication-rule"><span class="header-section-number">4.3.3</span> Multiplication Rule</h3>
-<p>For <strong>independent events</strong>, the probability that event <span class="math inline">\(A\)</span> <strong>and</strong> event <span class="math inline">\(B\)</span> both occur is:</p>
-<p><span class="math display">\[
-P(A \cap B) = P(A)P(B)
-\]</span></p>
-</section>
-<section id="conditional-probability" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="conditional-probability"><span class="header-section-number">4.3.4</span> Conditional Probability</h3>
-<p><strong>Conditional probability</strong> is the probability that event <span class="math inline">\(A\)</span> occurs given that event <span class="math inline">\(B\)</span> has already occurred.</p>
-<p><span class="math display">\[
-P(A \mid B) = \frac{P(A \cap B)}{P(B)}
-\]</span></p>
-</section>
-</section>
-<section id="distributions" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="distributions"><span class="header-section-number">4.4</span> Distributions</h2>
-<p>A probability distribution is a model describing the possible values of a random variable and how likely those values are.</p>
-<section id="binomial-distribution" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">4.4.1</span> Binomial Distribution</h3>
-<p>A <strong>binomial distribution</strong> models the number of <strong>successes</strong> in a <strong>fixed</strong> or known number of <strong>independent trials</strong>. Each trial has <strong>only two possible outcomes</strong>, classified as success or failure, with a <strong>constant probability of success</strong>, <span class="math inline">\(p\)</span>. Trials are independent, meaning the outcome of one trial does not change the probability of success on another. The random variable <span class="math inline">\(X\)</span> is <strong>discrete</strong> and represents the total number of successes across the <span class="math inline">\(n\)</span> trials.</p>
-<p><span class="math display">\[
-X \sim \text{Binomial}(n,p)
-\]</span></p>
-<p>Where…</p>
-<p><span class="math inline">\(n\)</span> = number of trials<br>
-<span class="math inline">\(p\)</span> = probability of success on each trial<br>
-<span class="math inline">\(X\)</span> = number of successes</p>
-<blockquote class="blockquote">
-<p><strong>Example:</strong> A retailer sends a promotion to 1,000 customers. Each customer has an 8% probability of clicking.</p>
-<p><span class="math inline">\(X \sim \text{Binomial}(1000, 0.08)\)</span></p>
-<p>Here, a <strong>trial</strong> is sending the promotion to one customer, a <strong>success</strong> is a click, <span class="math inline">\(n = 1000\)</span>, <span class="math inline">\(p = 0.08\)</span>, and <span class="math inline">\(X\)</span> is the number of customers who click.</p>
-</blockquote>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture4_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Binomial Distribution: n = 10, p = 0.30</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A binomial distribution is <strong>discrete</strong>, so it consists of separate probabilities for each possible number of successes. Each bar represents <span class="math inline">\(P(X=x)\)</span>, the probability of observing exactly <span class="math inline">\(x\)</span> successes.</p>
-</section>
-<section id="normal-distribution" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">4.4.2</span> Normal Distribution</h3>
-<p>A <strong>normal distribution</strong> models <strong>continuous numerical values</strong> that follow a <strong>symmetric, bell-shaped distribution</strong> centered around a mean, <span class="math inline">\(\mu\)</span>. The <strong>standard deviation</strong>, <span class="math inline">\(\sigma\)</span>, determines how spread out the values are around the mean. Because the distribution is symmetric, the <strong>mean, median, and mode are equal</strong>. The random variable <span class="math inline">\(X\)</span> is <strong>continuous</strong> and represents the numerical value being measured.</p>
-<p><span class="math display">\[
-X \sim N(\mu, \sigma^2)
-\]</span></p>
-<p>Where…</p>
-<p><span class="math inline">\(\mu\)</span> = population mean (center)<br>
-<span class="math inline">\(\sigma\)</span> = population standard deviation (spread)<br>
-<span class="math inline">\(\sigma^2\)</span> = population variance<br>
-<span class="math inline">\(X\)</span> = value of the continuous random variable</p>
-<blockquote class="blockquote">
-<p><strong>Example:</strong> Call durations have a mean of 6 minutes and a standard deviation of 1.5 minutes.</p>
-<p><span class="math inline">\(X \sim N(6, 1.5^2)\)</span></p>
-<p>Here, <span class="math inline">\(X\)</span> is the duration of a call in minutes, <span class="math inline">\(\mu = 6\)</span> is the average call duration, and <span class="math inline">\(\sigma = 1.5\)</span> is the standard deviation of call durations.</p>
-</blockquote>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Normal Distribution: μ = 6, σ = 1.5</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A normal distribution is <strong>continuous</strong>, so it is represented by a smooth curve rather than separate probabilities. The curve is <strong>symmetric and bell-shaped</strong>, centered at the mean, <span class="math inline">\(\mu\)</span>, while the standard deviation, <span class="math inline">\(\sigma\)</span>, determines its spread. Approximately <strong>68%</strong> of values fall within <span class="math inline">\(\mu \pm 1\sigma\)</span>, <strong>95%</strong> within <span class="math inline">\(\mu \pm 2\sigma\)</span>, and <strong>99.7%</strong> within <span class="math inline">\(\mu \pm 3\sigma\)</span>.</p>
-</section>
-<section id="poisson-distribution" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">4.4.3</span> Poisson Distribution</h3>
-<p>A <strong>Poisson distribution</strong> models the <strong>number of events</strong> that occur within a <strong>fixed interval of time or space</strong>. Events are assumed to occur <strong>independently</strong> and at a <strong>constant average rate</strong>, <span class="math inline">\(\lambda\)</span>. The random variable <span class="math inline">\(X\)</span> is <strong>discrete</strong> and represents the total number of events that occur within the interval.</p>
-<p><span class="math display">\[
-X \sim \text{Poisson}(\lambda)
-\]</span></p>
-<p>Where…</p>
-<p><span class="math inline">\(\lambda\)</span> = expected number of events per interval<br>
-<span class="math inline">\(X\)</span> = number of events that occur in the interval</p>
-<blockquote class="blockquote">
-<p><strong>Example:</strong> A call center receives an average of 12 calls per hour.</p>
-<p><span class="math inline">\(X \sim \text{Poisson}(12)\)</span></p>
-<p>Here, the <strong>interval</strong> is one hour, <span class="math inline">\(\lambda = 12\)</span> is the expected number of calls per hour, and <span class="math inline">\(X\)</span> is the number of calls received during one hour.</p>
-</blockquote>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture4_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Poisson Distribution: λ = 4</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A Poisson distribution is <strong>discrete</strong>, so it consists of separate probabilities for each possible number of events. Each bar represents <span class="math inline">\(P(X=x)\)</span>, the probability of observing exactly <span class="math inline">\(x\)</span> events within the interval. The shape of the distribution depends on the average event rate, <span class="math inline">\(\lambda\)</span>.</p>
-</section>
-<section id="exponential-distribution" class="level3" data-number="4.4.4">
-<h3 data-number="4.4.4" class="anchored" data-anchor-id="exponential-distribution"><span class="header-section-number">4.4.4</span> Exponential Distribution</h3>
-<p>An <strong>exponential distribution</strong> models the <strong>waiting time between events</strong> in a Poisson process. Events are assumed to occur <strong>independently</strong> and at a <strong>constant average rate</strong>, <span class="math inline">\(\lambda\)</span>. The random variable <span class="math inline">\(T\)</span> is <strong>continuous</strong> and represents the time until the next event or the time between consecutive events.</p>
+<section id="exponential-distribution" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="exponential-distribution"><span class="header-section-number">4.3.4</span> Exponential Distribution</h3>
+<p>An exponential distribution models the <strong>time between events</strong> in a Poisson process. While the Poisson distribution models <strong>how many events occur in an interval</strong>, the exponential distribution models <strong>how long until the next event occurs</strong>.</p>
+<p><strong>Continuous</strong></p>
 <p><span class="math display">\[
 T \sim \text{Exponential}(\lambda)
 \]</span></p>
-<p>Where…</p>
-<p><span class="math inline">\(\lambda\)</span> = average rate at which events occur<br>
-<span class="math inline">\(T\)</span> = waiting time until or between events</p>
-<blockquote class="blockquote">
-<p><strong>Example:</strong> Customers arrive at an average rate of 6 customers per hour.</p>
-<p><span class="math inline">\(T \sim \text{Exponential}(6)\)</span></p>
-<p>Here, <span class="math inline">\(\lambda = 6\)</span> is the average arrival rate per hour, and <span class="math inline">\(T\)</span> is the waiting time in hours until the next customer arrives. The expected waiting time is <span class="math inline">\(E[T] = 1/\lambda = 1/6\)</span> hour, or 10 minutes.</p>
-</blockquote>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="lecture4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Exponential Distribution: λ = 1</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>An exponential distribution is <strong>continuous and right-skewed</strong>, so it is represented by a smooth, decreasing curve. Short waiting times have the highest density, while increasingly long waiting times become less likely. The distribution is <strong>memoryless</strong>, meaning how long you have already waited does not change the distribution of how much longer you will wait.</p>
-<p>Poisson and Exponential model <strong>two different aspects of the same event process</strong>:</p>
 <ul>
-<li><strong>Poisson</strong> → How <strong>many</strong> events occur during an interval?</li>
-<li><strong>Exponential</strong> → How <strong>long</strong> between events?</li>
+<li><p><span class="math inline">\(T \rightarrow \text{waiting time until the next event}\)</span></p></li>
+<li><p><span class="math inline">\(\lambda \rightarrow \text{average rate at which events occur}\)</span></p></li>
+<li><p><code>dexp(t, rate = lambda)</code> density at <span class="math inline">\(t\)</span></p></li>
+<li><p><code>pexp(t, rate = lambda)</code> probability the event occurs within time <span class="math inline">\(t\)</span></p></li>
+<li><p><code>qexp(p, rate = lambda)</code> waiting time associated with cumulative probability <span class="math inline">\(p\)</span></p></li>
+<li><p><code>rexp(n, rate = lambda)</code> generate exponential waiting times</p></li>
 </ul>
-<p>For example, if customers arrive at a constant average rate:</p>
-<ul>
-<li>Number of customers arriving per hour → <strong>Poisson</strong></li>
-<li>Time until the next customer arrives → <strong>Exponential</strong></li>
-</ul>
-<dl>
-<dt>Q–Q Plot</dt>
-<dd>
-A graphical method for checking whether data are approximately normally distributed. If the points roughly follow the reference line, a Normal model may be reasonable. Systematic deviations from the line suggest the data are not Normal.
-</dd>
-</dl>
+<p>Exponential is memoryless: meaning independent events don’t remember what has already happened. What has occurred doesn’t impact what is to come.</p>
 
 
 </section>
@@ -885,8 +856,8 @@ A graphical method for checking whether data are approximately normally distribu
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lecture5.html" class="pagination-link" aria-label="Lecture 5">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lecture5.html" class="pagination-link" aria-label="One-Parameter Statistical Inference">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-Parameter Statistical Inference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

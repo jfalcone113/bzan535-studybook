@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Lecture 8 – BZAN 535: Statistical Methods</title>
+<title>8&nbsp; Inference for Categorical Data – BZAN 535: Statistical Methods</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -75,6 +110,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -87,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture8.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lecture 8</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture8.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inference for Categorical Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,25 +209,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-Parameter Statistical Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lecture 6</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Paired Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture8.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lecture 8</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inference for Categorical Data</span></span></a>
   </div>
 </li>
     </ul>
@@ -171,15 +235,121 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">8.1</span> Overview</a></li>
+  <li><a href="#two-proportion-inference" id="toc-two-proportion-inference" class="nav-link" data-scroll-target="#two-proportion-inference"><span class="header-section-number">9</span> Two-Proportion Inference</a>
+  <ul class="collapse">
+  <li><a href="#population-parameter" id="toc-population-parameter" class="nav-link" data-scroll-target="#population-parameter"><span class="header-section-number">9.1</span> Population Parameter</a></li>
+  </ul></li>
+  <li><a href="#confidence-interval-for-two-proportions" id="toc-confidence-interval-for-two-proportions" class="nav-link" data-scroll-target="#confidence-interval-for-two-proportions"><span class="header-section-number">10</span> Confidence Interval for Two Proportions</a></li>
+  <li><a href="#practical-importance" id="toc-practical-importance" class="nav-link" data-scroll-target="#practical-importance"><span class="header-section-number">11</span> Practical Importance</a></li>
+  <li><a href="#hypothesis-test-for-two-proportions" id="toc-hypothesis-test-for-two-proportions" class="nav-link" data-scroll-target="#hypothesis-test-for-two-proportions"><span class="header-section-number">12</span> Hypothesis Test for Two Proportions</a></li>
+  <li><a href="#why-proportions-are-pooled-for-the-hypothesis-test" id="toc-why-proportions-are-pooled-for-the-hypothesis-test" class="nav-link" data-scroll-target="#why-proportions-are-pooled-for-the-hypothesis-test"><span class="header-section-number">13</span> Why Proportions Are Pooled for the Hypothesis Test</a>
+  <ul class="collapse">
+  <li><a href="#confidence-interval" id="toc-confidence-interval" class="nav-link" data-scroll-target="#confidence-interval"><span class="header-section-number">13.1</span> Confidence Interval</a></li>
+  <li><a href="#hypothesis-test" id="toc-hypothesis-test" class="nav-link" data-scroll-target="#hypothesis-test"><span class="header-section-number">13.2</span> Hypothesis Test</a></li>
+  </ul></li>
+  <li><a href="#from-two-groups-to-several-groups" id="toc-from-two-groups-to-several-groups" class="nav-link" data-scroll-target="#from-two-groups-to-several-groups"><span class="header-section-number">14</span> From Two Groups to Several Groups</a></li>
+  <li><a href="#contingency-tables" id="toc-contingency-tables" class="nav-link" data-scroll-target="#contingency-tables"><span class="header-section-number">15</span> Contingency Tables</a></li>
+  <li><a href="#why-raw-counts-alone-can-be-misleading" id="toc-why-raw-counts-alone-can-be-misleading" class="nav-link" data-scroll-target="#why-raw-counts-alone-can-be-misleading"><span class="header-section-number">16</span> Why Raw Counts Alone Can Be Misleading</a></li>
+  <li><a href="#chi-square-test-of-independence" id="toc-chi-square-test-of-independence" class="nav-link" data-scroll-target="#chi-square-test-of-independence"><span class="header-section-number">17</span> Chi-Square Test of Independence</a></li>
+  <li><a href="#what-does-independence-mean" id="toc-what-does-independence-mean" class="nav-link" data-scroll-target="#what-does-independence-mean"><span class="header-section-number">18</span> What Does Independence Mean?</a></li>
+  <li><a href="#observed-vs.-expected-counts" id="toc-observed-vs.-expected-counts" class="nav-link" data-scroll-target="#observed-vs.-expected-counts"><span class="header-section-number">19</span> Observed vs.&nbsp;Expected Counts</a></li>
+  <li><a href="#expected-counts-under-independence" id="toc-expected-counts-under-independence" class="nav-link" data-scroll-target="#expected-counts-under-independence"><span class="header-section-number">20</span> Expected Counts Under Independence</a></li>
+  <li><a href="#why-expected-counts-can-differ-across-groups" id="toc-why-expected-counts-can-differ-across-groups" class="nav-link" data-scroll-target="#why-expected-counts-can-differ-across-groups"><span class="header-section-number">21</span> Why Expected Counts Can Differ Across Groups</a></li>
+  <li><a href="#pearson-chi-square-statistic" id="toc-pearson-chi-square-statistic" class="nav-link" data-scroll-target="#pearson-chi-square-statistic"><span class="header-section-number">22</span> Pearson Chi-Square Statistic</a>
+  <ul class="collapse">
+  <li><a href="#o-e" id="toc-o-e" class="nav-link" data-scroll-target="#o-e"><span class="header-section-number">22.0.1</span> <span class="math inline">\(O-E\)</span></a></li>
+  <li><a href="#squaring" id="toc-squaring" class="nav-link" data-scroll-target="#squaring"><span class="header-section-number">22.0.2</span> Squaring</a></li>
+  <li><a href="#dividing-by-e" id="toc-dividing-by-e" class="nav-link" data-scroll-target="#dividing-by-e"><span class="header-section-number">22.0.3</span> Dividing by <span class="math inline">\(E\)</span></a></li>
+  </ul></li>
+  <li><a href="#degrees-of-freedom" id="toc-degrees-of-freedom" class="nav-link" data-scroll-target="#degrees-of-freedom"><span class="header-section-number">23</span> Degrees of Freedom</a></li>
+  <li><a href="#chi-square-test-in-r" id="toc-chi-square-test-in-r" class="nav-link" data-scroll-target="#chi-square-test-in-r"><span class="header-section-number">24</span> Chi-Square Test in R</a></li>
+  <li><a href="#what-an-overall-chi-square-test-does-not-tell-you" id="toc-what-an-overall-chi-square-test-does-not-tell-you" class="nav-link" data-scroll-target="#what-an-overall-chi-square-test-does-not-tell-you"><span class="header-section-number">25</span> What an Overall Chi-Square Test Does Not Tell You</a></li>
+  <li><a href="#two-proportion-test-and-chi-square-connection" id="toc-two-proportion-test-and-chi-square-connection" class="nav-link" data-scroll-target="#two-proportion-test-and-chi-square-connection"><span class="header-section-number">26</span> Two-Proportion Test and Chi-Square Connection</a></li>
+  <li><a href="#finding-where-the-association-occurs" id="toc-finding-where-the-association-occurs" class="nav-link" data-scroll-target="#finding-where-the-association-occurs"><span class="header-section-number">27</span> Finding Where the Association Occurs</a></li>
+  <li><a href="#standardized-residuals" id="toc-standardized-residuals" class="nav-link" data-scroll-target="#standardized-residuals"><span class="header-section-number">28</span> Standardized Residuals</a></li>
+  <li><a href="#why-residuals-come-in-opposite-directions" id="toc-why-residuals-come-in-opposite-directions" class="nav-link" data-scroll-target="#why-residuals-come-in-opposite-directions"><span class="header-section-number">29</span> Why Residuals Come in Opposite Directions</a></li>
+  <li><a href="#conditions-for-the-chi-square-approximation" id="toc-conditions-for-the-chi-square-approximation" class="nav-link" data-scroll-target="#conditions-for-the-chi-square-approximation"><span class="header-section-number">30</span> Conditions for the Chi-Square Approximation</a>
+  <ul class="collapse">
+  <li><a href="#independent-observations" id="toc-independent-observations" class="nav-link" data-scroll-target="#independent-observations"><span class="header-section-number">30.1</span> Independent Observations</a></li>
+  <li><a href="#mutually-exclusive-categories" id="toc-mutually-exclusive-categories" class="nav-link" data-scroll-target="#mutually-exclusive-categories"><span class="header-section-number">30.2</span> Mutually Exclusive Categories</a></li>
+  <li><a href="#expected-counts" id="toc-expected-counts" class="nav-link" data-scroll-target="#expected-counts"><span class="header-section-number">30.3</span> Expected Counts</a></li>
+  </ul></li>
+  <li><a href="#chi-square-test-of-independence-workflow" id="toc-chi-square-test-of-independence-workflow" class="nav-link" data-scroll-target="#chi-square-test-of-independence-workflow"><span class="header-section-number">31</span> Chi-Square Test of Independence: Workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1-identify-the-observational-unit" id="toc-step-1-identify-the-observational-unit" class="nav-link" data-scroll-target="#step-1-identify-the-observational-unit"><span class="header-section-number">31.1</span> Step 1: Identify the Observational Unit</a></li>
+  <li><a href="#step-2-identify-the-two-categorical-variables" id="toc-step-2-identify-the-two-categorical-variables" class="nav-link" data-scroll-target="#step-2-identify-the-two-categorical-variables"><span class="header-section-number">31.2</span> Step 2: Identify the Two Categorical Variables</a></li>
+  <li><a href="#step-3-construct-a-contingency-table" id="toc-step-3-construct-a-contingency-table" class="nav-link" data-scroll-target="#step-3-construct-a-contingency-table"><span class="header-section-number">31.3</span> Step 3: Construct a Contingency Table</a></li>
+  <li><a href="#step-4-examine-counts-and-proportions" id="toc-step-4-examine-counts-and-proportions" class="nav-link" data-scroll-target="#step-4-examine-counts-and-proportions"><span class="header-section-number">31.4</span> Step 4: Examine Counts and Proportions</a></li>
+  <li><a href="#step-5-state-the-hypotheses" id="toc-step-5-state-the-hypotheses" class="nav-link" data-scroll-target="#step-5-state-the-hypotheses"><span class="header-section-number">31.5</span> Step 5: State the Hypotheses</a></li>
+  <li><a href="#step-6-calculate-expected-counts" id="toc-step-6-calculate-expected-counts" class="nav-link" data-scroll-target="#step-6-calculate-expected-counts"><span class="header-section-number">31.6</span> Step 6: Calculate Expected Counts</a></li>
+  <li><a href="#step-7-check-conditions" id="toc-step-7-check-conditions" class="nav-link" data-scroll-target="#step-7-check-conditions"><span class="header-section-number">31.7</span> Step 7: Check Conditions</a></li>
+  <li><a href="#step-8-conduct-the-test" id="toc-step-8-conduct-the-test" class="nav-link" data-scroll-target="#step-8-conduct-the-test"><span class="header-section-number">31.8</span> Step 8: Conduct the Test</a></li>
+  <li><a href="#step-9-interpret-the-overall-result" id="toc-step-9-interpret-the-overall-result" class="nav-link" data-scroll-target="#step-9-interpret-the-overall-result"><span class="header-section-number">31.9</span> Step 9: Interpret the Overall Result</a></li>
+  <li><a href="#step-10-investigate-the-pattern" id="toc-step-10-investigate-the-pattern" class="nav-link" data-scroll-target="#step-10-investigate-the-pattern"><span class="header-section-number">31.10</span> Step 10: Investigate the Pattern</a></li>
+  </ul></li>
+  <li><a href="#example-homeownership-and-marital-status" id="toc-example-homeownership-and-marital-status" class="nav-link" data-scroll-target="#example-homeownership-and-marital-status"><span class="header-section-number">32</span> Example: Homeownership and Marital Status</a>
+  <ul class="collapse">
+  <li><a href="#homeownership" id="toc-homeownership" class="nav-link" data-scroll-target="#homeownership"><span class="header-section-number">32.0.1</span> Homeownership</a></li>
+  <li><a href="#marital-status" id="toc-marital-status" class="nav-link" data-scroll-target="#marital-status"><span class="header-section-number">32.0.2</span> Marital Status</a></li>
+  </ul></li>
+  <li><a href="#category-definitions-matter" id="toc-category-definitions-matter" class="nav-link" data-scroll-target="#category-definitions-matter"><span class="header-section-number">33</span> Category Definitions Matter</a></li>
+  <li><a href="#association-does-not-imply-causation" id="toc-association-does-not-imply-causation" class="nav-link" data-scroll-target="#association-does-not-imply-causation"><span class="header-section-number">34</span> Association Does Not Imply Causation</a></li>
+  <li><a href="#chi-square-goodness-of-fit-test" id="toc-chi-square-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi-square-goodness-of-fit-test"><span class="header-section-number">35</span> Chi-Square Goodness-of-Fit Test</a></li>
+  <li><a href="#independence-vs.-goodness-of-fit" id="toc-independence-vs.-goodness-of-fit" class="nav-link" data-scroll-target="#independence-vs.-goodness-of-fit"><span class="header-section-number">36</span> Independence vs.&nbsp;Goodness-of-Fit</a>
+  <ul class="collapse">
+  <li><a href="#chi-square-test-of-independence-1" id="toc-chi-square-test-of-independence-1" class="nav-link" data-scroll-target="#chi-square-test-of-independence-1"><span class="header-section-number">36.1</span> Chi-Square Test of Independence</a></li>
+  <li><a href="#chi-square-goodness-of-fit-test-1" id="toc-chi-square-goodness-of-fit-test-1" class="nav-link" data-scroll-target="#chi-square-goodness-of-fit-test-1"><span class="header-section-number">36.2</span> Chi-Square Goodness-of-Fit Test</a></li>
+  </ul></li>
+  <li><a href="#expected-counts-for-goodness-of-fit" id="toc-expected-counts-for-goodness-of-fit" class="nav-link" data-scroll-target="#expected-counts-for-goodness-of-fit"><span class="header-section-number">37</span> Expected Counts for Goodness-of-Fit</a>
+  <ul class="collapse">
+  <li><a href="#store" id="toc-store" class="nav-link" data-scroll-target="#store"><span class="header-section-number">37.0.1</span> Store</a></li>
+  <li><a href="#website" id="toc-website" class="nav-link" data-scroll-target="#website"><span class="header-section-number">37.0.2</span> Website</a></li>
+  <li><a href="#app" id="toc-app" class="nav-link" data-scroll-target="#app"><span class="header-section-number">37.0.3</span> App</a></li>
+  </ul></li>
+  <li><a href="#goodness-of-fit-chi-square-statistic" id="toc-goodness-of-fit-chi-square-statistic" class="nav-link" data-scroll-target="#goodness-of-fit-chi-square-statistic"><span class="header-section-number">38</span> Goodness-of-Fit Chi-Square Statistic</a></li>
+  <li><a href="#goodness-of-fit-hypotheses" id="toc-goodness-of-fit-hypotheses" class="nav-link" data-scroll-target="#goodness-of-fit-hypotheses"><span class="header-section-number">39</span> Goodness-of-Fit Hypotheses</a></li>
+  <li><a href="#goodness-of-fit-degrees-of-freedom" id="toc-goodness-of-fit-degrees-of-freedom" class="nav-link" data-scroll-target="#goodness-of-fit-degrees-of-freedom"><span class="header-section-number">40</span> Goodness-of-Fit Degrees of Freedom</a></li>
+  <li><a href="#goodness-of-fit-in-r" id="toc-goodness-of-fit-in-r" class="nav-link" data-scroll-target="#goodness-of-fit-in-r"><span class="header-section-number">41</span> Goodness-of-Fit in R</a></li>
+  <li><a href="#one-logic-behind-both-chi-square-tests" id="toc-one-logic-behind-both-chi-square-tests" class="nav-link" data-scroll-target="#one-logic-behind-both-chi-square-tests"><span class="header-section-number">42</span> One Logic Behind Both Chi-Square Tests</a>
+  <ul class="collapse">
+  <li><a href="#test-of-independence" id="toc-test-of-independence" class="nav-link" data-scroll-target="#test-of-independence"><span class="header-section-number">42.0.1</span> Test of Independence</a></li>
+  <li><a href="#goodness-of-fit" id="toc-goodness-of-fit" class="nav-link" data-scroll-target="#goodness-of-fit"><span class="header-section-number">42.0.2</span> Goodness-of-Fit</a></li>
+  </ul></li>
+  <li><a href="#choosing-the-appropriate-categorical-method" id="toc-choosing-the-appropriate-categorical-method" class="nav-link" data-scroll-target="#choosing-the-appropriate-categorical-method"><span class="header-section-number">43</span> Choosing the Appropriate Categorical Method</a>
+  <ul class="collapse">
+  <li><a href="#are-you-comparing-two-population-proportions" id="toc-are-you-comparing-two-population-proportions" class="nav-link" data-scroll-target="#are-you-comparing-two-population-proportions"><span class="header-section-number">43.0.1</span> Are You Comparing Two Population Proportions?</a></li>
+  <li><a href="#are-you-examining-two-categorical-variables" id="toc-are-you-examining-two-categorical-variables" class="nav-link" data-scroll-target="#are-you-examining-two-categorical-variables"><span class="header-section-number">43.0.2</span> Are You Examining Two Categorical Variables?</a></li>
+  <li><a href="#are-you-comparing-one-categorical-variable-to-predetermined-proportions" id="toc-are-you-comparing-one-categorical-variable-to-predetermined-proportions" class="nav-link" data-scroll-target="#are-you-comparing-one-categorical-variable-to-predetermined-proportions"><span class="header-section-number">43.0.3</span> Are You Comparing One Categorical Variable to Predetermined Proportions?</a></li>
+  </ul></li>
+  <li><a href="#categorical-inference-workflow" id="toc-categorical-inference-workflow" class="nav-link" data-scroll-target="#categorical-inference-workflow"><span class="header-section-number">44</span> Categorical Inference Workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1-identify-the-business-question" id="toc-step-1-identify-the-business-question" class="nav-link" data-scroll-target="#step-1-identify-the-business-question"><span class="header-section-number">44.1</span> Step 1: Identify the Business Question</a></li>
+  <li><a href="#step-2-identify-the-observational-unit" id="toc-step-2-identify-the-observational-unit" class="nav-link" data-scroll-target="#step-2-identify-the-observational-unit"><span class="header-section-number">44.2</span> Step 2: Identify the Observational Unit</a></li>
+  <li><a href="#step-3-identify-the-categorical-variables" id="toc-step-3-identify-the-categorical-variables" class="nav-link" data-scroll-target="#step-3-identify-the-categorical-variables"><span class="header-section-number">44.3</span> Step 3: Identify the Categorical Variables</a></li>
+  <li><a href="#step-4-examine-counts-and-proportions-1" id="toc-step-4-examine-counts-and-proportions-1" class="nav-link" data-scroll-target="#step-4-examine-counts-and-proportions-1"><span class="header-section-number">44.4</span> Step 4: Examine Counts and Proportions</a></li>
+  <li><a href="#step-5-choose-the-appropriate-method" id="toc-step-5-choose-the-appropriate-method" class="nav-link" data-scroll-target="#step-5-choose-the-appropriate-method"><span class="header-section-number">44.5</span> Step 5: Choose the Appropriate Method</a></li>
+  <li><a href="#step-6-state-the-null-model" id="toc-step-6-state-the-null-model" class="nav-link" data-scroll-target="#step-6-state-the-null-model"><span class="header-section-number">44.6</span> Step 6: State the Null Model</a></li>
+  <li><a href="#step-7-check-conditions-1" id="toc-step-7-check-conditions-1" class="nav-link" data-scroll-target="#step-7-check-conditions-1"><span class="header-section-number">44.7</span> Step 7: Check Conditions</a></li>
+  <li><a href="#step-8-conduct-the-analysis" id="toc-step-8-conduct-the-analysis" class="nav-link" data-scroll-target="#step-8-conduct-the-analysis"><span class="header-section-number">44.8</span> Step 8: Conduct the Analysis</a></li>
+  <li><a href="#step-9-interpret-in-context" id="toc-step-9-interpret-in-context" class="nav-link" data-scroll-target="#step-9-interpret-in-context"><span class="header-section-number">44.9</span> Step 9: Interpret in Context</a></li>
+  <li><a href="#step-10-separate-association-from-causation" id="toc-step-10-separate-association-from-causation" class="nav-link" data-scroll-target="#step-10-separate-association-from-causation"><span class="header-section-number">44.10</span> Step 10: Separate Association from Causation</a></li>
+  </ul></li>
+  <li><a href="#connecting-lectures-58" id="toc-connecting-lectures-58" class="nav-link" data-scroll-target="#connecting-lectures-58"><span class="header-section-number">45</span> Connecting Lectures 5–8</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lecture 8</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inference for Categorical Data</span></h1>
 </div>
 
 
@@ -196,9 +366,1827 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In progress…give me some time!</p>
+<section id="overview" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">8.1</span> Overview</h2>
+<p>Previous inference methods focused primarily on <strong>quantitative outcomes</strong>.</p>
+<p>For example:</p>
+<ul>
+<li>One population mean → <span class="math inline">\(\mu\)</span></li>
+<li>Paired mean difference → <span class="math inline">\(\mu_d\)</span></li>
+<li>Difference between two independent means → <span class="math inline">\(\mu_1-\mu_2\)</span></li>
+</ul>
+<p>Lecture 8 shifts the focus to <strong>categorical outcomes</strong>.</p>
+<p>Examples include:</p>
+<ul>
+<li>Purchase vs.&nbsp;no purchase</li>
+<li>Homeowner vs.&nbsp;renter</li>
+<li>Married vs.&nbsp;unmarried</li>
+<li>Store vs.&nbsp;website vs.&nbsp;app</li>
+<li>Current page vs.&nbsp;new page vs.&nbsp;third page</li>
+</ul>
+<p>Instead of asking questions about <strong>means</strong>, we now ask questions about:</p>
+<ul>
+<li><strong>Proportions</strong></li>
+<li><strong>Counts</strong></li>
+<li><strong>Associations between categorical variables</strong></li>
+<li><strong>Whether observed category frequencies match an expected distribution</strong></li>
+</ul>
+<p>The main methods are:</p>
+<ol type="1">
+<li><strong>Two-proportion inference</strong></li>
+<li><strong>Chi-square test of independence</strong></li>
+<li><strong>Chi-square goodness-of-fit test</strong></li>
+</ol>
+<p>The appropriate method depends on the business question and structure of the categorical data.</p>
+<hr>
+</section>
+<section id="two-proportion-inference" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Two-Proportion Inference</h1>
+<p>Suppose a retailer conducts an A/B experiment.</p>
+<p>Each visitor is randomly assigned to either:</p>
+<ul>
+<li>Current page</li>
+<li>New page</li>
+</ul>
+<p>The outcome is whether the visitor:</p>
+<ul>
+<li>Purchases</li>
+<li>Does not purchase</li>
+</ul>
+<p>Suppose the results are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th style="text-align: right;">Visitors</th>
+<th style="text-align: right;">Purchases</th>
+<th style="text-align: right;">Conversion Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current</td>
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">1,200</td>
+<td style="text-align: right;">12.0%</td>
+</tr>
+<tr class="even">
+<td>New</td>
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">1,230</td>
+<td style="text-align: right;">12.3%</td>
+</tr>
+</tbody>
+</table>
+<p>The sample proportions are:</p>
+<p><span class="math display">\[
+\hat{p}_{Current}
+=
+\frac{1200}{10000}
+=
+0.120
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+\hat{p}_{New}
+=
+\frac{1230}{10000}
+=
+0.123
+\]</span></p>
+<p>The estimated difference is:</p>
+<p><span class="math display">\[
+\hat{p}_{New}-\hat{p}_{Current}
+=
+0.123-0.120
+=
+0.003
+\]</span></p>
+<p>or:</p>
+<p><span class="math display">\[
+\boxed{0.3\text{ percentage points}}
+\]</span></p>
+<p>Notice that this is <strong>0.3 percentage points</strong>, not 0.3%.</p>
+<hr>
+<section id="population-parameter" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="population-parameter"><span class="header-section-number">9.1</span> Population Parameter</h2>
+<p>The population parameter is:</p>
+<p><span class="math display">\[
+\boxed{
+p_{New}-p_{Current}
+}
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(p_{New}\)</span> = population conversion rate for the new page<br>
+<span class="math inline">\(p_{Current}\)</span> = population conversion rate for the current page</p>
+<p>The sample estimate is:</p>
+<p><span class="math display">\[
+\boxed{
+\hat{p}_{New}-\hat{p}_{Current}
+}
+\]</span></p>
+<p>This follows the same general inference framework used previously:</p>
+<p><span class="math display">\[
+\text{Sample Statistic}
+\rightarrow
+\text{Estimate Population Parameter}
+\]</span></p>
+<p>Here:</p>
+<p><span class="math display">\[
+\hat{p}_{New}-\hat{p}_{Current}
+\rightarrow
+p_{New}-p_{Current}
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="confidence-interval-for-two-proportions" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Confidence Interval for Two Proportions</h1>
+<p>A confidence interval estimates the possible values of:</p>
+<p><span class="math display">\[
+p_1-p_2
+\]</span></p>
+<p>using the observed sample proportions.</p>
+<p>The standard error is:</p>
+<p><span class="math display">\[
+SE
+=
+\sqrt{
+\frac{
+\hat{p}_1(1-\hat{p}_1)
+}{
+n_1
+}
++
+\frac{
+\hat{p}_2(1-\hat{p}_2)
+}{
+n_2
+}
+}
+\]</span></p>
+<p>A 95% confidence interval is approximately:</p>
+<p><span class="math display">\[
+\boxed{
+(\hat{p}_1-\hat{p}_2)
+\pm
+1.96(SE)
+}
+\]</span></p>
+<p>For the page experiment, the estimated difference is:</p>
+<p><span class="math display">\[
+0.30\text{ percentage points}
+\]</span></p>
+<p>and the 95% confidence interval is:</p>
+<p><span class="math display">\[
+\boxed{
+(-0.61,\ 1.21)
+\text{ percentage points}
+}
+\]</span></p>
+<p>This interval includes:</p>
+<p><span class="math display">\[
+0
+\]</span></p>
+<p>so a population difference of zero is compatible with the data.</p>
+<p>The interval also tells us much more than simply whether the result is statistically significant.</p>
+<p>It describes the <strong>range of plausible population differences</strong>.</p>
+<hr>
+</section>
+<section id="practical-importance" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Practical Importance</h1>
+<p>Suppose the retailer decides that implementing the new page would only be worthwhile if conversion improves by at least:</p>
+<p><span class="math display">\[
+0.5\text{ percentage points}
+\]</span></p>
+<p>The confidence interval is:</p>
+<p><span class="math display">\[
+(-0.61,\ 1.21)
+\]</span></p>
+<p>This interval includes:</p>
+<ul>
+<li>Negative effects</li>
+<li>No effect</li>
+<li>Improvements smaller than 0.5 percentage points</li>
+<li>Improvements larger than 0.5 percentage points</li>
+</ul>
+<p>Therefore, the data do not precisely establish whether the improvement reaches the business threshold.</p>
+<p>This illustrates an important distinction:</p>
+<blockquote class="blockquote">
+<p><strong>Statistical uncertainty and business importance are separate questions.</strong></p>
+</blockquote>
+<p>A confidence interval allows us to compare the estimated effect with a practically meaningful threshold rather than looking only at whether:</p>
+<p><span class="math display">\[
+p&lt;0.05
+\]</span></p>
+<hr>
+</section>
+<section id="hypothesis-test-for-two-proportions" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Hypothesis Test for Two Proportions</h1>
+<p>To test whether the population conversion rates differ:</p>
+<p><span class="math display">\[
+H_0:
+p_{New}=p_{Current}
+\]</span></p>
+<p>which is equivalent to:</p>
+<p><span class="math display">\[
+H_0:
+p_{New}-p_{Current}=0
+\]</span></p>
+<p>Against the two-sided alternative:</p>
+<p><span class="math display">\[
+H_a:
+p_{New}\neq p_{Current}
+\]</span></p>
+<p>In R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ab_test <span class="ot">&lt;-</span> <span class="fu">prop.test</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1230</span>, <span class="dv">1200</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">10000</span>, <span class="dv">10000</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">alternative =</span> <span class="st">"two.sided"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">correct =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ab_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here:</p>
+<ul>
+<li><code>x</code> contains the number of successes</li>
+<li><code>n</code> contains the total number of observations</li>
+<li><code>alternative = "two.sided"</code> tests for any difference</li>
+<li><code>correct = FALSE</code> disables the continuity correction</li>
+</ul>
+<p>For the example:</p>
+<p><span class="math display">\[
+p\text{-value}=0.516
+\]</span></p>
+<p>Because:</p>
+<p><span class="math display">\[
+0.516&gt;0.05
+\]</span></p>
+<p>we fail to reject:</p>
+<p><span class="math display">\[
+H_0
+\]</span></p>
+<p>The experiment does not provide sufficient evidence that the population conversion rates differ.</p>
+<p>This does <strong>not</strong> prove:</p>
+<p><span class="math display">\[
+p_{New}=p_{Current}
+\]</span></p>
+<p>It means the observed data do not provide sufficient evidence of a difference.</p>
+<hr>
+</section>
+<section id="why-proportions-are-pooled-for-the-hypothesis-test" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Why Proportions Are Pooled for the Hypothesis Test</h1>
+<p>There is an important difference between constructing a confidence interval and conducting the hypothesis test.</p>
+<section id="confidence-interval" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="confidence-interval"><span class="header-section-number">13.1</span> Confidence Interval</h2>
+<p>When constructing the confidence interval, we are <strong>not assuming the population proportions are equal</strong>.</p>
+<p>Therefore, we estimate their variability separately using:</p>
+<p><span class="math display">\[
+\hat{p}_1
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+\hat{p}_2
+\]</span></p>
+<p>The standard error is:</p>
+<p><span class="math display">\[
+SE_{CI}
+=
+\sqrt{
+\frac{\hat{p}_1(1-\hat{p}_1)}{n_1}
++
+\frac{\hat{p}_2(1-\hat{p}_2)}{n_2}
+}
+\]</span></p>
+</section>
+<section id="hypothesis-test" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="hypothesis-test"><span class="header-section-number">13.2</span> Hypothesis Test</h2>
+<p>Under the null hypothesis:</p>
+<p><span class="math display">\[
+H_0:p_1=p_2
+\]</span></p>
+<p>we are explicitly assuming that both groups share <strong>one common population proportion</strong>.</p>
+<p>Therefore, we estimate that common proportion using the pooled sample proportion:</p>
+<p><span class="math display">\[
+\boxed{
+\hat{p}_{pool}
+=
+\frac{x_1+x_2}{n_1+n_2}
+}
+\]</span></p>
+<p>The hypothesis-test standard error uses:</p>
+<p><span class="math display">\[
+\hat{p}_{pool}
+\]</span></p>
+<p>because the test asks:</p>
+<blockquote class="blockquote">
+<p>If the null hypothesis of equal population proportions were true, how much difference between the sample proportions would we expect from sampling variation alone?</p>
+</blockquote>
+<p>So:</p>
+<blockquote class="blockquote">
+<p><strong>Confidence interval → keep proportions separate.</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Hypothesis test under <span class="math inline">\(H_0:p_1=p_2\)</span> → pool the proportions.</strong></p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="from-two-groups-to-several-groups" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> From Two Groups to Several Groups</h1>
+<p>Suppose the retailer introduces a third page.</p>
+<p>The results are now:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th style="text-align: right;">Visitors</th>
+<th style="text-align: right;">Purchases</th>
+<th style="text-align: right;">Conversion Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current</td>
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">1,200</td>
+<td style="text-align: right;">12.0%</td>
+</tr>
+<tr class="even">
+<td>New</td>
+<td style="text-align: right;">10,000</td>
+<td style="text-align: right;">1,230</td>
+<td style="text-align: right;">12.3%</td>
+</tr>
+<tr class="odd">
+<td>Third</td>
+<td style="text-align: right;">15,000</td>
+<td style="text-align: right;">2,100</td>
+<td style="text-align: right;">14.0%</td>
+</tr>
+</tbody>
+</table>
+<p>Now the question becomes:</p>
+<blockquote class="blockquote">
+<p><strong>Do conversion rates differ across the three pages?</strong></p>
+</blockquote>
+<p>The null hypothesis is:</p>
+<p><span class="math display">\[
+\boxed{
+H_0:
+p_{Current}
+=
+p_{New}
+=
+p_{Third}
+}
+\]</span></p>
+<p>The alternative is:</p>
+<p><span class="math display">\[
+\boxed{
+H_a:
+\text{Not all population conversion rates are equal}
+}
+\]</span></p>
+<p>With more than two groups, we can organize the data into a <strong>contingency table</strong> and use a <strong>chi-square test</strong>.</p>
+<hr>
+</section>
+<section id="contingency-tables" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Contingency Tables</h1>
+<p>A <strong>contingency table</strong>, also called a <strong>two-way table</strong>, displays the counts corresponding to combinations of two categorical variables.</p>
+<p>For the page experiment, the two variables are:</p>
+<ol type="1">
+<li>Page</li>
+<li>Purchase outcome</li>
+</ol>
+<p>The table is:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th style="text-align: right;">Purchased</th>
+<th style="text-align: right;">Did Not Purchase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current</td>
+<td style="text-align: right;">1,200</td>
+<td style="text-align: right;">8,800</td>
+</tr>
+<tr class="even">
+<td>New</td>
+<td style="text-align: right;">1,230</td>
+<td style="text-align: right;">8,770</td>
+</tr>
+<tr class="odd">
+<td>Third</td>
+<td style="text-align: right;">2,100</td>
+<td style="text-align: right;">12,900</td>
+</tr>
+</tbody>
+</table>
+<p>In R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>page_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Purchased =</span> pages<span class="sc">$</span>Purchases,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Did not purchase</span><span class="st">`</span> <span class="ot">=</span> pages<span class="sc">$</span>Visitors <span class="sc">-</span> pages<span class="sc">$</span>Purchases</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(page_table) <span class="ot">&lt;-</span> pages<span class="sc">$</span>Page</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>page_table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Each visitor contributes to exactly <strong>one cell</strong> in the table.</p>
+<hr>
+</section>
+<section id="why-raw-counts-alone-can-be-misleading" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Why Raw Counts Alone Can Be Misleading</h1>
+<p>Notice that the third page has:</p>
+<p><span class="math display">\[
+2100
+\]</span></p>
+<p>purchases compared with:</p>
+<p><span class="math display">\[
+1200
+\]</span></p>
+<p>for the current page.</p>
+<p>But the third page also has:</p>
+<p><span class="math display">\[
+15000
+\]</span></p>
+<p>visitors instead of:</p>
+<p><span class="math display">\[
+10000
+\]</span></p>
+<p>Therefore, comparing raw purchase counts alone would be misleading.</p>
+<p>The relevant quantities are the <strong>conditional proportions</strong>:</p>
+<p><span class="math display">\[
+\frac{\text{Purchases}}{\text{Visitors}}
+\]</span></p>
+<p>which give:</p>
+<ul>
+<li>Current: 12.0%</li>
+<li>New: 12.3%</li>
+<li>Third: 14.0%</li>
+</ul>
+<p>When group sizes differ, counts must be interpreted relative to the corresponding totals.</p>
+<hr>
+</section>
+<section id="chi-square-test-of-independence" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Chi-Square Test of Independence</h1>
+<p>The <strong>chi-square test of independence</strong> determines whether two categorical variables are associated.</p>
+<p>For the page experiment, the variables are:</p>
+<ul>
+<li>Page assignment</li>
+<li>Purchase outcome</li>
+</ul>
+<p>The null hypothesis is:</p>
+<p><span class="math display">\[
+\boxed{
+H_0:
+\text{Page and purchase outcome are independent}
+}
+\]</span></p>
+<p>This can equivalently be written as:</p>
+<p><span class="math display">\[
+\boxed{
+H_0:
+p_{Current}
+=
+p_{New}
+=
+p_{Third}
+}
+\]</span></p>
+<p>The alternative is:</p>
+<p><span class="math display">\[
+\boxed{
+H_a:
+\text{Page and purchase outcome are associated}
+}
+\]</span></p>
+<p>or equivalently:</p>
+<p><span class="math display">\[
+H_a:
+\text{Not all population conversion rates are equal}
+\]</span></p>
+<hr>
+</section>
+<section id="what-does-independence-mean" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> What Does Independence Mean?</h1>
+<p>Two categorical variables are <strong>independent</strong> if knowing the value of one does not change the distribution of the other.</p>
+<p>In this example:</p>
+<blockquote class="blockquote">
+<p>Page and purchase outcome are independent if knowing which page a visitor sees does not change their probability of purchasing.</p>
+</blockquote>
+<p>If:</p>
+<p><span class="math display">\[
+P(\text{Purchase}\mid\text{Current})
+=
+P(\text{Purchase}\mid\text{New})
+=
+P(\text{Purchase}\mid\text{Third})
+\]</span></p>
+<p>then page and purchase are independent.</p>
+<p>If these probabilities differ, the variables are associated.</p>
+<hr>
+</section>
+<section id="observed-vs.-expected-counts" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Observed vs.&nbsp;Expected Counts</h1>
+<p>The chi-square test compares:</p>
+<ul>
+<li><strong>Observed counts</strong> — what actually occurred</li>
+<li><strong>Expected counts</strong> — what we would expect if the null hypothesis of independence were true</li>
+</ul>
+<p>The observed counts are denoted:</p>
+<p><span class="math display">\[
+O_{ij}
+\]</span></p>
+<p>and the expected counts are denoted:</p>
+<p><span class="math display">\[
+E_{ij}
+\]</span></p>
+<p>The core question is:</p>
+<blockquote class="blockquote">
+<p><strong>If these variables were really independent, what would this table approximately look like?</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="expected-counts-under-independence" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Expected Counts Under Independence</h1>
+<p>Across all three pages:</p>
+<p><span class="math display">\[
+1200+1230+2100
+=
+4530
+\]</span></p>
+<p>visitors purchased.</p>
+<p>There are:</p>
+<p><span class="math display">\[
+10000+10000+15000
+=
+35000
+\]</span></p>
+<p>total visitors.</p>
+<p>Therefore, the overall purchase rate is:</p>
+<p><span class="math display">\[
+\frac{4530}{35000}
+\approx
+0.1294
+\]</span></p>
+<p>or:</p>
+<p><span class="math display">\[
+12.94\%
+\]</span></p>
+<p>If page and purchase outcome are independent, each page should have approximately this same conversion rate.</p>
+<p>For the current page:</p>
+<p><span class="math display">\[
+E_{\text{Current,Purchased}}
+=
+10000(0.1294)
+\approx
+1294.3
+\]</span></p>
+<p>More generally, expected counts are calculated as:</p>
+<p><span class="math display">\[
+\boxed{
+E_{ij}
+=
+\frac{
+(\text{Row Total}_i)
+(\text{Column Total}_j)
+}{
+\text{Grand Total}
+}
+}
+\]</span></p>
+<p>This formula preserves the observed row and column totals while constructing the table we would expect under independence.</p>
+<hr>
+</section>
+<section id="why-expected-counts-can-differ-across-groups" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> Why Expected Counts Can Differ Across Groups</h1>
+<p>Independence does <strong>not</strong> mean that every group should have identical counts.</p>
+<p>The third page has:</p>
+<p><span class="math display">\[
+15000
+\]</span></p>
+<p>visitors while the other pages have:</p>
+<p><span class="math display">\[
+10000
+\]</span></p>
+<p>each.</p>
+<p>Even if all three pages have exactly the same underlying conversion probability, we would expect more purchases from the third page simply because more people saw it.</p>
+<p>Therefore:</p>
+<blockquote class="blockquote">
+<p><strong>Independence implies comparable proportions, not necessarily identical counts.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="pearson-chi-square-statistic" class="level1" data-number="22">
+<h1 data-number="22"><span class="header-section-number">22</span> Pearson Chi-Square Statistic</h1>
+<p>The Pearson chi-square statistic measures how far the observed counts are from the counts expected under the null hypothesis.</p>
+<p><span class="math display">\[
+\boxed{
+X^2
+=
+\sum_{i,j}
+\frac{
+(O_{ij}-E_{ij})^2
+}{
+E_{ij}
+}
+}
+\]</span></p>
+<p>Each cell contributes:</p>
+<p><span class="math display">\[
+\frac{(O-E)^2}{E}
+\]</span></p>
+<p>to the total statistic.</p>
+<p>The logic is:</p>
+<section id="o-e" class="level3" data-number="22.0.1">
+<h3 data-number="22.0.1" class="anchored" data-anchor-id="o-e"><span class="header-section-number">22.0.1</span> <span class="math inline">\(O-E\)</span></h3>
+<p>Measures how far the observed count is from the expected count.</p>
+</section>
+<section id="squaring" class="level3" data-number="22.0.2">
+<h3 data-number="22.0.2" class="anchored" data-anchor-id="squaring"><span class="header-section-number">22.0.2</span> Squaring</h3>
+<p><span class="math display">\[
+(O-E)^2
+\]</span></p>
+<p>prevents positive and negative differences from canceling each other out.</p>
+</section>
+<section id="dividing-by-e" class="level3" data-number="22.0.3">
+<h3 data-number="22.0.3" class="anchored" data-anchor-id="dividing-by-e"><span class="header-section-number">22.0.3</span> Dividing by <span class="math inline">\(E\)</span></h3>
+<p><span class="math display">\[
+\frac{(O-E)^2}{E}
+\]</span></p>
+<p>scales the discrepancy relative to the size of the expected count.</p>
+<p>Therefore:</p>
+<blockquote class="blockquote">
+<p><strong>Larger <span class="math inline">\(X^2\)</span> values indicate greater disagreement between the observed data and the null model.</strong></p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="degrees-of-freedom" class="level1" data-number="23">
+<h1 data-number="23"><span class="header-section-number">23</span> Degrees of Freedom</h1>
+<p>For a contingency table with:</p>
+<ul>
+<li><span class="math inline">\(r\)</span> rows</li>
+<li><span class="math inline">\(c\)</span> columns</li>
+</ul>
+<p>the degrees of freedom are:</p>
+<p><span class="math display">\[
+\boxed{
+df=(r-1)(c-1)
+}
+\]</span></p>
+<p>For the page experiment:</p>
+<p><span class="math display">\[
+r=3
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+c=2
+\]</span></p>
+<p>so:</p>
+<p><span class="math display">\[
+df
+=
+(3-1)(2-1)
+=
+2
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\boxed{df=2}
+\]</span></p>
+<p>Under the null hypothesis and appropriate conditions:</p>
+<p><span class="math display">\[
+X^2
+\sim
+\chi^2_{(r-1)(c-1)}
+\]</span></p>
+<p>approximately.</p>
+<hr>
+</section>
+<section id="chi-square-test-in-r" class="level1" data-number="24">
+<h1 data-number="24"><span class="header-section-number">24</span> Chi-Square Test in R</h1>
+<p>The test can be conducted using:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>page_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    page_table,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">correct =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>page_test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For the three-page example:</p>
+<p><span class="math display">\[
+X^2=26.435
+\]</span></p>
+<p>with:</p>
+<p><span class="math display">\[
+df=2
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+p\text{-value}
+=
+1.819\times10^{-6}
+\]</span></p>
+<p>The p-value is extremely small, so we reject:</p>
+<p><span class="math display">\[
+H_0
+\]</span></p>
+<p>and conclude that page assignment and purchase outcome are associated.</p>
+<p>Equivalently:</p>
+<blockquote class="blockquote">
+<p><strong>There is evidence that at least two of the population conversion rates differ.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="what-an-overall-chi-square-test-does-not-tell-you" class="level1" data-number="25">
+<h1 data-number="25"><span class="header-section-number">25</span> What an Overall Chi-Square Test Does Not Tell You</h1>
+<p>A significant chi-square test tells us:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Some association exists}
+}
+\]</span></p>
+<p>or:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Not all population proportions are equal}
+}
+\]</span></p>
+<p>It does <strong>not</strong> automatically tell us:</p>
+<ul>
+<li>Every group differs from every other group</li>
+<li>Which specific groups differ</li>
+<li>Which group should be selected by the business</li>
+<li>Whether the differences are practically important</li>
+</ul>
+<p>For the page example, rejecting:</p>
+<p><span class="math display">\[
+H_0:
+p_{Current}=p_{New}=p_{Third}
+\]</span></p>
+<p>means the equality of all three proportions is inconsistent with the data.</p>
+<p>It does <strong>not</strong> mean:</p>
+<p><span class="math display">\[
+p_{Current}\neq p_{New}\neq p_{Third}
+\]</span></p>
+<p>in every pairwise comparison.</p>
+<p>The next step is to investigate <strong>where the association appears</strong>.</p>
+<hr>
+</section>
+<section id="two-proportion-test-and-chi-square-connection" class="level1" data-number="26">
+<h1 data-number="26"><span class="header-section-number">26</span> Two-Proportion Test and Chi-Square Connection</h1>
+<p>With exactly two groups and two outcomes, the contingency table is:</p>
+<p><span class="math display">\[
+2\times2
+\]</span></p>
+<p>For example:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th style="text-align: right;">Purchased</th>
+<th style="text-align: right;">Did Not Purchase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>New</td>
+<td style="text-align: right;">1230</td>
+<td style="text-align: right;">8770</td>
+</tr>
+<tr class="even">
+<td>Current</td>
+<td style="text-align: right;">1200</td>
+<td style="text-align: right;">8800</td>
+</tr>
+</tbody>
+</table>
+<p>The chi-square test can be run using:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>two_page_table <span class="ot">&lt;-</span> page_table[</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"New"</span>, <span class="st">"Current"</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>two_page_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    two_page_table,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">correct =</span> <span class="cn">FALSE</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For a two-sided comparison without continuity correction, the two-proportion test and chi-square test are mathematically connected:</p>
+<p><span class="math display">\[
+\boxed{
+X^2=z^2
+}
+\]</span></p>
+<p>Therefore, they produce the same p-value in this setting.</p>
+<p>For this example:</p>
+<p><span class="math display">\[
+p\approx0.516
+\]</span></p>
+<p>from either method.</p>
+<p>So the two-proportion test and chi-square test are not unrelated techniques.</p>
+<p>The two-proportion test is closely connected to the chi-square framework when the table is:</p>
+<p><span class="math display">\[
+2\times2
+\]</span></p>
+<hr>
+</section>
+<section id="finding-where-the-association-occurs" class="level1" data-number="27">
+<h1 data-number="27"><span class="header-section-number">27</span> Finding Where the Association Occurs</h1>
+<p>After obtaining a significant overall chi-square test, first examine the category proportions.</p>
+<p>For the page experiment:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th style="text-align: right;">Conversion Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current</td>
+<td style="text-align: right;">12.0%</td>
+</tr>
+<tr class="even">
+<td>New</td>
+<td style="text-align: right;">12.3%</td>
+</tr>
+<tr class="odd">
+<td>Third</td>
+<td style="text-align: right;">14.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The pooled conversion rate is approximately:</p>
+<p><span class="math display">\[
+12.94\%
+\]</span></p>
+<p>The third page appears noticeably higher than the other two.</p>
+<p>This provides a descriptive indication of where the association may be occurring.</p>
+<p>However, we can investigate individual cells more formally using <strong>standardized residuals</strong>.</p>
+<hr>
+</section>
+<section id="standardized-residuals" class="level1" data-number="28">
+<h1 data-number="28"><span class="header-section-number">28</span> Standardized Residuals</h1>
+<p>A <strong>standardized residual</strong> measures how far an observed cell count differs from what would be expected under independence, accounting for the cell’s variability.</p>
+<p>In R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    page_test<span class="sc">$</span>stdres,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For the page example:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th style="text-align: right;">Purchased</th>
+<th style="text-align: right;">Did Not Purchase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current</td>
+<td style="text-align: right;">-3.32</td>
+<td style="text-align: right;">3.32</td>
+</tr>
+<tr class="even">
+<td>New</td>
+<td style="text-align: right;">-2.27</td>
+<td style="text-align: right;">2.27</td>
+</tr>
+<tr class="odd">
+<td>Third</td>
+<td style="text-align: right;">5.10</td>
+<td style="text-align: right;">-5.10</td>
+</tr>
+</tbody>
+</table>
+<p>Interpretation:</p>
+<ul>
+<li><strong>Positive residual</strong> → more observations than expected</li>
+<li><strong>Negative residual</strong> → fewer observations than expected</li>
+<li><strong>Large absolute residual</strong> → stronger departure from independence</li>
+</ul>
+<p>For the third page:</p>
+<p><span class="math display">\[
+5.10
+\]</span></p>
+<p>for purchases means substantially <strong>more purchases occurred than expected under independence</strong>.</p>
+<p>Its non-purchase residual is:</p>
+<p><span class="math display">\[
+-5.10
+\]</span></p>
+<p>meaning substantially <strong>fewer non-purchases occurred than expected</strong>.</p>
+<p>This pattern helps explain the significant overall chi-square statistic.</p>
+<hr>
+</section>
+<section id="why-residuals-come-in-opposite-directions" class="level1" data-number="29">
+<h1 data-number="29"><span class="header-section-number">29</span> Why Residuals Come in Opposite Directions</h1>
+<p>Within a row, the total number of visitors is fixed.</p>
+<p>If a page has more purchases than expected, those additional observations must come from somewhere.</p>
+<p>Therefore, it will also have fewer non-purchases than expected.</p>
+<p>For example:</p>
+<p><span class="math display">\[
+O_{\text{Purchased}}
+&gt;
+E_{\text{Purchased}}
+\]</span></p>
+<p>will correspond with:</p>
+<p><span class="math display">\[
+O_{\text{Not Purchased}}
+&lt;
+E_{\text{Not Purchased}}
+\]</span></p>
+<p>when there are only two outcome categories.</p>
+<hr>
+</section>
+<section id="conditions-for-the-chi-square-approximation" class="level1" data-number="30">
+<h1 data-number="30"><span class="header-section-number">30</span> Conditions for the Chi-Square Approximation</h1>
+<p>Before trusting a chi-square test, check whether its assumptions are reasonable.</p>
+<section id="independent-observations" class="level2" data-number="30.1">
+<h2 data-number="30.1" class="anchored" data-anchor-id="independent-observations"><span class="header-section-number">30.1</span> Independent Observations</h2>
+<p>Observations should contribute independently.</p>
+<p>For example, each visitor should contribute one independent observation rather than the same visitor appearing repeatedly and being treated as independent observations.</p>
+<p>A huge dataset does not solve a violation of independence.</p>
+<blockquote class="blockquote">
+<p><strong>More rows do not fix dependence among observations.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="mutually-exclusive-categories" class="level2" data-number="30.2">
+<h2 data-number="30.2" class="anchored" data-anchor-id="mutually-exclusive-categories"><span class="header-section-number">30.2</span> Mutually Exclusive Categories</h2>
+<p>Each observational unit should contribute to exactly one cell.</p>
+<p>For example, a visitor cannot simultaneously be classified as both:</p>
+<ul>
+<li>Purchased</li>
+<li>Did not purchase</li>
+</ul>
+<p>The categories must be mutually exclusive for the table being analyzed.</p>
+<hr>
+</section>
+<section id="expected-counts" class="level2" data-number="30.3">
+<h2 data-number="30.3" class="anchored" data-anchor-id="expected-counts"><span class="header-section-number">30.3</span> Expected Counts</h2>
+<p>Expected counts should be sufficiently large for the chi-square approximation to be reliable.</p>
+<p>A simple conservative rule is:</p>
+<p><span class="math display">\[
+\boxed{
+E_{ij}\geq5
+}
+\]</span></p>
+<p>for every cell.</p>
+<p>Expected counts can be inspected in R using:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    page_test<span class="sc">$</span>expected,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For the page example:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Page</th>
+<th style="text-align: right;">Purchased</th>
+<th style="text-align: right;">Did Not Purchase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Current</td>
+<td style="text-align: right;">1294.3</td>
+<td style="text-align: right;">8705.7</td>
+</tr>
+<tr class="even">
+<td>New</td>
+<td style="text-align: right;">1294.3</td>
+<td style="text-align: right;">8705.7</td>
+</tr>
+<tr class="odd">
+<td>Third</td>
+<td style="text-align: right;">1941.4</td>
+<td style="text-align: right;">13058.6</td>
+</tr>
+</tbody>
+</table>
+<p>All expected counts are far greater than 5.</p>
+<hr>
+</section>
+</section>
+<section id="chi-square-test-of-independence-workflow" class="level1" data-number="31">
+<h1 data-number="31"><span class="header-section-number">31</span> Chi-Square Test of Independence: Workflow</h1>
+<p>When determining whether two categorical variables are associated:</p>
+<section id="step-1-identify-the-observational-unit" class="level2" data-number="31.1">
+<h2 data-number="31.1" class="anchored" data-anchor-id="step-1-identify-the-observational-unit"><span class="header-section-number">31.1</span> Step 1: Identify the Observational Unit</h2>
+<p>Determine what one observation represents.</p>
+<hr>
+</section>
+<section id="step-2-identify-the-two-categorical-variables" class="level2" data-number="31.2">
+<h2 data-number="31.2" class="anchored" data-anchor-id="step-2-identify-the-two-categorical-variables"><span class="header-section-number">31.2</span> Step 2: Identify the Two Categorical Variables</h2>
+<p>For example:</p>
+<ul>
+<li>Page</li>
+<li>Purchase outcome</li>
+</ul>
+<hr>
+</section>
+<section id="step-3-construct-a-contingency-table" class="level2" data-number="31.3">
+<h2 data-number="31.3" class="anchored" data-anchor-id="step-3-construct-a-contingency-table"><span class="header-section-number">31.3</span> Step 3: Construct a Contingency Table</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Variable1 =</span> data<span class="sc">$</span>variable1,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Variable2 =</span> data<span class="sc">$</span>variable2</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="step-4-examine-counts-and-proportions" class="level2" data-number="31.4">
+<h2 data-number="31.4" class="anchored" data-anchor-id="step-4-examine-counts-and-proportions"><span class="header-section-number">31.4</span> Step 4: Examine Counts and Proportions</h2>
+<p>Do not rely only on raw counts.</p>
+<p>Compare relevant percentages or conditional proportions.</p>
+<hr>
+</section>
+<section id="step-5-state-the-hypotheses" class="level2" data-number="31.5">
+<h2 data-number="31.5" class="anchored" data-anchor-id="step-5-state-the-hypotheses"><span class="header-section-number">31.5</span> Step 5: State the Hypotheses</h2>
+<p><span class="math display">\[
+H_0:
+\text{The variables are independent}
+\]</span></p>
+<p><span class="math display">\[
+H_a:
+\text{The variables are associated}
+\]</span></p>
+<hr>
+</section>
+<section id="step-6-calculate-expected-counts" class="level2" data-number="31.6">
+<h2 data-number="31.6" class="anchored" data-anchor-id="step-6-calculate-expected-counts"><span class="header-section-number">31.6</span> Step 6: Calculate Expected Counts</h2>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+E_{ij}
+=
+\frac{
+(\text{Row Total})
+(\text{Column Total})
+}{
+\text{Grand Total}
+}
+\]</span></p>
+<hr>
+</section>
+<section id="step-7-check-conditions" class="level2" data-number="31.7">
+<h2 data-number="31.7" class="anchored" data-anchor-id="step-7-check-conditions"><span class="header-section-number">31.7</span> Step 7: Check Conditions</h2>
+<p>Verify:</p>
+<ul>
+<li>Independent observations</li>
+<li>Mutually exclusive categories</li>
+<li>Adequate expected counts</li>
+</ul>
+<hr>
+</section>
+<section id="step-8-conduct-the-test" class="level2" data-number="31.8">
+<h2 data-number="31.8" class="anchored" data-anchor-id="step-8-conduct-the-test"><span class="header-section-number">31.8</span> Step 8: Conduct the Test</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    contingency_table,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">correct =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="step-9-interpret-the-overall-result" class="level2" data-number="31.9">
+<h2 data-number="31.9" class="anchored" data-anchor-id="step-9-interpret-the-overall-result"><span class="header-section-number">31.9</span> Step 9: Interpret the Overall Result</h2>
+<p>If the p-value is small:</p>
+<blockquote class="blockquote">
+<p>There is evidence of an association between the categorical variables.</p>
+</blockquote>
+<p>If the p-value is not small:</p>
+<blockquote class="blockquote">
+<p>The data do not provide sufficient evidence of an association.</p>
+</blockquote>
+<hr>
+</section>
+<section id="step-10-investigate-the-pattern" class="level2" data-number="31.10">
+<h2 data-number="31.10" class="anchored" data-anchor-id="step-10-investigate-the-pattern"><span class="header-section-number">31.10</span> Step 10: Investigate the Pattern</h2>
+<p>If the overall test is significant, examine:</p>
+<ul>
+<li>Conditional proportions</li>
+<li>Observed vs.&nbsp;expected counts</li>
+<li>Standardized residuals</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>expected</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span>stdres</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This helps determine which categories appear to contribute most strongly to the overall association.</p>
+<hr>
+</section>
+</section>
+<section id="example-homeownership-and-marital-status" class="level1" data-number="32">
+<h1 data-number="32"><span class="header-section-number">32</span> Example: Homeownership and Marital Status</h1>
+<p>Suppose we ask:</p>
+<blockquote class="blockquote">
+<p>Is homeownership associated with marital status among the households in these data?</p>
+</blockquote>
+<p>The two categorical variables are:</p>
+<section id="homeownership" class="level3" data-number="32.0.1">
+<h3 data-number="32.0.1" class="anchored" data-anchor-id="homeownership"><span class="header-section-number">32.0.1</span> Homeownership</h3>
+<p>Possible categories include:</p>
+<ul>
+<li>Homeowner</li>
+<li>Probable Owner</li>
+<li>Probable Renter</li>
+<li>Renter</li>
+<li>Unknown</li>
+</ul>
+</section>
+<section id="marital-status" class="level3" data-number="32.0.2">
+<h3 data-number="32.0.2" class="anchored" data-anchor-id="marital-status"><span class="header-section-number">32.0.2</span> Marital Status</h3>
+<p>The codes are:</p>
+<ul>
+<li>A = Married</li>
+<li>B = Unmarried</li>
+<li>U = Unknown</li>
+</ul>
+<p>A contingency table might be created using:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Homeownership =</span> hh<span class="sc">$</span>homeowner_desc,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Marital_status =</span> hh<span class="sc">$</span>marital_status_code</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The hypotheses are:</p>
+<p><span class="math display">\[
+H_0:
+\text{Homeownership and marital status are independent}
+\]</span></p>
+<p><span class="math display">\[
+H_a:
+\text{Homeownership and marital status are associated}
+\]</span></p>
+<p>Before running the test, however, we must decide which categories should be included.</p>
+<hr>
+</section>
+</section>
+<section id="category-definitions-matter" class="level1" data-number="33">
+<h1 data-number="33"><span class="header-section-number">33</span> Category Definitions Matter</h1>
+<p>Suppose the data contain categories such as:</p>
+<ul>
+<li>Unknown homeownership</li>
+<li>Unknown marital status</li>
+<li>Probable owner</li>
+<li>Probable renter</li>
+</ul>
+<p>The decision to include, combine, or exclude these categories changes the population represented by the analysis and therefore changes the interpretation.</p>
+<p>For example, removing unknown marital status means the analysis is no longer about:</p>
+<blockquote class="blockquote">
+<p>All households in the dataset.</p>
+</blockquote>
+<p>It becomes an analysis of:</p>
+<blockquote class="blockquote">
+<p>Households with known marital status.</p>
+</blockquote>
+<p>Therefore:</p>
+<blockquote class="blockquote">
+<p><strong>Data-cleaning decisions are part of the statistical analysis because they determine what population the resulting inference describes.</strong></p>
+</blockquote>
+<p>Categories should not be removed simply because they are inconvenient.</p>
+<p>The decision should follow from the research question and the meaning of the categories.</p>
+<hr>
+</section>
+<section id="association-does-not-imply-causation" class="level1" data-number="34">
+<h1 data-number="34"><span class="header-section-number">34</span> Association Does Not Imply Causation</h1>
+<p>Suppose the chi-square analysis finds an association between:</p>
+<ul>
+<li>Marital status</li>
+<li>Homeownership</li>
+</ul>
+<p>Can we conclude:</p>
+<blockquote class="blockquote">
+<p>Getting married causes people to become homeowners?</p>
+</blockquote>
+<p>No.</p>
+<p>The chi-square test establishes statistical evidence of an <strong>association</strong>.</p>
+<p>It does not establish the causal mechanism behind that association.</p>
+<p>Other variables might affect both marital status and homeownership, such as:</p>
+<ul>
+<li>Age</li>
+<li>Income</li>
+<li>Household size</li>
+<li>Employment</li>
+<li>Geographic location</li>
+</ul>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Association}
+\neq
+\text{Causation}
+}
+\]</span></p>
+<p>The study design determines whether causal conclusions are justified.</p>
+<hr>
+</section>
+<section id="chi-square-goodness-of-fit-test" class="level1" data-number="35">
+<h1 data-number="35"><span class="header-section-number">35</span> Chi-Square Goodness-of-Fit Test</h1>
+<p>The chi-square framework can also answer a different type of categorical question.</p>
+<p>Suppose a retailer expects customers to make their first purchase through:</p>
+<ul>
+<li>Store: 50%</li>
+<li>Website: 30%</li>
+<li>App: 20%</li>
+</ul>
+<p>These percentages represent a <strong>specified benchmark distribution</strong>.</p>
+<p>An independent sample of 500 customers produces:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Channel</th>
+<th style="text-align: right;">Observed Customers</th>
+<th style="text-align: right;">Benchmark Share</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Store</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">50%</td>
+</tr>
+<tr class="even">
+<td>Website</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">30%</td>
+</tr>
+<tr class="odd">
+<td>App</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">20%</td>
+</tr>
+</tbody>
+</table>
+<p>The question is:</p>
+<blockquote class="blockquote">
+<p><strong>Does the observed channel mix match the retailer’s specified benchmark distribution?</strong></p>
+</blockquote>
+<p>This is a <strong>chi-square goodness-of-fit test</strong>.</p>
+<hr>
+</section>
+<section id="independence-vs.-goodness-of-fit" class="level1" data-number="36">
+<h1 data-number="36"><span class="header-section-number">36</span> Independence vs.&nbsp;Goodness-of-Fit</h1>
+<p>These two chi-square procedures answer different questions.</p>
+<section id="chi-square-test-of-independence-1" class="level2" data-number="36.1">
+<h2 data-number="36.1" class="anchored" data-anchor-id="chi-square-test-of-independence-1"><span class="header-section-number">36.1</span> Chi-Square Test of Independence</h2>
+<p>Uses <strong>two categorical variables</strong>.</p>
+<p>Example:</p>
+<blockquote class="blockquote">
+<p>Is page assignment associated with purchase outcome?</p>
+</blockquote>
+<p>The data form a two-way contingency table.</p>
+<hr>
+</section>
+<section id="chi-square-goodness-of-fit-test-1" class="level2" data-number="36.2">
+<h2 data-number="36.2" class="anchored" data-anchor-id="chi-square-goodness-of-fit-test-1"><span class="header-section-number">36.2</span> Chi-Square Goodness-of-Fit Test</h2>
+<p>Uses <strong>one categorical variable</strong> and compares its observed distribution with specified benchmark probabilities.</p>
+<p>Example:</p>
+<blockquote class="blockquote">
+<p>Does customer channel mix match 50% store, 30% website, and 20% app?</p>
+</blockquote>
+<p>The distinction is:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 40%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th style="text-align: right;">Variables</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Chi-square independence</td>
+<td style="text-align: right;">2 categorical variables</td>
+<td>Are the variables associated?</td>
+</tr>
+<tr class="even">
+<td>Chi-square goodness-of-fit</td>
+<td style="text-align: right;">1 categorical variable</td>
+<td>Does its distribution match specified proportions?</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="expected-counts-for-goodness-of-fit" class="level1" data-number="37">
+<h1 data-number="37"><span class="header-section-number">37</span> Expected Counts for Goodness-of-Fit</h1>
+<p>Suppose:</p>
+<p><span class="math display">\[
+n=500
+\]</span></p>
+<p>and the benchmark probabilities are:</p>
+<p><span class="math display">\[
+p_{Store}=0.50
+\]</span></p>
+<p><span class="math display">\[
+p_{Website}=0.30
+\]</span></p>
+<p><span class="math display">\[
+p_{App}=0.20
+\]</span></p>
+<p>Expected counts are:</p>
+<p><span class="math display">\[
+E_i=np_{i,0}
+\]</span></p>
+<p>Therefore:</p>
+<section id="store" class="level3" data-number="37.0.1">
+<h3 data-number="37.0.1" class="anchored" data-anchor-id="store"><span class="header-section-number">37.0.1</span> Store</h3>
+<p><span class="math display">\[
+E_{Store}
+=
+500(0.50)
+=
+250
+\]</span></p>
+</section>
+<section id="website" class="level3" data-number="37.0.2">
+<h3 data-number="37.0.2" class="anchored" data-anchor-id="website"><span class="header-section-number">37.0.2</span> Website</h3>
+<p><span class="math display">\[
+E_{Website}
+=
+500(0.30)
+=
+150
+\]</span></p>
+</section>
+<section id="app" class="level3" data-number="37.0.3">
+<h3 data-number="37.0.3" class="anchored" data-anchor-id="app"><span class="header-section-number">37.0.3</span> App</h3>
+<p><span class="math display">\[
+E_{App}
+=
+500(0.20)
+=
+100
+\]</span></p>
+<p>So under the benchmark:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Channel</th>
+<th style="text-align: right;">Observed</th>
+<th style="text-align: right;">Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Store</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">250</td>
+</tr>
+<tr class="even">
+<td>Website</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">150</td>
+</tr>
+<tr class="odd">
+<td>App</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">100</td>
+</tr>
+</tbody>
+</table>
+<p>The chi-square statistic again measures how far observed counts are from expected counts.</p>
+<hr>
+</section>
+</section>
+<section id="goodness-of-fit-chi-square-statistic" class="level1" data-number="38">
+<h1 data-number="38"><span class="header-section-number">38</span> Goodness-of-Fit Chi-Square Statistic</h1>
+<p>The statistic is:</p>
+<p><span class="math display">\[
+\boxed{
+X^2
+=
+\sum_i
+\frac{
+(O_i-E_i)^2
+}{
+E_i
+}
+}
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+E_i=np_{i,0}
+\]</span></p>
+<p>The logic is identical to the independence test:</p>
+<blockquote class="blockquote">
+<p>Compare what we observed with what we would expect if the null model were correct.</p>
+</blockquote>
+<hr>
+</section>
+<section id="goodness-of-fit-hypotheses" class="level1" data-number="39">
+<h1 data-number="39"><span class="header-section-number">39</span> Goodness-of-Fit Hypotheses</h1>
+<p>For the channel example:</p>
+<p><span class="math display">\[
+H_0:
+\begin{cases}
+p_{Store}=0.50\\
+p_{Website}=0.30\\
+p_{App}=0.20
+\end{cases}
+\]</span></p>
+<p>The alternative is:</p>
+<p><span class="math display">\[
+H_a:
+\text{The population distribution differs from the benchmark in at least one category}
+\]</span></p>
+<hr>
+</section>
+<section id="goodness-of-fit-degrees-of-freedom" class="level1" data-number="40">
+<h1 data-number="40"><span class="header-section-number">40</span> Goodness-of-Fit Degrees of Freedom</h1>
+<p>If there are:</p>
+<p><span class="math display">\[
+k
+\]</span></p>
+<p>categories and their probabilities are specified in advance, then:</p>
+<p><span class="math display">\[
+\boxed{
+df=k-1
+}
+\]</span></p>
+<p>For three channels:</p>
+<p><span class="math display">\[
+df=3-1=2
+\]</span></p>
+<hr>
+</section>
+<section id="goodness-of-fit-in-r" class="level1" data-number="41">
+<h1 data-number="41"><span class="header-section-number">41</span> Goodness-of-Fit in R</h1>
+<p>Suppose:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>channel_counts <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Store =</span> <span class="dv">240</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Website =</span> <span class="dv">160</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">App =</span> <span class="dv">100</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The test can be performed with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    channel_counts,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fu">c</span>(<span class="fl">0.50</span>, <span class="fl">0.30</span>, <span class="fl">0.20</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For the example:</p>
+<p><span class="math display">\[
+X^2=1.0667
+\]</span></p>
+<p><span class="math display">\[
+df=2
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+p\text{-value}=0.5866
+\]</span></p>
+<p>Because the p-value is not small, we fail to reject the null hypothesis.</p>
+<p>The data do not provide sufficient evidence that the population channel distribution differs from:</p>
+<p><span class="math display">\[
+50\%,30\%,20\%
+\]</span></p>
+<p>This does <strong>not</strong> prove that the true population proportions are exactly:</p>
+<p><span class="math display">\[
+50\%,30\%,20\%
+\]</span></p>
+<p>It means the observed differences are not sufficiently inconsistent with the benchmark to reject it.</p>
+<hr>
+</section>
+<section id="one-logic-behind-both-chi-square-tests" class="level1" data-number="42">
+<h1 data-number="42"><span class="header-section-number">42</span> One Logic Behind Both Chi-Square Tests</h1>
+<p>Both chi-square procedures follow the same basic structure:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Observed}
+\quad\text{vs.}\quad
+\text{Expected under }H_0
+}
+\]</span></p>
+<p>and both use:</p>
+<p><span class="math display">\[
+\boxed{
+X^2
+=
+\sum
+\frac{(O-E)^2}{E}
+}
+\]</span></p>
+<p>What changes is <strong>where the expected counts come from</strong>.</p>
+<section id="test-of-independence" class="level3" data-number="42.0.1">
+<h3 data-number="42.0.1" class="anchored" data-anchor-id="test-of-independence"><span class="header-section-number">42.0.1</span> Test of Independence</h3>
+<p>Expected counts are determined from the row and column totals:</p>
+<p><span class="math display">\[
+E_{ij}
+=
+\frac{
+(\text{Row Total}_i)
+(\text{Column Total}_j)
+}{
+\text{Grand Total}
+}
+\]</span></p>
+</section>
+<section id="goodness-of-fit" class="level3" data-number="42.0.2">
+<h3 data-number="42.0.2" class="anchored" data-anchor-id="goodness-of-fit"><span class="header-section-number">42.0.2</span> Goodness-of-Fit</h3>
+<p>Expected counts come from specified benchmark probabilities:</p>
+<p><span class="math display">\[
+E_i=np_{i,0}
+\]</span></p>
+<p>So the mathematical logic is the same, but the null model is different.</p>
+<hr>
+</section>
+</section>
+<section id="choosing-the-appropriate-categorical-method" class="level1" data-number="43">
+<h1 data-number="43"><span class="header-section-number">43</span> Choosing the Appropriate Categorical Method</h1>
+<p>The first step is identifying the business question.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Business Question</th>
+<th>Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>How much do two conversion rates differ?</td>
+<td>Two-proportion CI and test</td>
+</tr>
+<tr class="even">
+<td>Does conversion differ across three pages?</td>
+<td>Chi-square test on a two-way table</td>
+</tr>
+<tr class="odd">
+<td>Are homeownership and marital status associated?</td>
+<td>Chi-square test of independence</td>
+</tr>
+<tr class="even">
+<td>Does channel mix match specified shares?</td>
+<td>Chi-square goodness-of-fit test</td>
+</tr>
+</tbody>
+</table>
+<p>A useful decision process is:</p>
+<section id="are-you-comparing-two-population-proportions" class="level3" data-number="43.0.1">
+<h3 data-number="43.0.1" class="anchored" data-anchor-id="are-you-comparing-two-population-proportions"><span class="header-section-number">43.0.1</span> Are You Comparing Two Population Proportions?</h3>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Does the new page have a different conversion rate from the current page?</p>
+</blockquote>
+<p>Use:</p>
+<p><span class="math display">\[
+\boxed{\text{Two-Proportion Inference}}
+\]</span></p>
+<hr>
+</section>
+<section id="are-you-examining-two-categorical-variables" class="level3" data-number="43.0.2">
+<h3 data-number="43.0.2" class="anchored" data-anchor-id="are-you-examining-two-categorical-variables"><span class="header-section-number">43.0.2</span> Are You Examining Two Categorical Variables?</h3>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Is purchase outcome associated with which page a customer sees?</p>
+</blockquote>
+<p>or:</p>
+<blockquote class="blockquote">
+<p>Is homeownership associated with marital status?</p>
+</blockquote>
+<p>Use:</p>
+<p><span class="math display">\[
+\boxed{\text{Chi-Square Test of Independence}}
+\]</span></p>
+<hr>
+</section>
+<section id="are-you-comparing-one-categorical-variable-to-predetermined-proportions" class="level3" data-number="43.0.3">
+<h3 data-number="43.0.3" class="anchored" data-anchor-id="are-you-comparing-one-categorical-variable-to-predetermined-proportions"><span class="header-section-number">43.0.3</span> Are You Comparing One Categorical Variable to Predetermined Proportions?</h3>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Does the observed channel mix match the expected 50/30/20 split?</p>
+</blockquote>
+<p>Use:</p>
+<p><span class="math display">\[
+\boxed{\text{Chi-Square Goodness-of-Fit Test}}
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="categorical-inference-workflow" class="level1" data-number="44">
+<h1 data-number="44"><span class="header-section-number">44</span> Categorical Inference Workflow</h1>
+<p>When working with categorical data:</p>
+<section id="step-1-identify-the-business-question" class="level2" data-number="44.1">
+<h2 data-number="44.1" class="anchored" data-anchor-id="step-1-identify-the-business-question"><span class="header-section-number">44.1</span> Step 1: Identify the Business Question</h2>
+<p>Determine what comparison is actually being requested.</p>
+<hr>
+</section>
+<section id="step-2-identify-the-observational-unit" class="level2" data-number="44.2">
+<h2 data-number="44.2" class="anchored" data-anchor-id="step-2-identify-the-observational-unit"><span class="header-section-number">44.2</span> Step 2: Identify the Observational Unit</h2>
+<p>Ask:</p>
+<blockquote class="blockquote">
+<p>What does one observation represent?</p>
+</blockquote>
+<p>This is essential for determining whether observations are independent.</p>
+<hr>
+</section>
+<section id="step-3-identify-the-categorical-variables" class="level2" data-number="44.3">
+<h2 data-number="44.3" class="anchored" data-anchor-id="step-3-identify-the-categorical-variables"><span class="header-section-number">44.3</span> Step 3: Identify the Categorical Variables</h2>
+<p>Determine whether the problem contains:</p>
+<ul>
+<li>One categorical variable</li>
+<li>Two categorical variables</li>
+<li>Two groups with a binary outcome</li>
+</ul>
+<hr>
+</section>
+<section id="step-4-examine-counts-and-proportions-1" class="level2" data-number="44.4">
+<h2 data-number="44.4" class="anchored" data-anchor-id="step-4-examine-counts-and-proportions-1"><span class="header-section-number">44.4</span> Step 4: Examine Counts and Proportions</h2>
+<p>Construct:</p>
+<ul>
+<li>Frequency tables</li>
+<li>Contingency tables</li>
+<li>Conditional proportions</li>
+<li>Bar charts when useful</li>
+</ul>
+<p>Do not interpret raw counts without considering group sizes.</p>
+<hr>
+</section>
+<section id="step-5-choose-the-appropriate-method" class="level2" data-number="44.5">
+<h2 data-number="44.5" class="anchored" data-anchor-id="step-5-choose-the-appropriate-method"><span class="header-section-number">44.5</span> Step 5: Choose the Appropriate Method</h2>
+<p><span class="math display">\[
+\begin{array}{c}
+\text{Categorical Outcome}\\
+\downarrow\\
+\begin{cases}
+\text{Two proportions}
+\rightarrow
+\text{Two-proportion inference}\\[6pt]
+\text{Two categorical variables}
+\rightarrow
+\chi^2\text{ independence}\\[6pt]
+\text{One categorical variable vs. benchmark}
+\rightarrow
+\chi^2\text{ goodness-of-fit}
+\end{cases}
+\end{array}
+\]</span></p>
+<hr>
+</section>
+<section id="step-6-state-the-null-model" class="level2" data-number="44.6">
+<h2 data-number="44.6" class="anchored" data-anchor-id="step-6-state-the-null-model"><span class="header-section-number">44.6</span> Step 6: State the Null Model</h2>
+<p>For two proportions:</p>
+<p><span class="math display">\[
+H_0:p_1=p_2
+\]</span></p>
+<p>For independence:</p>
+<p><span class="math display">\[
+H_0:
+\text{The categorical variables are independent}
+\]</span></p>
+<p>For goodness-of-fit:</p>
+<p><span class="math display">\[
+H_0:
+\text{The category probabilities equal the specified benchmark}
+\]</span></p>
+<hr>
+</section>
+<section id="step-7-check-conditions-1" class="level2" data-number="44.7">
+<h2 data-number="44.7" class="anchored" data-anchor-id="step-7-check-conditions-1"><span class="header-section-number">44.7</span> Step 7: Check Conditions</h2>
+<p>Depending on the method, examine:</p>
+<ul>
+<li>Independence of observations</li>
+<li>Mutually exclusive categories</li>
+<li>Expected counts</li>
+<li>Sample sizes</li>
+</ul>
+<hr>
+</section>
+<section id="step-8-conduct-the-analysis" class="level2" data-number="44.8">
+<h2 data-number="44.8" class="anchored" data-anchor-id="step-8-conduct-the-analysis"><span class="header-section-number">44.8</span> Step 8: Conduct the Analysis</h2>
+<p>Use the appropriate R function:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.test</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>or:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="step-9-interpret-in-context" class="level2" data-number="44.9">
+<h2 data-number="44.9" class="anchored" data-anchor-id="step-9-interpret-in-context"><span class="header-section-number">44.9</span> Step 9: Interpret in Context</h2>
+<p>Translate the statistical result back into the business question.</p>
+<p>Avoid saying only:</p>
+<blockquote class="blockquote">
+<p>The p-value is significant.</p>
+</blockquote>
+<p>Instead explain <strong>what statistical relationship the data support</strong>.</p>
+<hr>
+</section>
+<section id="step-10-separate-association-from-causation" class="level2" data-number="44.10">
+<h2 data-number="44.10" class="anchored" data-anchor-id="step-10-separate-association-from-causation"><span class="header-section-number">44.10</span> Step 10: Separate Association from Causation</h2>
+<p>A statistically significant association does not automatically establish causality.</p>
+<p>Ask:</p>
+<blockquote class="blockquote">
+<p><strong>How were the data generated?</strong></p>
+</blockquote>
+<p>Random assignment can support causal interpretation.</p>
+<p>Observational association by itself cannot.</p>
+<hr>
+</section>
+</section>
+<section id="connecting-lectures-58" class="level1" data-number="45">
+<h1 data-number="45"><span class="header-section-number">45</span> Connecting Lectures 5–8</h1>
+<p>The inferential methods covered so far can now be organized according to the <strong>type of outcome and study design</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Parameter / Structure</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>What is one population mean?</td>
+<td><span class="math inline">\(\mu\)</span></td>
+<td>One-sample t</td>
+</tr>
+<tr class="even">
+<td>What is the mean difference for linked observations?</td>
+<td><span class="math inline">\(\mu_d\)</span></td>
+<td>Paired t</td>
+</tr>
+<tr class="odd">
+<td>How do two independent population means differ?</td>
+<td><span class="math inline">\(\mu_1-\mu_2\)</span></td>
+<td>Welch two-sample t</td>
+</tr>
+<tr class="even">
+<td>How do two population proportions differ?</td>
+<td><span class="math inline">\(p_1-p_2\)</span></td>
+<td>Two-proportion inference</td>
+</tr>
+<tr class="odd">
+<td>Are two categorical variables associated?</td>
+<td>Contingency table</td>
+<td>Chi-square independence</td>
+</tr>
+<tr class="even">
+<td>Does one categorical distribution match specified shares?</td>
+<td><span class="math inline">\(p_1,\ldots,p_k\)</span></td>
+<td>Chi-square goodness-of-fit</td>
+</tr>
+</tbody>
+</table>
+<p>The broader decision process is:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Business Question}
+\rightarrow
+\text{Outcome Type}
+\rightarrow
+\text{Study Design}
+\rightarrow
+\text{Parameter}
+\rightarrow
+\text{Statistical Method}
+\rightarrow
+\text{Interpretation}
+}
+\]</span></p>
+<p>The key idea remains the same:</p>
+<blockquote class="blockquote">
+<p><strong>Do not start by choosing a statistical test. Start by understanding what the variables represent, how the data were generated, and what population question you are trying to answer.</strong></p>
+</blockquote>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -603,8 +2591,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lecture7.html" class="pagination-link" aria-label="Lecture 7">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></span>
+      <a href="./lecture7.html" class="pagination-link" aria-label="Comparing Two Population Means: Independent Samples">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

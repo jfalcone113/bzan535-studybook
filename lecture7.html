@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Lecture 7 – BZAN 535: Statistical Methods</title>
+<title>7&nbsp; Comparing Two Population Means: Independent Samples – BZAN 535: Statistical Methods</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -76,6 +111,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -88,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture7.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture7.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,25 +210,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-Parameter Statistical Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lecture 6</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Paired Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture7.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lecture 8</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inference for Categorical Data</span></span></a>
   </div>
 </li>
     </ul>
@@ -172,15 +236,108 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">7.1</span> Overview</a></li>
+  <li><a href="#why-study-design-still-matters" id="toc-why-study-design-still-matters" class="nav-link" data-scroll-target="#why-study-design-still-matters"><span class="header-section-number">8</span> Why Study Design Still Matters</a>
+  <ul class="collapse">
+  <li><a href="#describe" id="toc-describe" class="nav-link" data-scroll-target="#describe"><span class="header-section-number">8.0.1</span> Describe</a></li>
+  <li><a href="#quantify-uncertainty" id="toc-quantify-uncertainty" class="nav-link" data-scroll-target="#quantify-uncertainty"><span class="header-section-number">8.0.2</span> Quantify Uncertainty</a></li>
+  <li><a href="#evaluate-causality" id="toc-evaluate-causality" class="nav-link" data-scroll-target="#evaluate-causality"><span class="header-section-number">8.0.3</span> Evaluate Causality</a></li>
+  </ul></li>
+  <li><a href="#paired-vs.-independent-samples" id="toc-paired-vs.-independent-samples" class="nav-link" data-scroll-target="#paired-vs.-independent-samples"><span class="header-section-number">9</span> Paired vs.&nbsp;Independent Samples</a>
+  <ul class="collapse">
+  <li><a href="#paired-samples" id="toc-paired-samples" class="nav-link" data-scroll-target="#paired-samples"><span class="header-section-number">9.1</span> Paired Samples</a></li>
+  <li><a href="#independent-samples" id="toc-independent-samples" class="nav-link" data-scroll-target="#independent-samples"><span class="header-section-number">9.2</span> Independent Samples</a></li>
+  </ul></li>
+  <li><a href="#the-observational-unit-determines-the-design" id="toc-the-observational-unit-determines-the-design" class="nav-link" data-scroll-target="#the-observational-unit-determines-the-design"><span class="header-section-number">10</span> The Observational Unit Determines the Design</a>
+  <ul class="collapse">
+  <li><a href="#example-taste-test" id="toc-example-taste-test" class="nav-link" data-scroll-target="#example-taste-test"><span class="header-section-number">10.1</span> Example: Taste Test</a>
+  <ul class="collapse">
+  <li><a href="#independent-samples-design" id="toc-independent-samples-design" class="nav-link" data-scroll-target="#independent-samples-design"><span class="header-section-number">10.1.1</span> Independent-Samples Design</a></li>
+  <li><a href="#paired-design" id="toc-paired-design" class="nav-link" data-scroll-target="#paired-design"><span class="header-section-number">10.1.2</span> Paired Design</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#independent-samples-and-the-population-difference" id="toc-independent-samples-and-the-population-difference" class="nav-link" data-scroll-target="#independent-samples-and-the-population-difference"><span class="header-section-number">11</span> Independent Samples and the Population Difference</a></li>
+  <li><a href="#hypotheses-for-two-independent-means" id="toc-hypotheses-for-two-independent-means" class="nav-link" data-scroll-target="#hypotheses-for-two-independent-means"><span class="header-section-number">12</span> Hypotheses for Two Independent Means</a>
+  <ul class="collapse">
+  <li><a href="#two-sided" id="toc-two-sided" class="nav-link" data-scroll-target="#two-sided"><span class="header-section-number">12.0.1</span> Two-Sided</a></li>
+  <li><a href="#right-tailed" id="toc-right-tailed" class="nav-link" data-scroll-target="#right-tailed"><span class="header-section-number">12.0.2</span> Right-Tailed</a></li>
+  <li><a href="#left-tailed" id="toc-left-tailed" class="nav-link" data-scroll-target="#left-tailed"><span class="header-section-number">12.0.3</span> Left-Tailed</a></li>
+  </ul></li>
+  <li><a href="#two-samples-two-sources-of-uncertainty" id="toc-two-samples-two-sources-of-uncertainty" class="nav-link" data-scroll-target="#two-samples-two-sources-of-uncertainty"><span class="header-section-number">13</span> Two Samples, Two Sources of Uncertainty</a></li>
+  <li><a href="#two-sample-t-tests" id="toc-two-sample-t-tests" class="nav-link" data-scroll-target="#two-sample-t-tests"><span class="header-section-number">14</span> Two-Sample t-Tests</a></li>
+  <li><a href="#welchs-two-sample-t-test" id="toc-welchs-two-sample-t-test" class="nav-link" data-scroll-target="#welchs-two-sample-t-test"><span class="header-section-number">15</span> Welch’s Two-Sample t-Test</a>
+  <ul class="collapse">
+  <li><a href="#welchs-test-in-r" id="toc-welchs-test-in-r" class="nav-link" data-scroll-target="#welchs-test-in-r"><span class="header-section-number">15.1</span> Welch’s Test in R</a></li>
+  </ul></li>
+  <li><a href="#pooled-two-sample-t-test" id="toc-pooled-two-sample-t-test" class="nav-link" data-scroll-target="#pooled-two-sample-t-test"><span class="header-section-number">16</span> Pooled Two-Sample t-Test</a>
+  <ul class="collapse">
+  <li><a href="#pooled-test-in-r" id="toc-pooled-test-in-r" class="nav-link" data-scroll-target="#pooled-test-in-r"><span class="header-section-number">16.1</span> Pooled Test in R</a></li>
+  </ul></li>
+  <li><a href="#welch-vs.-pooled-t-test" id="toc-welch-vs.-pooled-t-test" class="nav-link" data-scroll-target="#welch-vs.-pooled-t-test"><span class="header-section-number">17</span> Welch vs.&nbsp;Pooled t-Test</a></li>
+  <li><a href="#why-unequal-sample-sizes-matter" id="toc-why-unequal-sample-sizes-matter" class="nav-link" data-scroll-target="#why-unequal-sample-sizes-matter"><span class="header-section-number">18</span> Why Unequal Sample Sizes Matter</a></li>
+  <li><a href="#examine-the-data-before-testing" id="toc-examine-the-data-before-testing" class="nav-link" data-scroll-target="#examine-the-data-before-testing"><span class="header-section-number">19</span> Examine the Data Before Testing</a></li>
+  <li><a href="#example-national-vs.-private-brand-soft-drinks" id="toc-example-national-vs.-private-brand-soft-drinks" class="nav-link" data-scroll-target="#example-national-vs.-private-brand-soft-drinks"><span class="header-section-number">20</span> Example: National vs.&nbsp;Private-Brand Soft Drinks</a>
+  <ul class="collapse">
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics"><span class="header-section-number">20.1</span> Descriptive Statistics</a>
+  <ul class="collapse">
+  <li><a href="#unequal-sample-sizes" id="toc-unequal-sample-sizes" class="nav-link" data-scroll-target="#unequal-sample-sizes"><span class="header-section-number">20.1.1</span> Unequal Sample Sizes</a></li>
+  <li><a href="#unequal-variability" id="toc-unequal-variability" class="nav-link" data-scroll-target="#unequal-variability"><span class="header-section-number">20.1.2</span> Unequal Variability</a></li>
+  <li><a href="#strong-skewness" id="toc-strong-skewness" class="nav-link" data-scroll-target="#strong-skewness"><span class="header-section-number">20.1.3</span> Strong Skewness</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#applying-welchs-test" id="toc-applying-welchs-test" class="nav-link" data-scroll-target="#applying-welchs-test"><span class="header-section-number">21</span> Applying Welch’s Test</a></li>
+  <li><a href="#confidence-interval-for-two-independent-means" id="toc-confidence-interval-for-two-independent-means" class="nav-link" data-scroll-target="#confidence-interval-for-two-independent-means"><span class="header-section-number">22</span> Confidence Interval for Two Independent Means</a></li>
+  <li><a href="#confidence-intervals-and-hypothesis-tests" id="toc-confidence-intervals-and-hypothesis-tests" class="nav-link" data-scroll-target="#confidence-intervals-and-hypothesis-tests"><span class="header-section-number">23</span> Confidence Intervals and Hypothesis Tests</a>
+  <ul class="collapse">
+  <li><a href="#if-the-95-confidence-interval-excludes-0" id="toc-if-the-95-confidence-interval-excludes-0" class="nav-link" data-scroll-target="#if-the-95-confidence-interval-excludes-0"><span class="header-section-number">23.0.1</span> If the 95% Confidence Interval Excludes 0</a></li>
+  <li><a href="#if-the-95-confidence-interval-contains-0" id="toc-if-the-95-confidence-interval-contains-0" class="nav-link" data-scroll-target="#if-the-95-confidence-interval-contains-0"><span class="header-section-number">23.0.2</span> If the 95% Confidence Interval Contains 0</a></li>
+  </ul></li>
+  <li><a href="#failing-to-reject-does-not-prove-equality" id="toc-failing-to-reject-does-not-prove-equality" class="nav-link" data-scroll-target="#failing-to-reject-does-not-prove-equality"><span class="header-section-number">24</span> Failing to Reject Does Not Prove Equality</a></li>
+  <li><a href="#statistical-significance-vs.-practical-importance" id="toc-statistical-significance-vs.-practical-importance" class="nav-link" data-scroll-target="#statistical-significance-vs.-practical-importance"><span class="header-section-number">25</span> Statistical Significance vs.&nbsp;Practical Importance</a></li>
+  <li><a href="#statistical-evidence-vs.-causal-evidence" id="toc-statistical-evidence-vs.-causal-evidence" class="nav-link" data-scroll-target="#statistical-evidence-vs.-causal-evidence"><span class="header-section-number">26</span> Statistical Evidence vs.&nbsp;Causal Evidence</a></li>
+  <li><a href="#example-homeowners-vs.-renters" id="toc-example-homeowners-vs.-renters" class="nav-link" data-scroll-target="#example-homeowners-vs.-renters"><span class="header-section-number">27</span> Example: Homeowners vs.&nbsp;Renters</a>
+  <ul class="collapse">
+  <li><a href="#analysis-workflow-in-r" id="toc-analysis-workflow-in-r" class="nav-link" data-scroll-target="#analysis-workflow-in-r"><span class="header-section-number">27.1</span> Analysis Workflow in R</a></li>
+  </ul></li>
+  <li><a href="#paired-vs.-independent-t-tests" id="toc-paired-vs.-independent-t-tests" class="nav-link" data-scroll-target="#paired-vs.-independent-t-tests"><span class="header-section-number">28</span> Paired vs.&nbsp;Independent t-Tests</a></li>
+  <li><a href="#independent-samples-assumptions" id="toc-independent-samples-assumptions" class="nav-link" data-scroll-target="#independent-samples-assumptions"><span class="header-section-number">29</span> Independent-Samples Assumptions</a>
+  <ul class="collapse">
+  <li><a href="#independence-between-groups" id="toc-independence-between-groups" class="nav-link" data-scroll-target="#independence-between-groups"><span class="header-section-number">29.0.1</span> Independence Between Groups</a></li>
+  <li><a href="#independence-within-groups" id="toc-independence-within-groups" class="nav-link" data-scroll-target="#independence-within-groups"><span class="header-section-number">29.0.2</span> Independence Within Groups</a></li>
+  <li><a href="#distribution-shape" id="toc-distribution-shape" class="nav-link" data-scroll-target="#distribution-shape"><span class="header-section-number">29.0.3</span> Distribution Shape</a></li>
+  <li><a href="#variance-assumption" id="toc-variance-assumption" class="nav-link" data-scroll-target="#variance-assumption"><span class="header-section-number">29.0.4</span> Variance Assumption</a></li>
+  </ul></li>
+  <li><a href="#independent-means-analysis-full-workflow" id="toc-independent-means-analysis-full-workflow" class="nav-link" data-scroll-target="#independent-means-analysis-full-workflow"><span class="header-section-number">30</span> Independent-Means Analysis: Full Workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1-identify-the-observational-unit" id="toc-step-1-identify-the-observational-unit" class="nav-link" data-scroll-target="#step-1-identify-the-observational-unit"><span class="header-section-number">30.1</span> Step 1: Identify the Observational Unit</a></li>
+  <li><a href="#step-2-determine-whether-the-samples-are-paired-or-independent" id="toc-step-2-determine-whether-the-samples-are-paired-or-independent" class="nav-link" data-scroll-target="#step-2-determine-whether-the-samples-are-paired-or-independent"><span class="header-section-number">30.2</span> Step 2: Determine Whether the Samples Are Paired or Independent</a></li>
+  <li><a href="#step-3-define-the-population-difference" id="toc-step-3-define-the-population-difference" class="nav-link" data-scroll-target="#step-3-define-the-population-difference"><span class="header-section-number">30.3</span> Step 3: Define the Population Difference</a></li>
+  <li><a href="#step-4-examine-the-data" id="toc-step-4-examine-the-data" class="nav-link" data-scroll-target="#step-4-examine-the-data"><span class="header-section-number">30.4</span> Step 4: Examine the Data</a></li>
+  <li><a href="#step-5-estimate-the-difference" id="toc-step-5-estimate-the-difference" class="nav-link" data-scroll-target="#step-5-estimate-the-difference"><span class="header-section-number">30.5</span> Step 5: Estimate the Difference</a></li>
+  <li><a href="#step-6-quantify-the-uncertainty" id="toc-step-6-quantify-the-uncertainty" class="nav-link" data-scroll-target="#step-6-quantify-the-uncertainty"><span class="header-section-number">30.6</span> Step 6: Quantify the Uncertainty</a></li>
+  <li><a href="#step-7-perform-the-hypothesis-test" id="toc-step-7-perform-the-hypothesis-test" class="nav-link" data-scroll-target="#step-7-perform-the-hypothesis-test"><span class="header-section-number">30.7</span> Step 7: Perform the Hypothesis Test</a></li>
+  <li><a href="#step-8-interpret-in-context" id="toc-step-8-interpret-in-context" class="nav-link" data-scroll-target="#step-8-interpret-in-context"><span class="header-section-number">30.8</span> Step 8: Interpret in Context</a></li>
+  </ul></li>
+  <li><a href="#overall-framework" id="toc-overall-framework" class="nav-link" data-scroll-target="#overall-framework"><span class="header-section-number">31</span> Overall Framework</a>
+  <ul class="collapse">
+  <li><a href="#one-population-mean" id="toc-one-population-mean" class="nav-link" data-scroll-target="#one-population-mean"><span class="header-section-number">31.0.1</span> One Population Mean</a></li>
+  <li><a href="#two-linked-conditions" id="toc-two-linked-conditions" class="nav-link" data-scroll-target="#two-linked-conditions"><span class="header-section-number">31.0.2</span> Two Linked Conditions</a></li>
+  <li><a href="#two-independent-populations" id="toc-two-independent-populations" class="nav-link" data-scroll-target="#two-independent-populations"><span class="header-section-number">31.0.3</span> Two Independent Populations</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></h1>
 </div>
 
 
@@ -197,9 +354,1290 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In progress…give me some time!</p>
+<section id="overview" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">7.1</span> Overview</h2>
+<p>Lecture 6 considered situations where observations from two conditions were <strong>meaningfully linked</strong>.</p>
+<p>For paired data, each pair produced one difference:</p>
+<p><span class="math display">\[
+d_i=X_{1i}-X_{2i}
+\]</span></p>
+<p>and the analysis became a one-sample inference problem involving:</p>
+<p><span class="math display">\[
+\mu_d
+\]</span></p>
+<p>Now consider a different situation.</p>
+<p>Suppose we want to compare:</p>
+<ul>
+<li>Spending by homeowners vs.&nbsp;renters</li>
+<li>Sales of national-brand vs.&nbsp;private-brand products</li>
+<li>Customers assigned to Website A vs.&nbsp;Website B</li>
+<li>Employees receiving one training program vs.&nbsp;employees receiving another</li>
+</ul>
+<p>In these situations, the observations in one group do not have a meaningful one-to-one connection with observations in the other group.</p>
+<p>These are <strong>independent samples</strong>.</p>
+<p>Instead of analyzing within-pair differences, we compare the two sample means:</p>
+<p><span class="math display">\[
+\bar{X}_1-\bar{X}_2
+\]</span></p>
+<p>to learn about the difference between the two population means:</p>
+<p><span class="math display">\[
+\boxed{\mu_1-\mu_2}
+\]</span></p>
+<p>The major distinction is:</p>
+<blockquote class="blockquote">
+<p><strong>Paired samples compare within-pair differences. Independent samples compare two separate group means.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="why-study-design-still-matters" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Why Study Design Still Matters</h1>
+<p>Statistical analysis involves more than calculating a p-value.</p>
+<p>Suppose a retailer asks:</p>
+<blockquote class="blockquote">
+<p>Would offering more coupons increase customer spending?</p>
+</blockquote>
+<p>There are several different questions hidden inside this problem.</p>
+<section id="describe" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="describe"><span class="header-section-number">8.0.1</span> Describe</h3>
+<p>How does spending differ between customers who use coupons and customers who do not?</p>
+</section>
+<section id="quantify-uncertainty" class="level3" data-number="8.0.2">
+<h3 data-number="8.0.2" class="anchored" data-anchor-id="quantify-uncertainty"><span class="header-section-number">8.0.2</span> Quantify Uncertainty</h3>
+<p>How precisely can we estimate the difference in population mean spending?</p>
+</section>
+<section id="evaluate-causality" class="level3" data-number="8.0.3">
+<h3 data-number="8.0.3" class="anchored" data-anchor-id="evaluate-causality"><span class="header-section-number">8.0.3</span> Evaluate Causality</h3>
+<p>Does the difference actually result from coupons, or are customers who use coupons already different from customers who do not?</p>
+<p>A hypothesis test addresses <strong>sampling uncertainty</strong>.</p>
+<p>It does not automatically eliminate:</p>
+<ul>
+<li>Confounding</li>
+<li>Selection bias</li>
+<li>Differences in the underlying groups</li>
+</ul>
+<p>Therefore:</p>
+<blockquote class="blockquote">
+<p><strong>Statistical significance and causal evidence are different questions.</strong></p>
+</blockquote>
+<p>The study design determines what conclusions the statistical analysis can support.</p>
+<hr>
+</section>
+</section>
+<section id="paired-vs.-independent-samples" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Paired vs.&nbsp;Independent Samples</h1>
+<p>Before comparing two means, determine whether the observations are <strong>paired or independent</strong>.</p>
+<section id="paired-samples" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="paired-samples"><span class="header-section-number">9.1</span> Paired Samples</h2>
+<p>Observations are paired when each observation in one condition has a meaningful one-to-one connection with an observation in the other condition.</p>
+<p>Examples:</p>
+<ul>
+<li>Same customer before and after treatment</li>
+<li>Same store before and after a redesign</li>
+<li>Identical twins</li>
+<li>Matched treatment and control stores</li>
+</ul>
+<p>Each pair produces:</p>
+<p><span class="math display">\[
+d_i=X_{1i}-X_{2i}
+\]</span></p>
+<p>and inference is performed on:</p>
+<p><span class="math display">\[
+\mu_d
+\]</span></p>
+<hr>
+</section>
+<section id="independent-samples" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="independent-samples"><span class="header-section-number">9.2</span> Independent Samples</h2>
+<p>Samples are independent when the groups contain <strong>different observational units</strong> and there is no meaningful one-to-one link between observations across groups.</p>
+<p>Examples:</p>
+<ul>
+<li>20 randomly selected men vs.&nbsp;20 independently selected women</li>
+<li>Homeowners vs.&nbsp;renters</li>
+<li>National-brand products vs.&nbsp;private-brand products</li>
+<li>Customers assigned to two different website versions</li>
+</ul>
+<p>Each observational unit contributes to only <strong>one group</strong>.</p>
+<p>The parameter of interest is:</p>
+<p><span class="math display">\[
+\boxed{\mu_1-\mu_2}
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="the-observational-unit-determines-the-design" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> The Observational Unit Determines the Design</h1>
+<p>The <strong>observational unit</strong> is the individual entity on which a measurement is taken.</p>
+<p>Before choosing a statistical test, ask:</p>
+<blockquote class="blockquote">
+<p><strong>What is the observational unit?</strong></p>
+</blockquote>
+<p>and then:</p>
+<blockquote class="blockquote">
+<p><strong>Does each observational unit contribute one measurement or a linked pair of measurements?</strong></p>
+</blockquote>
+<p>If each unit contributes to only one group:</p>
+<p><span class="math display">\[
+\boxed{\text{Independent Samples}}
+\]</span></p>
+<p>If the same unit contributes measurements under both conditions, or units are intentionally matched:</p>
+<p><span class="math display">\[
+\boxed{\text{Paired Samples}}
+\]</span></p>
+<hr>
+<section id="example-taste-test" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="example-taste-test"><span class="header-section-number">10.1</span> Example: Taste Test</h2>
+<p>Suppose a company wants to compare mean taste ratings for Coke and Pepsi.</p>
+<section id="independent-samples-design" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="independent-samples-design"><span class="header-section-number">10.1.1</span> Independent-Samples Design</h3>
+<p>Randomly assign participants to one of two groups:</p>
+<ul>
+<li>Group 1 tastes Coke</li>
+<li>Group 2 tastes Pepsi</li>
+</ul>
+<p>Each participant tastes only one product.</p>
+<p>The groups are independent.</p>
+</section>
+<section id="paired-design" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="paired-design"><span class="header-section-number">10.1.2</span> Paired Design</h3>
+<p>Every participant tastes both Coke and Pepsi.</p>
+<p>Each participant provides:</p>
+<p><span class="math display">\[
+(\text{Coke Rating}_i,\text{Pepsi Rating}_i)
+\]</span></p>
+<p>The observations are paired because both ratings come from the same person.</p>
+<p>The two designs answer similar questions but use different information.</p>
+<p>The paired design controls for individual differences in taste preferences because each participant acts as their own comparison.</p>
+<p>However, the study would need to prevent <strong>order effects</strong>.</p>
+<p>For example, tasting Coke first might affect a participant’s Pepsi rating.</p>
+<p>A common solution would be to randomize which product each participant tastes first.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="independent-samples-and-the-population-difference" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Independent Samples and the Population Difference</h1>
+<p>Suppose Group 1 has population mean:</p>
+<p><span class="math display">\[
+\mu_1
+\]</span></p>
+<p>and Group 2 has population mean:</p>
+<p><span class="math display">\[
+\mu_2
+\]</span></p>
+<p>The parameter of interest is:</p>
+<p><span class="math display">\[
+\boxed{\Delta=\mu_1-\mu_2}
+\]</span></p>
+<p>The sample estimate is:</p>
+<p><span class="math display">\[
+\boxed{\hat{\Delta}=\bar{X}_1-\bar{X}_2}
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\bar{X}_1-\bar{X}_2
+\rightarrow
+\text{estimate of }
+\mu_1-\mu_2
+\]</span></p>
+<p>The direction must be defined <strong>before interpreting the result</strong>.</p>
+<p>For example, suppose:</p>
+<p><span class="math display">\[
+\Delta
+=
+\mu_{\text{Homeowners}}
+-
+\mu_{\text{Renters}}
+\]</span></p>
+<p>Then:</p>
+<ul>
+<li><span class="math inline">\(\Delta&gt;0\)</span> means homeowners spend more on average</li>
+<li><span class="math inline">\(\Delta&lt;0\)</span> means renters spend more on average</li>
+<li><span class="math inline">\(\Delta=0\)</span> means the population means are equal</li>
+</ul>
+<p>Reversing the order reverses the sign:</p>
+<p><span class="math display">\[
+\mu_1-\mu_2
+=
+-(\mu_2-\mu_1)
+\]</span></p>
+<p>Therefore:</p>
+<blockquote class="blockquote">
+<p><strong>Always define the direction of the difference before interpreting it.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="hypotheses-for-two-independent-means" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Hypotheses for Two Independent Means</h1>
+<p>The most common null hypothesis is:</p>
+<p><span class="math display">\[
+H_0:\mu_1-\mu_2=0
+\]</span></p>
+<p>which is equivalent to:</p>
+<p><span class="math display">\[
+H_0:\mu_1=\mu_2
+\]</span></p>
+<p>The alternative depends on the research question.</p>
+<section id="two-sided" class="level3" data-number="12.0.1">
+<h3 data-number="12.0.1" class="anchored" data-anchor-id="two-sided"><span class="header-section-number">12.0.1</span> Two-Sided</h3>
+<p>To determine whether the population means differ:</p>
+<p><span class="math display">\[
+H_a:\mu_1-\mu_2\neq0
+\]</span></p>
+</section>
+<section id="right-tailed" class="level3" data-number="12.0.2">
+<h3 data-number="12.0.2" class="anchored" data-anchor-id="right-tailed"><span class="header-section-number">12.0.2</span> Right-Tailed</h3>
+<p>To determine whether Population 1 has a larger mean:</p>
+<p><span class="math display">\[
+H_a:\mu_1-\mu_2&gt;0
+\]</span></p>
+</section>
+<section id="left-tailed" class="level3" data-number="12.0.3">
+<h3 data-number="12.0.3" class="anchored" data-anchor-id="left-tailed"><span class="header-section-number">12.0.3</span> Left-Tailed</h3>
+<p>To determine whether Population 1 has a smaller mean:</p>
+<p><span class="math display">\[
+H_a:\mu_1-\mu_2&lt;0
+\]</span></p>
+<p>Again, the meaning of positive and negative depends on how Group 1 and Group 2 were defined.</p>
+<hr>
+</section>
+</section>
+<section id="two-samples-two-sources-of-uncertainty" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Two Samples, Two Sources of Uncertainty</h1>
+<p>With paired samples, uncertainty comes from the variation among the within-pair differences.</p>
+<p>With independent samples, we estimate:</p>
+<p><span class="math display">\[
+\mu_1
+\]</span></p>
+<p>using:</p>
+<p><span class="math display">\[
+\bar{X}_1
+\]</span></p>
+<p>and independently estimate:</p>
+<p><span class="math display">\[
+\mu_2
+\]</span></p>
+<p>using:</p>
+<p><span class="math display">\[
+\bar{X}_2
+\]</span></p>
+<p>Both estimates contain sampling uncertainty.</p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\bar{X}_1-\bar{X}_2
+\]</span></p>
+<p>has uncertainty from <strong>both samples</strong>.</p>
+<p>For independent samples:</p>
+<p><span class="math display">\[
+SE(\bar{X}_1-\bar{X}_2)
+=
+\sqrt{
+\frac{\sigma_1^2}{n_1}
++
+\frac{\sigma_2^2}{n_2}
+}
+\]</span></p>
+<p>In practice, the population standard deviations are usually unknown, so they must be estimated from the samples.</p>
+<p>An important consequence is:</p>
+<blockquote class="blockquote">
+<p><strong>The less precise group contributes more uncertainty to the comparison.</strong></p>
+</blockquote>
+<p>For example, if:</p>
+<p><span class="math display">\[
+n_1=10{,}000
+\]</span></p>
+<p>but:</p>
+<p><span class="math display">\[
+n_2=20
+\]</span></p>
+<p>the second sample will generally contribute much more uncertainty to the estimated difference.</p>
+<p>A huge sample in one group does not eliminate uncertainty created by a small sample in the other.</p>
+<hr>
+</section>
+<section id="two-sample-t-tests" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Two-Sample t-Tests</h1>
+<p>There are two major approaches for comparing two independent population means:</p>
+<ol type="1">
+<li><strong>Welch’s two-sample t-test</strong></li>
+<li><strong>Pooled two-sample t-test</strong></li>
+</ol>
+<p>Both estimate the same population quantity:</p>
+<p><span class="math display">\[
+\mu_1-\mu_2
+\]</span></p>
+<p>The difference is how they estimate the uncertainty.</p>
+<hr>
+</section>
+<section id="welchs-two-sample-t-test" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Welch’s Two-Sample t-Test</h1>
+<p><strong>Welch’s t-test</strong> estimates the variance of each population separately.</p>
+<p>It does <strong>not</strong> assume that the two populations have equal variances.</p>
+<p>The estimated population difference is:</p>
+<p><span class="math display">\[
+\hat{\Delta}
+=
+\bar{X}_1-\bar{X}_2
+\]</span></p>
+<p>The standard error is:</p>
+<p><span class="math display">\[
+\boxed{
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(s_1\)</span> = sample standard deviation of Group 1<br>
+<span class="math inline">\(s_2\)</span> = sample standard deviation of Group 2<br>
+<span class="math inline">\(n_1\)</span> = sample size of Group 1<br>
+<span class="math inline">\(n_2\)</span> = sample size of Group 2</p>
+<p>The test statistic is:</p>
+<p><span class="math display">\[
+\boxed{
+t=
+\frac{
+(\bar{X}_1-\bar{X}_2)-0
+}{
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+}
+\]</span></p>
+<p>More generally, if the null hypothesis specifies some difference:</p>
+<p><span class="math display">\[
+\Delta_0
+\]</span></p>
+<p>then:</p>
+<p><span class="math display">\[
+t=
+\frac{
+\hat{\Delta}-\Delta_0
+}{
+SE(\hat{\Delta})
+}
+\]</span></p>
+<p>As before, the t-statistic represents:</p>
+<blockquote class="blockquote">
+<p><strong>How many estimated standard errors the observed difference lies from the null value.</strong></p>
+</blockquote>
+<hr>
+<section id="welchs-test-in-r" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="welchs-test-in-r"><span class="header-section-number">15.1</span> Welch’s Test in R</h2>
+<p>R uses Welch’s method by default when performing an independent two-sample t-test.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    outcome <span class="sc">~</span> group,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> my_data</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    spending <span class="sc">~</span> homeowner_desc,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> households</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Unless otherwise specified, <code>t.test()</code> does <strong>not</strong> assume equal population variances.</p>
+<p>This makes Welch’s method the standard default when there is no strong reason to assume that the two population variances are equal.</p>
+<hr>
+</section>
+</section>
+<section id="pooled-two-sample-t-test" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Pooled Two-Sample t-Test</h1>
+<p>The <strong>pooled t-test</strong> makes an additional assumption:</p>
+<p><span class="math display">\[
+\boxed{
+\sigma_1^2=\sigma_2^2=\sigma^2
+}
+\]</span></p>
+<p>In other words, the two populations are assumed to have the <strong>same variance</strong>.</p>
+<p>Because both samples are assumed to estimate the same population variance, their information can be combined into a single <strong>pooled variance estimate</strong>.</p>
+<p>The pooled variance is:</p>
+<p><span class="math display">\[
+\boxed{
+s_p^2
+=
+\frac{
+(n_1-1)s_1^2
++
+(n_2-1)s_2^2
+}{
+n_1+n_2-2
+}
+}
+\]</span></p>
+<p>The pooled standard deviation is:</p>
+<p><span class="math display">\[
+s_p=\sqrt{s_p^2}
+\]</span></p>
+<p>The standard error becomes:</p>
+<p><span class="math display">\[
+\boxed{
+SE_{\text{pooled}}
+=
+s_p
+\sqrt{
+\frac{1}{n_1}
++
+\frac{1}{n_2}
+}
+}
+\]</span></p>
+<p>The degrees of freedom are:</p>
+<p><span class="math display">\[
+df=n_1+n_2-2
+\]</span></p>
+<hr>
+<section id="pooled-test-in-r" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="pooled-test-in-r"><span class="header-section-number">16.1</span> Pooled Test in R</h2>
+<p>Unlike Welch’s method, pooling must be requested explicitly:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    outcome <span class="sc">~</span> group,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> my_data,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">var.equal =</span> <span class="cn">TRUE</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The argument:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>var.equal <span class="ot">=</span> <span class="cn">TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>tells R to assume equal population variances.</p>
+<hr>
+</section>
+</section>
+<section id="welch-vs.-pooled-t-test" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Welch vs.&nbsp;Pooled t-Test</h1>
+<p>Both methods estimate:</p>
+<p><span class="math display">\[
+\mu_1-\mu_2
+\]</span></p>
+<p>but they make different assumptions about variability.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Welch</th>
+<th>Pooled</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compares two independent means</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Assumes equal population variances</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Estimates variances separately</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Combines variance estimates</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>R <code>t.test()</code> default</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>The practical rule is:</p>
+<blockquote class="blockquote">
+<p><strong>Use Welch’s method by default unless there is a defensible reason to assume equal population variances.</strong></p>
+</blockquote>
+<p>The pooled method is appropriate only when the equal-variance assumption has a reasonable basis.</p>
+<hr>
+</section>
+<section id="why-unequal-sample-sizes-matter" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Why Unequal Sample Sizes Matter</h1>
+<p>Unequal sample sizes are especially important when the groups also have different variances.</p>
+<p>Recall Welch’s standard error:</p>
+<p><span class="math display">\[
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+\]</span></p>
+<p>Each group’s contribution depends on both:</p>
+<ul>
+<li>Its variability</li>
+<li>Its sample size</li>
+</ul>
+<p>A group with:</p>
+<ul>
+<li>High variability</li>
+<li>Small sample size</li>
+</ul>
+<p>can contribute substantial uncertainty.</p>
+<p>Therefore, before comparing two means, examine:</p>
+<p><span class="math display">\[
+n_1,\ n_2,\ s_1,\ s_2
+\]</span></p>
+<p>rather than looking only at the two means.</p>
+<hr>
+</section>
+<section id="examine-the-data-before-testing" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Examine the Data Before Testing</h1>
+<p>Before running a two-sample t-test, summarize and visualize both groups.</p>
+<p>Important features include:</p>
+<ul>
+<li>Sample size</li>
+<li>Mean</li>
+<li>Median</li>
+<li>Standard deviation</li>
+<li>Skewness</li>
+<li>Outliers or unusual observations</li>
+</ul>
+<p>For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_data <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean =</span> <span class="fu">mean</span>(outcome, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">median =</span> <span class="fu">median</span>(outcome, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd =</span> <span class="fu">sd</span>(outcome, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A useful visualization is a boxplot:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    my_data,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> group,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> outcome</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The statistical test should not replace descriptive analysis.</p>
+<p>Instead:</p>
+<p><span class="math display">\[
+\text{Describe}
+\rightarrow
+\text{Check}
+\rightarrow
+\text{Infer}
+\]</span></p>
+<hr>
+</section>
+<section id="example-national-vs.-private-brand-soft-drinks" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Example: National vs.&nbsp;Private-Brand Soft Drinks</h1>
+<p>Suppose we compare total observed sales for:</p>
+<ul>
+<li>National-brand 2-liter soft drinks</li>
+<li>Private-brand 2-liter soft drinks</li>
+</ul>
+<p>The observational unit is a:</p>
+<blockquote class="blockquote">
+<p><strong>Soft-drink product</strong></p>
+</blockquote>
+<p>Each product belongs to either:</p>
+<ul>
+<li>National brand</li>
+</ul>
+<p>or:</p>
+<ul>
+<li>Private brand</li>
+</ul>
+<p>A national-brand product is not meaningfully paired with one particular private-brand product.</p>
+<p>Therefore, the samples are:</p>
+<p><span class="math display">\[
+\boxed{\text{Independent}}
+\]</span></p>
+<hr>
+<section id="descriptive-statistics" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">20.1</span> Descriptive Statistics</h2>
+<p>Suppose the data show:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Brand</th>
+<th style="text-align: right;">Products</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>National</td>
+<td style="text-align: right;">175</td>
+<td style="text-align: right;">203.9</td>
+<td style="text-align: right;">4.5</td>
+<td style="text-align: right;">664.7</td>
+</tr>
+<tr class="even">
+<td>Private</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">170.4</td>
+<td style="text-align: right;">62.1</td>
+<td style="text-align: right;">263.9</td>
+</tr>
+</tbody>
+</table>
+<p>Several features immediately deserve attention.</p>
+<section id="unequal-sample-sizes" class="level3" data-number="20.1.1">
+<h3 data-number="20.1.1" class="anchored" data-anchor-id="unequal-sample-sizes"><span class="header-section-number">20.1.1</span> Unequal Sample Sizes</h3>
+<p><span class="math display">\[
+n_{\text{National}}=175
+\]</span></p>
+<p>while:</p>
+<p><span class="math display">\[
+n_{\text{Private}}=57
+\]</span></p>
+</section>
+<section id="unequal-variability" class="level3" data-number="20.1.2">
+<h3 data-number="20.1.2" class="anchored" data-anchor-id="unequal-variability"><span class="header-section-number">20.1.2</span> Unequal Variability</h3>
+<p><span class="math display">\[
+s_{\text{National}}=664.7
+\]</span></p>
+<p>while:</p>
+<p><span class="math display">\[
+s_{\text{Private}}=263.9
+\]</span></p>
+<p>The national-brand group is much more variable.</p>
+</section>
+<section id="strong-skewness" class="level3" data-number="20.1.3">
+<h3 data-number="20.1.3" class="anchored" data-anchor-id="strong-skewness"><span class="header-section-number">20.1.3</span> Strong Skewness</h3>
+<p>For national brands:</p>
+<p><span class="math display">\[
+\text{Mean}=203.9
+\]</span></p>
+<p>while:</p>
+<p><span class="math display">\[
+\text{Median}=4.5
+\]</span></p>
+<p>The enormous difference between the mean and median indicates a highly right-skewed distribution with some extremely large observations.</p>
+<p>This is why descriptive analysis should occur <strong>before</strong> inferential analysis.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="applying-welchs-test" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> Applying Welch’s Test</h1>
+<p>Define the population difference as:</p>
+<p><span class="math display">\[
+\Delta
+=
+\mu_{\text{National}}
+-
+\mu_{\text{Private}}
+\]</span></p>
+<p>Suppose the estimated means are:</p>
+<p><span class="math display">\[
+\bar{X}_{\text{National}}
+=
+203.89
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+\bar{X}_{\text{Private}}
+=
+170.41
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+\hat{\Delta}
+=
+203.89-170.41
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\hat{\Delta}=33.48
+}
+\]</span></p>
+<p>So national-brand products have an observed mean sales value approximately 33.48 units higher than private-brand products.</p>
+<p>But the estimate alone does not tell us how uncertain that difference is.</p>
+<hr>
+</section>
+<section id="confidence-interval-for-two-independent-means" class="level1" data-number="22">
+<h1 data-number="22"><span class="header-section-number">22</span> Confidence Interval for Two Independent Means</h1>
+<p>A confidence interval for the population mean difference has the general form:</p>
+<p><span class="math display">\[
+\boxed{
+\hat{\Delta}
+\pm
+t^*SE(\hat{\Delta})
+}
+\]</span></p>
+<p>For Welch’s method:</p>
+<p><span class="math display">\[
+\boxed{
+(\bar{X}_1-\bar{X}_2)
+\pm
+t^*
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+\]</span></p>
+<p>Suppose the soft-drink example produces:</p>
+<p><span class="math display">\[
+95\%\text{ CI}
+=
+(-87.14,\ 154.10)
+\]</span></p>
+<p>This means the data are compatible with population mean differences ranging from approximately:</p>
+<p><span class="math display">\[
+-87.14
+\]</span></p>
+<p>to:</p>
+<p><span class="math display">\[
+154.10
+\]</span></p>
+<p>under the method’s assumptions.</p>
+<p>Because the interval contains:</p>
+<p><span class="math display">\[
+0
+\]</span></p>
+<p>a population mean difference of zero remains compatible with the data.</p>
+<hr>
+</section>
+<section id="confidence-intervals-and-hypothesis-tests" class="level1" data-number="23">
+<h1 data-number="23"><span class="header-section-number">23</span> Confidence Intervals and Hypothesis Tests</h1>
+<p>For the two-sided hypotheses:</p>
+<p><span class="math display">\[
+H_0:\mu_1-\mu_2=0
+\]</span></p>
+<p><span class="math display">\[
+H_a:\mu_1-\mu_2\neq0
+\]</span></p>
+<p>the confidence interval and hypothesis test communicate closely related information.</p>
+<section id="if-the-95-confidence-interval-excludes-0" class="level3" data-number="23.0.1">
+<h3 data-number="23.0.1" class="anchored" data-anchor-id="if-the-95-confidence-interval-excludes-0"><span class="header-section-number">23.0.1</span> If the 95% Confidence Interval Excludes 0</h3>
+<p>There is evidence against:</p>
+<p><span class="math display">\[
+H_0:\mu_1-\mu_2=0
+\]</span></p>
+<p>at the corresponding 5% significance level.</p>
+</section>
+<section id="if-the-95-confidence-interval-contains-0" class="level3" data-number="23.0.2">
+<h3 data-number="23.0.2" class="anchored" data-anchor-id="if-the-95-confidence-interval-contains-0"><span class="header-section-number">23.0.2</span> If the 95% Confidence Interval Contains 0</h3>
+<p>We fail to reject:</p>
+<p><span class="math display">\[
+H_0:\mu_1-\mu_2=0
+\]</span></p>
+<p>at the corresponding 5% significance level.</p>
+<p>For the soft-drink example:</p>
+<p><span class="math display">\[
+(-87.14,\ 154.10)
+\]</span></p>
+<p>contains:</p>
+<p><span class="math display">\[
+0
+\]</span></p>
+<p>so we fail to reject the null hypothesis.</p>
+<hr>
+</section>
+</section>
+<section id="failing-to-reject-does-not-prove-equality" class="level1" data-number="24">
+<h1 data-number="24"><span class="header-section-number">24</span> Failing to Reject Does Not Prove Equality</h1>
+<p>This distinction is essential.</p>
+<p>Suppose:</p>
+<p><span class="math display">\[
+p=0.58
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+95\%\text{ CI}
+=
+(-87.14,\ 154.10)
+\]</span></p>
+<p>We can say:</p>
+<blockquote class="blockquote">
+<p>The data do not provide sufficient evidence that the two population means differ.</p>
+</blockquote>
+<p>We should <strong>not</strong> say:</p>
+<blockquote class="blockquote">
+<p>The population means are equal.</p>
+</blockquote>
+<p>Why?</p>
+<p>Because the confidence interval contains many possible differences besides zero.</p>
+<p>For example, values such as:</p>
+<p><span class="math display">\[
+-50,\ 25,\ 100
+\]</span></p>
+<p>are also inside the interval.</p>
+<p>The data are therefore compatible with:</p>
+<ul>
+<li>Negative differences</li>
+<li>No difference</li>
+<li>Positive differences</li>
+</ul>
+<p>The analysis has not demonstrated equality.</p>
+<blockquote class="blockquote">
+<p><strong>Failing to find evidence of a difference is not the same as finding evidence of no difference.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="statistical-significance-vs.-practical-importance" class="level1" data-number="25">
+<h1 data-number="25"><span class="header-section-number">25</span> Statistical Significance vs.&nbsp;Practical Importance</h1>
+<p>Suppose a test finds:</p>
+<p><span class="math display">\[
+p&lt;0.05
+\]</span></p>
+<p>That tells us the observed difference would be difficult to explain purely through sampling variation under the null model.</p>
+<p>It does <strong>not</strong> tell us whether the difference is important for the business.</p>
+<p>For example, a very large sample might detect:</p>
+<p><span class="math display">\[
+\$0.03
+\]</span></p>
+<p>of additional average spending.</p>
+<p>That difference might be statistically detectable but operationally irrelevant.</p>
+<p>Therefore, interpretation should consider:</p>
+<ol type="1">
+<li>Estimated difference</li>
+<li>Confidence interval</li>
+<li>Statistical evidence</li>
+<li>Practical magnitude</li>
+<li>Study design</li>
+</ol>
+<p>A p-value alone does not answer all of these questions.</p>
+<hr>
+</section>
+<section id="statistical-evidence-vs.-causal-evidence" class="level1" data-number="26">
+<h1 data-number="26"><span class="header-section-number">26</span> Statistical Evidence vs.&nbsp;Causal Evidence</h1>
+<p>Suppose observational data show:</p>
+<p><span class="math display">\[
+\bar{X}_{\text{Coupon}}
+&gt;
+\bar{X}_{\text{No Coupon}}
+\]</span></p>
+<p>Even if a two-sample t-test finds a statistically significant difference, we cannot automatically conclude:</p>
+<blockquote class="blockquote">
+<p>Coupons caused customers to spend more.</p>
+</blockquote>
+<p>Customers who use coupons may systematically differ from customers who do not.</p>
+<p>For example, coupon users might:</p>
+<ul>
+<li>Shop more frequently</li>
+<li>Purchase larger baskets</li>
+<li>Be more loyal customers</li>
+<li>Differ demographically</li>
+</ul>
+<p>A hypothesis test quantifies <strong>sampling uncertainty</strong>.</p>
+<p>It does not automatically remove <strong>confounding</strong>.</p>
+<p>Therefore:</p>
+<blockquote class="blockquote">
+<p><strong>Inference about a difference and inference about causation are separate issues.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="example-homeowners-vs.-renters" class="level1" data-number="27">
+<h1 data-number="27"><span class="header-section-number">27</span> Example: Homeowners vs.&nbsp;Renters</h1>
+<p>Suppose the business question is:</p>
+<blockquote class="blockquote">
+<p>How does annual Kroger spending differ between households that own their home and households that rent?</p>
+</blockquote>
+<p>First define the populations.</p>
+<p>Population 1:</p>
+<blockquote class="blockquote">
+<p>Kroger households that own their home</p>
+</blockquote>
+<p>Population 2:</p>
+<blockquote class="blockquote">
+<p>Kroger households that rent their home</p>
+</blockquote>
+<p>Define:</p>
+<p><span class="math display">\[
+\Delta
+=
+\mu_{\text{Owner}}
+-
+\mu_{\text{Renter}}
+\]</span></p>
+<p>The observational unit is:</p>
+<blockquote class="blockquote">
+<p><strong>Household</strong></p>
+</blockquote>
+<p>Each household belongs to one group.</p>
+<p>There is no natural one-to-one relationship between an owner household and a renter household.</p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\boxed{\text{Independent Samples}}
+\]</span></p>
+<hr>
+<section id="analysis-workflow-in-r" class="level2" data-number="27.1">
+<h2 data-number="27.1" class="anchored" data-anchor-id="analysis-workflow-in-r"><span class="header-section-number">27.1</span> Analysis Workflow in R</h2>
+<p>First summarize the groups:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>households <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(homeowner_desc) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">mean_spend =</span> <span class="fu">mean</span>(spend, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">median_spend =</span> <span class="fu">median</span>(spend, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd_spend =</span> <span class="fu">sd</span>(spend, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then visualize:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    households,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> homeowner_desc,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> spend</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then perform Welch’s two-sample t-test:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    spend <span class="sc">~</span> homeowner_desc,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> households</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The output provides:</p>
+<ul>
+<li>Group means</li>
+<li>Estimated difference</li>
+<li>t-statistic</li>
+<li>Degrees of freedom</li>
+<li>p-value</li>
+<li>Confidence interval</li>
+</ul>
+<p>The final interpretation should report the estimated population difference and its uncertainty in the context of homeowner and renter households.</p>
+<hr>
+</section>
+</section>
+<section id="paired-vs.-independent-t-tests" class="level1" data-number="28">
+<h1 data-number="28"><span class="header-section-number">28</span> Paired vs.&nbsp;Independent t-Tests</h1>
+<p>The two procedures are closely related but solve different problems.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Paired t-Test</th>
+<th>Independent t-Test</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Groups</td>
+<td>Meaningfully linked</td>
+<td>Separate</td>
+</tr>
+<tr class="even">
+<td>Observational units</td>
+<td>Same/matched units</td>
+<td>Different units</td>
+</tr>
+<tr class="odd">
+<td>Parameter</td>
+<td><span class="math inline">\(\mu_d\)</span></td>
+<td><span class="math inline">\(\mu_1-\mu_2\)</span></td>
+</tr>
+<tr class="even">
+<td>Statistic</td>
+<td><span class="math inline">\(\bar{d}\)</span></td>
+<td><span class="math inline">\(\bar{X}_1-\bar{X}_2\)</span></td>
+</tr>
+<tr class="odd">
+<td>Source of uncertainty</td>
+<td>Variation in differences</td>
+<td>Variation from both samples</td>
+</tr>
+<tr class="even">
+<td>Analysis</td>
+<td>One-sample t-test on differences</td>
+<td>Two-sample t-test</td>
+</tr>
+<tr class="odd">
+<td>Typical R argument</td>
+<td><code>paired = TRUE</code></td>
+<td>Welch default</td>
+</tr>
+</tbody>
+</table>
+<p>The first question should therefore <strong>not</strong> be:</p>
+<blockquote class="blockquote">
+<p>Which t-test formula do I use?</p>
+</blockquote>
+<p>It should be:</p>
+<blockquote class="blockquote">
+<p><strong>How were the data generated, and are these observations meaningfully linked?</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="independent-samples-assumptions" class="level1" data-number="29">
+<h1 data-number="29"><span class="header-section-number">29</span> Independent-Samples Assumptions</h1>
+<p>For a two-sample t procedure, the analysis requires the observations to have an appropriate independence structure.</p>
+<p>Most importantly:</p>
+<section id="independence-between-groups" class="level3" data-number="29.0.1">
+<h3 data-number="29.0.1" class="anchored" data-anchor-id="independence-between-groups"><span class="header-section-number">29.0.1</span> Independence Between Groups</h3>
+<p>The observations in one group should not be paired with observations in the other group.</p>
+<p>If meaningful pairing exists, use a paired analysis instead.</p>
+</section>
+<section id="independence-within-groups" class="level3" data-number="29.0.2">
+<h3 data-number="29.0.2" class="anchored" data-anchor-id="independence-within-groups"><span class="header-section-number">29.0.2</span> Independence Within Groups</h3>
+<p>Observations should represent independent observational units rather than repeated or clustered measurements being incorrectly treated as separate independent observations.</p>
+</section>
+<section id="distribution-shape" class="level3" data-number="29.0.3">
+<h3 data-number="29.0.3" class="anchored" data-anchor-id="distribution-shape"><span class="header-section-number">29.0.3</span> Distribution Shape</h3>
+<p>The behavior of the t procedure also depends on sample size and the distributions of the data.</p>
+<p>Before inference, inspect:</p>
+<ul>
+<li>Skewness</li>
+<li>Extreme observations</li>
+<li>Sample sizes</li>
+<li>Variability</li>
+</ul>
+<p>Large samples generally make inference about means more robust to moderate non-Normality, but extreme skewness and unusual observations should still be investigated.</p>
+</section>
+<section id="variance-assumption" class="level3" data-number="29.0.4">
+<h3 data-number="29.0.4" class="anchored" data-anchor-id="variance-assumption"><span class="header-section-number">29.0.4</span> Variance Assumption</h3>
+<p>Welch’s test does <strong>not</strong> require:</p>
+<p><span class="math display">\[
+\sigma_1^2=\sigma_2^2
+\]</span></p>
+<p>The pooled test does.</p>
+<p>This is one reason Welch’s method is generally preferred as the default.</p>
+<hr>
+</section>
+</section>
+<section id="independent-means-analysis-full-workflow" class="level1" data-number="30">
+<h1 data-number="30"><span class="header-section-number">30</span> Independent-Means Analysis: Full Workflow</h1>
+<p>When comparing two population means from separate groups:</p>
+<section id="step-1-identify-the-observational-unit" class="level2" data-number="30.1">
+<h2 data-number="30.1" class="anchored" data-anchor-id="step-1-identify-the-observational-unit"><span class="header-section-number">30.1</span> Step 1: Identify the Observational Unit</h2>
+<p>Ask:</p>
+<blockquote class="blockquote">
+<p>What does one row or measurement represent?</p>
+</blockquote>
+<p>Determine whether the two groups contain genuinely separate observational units.</p>
+<hr>
+</section>
+<section id="step-2-determine-whether-the-samples-are-paired-or-independent" class="level2" data-number="30.2">
+<h2 data-number="30.2" class="anchored" data-anchor-id="step-2-determine-whether-the-samples-are-paired-or-independent"><span class="header-section-number">30.2</span> Step 2: Determine Whether the Samples Are Paired or Independent</h2>
+<p>Ask:</p>
+<blockquote class="blockquote">
+<p>Can each observation in one group be meaningfully linked to exactly one observation in the other?</p>
+</blockquote>
+<p>If yes:</p>
+<p><span class="math display">\[
+\text{Paired}
+\]</span></p>
+<p>If no:</p>
+<p><span class="math display">\[
+\text{Independent}
+\]</span></p>
+<hr>
+</section>
+<section id="step-3-define-the-population-difference" class="level2" data-number="30.3">
+<h2 data-number="30.3" class="anchored" data-anchor-id="step-3-define-the-population-difference"><span class="header-section-number">30.3</span> Step 3: Define the Population Difference</h2>
+<p>Explicitly define:</p>
+<p><span class="math display">\[
+\Delta=\mu_1-\mu_2
+\]</span></p>
+<p>before calculating or interpreting the estimate.</p>
+<p>This establishes what positive and negative values mean.</p>
+<hr>
+</section>
+<section id="step-4-examine-the-data" class="level2" data-number="30.4">
+<h2 data-number="30.4" class="anchored" data-anchor-id="step-4-examine-the-data"><span class="header-section-number">30.4</span> Step 4: Examine the Data</h2>
+<p>For each group, examine:</p>
+<ul>
+<li>Sample size</li>
+<li>Mean</li>
+<li>Median</li>
+<li>Standard deviation</li>
+<li>Distribution shape</li>
+<li>Skewness</li>
+<li>Unusual observations</li>
+</ul>
+<p>Use both numerical summaries and visualizations.</p>
+<hr>
+</section>
+<section id="step-5-estimate-the-difference" class="level2" data-number="30.5">
+<h2 data-number="30.5" class="anchored" data-anchor-id="step-5-estimate-the-difference"><span class="header-section-number">30.5</span> Step 5: Estimate the Difference</h2>
+<p>Calculate:</p>
+<p><span class="math display">\[
+\hat{\Delta}
+=
+\bar{X}_1-\bar{X}_2
+\]</span></p>
+<hr>
+</section>
+<section id="step-6-quantify-the-uncertainty" class="level2" data-number="30.6">
+<h2 data-number="30.6" class="anchored" data-anchor-id="step-6-quantify-the-uncertainty"><span class="header-section-number">30.6</span> Step 6: Quantify the Uncertainty</h2>
+<p>Using Welch’s method:</p>
+<p><span class="math display">\[
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+\]</span></p>
+<p>Construct a confidence interval:</p>
+<p><span class="math display">\[
+\hat{\Delta}
+\pm
+t^*SE(\hat{\Delta})
+\]</span></p>
+<hr>
+</section>
+<section id="step-7-perform-the-hypothesis-test" class="level2" data-number="30.7">
+<h2 data-number="30.7" class="anchored" data-anchor-id="step-7-perform-the-hypothesis-test"><span class="header-section-number">30.7</span> Step 7: Perform the Hypothesis Test</h2>
+<p>Usually:</p>
+<p><span class="math display">\[
+H_0:\mu_1-\mu_2=0
+\]</span></p>
+<p>against an appropriate alternative.</p>
+<p>Use Welch’s method by default:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    outcome <span class="sc">~</span> group,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> my_data</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Use the pooled method only when the equal-population-variance assumption has a defensible basis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    outcome <span class="sc">~</span> group,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> my_data,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">var.equal =</span> <span class="cn">TRUE</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<hr>
+</section>
+<section id="step-8-interpret-in-context" class="level2" data-number="30.8">
+<h2 data-number="30.8" class="anchored" data-anchor-id="step-8-interpret-in-context"><span class="header-section-number">30.8</span> Step 8: Interpret in Context</h2>
+<p>Report:</p>
+<ol type="1">
+<li>The direction of the comparison</li>
+<li>The estimated mean difference</li>
+<li>The confidence interval</li>
+<li>The statistical evidence</li>
+<li>Practical importance when relevant</li>
+<li>Whether the study design supports a causal interpretation</li>
+</ol>
+<p>The statistical result should always be translated back into the original business question.</p>
+<hr>
+</section>
+</section>
+<section id="overall-framework" class="level1" data-number="31">
+<h1 data-number="31"><span class="header-section-number">31</span> Overall Framework</h1>
+<p>The sequence from Lectures 5–7 can now be viewed as one unified framework.</p>
+<section id="one-population-mean" class="level3" data-number="31.0.1">
+<h3 data-number="31.0.1" class="anchored" data-anchor-id="one-population-mean"><span class="header-section-number">31.0.1</span> One Population Mean</h3>
+<p>Parameter:</p>
+<p><span class="math display">\[
+\mu
+\]</span></p>
+<p>Estimate:</p>
+<p><span class="math display">\[
+\bar{X}
+\]</span></p>
+<p>Method:</p>
+<p><span class="math display">\[
+\text{One-Sample }t
+\]</span></p>
+</section>
+<section id="two-linked-conditions" class="level3" data-number="31.0.2">
+<h3 data-number="31.0.2" class="anchored" data-anchor-id="two-linked-conditions"><span class="header-section-number">31.0.2</span> Two Linked Conditions</h3>
+<p>Parameter:</p>
+<p><span class="math display">\[
+\mu_d
+\]</span></p>
+<p>Estimate:</p>
+<p><span class="math display">\[
+\bar{d}
+\]</span></p>
+<p>Method:</p>
+<p><span class="math display">\[
+\text{Paired }t
+=
+\text{One-Sample }t\text{ on Differences}
+\]</span></p>
+</section>
+<section id="two-independent-populations" class="level3" data-number="31.0.3">
+<h3 data-number="31.0.3" class="anchored" data-anchor-id="two-independent-populations"><span class="header-section-number">31.0.3</span> Two Independent Populations</h3>
+<p>Parameter:</p>
+<p><span class="math display">\[
+\mu_1-\mu_2
+\]</span></p>
+<p>Estimate:</p>
+<p><span class="math display">\[
+\bar{X}_1-\bar{X}_2
+\]</span></p>
+<p>Method:</p>
+<p><span class="math display">\[
+\text{Welch Two-Sample }t
+\]</span></p>
+<p>The decision process is therefore:</p>
+<p><span class="math display">\[
+\boxed{
+\begin{array}{c}
+\text{What population quantity are we studying?}\\[6pt]
+\downarrow\\
+\text{One Mean}
+\rightarrow
+\mu
+\rightarrow
+\text{One-Sample }t\\[8pt]
+\text{Two Means}
+\rightarrow
+\begin{cases}
+\text{Linked observations}
+\rightarrow
+\mu_d
+\rightarrow
+\text{Paired }t\\[6pt]
+\text{Separate observations}
+\rightarrow
+\mu_1-\mu_2
+\rightarrow
+\text{Welch Two-Sample }t
+\end{cases}
+\end{array}
+}
+\]</span></p>
+<p>The key principle is:</p>
+<blockquote class="blockquote">
+<p><strong>The study design determines the statistical method.</strong></p>
+</blockquote>
+<p>Do not begin by choosing a formula.</p>
+<p>Begin by identifying:</p>
+<ol type="1">
+<li>The business question</li>
+<li>The observational unit</li>
+<li>The populations being compared</li>
+<li>Whether observations are linked or independent</li>
+<li>The population parameter being estimated</li>
+</ol>
+<p>Then choose the statistical method that matches that structure.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -604,13 +2042,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lecture6.html" class="pagination-link" aria-label="Lecture 6">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lecture 6</span></span>
+      <a href="./lecture6.html" class="pagination-link" aria-label="Comparing Two Population Means: Paired Samples">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Paired Samples</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lecture8.html" class="pagination-link" aria-label="Lecture 8">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lecture 8</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lecture8.html" class="pagination-link" aria-label="Inference for Categorical Data">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inference for Categorical Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

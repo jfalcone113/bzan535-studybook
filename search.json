@@ -4,7 +4,17 @@
     "href": "index.html",
     "title": "BZAN 535: Statistical Methods",
     "section": "",
-    "text": "Preface\nBZAN 535 Study Book\nBased on slides, arranged by yours truly.",
+    "text": "Preface\nBZAN 535 Study Book",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#chapter-overview",
+    "href": "index.html#chapter-overview",
+    "title": "BZAN 535: Statistical Methods",
+    "section": "Chapter Overview",
+    "text": "Chapter Overview\n\nChapter 1 — Role of Statistics and Key Concepts\nIntroduces the role of statistics in turning data into informed decisions. Covers data types and measurement scales, populations and samples, parameters and statistics, descriptive versus inferential statistics, and the distinction between observational studies and randomized experiments. Particular attention is given to the different roles of random sampling and random assignment in supporting generalization and causal inference.\n\n\nChapter 2 — Descriptive Analysis\nDevelops the tools used to summarize and understand observed data. Covers measures of center, spread, and distribution shape; frequency tables; outliers; and common visualizations including histograms, boxplots, scatterplots, and bar charts. The chapter also introduces the ggplot2 framework for constructing statistical visualizations in R.\n\n\nChapter 3 — Descriptive Analytics for Time Series Data\nExtends descriptive analysis to data observed over time. Introduces date and time manipulation with lubridate, time-based filtering and grouping, and visualization of temporal data. The chapter examines important time-series patterns including trend, seasonality, short-term variation, and level changes, along with techniques such as moving averages for revealing underlying patterns.\n\n\nChapter 4 — Probability Rules and Distributions\nMoves from describing observed data to reasoning about uncertain outcomes. Introduces probability terminology, probability rules, conditional probability, independence, and the distinction between discrete and continuous random variables. The chapter then develops four important probability distributions—Binomial, Normal, Poisson, and Exponential—and explains how to recognize, interpret, and work with each distribution in R.",
     "crumbs": [
       "Preface"
     ]
@@ -194,7 +204,7 @@
     "href": "lecture4.html",
     "title": "4  Probability Rules and Distributions",
     "section": "",
-    "text": "4.1 Overview\nThis section marks the transition from describing observed data to reasoning about uncertain outcomes. In earlier sections, the focus was on concepts such as center, spread, shape, and trends. Now we extend that framework by asking:\nAnswering this requires more than descriptive statistics. It requires looking at probabilities and probability distributions.\nFor example, suppose a call center receives an average of 12 calls per hour. Knowing the average is useful, but it doesn’t necessarily answer a question such as:\nThe actual number of calls is uncertain. It could be 8 calls, 12 calls, 15 calls, 20 calls, and so on. A probability answers a specific question about this value. A probability distribution describes how probability is distributed across the different possible values.\nDifferent types of random processes produce different patterns of possible outcomes. This leads to different probability distributions, including:\nThe key task is therefore not simply calculating a probability, but first determining which probability distribution appropriately models the situation.",
+    "text": "4.1 Overview\nThis section marks the transition from describing observed data to reasoning about uncertain outcomes. In earlier sections, the focus was on concepts such as center, spread, shape, and trends. Now we extend that framework by asking: “What could happen, and how likely is each outcome?” Answering this requires more than descriptive statistics. It requires looking at probabilities and probability distributions.\nThings to cover:",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Probability Rules and Distributions</span>"
     ]
@@ -204,27 +214,17 @@
     "href": "lecture4.html#overview",
     "title": "4  Probability Rules and Distributions",
     "section": "",
-    "text": "What could happen, and how likely is each outcome?\n\n\n\nWhat is the probability that the call center receives 20 or more calls in the next hour?*\n\n\n\nBinomial\nNormal\nPoisson\nExponential",
+    "text": "Probability Rules\nBinomial Distribution\nNormal Distribution\nPoisson Distribution\nExponential Distribution",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Probability Rules and Distributions</span>"
     ]
   },
   {
-    "objectID": "lecture4.html#probability-terminology",
-    "href": "lecture4.html#probability-terminology",
+    "objectID": "lecture4.html#probability",
+    "href": "lecture4.html#probability",
     "title": "4  Probability Rules and Distributions",
-    "section": "4.2 Probability Terminology",
-    "text": "4.2 Probability Terminology\n\nProbability\n\nA single number between 0 and 1 describing how likely a particular event is.\n\nProbability Distribution\n\nA model that describes the possible values of a random variable and their probabilities.\n\nExperiment\n\nA process that produces an uncertain outcome (random process).\n\nOutcome\n\nA single possible result of an experiment.\n\nEvent\n\nA set of one or more outcomes from the sample space.\n\nSample Space\n\nThe set of all possible outcomes of an experiment, typically denoted by \\(S\\).\n\nComplement\n\nThe event that \\(A\\) does not occur, denoted \\(A^c\\).\n\nConditional Probability\n\nThe probability that event \\(A\\) occurs given that event \\(B\\) has already occurred, denoted \\(P(A \\mid B)\\).\n\nRandom Variable\n\nA numerical variable whose value is determined by the outcome of a random process (experiment).\n\n\nNote: random does not mean that all possible outcomes are equally likely. It simply means that the outcome is unknown in advance.\nWhen determining probabilties involving multiple events or variables, there are two questions to consider:\nCan A and B happen together?\nEvents being mutually exclusive means they cannot happen together. If one event occurs, it is not possible for another to occur. Suppose a customer’s response to an email is classified as “click” or “ignore”. It’s physically impossible for the customer to both click the email and ignore it.\nEvents that are indepdendent mean the outcome of one event has no effect on another. For example, say the outcome of Customer A clicking or ignoring the email has no effect on whether Customer B clicks. Knowing Customer A clicked doesn’t change the probability of Customer B clicking.\nIndependence and mutually exclusivity are two separate dimensions; the only contradiction is “independent and mutually exclusive”. While other combinations are possible, events cannot be both independent and mutually exclusive because the occurrence of one makes the probability of the other 0, so the events are necessarily dependent.",
-    "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Probability Rules and Distributions</span>"
-    ]
-  },
-  {
-    "objectID": "lecture4.html#probability-rules",
-    "href": "lecture4.html#probability-rules",
-    "title": "4  Probability Rules and Distributions",
-    "section": "4.3 Probability Rules",
-    "text": "4.3 Probability Rules\n\n4.3.1 Complement Rule\nThe complement of event \\(A\\), denoted \\(A^c\\), is the event that \\(A\\) does not occur.\n\\(P(A^c) = 1 - P(A)\\)\n\n\n4.3.2 Addition Rule\nThe addition rule calculates the probability that event \\(A\\) or event \\(B\\) occurs.\nFor any two events:\n\\[\nP(A \\cup B) = P(A) + P(B) - P(A \\cap B)\n\\]\nIf \\(A\\) and \\(B\\) are mutually exclusive, they cannot occur together, so \\(P(A \\cap B)=0\\):\n\\[\nP(A \\cup B) = P(A) + P(B)\n\\]\n\n\n4.3.3 Multiplication Rule\nFor independent events, the probability that event \\(A\\) and event \\(B\\) both occur is:\n\\[\nP(A \\cap B) = P(A)P(B)\n\\]\n\n\n4.3.4 Conditional Probability\nConditional probability is the probability that event \\(A\\) occurs given that event \\(B\\) has already occurred.\n\\[\nP(A \\mid B) = \\frac{P(A \\cap B)}{P(B)}\n\\]",
+    "section": "4.2 Probability",
+    "text": "4.2 Probability\n\n4.2.1 Probability Terminology\nA probability is a number from 0 to 1 describing how likely an event is.\n\n\n\n\n\n\n\n\nTerm\nMeaning\nExample\n\n\n\n\nExperiment\nRandom process\nSend a marketing email\n\n\nOutcome\nOne possible result\nCustomer clicks\n\n\nEvent\nOne or more outcomes you’re interested in\nCustomer engages\n\n\nSample Space\nAll possible outcomes\n{Click, Open, Ignore, Unsubscribe}\n\n\n\n\n\n4.2.2 Basic Probability Rules\n\n4.2.2.1 Complement Rule\nThe complement rule finds the probability that an event does not happen.\n\\[\nP(A^c)=1-P(A)\n\\] If event A happens with probability P(A), its complement, written A^c, means “not A.”\nFor example:\nIf there’s a 20% chance of clicking: \\(P(\\text{No click})=1-.20=.80\\)\n\n\n4.2.2.2 Addition Rule\nThe addition rule finds the probability that event A OR event B occurs.\n\\[P(A\\cup B)=P(A)+P(B) - P(A)\\]\nHowever, that only works if Event A and Event B can occur simultaneously.\nIf A and B are Mututally Exclusive: \\[P(A\\cup B)=P(A)+P(B)\\]\nFor example:\nSuppose:\n\n\\(P(\\text{opens email})=0.50\\)\n\\(P(\\text{clicks link})=0.20\\)\n\\(P(\\text{opens AND clicks})=0.15\\)\n\nThen:\n\\(P(\\text{opens OR clicks})=0.50+0.20-0.15=0.55\\)\nNote: if mutually exclusive: \\(P(\\text{opens OR clicks})=0.50+0.20=0.70\\)\n\n\n4.2.2.3 Multiplication\nThe multiplication rule finds the probability that event A AND event B occur.\nIf A and B are Dependent Events:\n\\[P(A\\cap B)=P(A)\\times P(B\\mid A)\\]\nIf A and B are Independent Events:\n\\[P(A\\cap B)=P(A)\\cdot P(B)\\]\n\n\n\n4.2.3 Conditional Probability\nConditional Probability is the probability an event occurs given another has occured (i.e. probability of Event A given Event B occurred)\n\\[P(A\\mid B)\\]",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Probability Rules and Distributions</span>"
     ]
@@ -233,8 +233,8 @@
     "objectID": "lecture4.html#distributions",
     "href": "lecture4.html#distributions",
     "title": "4  Probability Rules and Distributions",
-    "section": "4.4 Distributions",
-    "text": "4.4 Distributions\nA probability distribution is a model describing the possible values of a random variable and how likely those values are.\n\n4.4.1 Binomial Distribution\nA binomial distribution models the number of successes in a fixed or known number of independent trials. Each trial has only two possible outcomes, classified as success or failure, with a constant probability of success, \\(p\\). Trials are independent, meaning the outcome of one trial does not change the probability of success on another. The random variable \\(X\\) is discrete and represents the total number of successes across the \\(n\\) trials.\n\\[\nX \\sim \\text{Binomial}(n,p)\n\\]\nWhere…\n\\(n\\) = number of trials\n\\(p\\) = probability of success on each trial\n\\(X\\) = number of successes\n\nExample: A retailer sends a promotion to 1,000 customers. Each customer has an 8% probability of clicking.\n\\(X \\sim \\text{Binomial}(1000, 0.08)\\)\nHere, a trial is sending the promotion to one customer, a success is a click, \\(n = 1000\\), \\(p = 0.08\\), and \\(X\\) is the number of customers who click.\n\n\n\n\n\n\nBinomial Distribution: n = 10, p = 0.30\n\n\n\n\nA binomial distribution is discrete, so it consists of separate probabilities for each possible number of successes. Each bar represents \\(P(X=x)\\), the probability of observing exactly \\(x\\) successes.\n\n\n4.4.2 Normal Distribution\nA normal distribution models continuous numerical values that follow a symmetric, bell-shaped distribution centered around a mean, \\(\\mu\\). The standard deviation, \\(\\sigma\\), determines how spread out the values are around the mean. Because the distribution is symmetric, the mean, median, and mode are equal. The random variable \\(X\\) is continuous and represents the numerical value being measured.\n\\[\nX \\sim N(\\mu, \\sigma^2)\n\\]\nWhere…\n\\(\\mu\\) = population mean (center)\n\\(\\sigma\\) = population standard deviation (spread)\n\\(\\sigma^2\\) = population variance\n\\(X\\) = value of the continuous random variable\n\nExample: Call durations have a mean of 6 minutes and a standard deviation of 1.5 minutes.\n\\(X \\sim N(6, 1.5^2)\\)\nHere, \\(X\\) is the duration of a call in minutes, \\(\\mu = 6\\) is the average call duration, and \\(\\sigma = 1.5\\) is the standard deviation of call durations.\n\n\n\n\n\n\nNormal Distribution: μ = 6, σ = 1.5\n\n\n\n\nA normal distribution is continuous, so it is represented by a smooth curve rather than separate probabilities. The curve is symmetric and bell-shaped, centered at the mean, \\(\\mu\\), while the standard deviation, \\(\\sigma\\), determines its spread. Approximately 68% of values fall within \\(\\mu \\pm 1\\sigma\\), 95% within \\(\\mu \\pm 2\\sigma\\), and 99.7% within \\(\\mu \\pm 3\\sigma\\).\n\n\n4.4.3 Poisson Distribution\nA Poisson distribution models the number of events that occur within a fixed interval of time or space. Events are assumed to occur independently and at a constant average rate, \\(\\lambda\\). The random variable \\(X\\) is discrete and represents the total number of events that occur within the interval.\n\\[\nX \\sim \\text{Poisson}(\\lambda)\n\\]\nWhere…\n\\(\\lambda\\) = expected number of events per interval\n\\(X\\) = number of events that occur in the interval\n\nExample: A call center receives an average of 12 calls per hour.\n\\(X \\sim \\text{Poisson}(12)\\)\nHere, the interval is one hour, \\(\\lambda = 12\\) is the expected number of calls per hour, and \\(X\\) is the number of calls received during one hour.\n\n\n\n\n\n\nPoisson Distribution: λ = 4\n\n\n\n\nA Poisson distribution is discrete, so it consists of separate probabilities for each possible number of events. Each bar represents \\(P(X=x)\\), the probability of observing exactly \\(x\\) events within the interval. The shape of the distribution depends on the average event rate, \\(\\lambda\\).\n\n\n4.4.4 Exponential Distribution\nAn exponential distribution models the waiting time between events in a Poisson process. Events are assumed to occur independently and at a constant average rate, \\(\\lambda\\). The random variable \\(T\\) is continuous and represents the time until the next event or the time between consecutive events.\n\\[\nT \\sim \\text{Exponential}(\\lambda)\n\\]\nWhere…\n\\(\\lambda\\) = average rate at which events occur\n\\(T\\) = waiting time until or between events\n\nExample: Customers arrive at an average rate of 6 customers per hour.\n\\(T \\sim \\text{Exponential}(6)\\)\nHere, \\(\\lambda = 6\\) is the average arrival rate per hour, and \\(T\\) is the waiting time in hours until the next customer arrives. The expected waiting time is \\(E[T] = 1/\\lambda = 1/6\\) hour, or 10 minutes.\n\n\n\n\n\n\nExponential Distribution: λ = 1\n\n\n\n\nAn exponential distribution is continuous and right-skewed, so it is represented by a smooth, decreasing curve. Short waiting times have the highest density, while increasingly long waiting times become less likely. The distribution is memoryless, meaning how long you have already waited does not change the distribution of how much longer you will wait.\nPoisson and Exponential model two different aspects of the same event process:\n\nPoisson → How many events occur during an interval?\nExponential → How long between events?\n\nFor example, if customers arrive at a constant average rate:\n\nNumber of customers arriving per hour → Poisson\nTime until the next customer arrives → Exponential\n\n\nQ–Q Plot\n\nA graphical method for checking whether data are approximately normally distributed. If the points roughly follow the reference line, a Normal model may be reasonable. Systematic deviations from the line suggest the data are not Normal.",
+    "section": "4.3 Distributions",
+    "text": "4.3 Distributions\n\n4.3.1 Binomial Distribution\nA binomial distribution models the number of successes in a fixed number trials, where each trial has two possible outcomes: success or failure. Each trial is independent and the probability of success remains constant.\nDiscrete\n\\[X\\sim\\text{Binomial}(n,p)\\]\n\n\\(X \\rightarrow \\text{a discrete random variable}\\)\n\\(n \\rightarrow \\text{number of independent trials}\\)\n\\(p \\rightarrow \\text{probability of success}\\)\n\ndbinom(k, n, p) probability exactly k successes pbinom(k, n, p) probability less than or equal to k successes\n\n\n4.3.2 Normal Distribution\nA normal distribution models a continuous random variable with values that are distributed symmetrically around a mean, with values closer to the mean occurring more frequently than values farther from the mean.\nmean = median = mode\nContinuous\n\\[X\\sim\\text{Normal}(\\mu,\\sigma)\\]\n\n\\(X \\rightarrow \\text{a continuous random variable}\\)\n\\(\\mu \\rightarrow \\text{mean}\\)\n\\(\\sigma \\rightarrow \\text{standard deviation}\\)\n\ndnorm(x, mu, sigma) height of the curve at 100, not probability (continuous variable) pnorm(x, mu, sigma) area to the left of 100, which is a probability\n\nZ-score\n\nHow many standard deviations away from mean.\n\n\n\\(z=\\frac{x-\\mu}{\\sigma}\\)\nEmpirical Rule\n\n68% are within one standard deviation away from mean \n95% are within two standard deviations away from mean \n99.7% are within two standard deviations away from mean \n\nThree ways to assess whether data are approximately normally distributed\n\nHistogram: Shows the shape of the data (roughly symmetric, bell-shaped)\nQ-Q plot: Compares observed data to what we’d expect from a normal distribution (points roughly follow a straight line)\nShapiro-Wilk test: Formal hypothesis test for normality (p &gt; 0.05: do not reject normality)\n\n\n\n4.3.3 Poisson Distribution\nA Poisson distribution models the number of times an event occurs within a fixed interval of time.\nexpected number of events (\\(\\lambda\\)) = mean = variance\nDiscrete\n\\[X\\sim\\text{Poisson}(\\lambda)\\]\n\n\\(X \\rightarrow \\text{number of events in the interval}\\)\n\\(\\lambda \\rightarrow \\text{average number of events per interval}\\)\n\nFunction\nCalculates\nMeaning\n\ndpois(k, lambda) exactly k events\nppois(k, lambda) k or fewer events\n\n\nChi-Square Goodness-of-Fit Test\n\nA chi-square goodness-of-fit test compares the observed event counts to the expected counts under a Poisson distribution.\n\n\n\n\\(H_0\\): The data are consistent with a Poisson distribution.\n\\(H_A\\): The data are not consistent with a Poisson distribution.\n\\(p &gt; 0.05\\): Fail to reject \\(H_0\\) → data are reasonably consistent with Poisson.\n\\(p &lt; 0.05\\): Reject \\(H_0\\) → evidence that the data do not fit a Poisson distribution.\n\n\nOverdispersion Check\n\nFor a Poisson distribution, the mean and variance should be approximately equal.\n\n\n\\[\n\\frac{\\text{Variance}}{\\text{Mean}} \\approx 1\n\\]\n\n\n4.3.4 Exponential Distribution\nAn exponential distribution models the time between events in a Poisson process. While the Poisson distribution models how many events occur in an interval, the exponential distribution models how long until the next event occurs.\nContinuous\n\\[\nT \\sim \\text{Exponential}(\\lambda)\n\\]\n\n\\(T \\rightarrow \\text{waiting time until the next event}\\)\n\\(\\lambda \\rightarrow \\text{average rate at which events occur}\\)\ndexp(t, rate = lambda) density at \\(t\\)\npexp(t, rate = lambda) probability the event occurs within time \\(t\\)\nqexp(p, rate = lambda) waiting time associated with cumulative probability \\(p\\)\nrexp(n, rate = lambda) generate exponential waiting times\n\nExponential is memoryless: meaning independent events don’t remember what has already happened. What has occurred doesn’t impact what is to come.",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Probability Rules and Distributions</span>"
     ]
@@ -242,41 +242,641 @@
   {
     "objectID": "lecture5.html",
     "href": "lecture5.html",
-    "title": "5  Lecture 5",
+    "title": "5  One-Parameter Statistical Inference",
     "section": "",
-    "text": "In progress…give me some time",
+    "text": "5.1 Overview\nSo far, the focus has been on describing observed data and modeling uncertainty. Descriptive statistics summarize the data we actually observe. Probability distributions describe how uncertain outcomes behave. Statistical inference takes the next step: what can a sample tell us about a population we cannot fully observe?\nSuppose a company reports:\nThat number may sound precise, but suppose it came from a sample of 2,500 households rather than every household. The sample mean \\(\\bar{x} = 1793\\) is known, but the population mean \\(\\mu\\) is unknown.\nThe goal of statistical inference is to use the observed sample statistic to learn about the unknown population parameter, while explicitly accounting for sampling uncertainty.\nThe general process is:\n\\[\\text{Population} \\rightarrow \\text{Sample} \\rightarrow \\text{Statistic} \\rightarrow \\text{Inference about Parameter}\\]\nThere are two major tools for doing this:\nBefore either one works, however, we need to understand sampling variability.",
     "crumbs": [
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Lecture 5</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>One-Parameter Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "lecture5.html#overview",
+    "href": "lecture5.html#overview",
+    "title": "5  One-Parameter Statistical Inference",
+    "section": "",
+    "text": "Average household spending last month was $1,793.\n\n\n\n\n\n\n\nConfidence intervals\n\nEstimate a population parameter\n\nHypothesis tests\n\nEvaluate a claim about a population parameter",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>One-Parameter Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "lecture5.html#sampling",
+    "href": "lecture5.html#sampling",
+    "title": "5  One-Parameter Statistical Inference",
+    "section": "5.2 Sampling",
+    "text": "5.2 Sampling\nA sample is a subset of a population that you actually observe or collect data from. The goal is usually to use information from the sample to learn about the population. This connects to statistics vs. parameters (see Section 1).\n\nBias\n\nThe estimate is consistently off from the true value (population) in a particular way, likely caused by poor design.\n\nVariance\n\nSample-to-sample variation that occurs naturally, even with good design. Decreases as \\(n\\), the number of observations, decreases.\n\n\nCommon sources of bias:\n\nCoverage bias \\(\\rightarrow\\) Some members of the population have little or no chance of being included because the sampling method does not adequately cover the population.\nSelection bias \\(\\rightarrow\\) The method used to select participants systematically favors certain types of people over others.\nNonresponse bias \\(\\rightarrow\\) People who do not respond differ systematically from those who do respond in a way related to the question being studied.\n\n\\[\\boxed{\\text{Coverage}=\\text{Who can be reached}} \\boxed{\\text{Selection}=\\text{Who gets selected}} \\boxed{\\text{Nonresponse}=\\text{Who actually responds}}\\]\nSampling Methods\n\nSimple Random Sampling\n\nequal chance for everyone.\n\nStratified Sampling\n\ndivide into groups, then sample from EACH group.\n\nCluster\n\ndivide into groups, randomly choose SOME groups, then sample within those selected groups\n\nSystematic\n\nevery \\(k\\)-th unit after a random start",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>One-Parameter Statistical Inference</span>"
+    ]
+  },
+  {
+    "objectID": "lecture5.html#sampling-distribution-and-the-clt",
+    "href": "lecture5.html#sampling-distribution-and-the-clt",
+    "title": "5  One-Parameter Statistical Inference",
+    "section": "5.3 Sampling Distribution and the CLT",
+    "text": "5.3 Sampling Distribution and the CLT\nIn progress…",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>One-Parameter Statistical Inference</span>"
     ]
   },
   {
     "objectID": "lecture6.html",
     "href": "lecture6.html",
-    "title": "6  Lecture 6",
+    "title": "6  Comparing Two Population Means: Paired Samples",
     "section": "",
-    "text": "In progress…give me some time!",
+    "text": "6.1 Overview\nLecture 5 introduced inference for one population parameter.\nFor example, we could ask whether a population mean differs from some benchmark:\n\\[\nH_0:\\mu=\\mu_0\n\\]\nNow suppose we have two sets of measurements and want to compare their means.\nExamples include:\nBefore choosing a statistical test, the most important question is:\nIf observations can be meaningfully linked one-to-one, we have paired data.\nIf no meaningful one-to-one relationship exists, we instead have independent samples.\nThis distinction determines how the data should be analyzed.",
     "crumbs": [
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Lecture 6</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#overview",
+    "href": "lecture6.html#overview",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "",
+    "text": "Customer spending before vs. after joining a loyalty program\nStore sales before vs. after a layout change\nMeasurements from matched treatment and control stores\nMeasurements from twins or other naturally matched subjects\n\n\n\nAre the observations in the two conditions independent, or are they meaningfully connected?",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#what-creates-a-pair",
+    "href": "lecture6.html#what-creates-a-pair",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "7.1 What Creates a Pair?",
+    "text": "7.1 What Creates a Pair?\nA pair exists when an observation in one condition can be meaningfully linked to exactly one observation in another condition.\nCommon forms of pairing include:\n\n7.1.1 Repeated Measurements\nThe same observational unit is measured twice.\nExamples:\n\nSame customer before and after a program\nSame employee before and after training\nSame store before and after a redesign\n\n\n\n7.1.2 Natural Pairs\nDifferent observational units have a meaningful natural relationship.\nExamples:\n\nIdentical twins\nSiblings\nMatched geographic locations\n\n\n\n7.1.3 Matched Pairs\nResearchers intentionally match similar observational units before comparing treatments.\nExamples:\n\nMatch two stores with similar historical sales\nMatch customers with similar demographics\nMatch patients with similar baseline characteristics\n\nOne member of each pair may then receive one treatment while the other receives another.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#standard-error-of-the-mean-difference",
+    "href": "lecture6.html#standard-error-of-the-mean-difference",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "12.1 Standard Error of the Mean Difference",
+    "text": "12.1 Standard Error of the Mean Difference\nLet:\n\\[\ns_d\n\\]\nrepresent the sample standard deviation of the differences.\nThen:\n\\[\nSE(\\bar{d})\n=\n\\frac{s_d}{\\sqrt{n}}\n\\]\nwhere:\n\\(n\\) = number of pairs\nNotice that \\(n\\) is not the total number of individual measurements.\nIf there are 15 pairs, then:\n\\[\nn=15\n\\]\neven though there are:\n\\[\n30\n\\]\nindividual measurements.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#paired-t-test-statistic",
+    "href": "lecture6.html#paired-t-test-statistic",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "12.2 Paired t-Test Statistic",
+    "text": "12.2 Paired t-Test Statistic\nTo test:\n\\[\nH_0:\\mu_d=0\n\\]\nthe test statistic is:\n\\[\n\\boxed{\nt=\n\\frac{\\bar{d}-0}\n{s_d/\\sqrt{n}}\n}\n\\]\nMore generally:\n\\[\nt=\n\\frac{\\bar{d}-\\mu_{d,0}}\n{s_d/\\sqrt{n}}\n\\]\nThe degrees of freedom are:\n\\[\ndf=n-1\n\\]\nThe test statistic tells us:\n\nHow many standard errors the observed mean difference lies from the value specified by the null hypothesis.\n\nA large absolute value of \\(t\\) means the observed mean difference is far from the null value relative to the amount of sampling uncertainty.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#paired-t-test-in-r",
+    "href": "lecture6.html#paired-t-test-in-r",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "13.1 Paired t-Test in R",
+    "text": "13.1 Paired t-Test in R\nIf the differences have already been calculated:\n\nt.test(\n    pairs$Difference,\n    mu = 0\n)\n\nThis is simply a one-sample t-test on the differences.\nThe example produces approximately:\n\\[\nt=3.23\n\\]\n\\[\ndf=14\n\\]\n\\[\np=0.006\n\\]\nand a 95% confidence interval of approximately:\n\\[\n(0.067,\\ 0.331)\n\\]\nBecause:\n\\[\np&lt;0.05\n\\]\nwe reject:\n\\[\nH_0:\\mu_d=0\n\\]\nThe data provide evidence that the population mean difference is not zero.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#using-paired-true",
+    "href": "lecture6.html#using-paired-true",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "13.2 Using paired = TRUE",
+    "text": "13.2 Using paired = TRUE\nR can also calculate the differences internally.\nFor example:\n\nt.test(\n    pairs$Unaffected,\n    pairs$Affected,\n    paired = TRUE\n)\n\nThis performs the same conceptual analysis:\n\\[\nd_i\n=\n\\text{Unaffected}_i\n-\n\\text{Affected}_i\n\\]\nfollowed by a one-sample t-test on those differences.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#step-1-match-similar-units",
+    "href": "lecture6.html#step-1-match-similar-units",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "16.1 Step 1: Match Similar Units",
+    "text": "16.1 Step 1: Match Similar Units\nBefore treatment assignment, form pairs of similar stores using pre-experiment characteristics such as:\n\nBaseline sales\nStore size\nCustomer traffic\nNeighborhood characteristics\n\nThe goal is to make the stores within each pair as comparable as possible before the treatment occurs.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#step-2-randomize-within-each-pair",
+    "href": "lecture6.html#step-2-randomize-within-each-pair",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "16.2 Step 2: Randomize Within Each Pair",
+    "text": "16.2 Step 2: Randomize Within Each Pair\nWithin each matched pair:\n\nRandomly assign one store to treatment\nRandomly assign the other to control\n\nRandomization remains important.\nMatching improves comparability and precision, while random assignment supports causal inference.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#step-3-calculate-one-difference-per-pair",
+    "href": "lecture6.html#step-3-calculate-one-difference-per-pair",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "16.3 Step 3: Calculate One Difference Per Pair",
+    "text": "16.3 Step 3: Calculate One Difference Per Pair\nFor pair \\(i\\), calculate:\n\\[\nd_i\n=\n\\text{Sales}_{\\text{endcap},i}\n-\n\\text{Sales}_{\\text{control},i}\n\\]\nThen analyze:\n\\[\nd_1,d_2,\\ldots,d_n\n\\]\nand test:\n\\[\nH_0:\\mu_d=0\n\\]\nThe key distinction is:\n\nMatching improves precision. Random assignment supports causality.\n\nThey serve different purposes.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#independence-within-a-pair-is-not-required",
+    "href": "lecture6.html#independence-within-a-pair-is-not-required",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "17.1 Independence Within a Pair Is Not Required",
+    "text": "17.1 Independence Within a Pair Is Not Required\nThe two observations within a pair do not need to be independent.\nIn fact, the reason for using a paired analysis is usually that they are related.\nFor example:\n\\[\n(\\text{Before}_i,\\text{After}_i)\n\\]\nfor the same store are naturally connected.\nThat relationship is exactly what the paired analysis preserves.\nWhat needs to be independent is:\n\\[\nd_1,d_2,\\ldots,d_n\n\\]\nacross separate pairs.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#normality-applies-to-the-differences",
+    "href": "lecture6.html#normality-applies-to-the-differences",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "17.2 Normality Applies to the Differences",
+    "text": "17.2 Normality Applies to the Differences\nA paired t-test does not require both original variables to be Normally distributed.\nYou do not separately need:\n\\[\nX\\sim N\n\\]\nand:\n\\[\nY\\sim N\n\\]\nInstead, the relevant quantity is:\n\\[\nD=X-Y\n\\]\nFor small samples, we want the distribution of:\n\\[\nd_1,d_2,\\ldots,d_n\n\\]\nto be reasonably consistent with a Normal distribution and free of severe outliers.\nTherefore:\n\nCheck the differences, not the two original columns separately.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture6.html#examples",
+    "href": "lecture6.html#examples",
+    "title": "6  Comparing Two Population Means: Paired Samples",
+    "section": "25.1 Examples",
+    "text": "25.1 Examples\n\n25.1.1 Same Customers Before and After\nMonthly spending is recorded for the same customers before and after they join a loyalty program.\nPaired\nEach customer’s before measurement is linked to that same customer’s after measurement.\n\n\n\n25.1.2 Randomized Website Experiment\nOne group of customers sees the current website.\nA different group sees a redesigned website.\nIndependent\nThere is no one-to-one correspondence between customers in the two groups.\n\n\n\n25.1.3 Matched Stores\nTreatment stores are intentionally matched with similar control stores before an experiment.\nPaired\nEach treatment store has a specific matched control store.\n\n\n\n25.1.4 Different Orders Across Months\nDelivery times from one group of orders this month are compared with a different group of orders last month.\nIndependent\nAn order this month does not correspond to one specific order from last month.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Comparing Two Population Means: Paired Samples</span>"
     ]
   },
   {
     "objectID": "lecture7.html",
     "href": "lecture7.html",
-    "title": "7  Lecture 7",
+    "title": "7  Comparing Two Population Means: Independent Samples",
     "section": "",
-    "text": "In progress…give me some time!",
+    "text": "7.1 Overview\nLecture 6 considered situations where observations from two conditions were meaningfully linked.\nFor paired data, each pair produced one difference:\n\\[\nd_i=X_{1i}-X_{2i}\n\\]\nand the analysis became a one-sample inference problem involving:\n\\[\n\\mu_d\n\\]\nNow consider a different situation.\nSuppose we want to compare:\nIn these situations, the observations in one group do not have a meaningful one-to-one connection with observations in the other group.\nThese are independent samples.\nInstead of analyzing within-pair differences, we compare the two sample means:\n\\[\n\\bar{X}_1-\\bar{X}_2\n\\]\nto learn about the difference between the two population means:\n\\[\n\\boxed{\\mu_1-\\mu_2}\n\\]\nThe major distinction is:",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Lecture 7</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#overview",
+    "href": "lecture7.html#overview",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "",
+    "text": "Spending by homeowners vs. renters\nSales of national-brand vs. private-brand products\nCustomers assigned to Website A vs. Website B\nEmployees receiving one training program vs. employees receiving another\n\n\n\n\n\n\n\n\n\nPaired samples compare within-pair differences. Independent samples compare two separate group means.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#paired-samples",
+    "href": "lecture7.html#paired-samples",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "9.1 Paired Samples",
+    "text": "9.1 Paired Samples\nObservations are paired when each observation in one condition has a meaningful one-to-one connection with an observation in the other condition.\nExamples:\n\nSame customer before and after treatment\nSame store before and after a redesign\nIdentical twins\nMatched treatment and control stores\n\nEach pair produces:\n\\[\nd_i=X_{1i}-X_{2i}\n\\]\nand inference is performed on:\n\\[\n\\mu_d\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#independent-samples",
+    "href": "lecture7.html#independent-samples",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "9.2 Independent Samples",
+    "text": "9.2 Independent Samples\nSamples are independent when the groups contain different observational units and there is no meaningful one-to-one link between observations across groups.\nExamples:\n\n20 randomly selected men vs. 20 independently selected women\nHomeowners vs. renters\nNational-brand products vs. private-brand products\nCustomers assigned to two different website versions\n\nEach observational unit contributes to only one group.\nThe parameter of interest is:\n\\[\n\\boxed{\\mu_1-\\mu_2}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#example-taste-test",
+    "href": "lecture7.html#example-taste-test",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "10.1 Example: Taste Test",
+    "text": "10.1 Example: Taste Test\nSuppose a company wants to compare mean taste ratings for Coke and Pepsi.\n\n10.1.1 Independent-Samples Design\nRandomly assign participants to one of two groups:\n\nGroup 1 tastes Coke\nGroup 2 tastes Pepsi\n\nEach participant tastes only one product.\nThe groups are independent.\n\n\n10.1.2 Paired Design\nEvery participant tastes both Coke and Pepsi.\nEach participant provides:\n\\[\n(\\text{Coke Rating}_i,\\text{Pepsi Rating}_i)\n\\]\nThe observations are paired because both ratings come from the same person.\nThe two designs answer similar questions but use different information.\nThe paired design controls for individual differences in taste preferences because each participant acts as their own comparison.\nHowever, the study would need to prevent order effects.\nFor example, tasting Coke first might affect a participant’s Pepsi rating.\nA common solution would be to randomize which product each participant tastes first.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#welchs-test-in-r",
+    "href": "lecture7.html#welchs-test-in-r",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "15.1 Welch’s Test in R",
+    "text": "15.1 Welch’s Test in R\nR uses Welch’s method by default when performing an independent two-sample t-test.\n\nt.test(\n    outcome ~ group,\n    data = my_data\n)\n\nFor example:\n\nt.test(\n    spending ~ homeowner_desc,\n    data = households\n)\n\nUnless otherwise specified, t.test() does not assume equal population variances.\nThis makes Welch’s method the standard default when there is no strong reason to assume that the two population variances are equal.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#pooled-test-in-r",
+    "href": "lecture7.html#pooled-test-in-r",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "16.1 Pooled Test in R",
+    "text": "16.1 Pooled Test in R\nUnlike Welch’s method, pooling must be requested explicitly:\n\nt.test(\n    outcome ~ group,\n    data = my_data,\n    var.equal = TRUE\n)\n\nThe argument:\n\nvar.equal = TRUE\n\ntells R to assume equal population variances.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#descriptive-statistics",
+    "href": "lecture7.html#descriptive-statistics",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "20.1 Descriptive Statistics",
+    "text": "20.1 Descriptive Statistics\nSuppose the data show:\n\n\n\nBrand\nProducts\nMean\nMedian\nSD\n\n\n\n\nNational\n175\n203.9\n4.5\n664.7\n\n\nPrivate\n57\n170.4\n62.1\n263.9\n\n\n\nSeveral features immediately deserve attention.\n\n20.1.1 Unequal Sample Sizes\n\\[\nn_{\\text{National}}=175\n\\]\nwhile:\n\\[\nn_{\\text{Private}}=57\n\\]\n\n\n20.1.2 Unequal Variability\n\\[\ns_{\\text{National}}=664.7\n\\]\nwhile:\n\\[\ns_{\\text{Private}}=263.9\n\\]\nThe national-brand group is much more variable.\n\n\n20.1.3 Strong Skewness\nFor national brands:\n\\[\n\\text{Mean}=203.9\n\\]\nwhile:\n\\[\n\\text{Median}=4.5\n\\]\nThe enormous difference between the mean and median indicates a highly right-skewed distribution with some extremely large observations.\nThis is why descriptive analysis should occur before inferential analysis.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#analysis-workflow-in-r",
+    "href": "lecture7.html#analysis-workflow-in-r",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "27.1 Analysis Workflow in R",
+    "text": "27.1 Analysis Workflow in R\nFirst summarize the groups:\n\nhouseholds |&gt;\n    group_by(homeowner_desc) |&gt;\n    summarise(\n        n = n(),\n        mean_spend = mean(spend, na.rm = TRUE),\n        median_spend = median(spend, na.rm = TRUE),\n        sd_spend = sd(spend, na.rm = TRUE)\n    )\n\nThen visualize:\n\nggplot(\n    households,\n    aes(\n        x = homeowner_desc,\n        y = spend\n    )\n) +\n    geom_boxplot()\n\nThen perform Welch’s two-sample t-test:\n\nt.test(\n    spend ~ homeowner_desc,\n    data = households\n)\n\nThe output provides:\n\nGroup means\nEstimated difference\nt-statistic\nDegrees of freedom\np-value\nConfidence interval\n\nThe final interpretation should report the estimated population difference and its uncertainty in the context of homeowner and renter households.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-1-identify-the-observational-unit",
+    "href": "lecture7.html#step-1-identify-the-observational-unit",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.1 Step 1: Identify the Observational Unit",
+    "text": "30.1 Step 1: Identify the Observational Unit\nAsk:\n\nWhat does one row or measurement represent?\n\nDetermine whether the two groups contain genuinely separate observational units.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-2-determine-whether-the-samples-are-paired-or-independent",
+    "href": "lecture7.html#step-2-determine-whether-the-samples-are-paired-or-independent",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.2 Step 2: Determine Whether the Samples Are Paired or Independent",
+    "text": "30.2 Step 2: Determine Whether the Samples Are Paired or Independent\nAsk:\n\nCan each observation in one group be meaningfully linked to exactly one observation in the other?\n\nIf yes:\n\\[\n\\text{Paired}\n\\]\nIf no:\n\\[\n\\text{Independent}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-3-define-the-population-difference",
+    "href": "lecture7.html#step-3-define-the-population-difference",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.3 Step 3: Define the Population Difference",
+    "text": "30.3 Step 3: Define the Population Difference\nExplicitly define:\n\\[\n\\Delta=\\mu_1-\\mu_2\n\\]\nbefore calculating or interpreting the estimate.\nThis establishes what positive and negative values mean.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-4-examine-the-data",
+    "href": "lecture7.html#step-4-examine-the-data",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.4 Step 4: Examine the Data",
+    "text": "30.4 Step 4: Examine the Data\nFor each group, examine:\n\nSample size\nMean\nMedian\nStandard deviation\nDistribution shape\nSkewness\nUnusual observations\n\nUse both numerical summaries and visualizations.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-5-estimate-the-difference",
+    "href": "lecture7.html#step-5-estimate-the-difference",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.5 Step 5: Estimate the Difference",
+    "text": "30.5 Step 5: Estimate the Difference\nCalculate:\n\\[\n\\hat{\\Delta}\n=\n\\bar{X}_1-\\bar{X}_2\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-6-quantify-the-uncertainty",
+    "href": "lecture7.html#step-6-quantify-the-uncertainty",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.6 Step 6: Quantify the Uncertainty",
+    "text": "30.6 Step 6: Quantify the Uncertainty\nUsing Welch’s method:\n\\[\nSE(\\hat{\\Delta})\n=\n\\sqrt{\n\\frac{s_1^2}{n_1}\n+\n\\frac{s_2^2}{n_2}\n}\n\\]\nConstruct a confidence interval:\n\\[\n\\hat{\\Delta}\n\\pm\nt^*SE(\\hat{\\Delta})\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-7-perform-the-hypothesis-test",
+    "href": "lecture7.html#step-7-perform-the-hypothesis-test",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.7 Step 7: Perform the Hypothesis Test",
+    "text": "30.7 Step 7: Perform the Hypothesis Test\nUsually:\n\\[\nH_0:\\mu_1-\\mu_2=0\n\\]\nagainst an appropriate alternative.\nUse Welch’s method by default:\n\nt.test(\n    outcome ~ group,\n    data = my_data\n)\n\nUse the pooled method only when the equal-population-variance assumption has a defensible basis:\n\nt.test(\n    outcome ~ group,\n    data = my_data,\n    var.equal = TRUE\n)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
+    ]
+  },
+  {
+    "objectID": "lecture7.html#step-8-interpret-in-context",
+    "href": "lecture7.html#step-8-interpret-in-context",
+    "title": "7  Comparing Two Population Means: Independent Samples",
+    "section": "30.8 Step 8: Interpret in Context",
+    "text": "30.8 Step 8: Interpret in Context\nReport:\n\nThe direction of the comparison\nThe estimated mean difference\nThe confidence interval\nThe statistical evidence\nPractical importance when relevant\nWhether the study design supports a causal interpretation\n\nThe statistical result should always be translated back into the original business question.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Comparing Two Population Means: Independent Samples</span>"
     ]
   },
   {
     "objectID": "lecture8.html",
     "href": "lecture8.html",
-    "title": "8  Lecture 8",
+    "title": "8  Inference for Categorical Data",
     "section": "",
-    "text": "In progress…give me some time!",
+    "text": "8.1 Overview\nPrevious inference methods focused primarily on quantitative outcomes.\nFor example:\nLecture 8 shifts the focus to categorical outcomes.\nExamples include:\nInstead of asking questions about means, we now ask questions about:\nThe main methods are:\nThe appropriate method depends on the business question and structure of the categorical data.",
     "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Lecture 8</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#overview",
+    "href": "lecture8.html#overview",
+    "title": "8  Inference for Categorical Data",
+    "section": "",
+    "text": "One population mean → \\(\\mu\\)\nPaired mean difference → \\(\\mu_d\\)\nDifference between two independent means → \\(\\mu_1-\\mu_2\\)\n\n\n\n\nPurchase vs. no purchase\nHomeowner vs. renter\nMarried vs. unmarried\nStore vs. website vs. app\nCurrent page vs. new page vs. third page\n\n\n\nProportions\nCounts\nAssociations between categorical variables\nWhether observed category frequencies match an expected distribution\n\n\n\nTwo-proportion inference\nChi-square test of independence\nChi-square goodness-of-fit test",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#population-parameter",
+    "href": "lecture8.html#population-parameter",
+    "title": "8  Inference for Categorical Data",
+    "section": "9.1 Population Parameter",
+    "text": "9.1 Population Parameter\nThe population parameter is:\n\\[\n\\boxed{\np_{New}-p_{Current}\n}\n\\]\nwhere:\n\\(p_{New}\\) = population conversion rate for the new page\n\\(p_{Current}\\) = population conversion rate for the current page\nThe sample estimate is:\n\\[\n\\boxed{\n\\hat{p}_{New}-\\hat{p}_{Current}\n}\n\\]\nThis follows the same general inference framework used previously:\n\\[\n\\text{Sample Statistic}\n\\rightarrow\n\\text{Estimate Population Parameter}\n\\]\nHere:\n\\[\n\\hat{p}_{New}-\\hat{p}_{Current}\n\\rightarrow\np_{New}-p_{Current}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#confidence-interval",
+    "href": "lecture8.html#confidence-interval",
+    "title": "8  Inference for Categorical Data",
+    "section": "13.1 Confidence Interval",
+    "text": "13.1 Confidence Interval\nWhen constructing the confidence interval, we are not assuming the population proportions are equal.\nTherefore, we estimate their variability separately using:\n\\[\n\\hat{p}_1\n\\]\nand:\n\\[\n\\hat{p}_2\n\\]\nThe standard error is:\n\\[\nSE_{CI}\n=\n\\sqrt{\n\\frac{\\hat{p}_1(1-\\hat{p}_1)}{n_1}\n+\n\\frac{\\hat{p}_2(1-\\hat{p}_2)}{n_2}\n}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#hypothesis-test",
+    "href": "lecture8.html#hypothesis-test",
+    "title": "8  Inference for Categorical Data",
+    "section": "13.2 Hypothesis Test",
+    "text": "13.2 Hypothesis Test\nUnder the null hypothesis:\n\\[\nH_0:p_1=p_2\n\\]\nwe are explicitly assuming that both groups share one common population proportion.\nTherefore, we estimate that common proportion using the pooled sample proportion:\n\\[\n\\boxed{\n\\hat{p}_{pool}\n=\n\\frac{x_1+x_2}{n_1+n_2}\n}\n\\]\nThe hypothesis-test standard error uses:\n\\[\n\\hat{p}_{pool}\n\\]\nbecause the test asks:\n\nIf the null hypothesis of equal population proportions were true, how much difference between the sample proportions would we expect from sampling variation alone?\n\nSo:\n\nConfidence interval → keep proportions separate.\n\n\nHypothesis test under \\(H_0:p_1=p_2\\) → pool the proportions.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#independent-observations",
+    "href": "lecture8.html#independent-observations",
+    "title": "8  Inference for Categorical Data",
+    "section": "30.1 Independent Observations",
+    "text": "30.1 Independent Observations\nObservations should contribute independently.\nFor example, each visitor should contribute one independent observation rather than the same visitor appearing repeatedly and being treated as independent observations.\nA huge dataset does not solve a violation of independence.\n\nMore rows do not fix dependence among observations.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#mutually-exclusive-categories",
+    "href": "lecture8.html#mutually-exclusive-categories",
+    "title": "8  Inference for Categorical Data",
+    "section": "30.2 Mutually Exclusive Categories",
+    "text": "30.2 Mutually Exclusive Categories\nEach observational unit should contribute to exactly one cell.\nFor example, a visitor cannot simultaneously be classified as both:\n\nPurchased\nDid not purchase\n\nThe categories must be mutually exclusive for the table being analyzed.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#expected-counts",
+    "href": "lecture8.html#expected-counts",
+    "title": "8  Inference for Categorical Data",
+    "section": "30.3 Expected Counts",
+    "text": "30.3 Expected Counts\nExpected counts should be sufficiently large for the chi-square approximation to be reliable.\nA simple conservative rule is:\n\\[\n\\boxed{\nE_{ij}\\geq5\n}\n\\]\nfor every cell.\nExpected counts can be inspected in R using:\n\nround(\n    page_test$expected,\n    1\n)\n\nFor the page example:\n\n\n\nPage\nPurchased\nDid Not Purchase\n\n\n\n\nCurrent\n1294.3\n8705.7\n\n\nNew\n1294.3\n8705.7\n\n\nThird\n1941.4\n13058.6\n\n\n\nAll expected counts are far greater than 5.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-1-identify-the-observational-unit",
+    "href": "lecture8.html#step-1-identify-the-observational-unit",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.1 Step 1: Identify the Observational Unit",
+    "text": "31.1 Step 1: Identify the Observational Unit\nDetermine what one observation represents.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-2-identify-the-two-categorical-variables",
+    "href": "lecture8.html#step-2-identify-the-two-categorical-variables",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.2 Step 2: Identify the Two Categorical Variables",
+    "text": "31.2 Step 2: Identify the Two Categorical Variables\nFor example:\n\nPage\nPurchase outcome",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-3-construct-a-contingency-table",
+    "href": "lecture8.html#step-3-construct-a-contingency-table",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.3 Step 3: Construct a Contingency Table",
+    "text": "31.3 Step 3: Construct a Contingency Table\n\ntable(\n    Variable1 = data$variable1,\n    Variable2 = data$variable2\n)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-4-examine-counts-and-proportions",
+    "href": "lecture8.html#step-4-examine-counts-and-proportions",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.4 Step 4: Examine Counts and Proportions",
+    "text": "31.4 Step 4: Examine Counts and Proportions\nDo not rely only on raw counts.\nCompare relevant percentages or conditional proportions.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-5-state-the-hypotheses",
+    "href": "lecture8.html#step-5-state-the-hypotheses",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.5 Step 5: State the Hypotheses",
+    "text": "31.5 Step 5: State the Hypotheses\n\\[\nH_0:\n\\text{The variables are independent}\n\\]\n\\[\nH_a:\n\\text{The variables are associated}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-6-calculate-expected-counts",
+    "href": "lecture8.html#step-6-calculate-expected-counts",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.6 Step 6: Calculate Expected Counts",
+    "text": "31.6 Step 6: Calculate Expected Counts\nConceptually:\n\\[\nE_{ij}\n=\n\\frac{\n(\\text{Row Total})\n(\\text{Column Total})\n}{\n\\text{Grand Total}\n}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-7-check-conditions",
+    "href": "lecture8.html#step-7-check-conditions",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.7 Step 7: Check Conditions",
+    "text": "31.7 Step 7: Check Conditions\nVerify:\n\nIndependent observations\nMutually exclusive categories\nAdequate expected counts",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-8-conduct-the-test",
+    "href": "lecture8.html#step-8-conduct-the-test",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.8 Step 8: Conduct the Test",
+    "text": "31.8 Step 8: Conduct the Test\n\ntest &lt;- chisq.test(\n    contingency_table,\n    correct = FALSE\n)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-9-interpret-the-overall-result",
+    "href": "lecture8.html#step-9-interpret-the-overall-result",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.9 Step 9: Interpret the Overall Result",
+    "text": "31.9 Step 9: Interpret the Overall Result\nIf the p-value is small:\n\nThere is evidence of an association between the categorical variables.\n\nIf the p-value is not small:\n\nThe data do not provide sufficient evidence of an association.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-10-investigate-the-pattern",
+    "href": "lecture8.html#step-10-investigate-the-pattern",
+    "title": "8  Inference for Categorical Data",
+    "section": "31.10 Step 10: Investigate the Pattern",
+    "text": "31.10 Step 10: Investigate the Pattern\nIf the overall test is significant, examine:\n\nConditional proportions\nObserved vs. expected counts\nStandardized residuals\n\n\ntest$expected\ntest$stdres\n\nThis helps determine which categories appear to contribute most strongly to the overall association.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#chi-square-test-of-independence-1",
+    "href": "lecture8.html#chi-square-test-of-independence-1",
+    "title": "8  Inference for Categorical Data",
+    "section": "36.1 Chi-Square Test of Independence",
+    "text": "36.1 Chi-Square Test of Independence\nUses two categorical variables.\nExample:\n\nIs page assignment associated with purchase outcome?\n\nThe data form a two-way contingency table.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#chi-square-goodness-of-fit-test-1",
+    "href": "lecture8.html#chi-square-goodness-of-fit-test-1",
+    "title": "8  Inference for Categorical Data",
+    "section": "36.2 Chi-Square Goodness-of-Fit Test",
+    "text": "36.2 Chi-Square Goodness-of-Fit Test\nUses one categorical variable and compares its observed distribution with specified benchmark probabilities.\nExample:\n\nDoes customer channel mix match 50% store, 30% website, and 20% app?\n\nThe distinction is:\n\n\n\n\n\n\n\n\nMethod\nVariables\nQuestion\n\n\n\n\nChi-square independence\n2 categorical variables\nAre the variables associated?\n\n\nChi-square goodness-of-fit\n1 categorical variable\nDoes its distribution match specified proportions?",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-1-identify-the-business-question",
+    "href": "lecture8.html#step-1-identify-the-business-question",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.1 Step 1: Identify the Business Question",
+    "text": "44.1 Step 1: Identify the Business Question\nDetermine what comparison is actually being requested.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-2-identify-the-observational-unit",
+    "href": "lecture8.html#step-2-identify-the-observational-unit",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.2 Step 2: Identify the Observational Unit",
+    "text": "44.2 Step 2: Identify the Observational Unit\nAsk:\n\nWhat does one observation represent?\n\nThis is essential for determining whether observations are independent.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-3-identify-the-categorical-variables",
+    "href": "lecture8.html#step-3-identify-the-categorical-variables",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.3 Step 3: Identify the Categorical Variables",
+    "text": "44.3 Step 3: Identify the Categorical Variables\nDetermine whether the problem contains:\n\nOne categorical variable\nTwo categorical variables\nTwo groups with a binary outcome",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-4-examine-counts-and-proportions-1",
+    "href": "lecture8.html#step-4-examine-counts-and-proportions-1",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.4 Step 4: Examine Counts and Proportions",
+    "text": "44.4 Step 4: Examine Counts and Proportions\nConstruct:\n\nFrequency tables\nContingency tables\nConditional proportions\nBar charts when useful\n\nDo not interpret raw counts without considering group sizes.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-5-choose-the-appropriate-method",
+    "href": "lecture8.html#step-5-choose-the-appropriate-method",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.5 Step 5: Choose the Appropriate Method",
+    "text": "44.5 Step 5: Choose the Appropriate Method\n\\[\n\\begin{array}{c}\n\\text{Categorical Outcome}\\\\\n\\downarrow\\\\\n\\begin{cases}\n\\text{Two proportions}\n\\rightarrow\n\\text{Two-proportion inference}\\\\[6pt]\n\\text{Two categorical variables}\n\\rightarrow\n\\chi^2\\text{ independence}\\\\[6pt]\n\\text{One categorical variable vs. benchmark}\n\\rightarrow\n\\chi^2\\text{ goodness-of-fit}\n\\end{cases}\n\\end{array}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-6-state-the-null-model",
+    "href": "lecture8.html#step-6-state-the-null-model",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.6 Step 6: State the Null Model",
+    "text": "44.6 Step 6: State the Null Model\nFor two proportions:\n\\[\nH_0:p_1=p_2\n\\]\nFor independence:\n\\[\nH_0:\n\\text{The categorical variables are independent}\n\\]\nFor goodness-of-fit:\n\\[\nH_0:\n\\text{The category probabilities equal the specified benchmark}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-7-check-conditions-1",
+    "href": "lecture8.html#step-7-check-conditions-1",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.7 Step 7: Check Conditions",
+    "text": "44.7 Step 7: Check Conditions\nDepending on the method, examine:\n\nIndependence of observations\nMutually exclusive categories\nExpected counts\nSample sizes",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-8-conduct-the-analysis",
+    "href": "lecture8.html#step-8-conduct-the-analysis",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.8 Step 8: Conduct the Analysis",
+    "text": "44.8 Step 8: Conduct the Analysis\nUse the appropriate R function:\n\nprop.test()\n\nor:\n\nchisq.test()",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-9-interpret-in-context",
+    "href": "lecture8.html#step-9-interpret-in-context",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.9 Step 9: Interpret in Context",
+    "text": "44.9 Step 9: Interpret in Context\nTranslate the statistical result back into the business question.\nAvoid saying only:\n\nThe p-value is significant.\n\nInstead explain what statistical relationship the data support.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
+    ]
+  },
+  {
+    "objectID": "lecture8.html#step-10-separate-association-from-causation",
+    "href": "lecture8.html#step-10-separate-association-from-causation",
+    "title": "8  Inference for Categorical Data",
+    "section": "44.10 Step 10: Separate Association from Causation",
+    "text": "44.10 Step 10: Separate Association from Causation\nA statistically significant association does not automatically establish causality.\nAsk:\n\nHow were the data generated?\n\nRandom assignment can support causal interpretation.\nObservational association by itself cannot.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Inference for Categorical Data</span>"
     ]
   }
 ]

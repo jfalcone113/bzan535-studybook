@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Lecture 6 – BZAN 535: Statistical Methods</title>
+<title>6&nbsp; Comparing Two Population Means: Paired Samples – BZAN 535: Statistical Methods</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -76,6 +111,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -88,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture6.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lecture 6</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./lecture6.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Paired Samples</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,25 +210,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-Parameter Statistical Inference</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture6.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lecture 6</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Paired Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./lecture8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lecture 8</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Inference for Categorical Data</span></span></a>
   </div>
 </li>
     </ul>
@@ -172,15 +236,91 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">6.1</span> Overview</a></li>
+  <li><a href="#paired-vs.-independent-samples" id="toc-paired-vs.-independent-samples" class="nav-link" data-scroll-target="#paired-vs.-independent-samples"><span class="header-section-number">7</span> Paired vs.&nbsp;Independent Samples</a>
+  <ul class="collapse">
+  <li><a href="#what-creates-a-pair" id="toc-what-creates-a-pair" class="nav-link" data-scroll-target="#what-creates-a-pair"><span class="header-section-number">7.1</span> What Creates a Pair?</a>
+  <ul class="collapse">
+  <li><a href="#repeated-measurements" id="toc-repeated-measurements" class="nav-link" data-scroll-target="#repeated-measurements"><span class="header-section-number">7.1.1</span> Repeated Measurements</a></li>
+  <li><a href="#natural-pairs" id="toc-natural-pairs" class="nav-link" data-scroll-target="#natural-pairs"><span class="header-section-number">7.1.2</span> Natural Pairs</a></li>
+  <li><a href="#matched-pairs" id="toc-matched-pairs" class="nav-link" data-scroll-target="#matched-pairs"><span class="header-section-number">7.1.3</span> Matched Pairs</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#why-pairing-matters" id="toc-why-pairing-matters" class="nav-link" data-scroll-target="#why-pairing-matters"><span class="header-section-number">8</span> Why Pairing Matters</a></li>
+  <li><a href="#defining-the-difference" id="toc-defining-the-difference" class="nav-link" data-scroll-target="#defining-the-difference"><span class="header-section-number">9</span> Defining the Difference</a></li>
+  <li><a href="#the-population-parameter" id="toc-the-population-parameter" class="nav-link" data-scroll-target="#the-population-parameter"><span class="header-section-number">10</span> The Population Parameter</a></li>
+  <li><a href="#hypotheses-for-paired-data" id="toc-hypotheses-for-paired-data" class="nav-link" data-scroll-target="#hypotheses-for-paired-data"><span class="header-section-number">11</span> Hypotheses for Paired Data</a>
+  <ul class="collapse">
+  <li><a href="#two-sided" id="toc-two-sided" class="nav-link" data-scroll-target="#two-sided"><span class="header-section-number">11.0.1</span> Two-Sided</a></li>
+  <li><a href="#right-tailed" id="toc-right-tailed" class="nav-link" data-scroll-target="#right-tailed"><span class="header-section-number">11.0.2</span> Right-Tailed</a></li>
+  <li><a href="#left-tailed" id="toc-left-tailed" class="nav-link" data-scroll-target="#left-tailed"><span class="header-section-number">11.0.3</span> Left-Tailed</a></li>
+  </ul></li>
+  <li><a href="#paired-t-test" id="toc-paired-t-test" class="nav-link" data-scroll-target="#paired-t-test"><span class="header-section-number">12</span> Paired t-Test</a>
+  <ul class="collapse">
+  <li><a href="#standard-error-of-the-mean-difference" id="toc-standard-error-of-the-mean-difference" class="nav-link" data-scroll-target="#standard-error-of-the-mean-difference"><span class="header-section-number">12.1</span> Standard Error of the Mean Difference</a></li>
+  <li><a href="#paired-t-test-statistic" id="toc-paired-t-test-statistic" class="nav-link" data-scroll-target="#paired-t-test-statistic"><span class="header-section-number">12.2</span> Paired t-Test Statistic</a></li>
+  </ul></li>
+  <li><a href="#example-identical-twin-study" id="toc-example-identical-twin-study" class="nav-link" data-scroll-target="#example-identical-twin-study"><span class="header-section-number">13</span> Example: Identical Twin Study</a>
+  <ul class="collapse">
+  <li><a href="#paired-t-test-in-r" id="toc-paired-t-test-in-r" class="nav-link" data-scroll-target="#paired-t-test-in-r"><span class="header-section-number">13.1</span> Paired t-Test in R</a></li>
+  <li><a href="#using-paired-true" id="toc-using-paired-true" class="nav-link" data-scroll-target="#using-paired-true"><span class="header-section-number">13.2</span> Using <code>paired = TRUE</code></a></li>
+  </ul></li>
+  <li><a href="#confidence-interval-for-a-mean-difference" id="toc-confidence-interval-for-a-mean-difference" class="nav-link" data-scroll-target="#confidence-interval-for-a-mean-difference"><span class="header-section-number">14</span> Confidence Interval for a Mean Difference</a></li>
+  <li><a href="#statistical-evidence-vs.-causality" id="toc-statistical-evidence-vs.-causality" class="nav-link" data-scroll-target="#statistical-evidence-vs.-causality"><span class="header-section-number">15</span> Statistical Evidence vs.&nbsp;Causality</a></li>
+  <li><a href="#matched-pairs-experimental-design" id="toc-matched-pairs-experimental-design" class="nav-link" data-scroll-target="#matched-pairs-experimental-design"><span class="header-section-number">16</span> Matched-Pairs Experimental Design</a>
+  <ul class="collapse">
+  <li><a href="#step-1-match-similar-units" id="toc-step-1-match-similar-units" class="nav-link" data-scroll-target="#step-1-match-similar-units"><span class="header-section-number">16.1</span> Step 1: Match Similar Units</a></li>
+  <li><a href="#step-2-randomize-within-each-pair" id="toc-step-2-randomize-within-each-pair" class="nav-link" data-scroll-target="#step-2-randomize-within-each-pair"><span class="header-section-number">16.2</span> Step 2: Randomize Within Each Pair</a></li>
+  <li><a href="#step-3-calculate-one-difference-per-pair" id="toc-step-3-calculate-one-difference-per-pair" class="nav-link" data-scroll-target="#step-3-calculate-one-difference-per-pair"><span class="header-section-number">16.3</span> Step 3: Calculate One Difference Per Pair</a></li>
+  </ul></li>
+  <li><a href="#assumptions-of-the-paired-t-test" id="toc-assumptions-of-the-paired-t-test" class="nav-link" data-scroll-target="#assumptions-of-the-paired-t-test"><span class="header-section-number">17</span> Assumptions of the Paired t-Test</a>
+  <ul class="collapse">
+  <li><a href="#independence-within-a-pair-is-not-required" id="toc-independence-within-a-pair-is-not-required" class="nav-link" data-scroll-target="#independence-within-a-pair-is-not-required"><span class="header-section-number">17.1</span> Independence Within a Pair Is Not Required</a></li>
+  <li><a href="#normality-applies-to-the-differences" id="toc-normality-applies-to-the-differences" class="nav-link" data-scroll-target="#normality-applies-to-the-differences"><span class="header-section-number">17.2</span> Normality Applies to the Differences</a></li>
+  </ul></li>
+  <li><a href="#checking-the-differences" id="toc-checking-the-differences" class="nav-link" data-scroll-target="#checking-the-differences"><span class="header-section-number">18</span> Checking the Differences</a>
+  <ul class="collapse">
+  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"><span class="header-section-number">18.0.1</span> Histogram</a></li>
+  <li><a href="#qq-plot" id="toc-qq-plot" class="nav-link" data-scroll-target="#qq-plot"><span class="header-section-number">18.0.2</span> Q–Q Plot</a></li>
+  </ul></li>
+  <li><a href="#pairing-does-not-automatically-mean-independence" id="toc-pairing-does-not-automatically-mean-independence" class="nav-link" data-scroll-target="#pairing-does-not-automatically-mean-independence"><span class="header-section-number">19</span> Pairing Does Not Automatically Mean Independence</a></li>
+  <li><a href="#time-structure-in-paired-differences" id="toc-time-structure-in-paired-differences" class="nav-link" data-scroll-target="#time-structure-in-paired-differences"><span class="header-section-number">20</span> Time Structure in Paired Differences</a></li>
+  <li><a href="#autocorrelation" id="toc-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation"><span class="header-section-number">21</span> Autocorrelation</a></li>
+  <li><a href="#changing-means-vs.-autocorrelation" id="toc-changing-means-vs.-autocorrelation" class="nav-link" data-scroll-target="#changing-means-vs.-autocorrelation"><span class="header-section-number">22</span> Changing Means vs.&nbsp;Autocorrelation</a></li>
+  <li><a href="#unit-of-replication" id="toc-unit-of-replication" class="nav-link" data-scroll-target="#unit-of-replication"><span class="header-section-number">23</span> Unit of Replication</a>
+  <ul class="collapse">
+  <li><a href="#study-a-many-matched-store-pairs" id="toc-study-a-many-matched-store-pairs" class="nav-link" data-scroll-target="#study-a-many-matched-store-pairs"><span class="header-section-number">23.0.1</span> Study A: Many Matched Store Pairs</a></li>
+  <li><a href="#study-b-one-store-pair-for-104-weeks" id="toc-study-b-one-store-pair-for-104-weeks" class="nav-link" data-scroll-target="#study-b-one-store-pair-for-104-weeks"><span class="header-section-number">23.0.2</span> Study B: One Store Pair for 104 Weeks</a></li>
+  </ul></li>
+  <li><a href="#pseudoreplication" id="toc-pseudoreplication" class="nav-link" data-scroll-target="#pseudoreplication"><span class="header-section-number">24</span> Pseudoreplication</a></li>
+  <li><a href="#choosing-paired-vs.-independent-analysis" id="toc-choosing-paired-vs.-independent-analysis" class="nav-link" data-scroll-target="#choosing-paired-vs.-independent-analysis"><span class="header-section-number">25</span> Choosing Paired vs.&nbsp;Independent Analysis</a>
+  <ul class="collapse">
+  <li><a href="#if-yes" id="toc-if-yes" class="nav-link" data-scroll-target="#if-yes"><span class="header-section-number">25.0.1</span> If Yes</a></li>
+  <li><a href="#if-no" id="toc-if-no" class="nav-link" data-scroll-target="#if-no"><span class="header-section-number">25.0.2</span> If No</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="header-section-number">25.1</span> Examples</a>
+  <ul class="collapse">
+  <li><a href="#same-customers-before-and-after" id="toc-same-customers-before-and-after" class="nav-link" data-scroll-target="#same-customers-before-and-after"><span class="header-section-number">25.1.1</span> Same Customers Before and After</a></li>
+  <li><a href="#randomized-website-experiment" id="toc-randomized-website-experiment" class="nav-link" data-scroll-target="#randomized-website-experiment"><span class="header-section-number">25.1.2</span> Randomized Website Experiment</a></li>
+  <li><a href="#matched-stores" id="toc-matched-stores" class="nav-link" data-scroll-target="#matched-stores"><span class="header-section-number">25.1.3</span> Matched Stores</a></li>
+  <li><a href="#different-orders-across-months" id="toc-different-orders-across-months" class="nav-link" data-scroll-target="#different-orders-across-months"><span class="header-section-number">25.1.4</span> Different Orders Across Months</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#paired-samples-workflow" id="toc-paired-samples-workflow" class="nav-link" data-scroll-target="#paired-samples-workflow"><span class="header-section-number">26</span> Paired-Samples Workflow</a></li>
+  <li><a href="#overall-framework" id="toc-overall-framework" class="nav-link" data-scroll-target="#overall-framework"><span class="header-section-number">27</span> Overall Framework</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lecture 6</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Paired Samples</span></h1>
 </div>
 
 
@@ -197,9 +337,987 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In progress…give me some time!</p>
+<section id="overview" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">6.1</span> Overview</h2>
+<p>Lecture 5 introduced inference for <strong>one population parameter</strong>.</p>
+<p>For example, we could ask whether a population mean differs from some benchmark:</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0
+\]</span></p>
+<p>Now suppose we have <strong>two sets of measurements</strong> and want to compare their means.</p>
+<p>Examples include:</p>
+<ul>
+<li>Customer spending before vs.&nbsp;after joining a loyalty program</li>
+<li>Store sales before vs.&nbsp;after a layout change</li>
+<li>Measurements from matched treatment and control stores</li>
+<li>Measurements from twins or other naturally matched subjects</li>
+</ul>
+<p>Before choosing a statistical test, the most important question is:</p>
+<blockquote class="blockquote">
+<p><strong>Are the observations in the two conditions independent, or are they meaningfully connected?</strong></p>
+</blockquote>
+<p>If observations can be meaningfully linked one-to-one, we have <strong>paired data</strong>.</p>
+<p>If no meaningful one-to-one relationship exists, we instead have <strong>independent samples</strong>.</p>
+<p>This distinction determines how the data should be analyzed.</p>
+<hr>
+</section>
+<section id="paired-vs.-independent-samples" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Paired vs.&nbsp;Independent Samples</h1>
+<p>Suppose a retailer measures checkout time at 20 stores.</p>
+<p>The company then installs a new checkout layout and measures checkout time at the <strong>same 20 stores again</strong>.</p>
+<p>For every store, there are two measurements:</p>
+<p><span class="math display">\[
+(\text{Before}_i,\text{After}_i)
+\]</span></p>
+<p>These observations are <strong>paired</strong> because each after measurement corresponds to the same store’s before measurement.</p>
+<p>It would be inappropriate to ignore this connection and treat the 40 measurements as unrelated observations.</p>
+<p>Instead, calculate the change within each store:</p>
+<p><span class="math display">\[
+d_i=\text{After}_i-\text{Before}_i
+\]</span></p>
+<p>Now the original problem:</p>
+<p><span class="math display">\[
+\text{Before vs. After}
+\]</span></p>
+<p>becomes:</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_n
+\]</span></p>
+<p>which is a <strong>one-sample problem involving the differences</strong>.</p>
+<hr>
+<section id="what-creates-a-pair" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="what-creates-a-pair"><span class="header-section-number">7.1</span> What Creates a Pair?</h2>
+<p>A pair exists when an observation in one condition can be meaningfully linked to exactly one observation in another condition.</p>
+<p>Common forms of pairing include:</p>
+<section id="repeated-measurements" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="repeated-measurements"><span class="header-section-number">7.1.1</span> Repeated Measurements</h3>
+<p>The same observational unit is measured twice.</p>
+<p>Examples:</p>
+<ul>
+<li>Same customer before and after a program</li>
+<li>Same employee before and after training</li>
+<li>Same store before and after a redesign</li>
+</ul>
+</section>
+<section id="natural-pairs" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="natural-pairs"><span class="header-section-number">7.1.2</span> Natural Pairs</h3>
+<p>Different observational units have a meaningful natural relationship.</p>
+<p>Examples:</p>
+<ul>
+<li>Identical twins</li>
+<li>Siblings</li>
+<li>Matched geographic locations</li>
+</ul>
+</section>
+<section id="matched-pairs" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="matched-pairs"><span class="header-section-number">7.1.3</span> Matched Pairs</h3>
+<p>Researchers intentionally match similar observational units before comparing treatments.</p>
+<p>Examples:</p>
+<ul>
+<li>Match two stores with similar historical sales</li>
+<li>Match customers with similar demographics</li>
+<li>Match patients with similar baseline characteristics</li>
+</ul>
+<p>One member of each pair may then receive one treatment while the other receives another.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="why-pairing-matters" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Why Pairing Matters</h1>
+<p>Suppose we have measurements:</p>
+<p><span class="math display">\[
+X_i
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+Y_i
+\]</span></p>
+<p>for pair <span class="math inline">\(i\)</span>.</p>
+<p>Instead of analyzing the two sets separately, calculate:</p>
+<p><span class="math display">\[
+d_i=X_i-Y_i
+\]</span></p>
+<p>Each pair now contributes <strong>one difference</strong>.</p>
+<p>The pair, rather than each individual measurement, becomes the <strong>unit of analysis</strong>.</p>
+<p>Pairing can improve precision because characteristics shared within a pair are removed before the two conditions are compared.</p>
+<p>For example, stores may naturally differ because of:</p>
+<ul>
+<li>Store size</li>
+<li>Customer traffic</li>
+<li>Location</li>
+<li>Neighborhood demographics</li>
+<li>Historical sales</li>
+</ul>
+<p>If the same store is measured before and after a change, much of this store-to-store variation is automatically controlled because each store is compared with itself.</p>
+<p>Conceptually:</p>
+<p><span class="math display">\[
+\text{Observed Difference}
+=
+\text{Condition Effect}
++
+\text{Within-Pair Noise}
+\]</span></p>
+<p>rather than comparing two groups containing all of the between-unit variation.</p>
+<p>When the measurements within pairs are meaningfully related, pairing can therefore reduce noise and improve precision.</p>
+<hr>
+</section>
+<section id="defining-the-difference" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Defining the Difference</h1>
+<p>The direction of the difference matters.</p>
+<p>Suppose:</p>
+<p><span class="math display">\[
+d_i=\text{After}_i-\text{Before}_i
+\]</span></p>
+<p>Then:</p>
+<ul>
+<li><span class="math inline">\(d_i&gt;0\)</span> means the measurement increased</li>
+<li><span class="math inline">\(d_i&lt;0\)</span> means the measurement decreased</li>
+<li><span class="math inline">\(d_i=0\)</span> means there was no change</li>
+</ul>
+<p>If the outcome is checkout time, for example:</p>
+<p><span class="math display">\[
+d_i&lt;0
+\]</span></p>
+<p>would represent an improvement because checkout time decreased.</p>
+<p>But if we instead defined:</p>
+<p><span class="math display">\[
+d_i=\text{Before}_i-\text{After}_i
+\]</span></p>
+<p>then improvement would produce:</p>
+<p><span class="math display">\[
+d_i&gt;0
+\]</span></p>
+<p>There is nothing inherently correct about one direction over the other.</p>
+<p>The important thing is to:</p>
+<ol type="1">
+<li>Define the difference explicitly</li>
+<li>Keep the direction consistent</li>
+<li>Interpret the sign in context</li>
+</ol>
+<hr>
+</section>
+<section id="the-population-parameter" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> The Population Parameter</h1>
+<p>Once the differences are defined:</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_n
+\]</span></p>
+<p>the parameter of interest is:</p>
+<p><span class="math display">\[
+\boxed{\mu_d}
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+\mu_d
+=
+\text{population mean difference}
+\]</span></p>
+<p>The corresponding sample statistic is:</p>
+<p><span class="math display">\[
+\boxed{\bar{d}}
+\]</span></p>
+<p>where:</p>
+<p><span class="math display">\[
+\bar{d}
+=
+\frac{\sum d_i}{n}
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\bar{d}
+\rightarrow
+\text{estimate of }
+\mu_d
+\]</span></p>
+<p>This is exactly the same logic used in one-sample inference:</p>
+<p><span class="math display">\[
+\bar{x}\rightarrow\mu
+\]</span></p>
+<p>except the observations are now <strong>within-pair differences</strong>.</p>
+<hr>
+</section>
+<section id="hypotheses-for-paired-data" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Hypotheses for Paired Data</h1>
+<p>If the question is whether the two conditions differ on average, the null hypothesis is:</p>
+<p><span class="math display">\[
+H_0:\mu_d=0
+\]</span></p>
+<p>A mean difference of zero means:</p>
+<blockquote class="blockquote">
+<p><strong>There is no average difference between the two conditions.</strong></p>
+</blockquote>
+<p>The alternative depends on the research question.</p>
+<section id="two-sided" class="level3" data-number="11.0.1">
+<h3 data-number="11.0.1" class="anchored" data-anchor-id="two-sided"><span class="header-section-number">11.0.1</span> Two-Sided</h3>
+<p>To test whether the conditions differ:</p>
+<p><span class="math display">\[
+H_a:\mu_d\neq0
+\]</span></p>
+</section>
+<section id="right-tailed" class="level3" data-number="11.0.2">
+<h3 data-number="11.0.2" class="anchored" data-anchor-id="right-tailed"><span class="header-section-number">11.0.2</span> Right-Tailed</h3>
+<p>If positive differences represent the effect of interest:</p>
+<p><span class="math display">\[
+H_a:\mu_d&gt;0
+\]</span></p>
+</section>
+<section id="left-tailed" class="level3" data-number="11.0.3">
+<h3 data-number="11.0.3" class="anchored" data-anchor-id="left-tailed"><span class="header-section-number">11.0.3</span> Left-Tailed</h3>
+<p>If negative differences represent the effect of interest:</p>
+<p><span class="math display">\[
+H_a:\mu_d&lt;0
+\]</span></p>
+<p>The direction depends entirely on how:</p>
+<p><span class="math display">\[
+d_i
+\]</span></p>
+<p>was defined.</p>
+<hr>
+</section>
+</section>
+<section id="paired-t-test" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Paired t-Test</h1>
+<p>A <strong>paired t-test</strong> compares the population mean difference to a hypothesized value, usually zero.</p>
+<p>The important insight is:</p>
+<blockquote class="blockquote">
+<p><strong>A paired t-test is mathematically a one-sample t-test performed on the within-pair differences.</strong></p>
+</blockquote>
+<p>Once we calculate:</p>
+<p><span class="math display">\[
+d_i=X_i-Y_i
+\]</span></p>
+<p>we no longer need to think of the analysis as two separate samples.</p>
+<p>We have one sample:</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_n
+\]</span></p>
+<p>and ask whether its population mean differs from zero.</p>
+<hr>
+<section id="standard-error-of-the-mean-difference" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="standard-error-of-the-mean-difference"><span class="header-section-number">12.1</span> Standard Error of the Mean Difference</h2>
+<p>Let:</p>
+<p><span class="math display">\[
+s_d
+\]</span></p>
+<p>represent the sample standard deviation of the differences.</p>
+<p>Then:</p>
+<p><span class="math display">\[
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(n\)</span> = number of <strong>pairs</strong></p>
+<p>Notice that <span class="math inline">\(n\)</span> is not the total number of individual measurements.</p>
+<p>If there are 15 pairs, then:</p>
+<p><span class="math display">\[
+n=15
+\]</span></p>
+<p>even though there are:</p>
+<p><span class="math display">\[
+30
+\]</span></p>
+<p>individual measurements.</p>
+<hr>
+</section>
+<section id="paired-t-test-statistic" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="paired-t-test-statistic"><span class="header-section-number">12.2</span> Paired t-Test Statistic</h2>
+<p>To test:</p>
+<p><span class="math display">\[
+H_0:\mu_d=0
+\]</span></p>
+<p>the test statistic is:</p>
+<p><span class="math display">\[
+\boxed{
+t=
+\frac{\bar{d}-0}
+{s_d/\sqrt{n}}
+}
+\]</span></p>
+<p>More generally:</p>
+<p><span class="math display">\[
+t=
+\frac{\bar{d}-\mu_{d,0}}
+{s_d/\sqrt{n}}
+\]</span></p>
+<p>The degrees of freedom are:</p>
+<p><span class="math display">\[
+df=n-1
+\]</span></p>
+<p>The test statistic tells us:</p>
+<blockquote class="blockquote">
+<p><strong>How many standard errors the observed mean difference lies from the value specified by the null hypothesis.</strong></p>
+</blockquote>
+<p>A large absolute value of <span class="math inline">\(t\)</span> means the observed mean difference is far from the null value relative to the amount of sampling uncertainty.</p>
+<hr>
+</section>
+</section>
+<section id="example-identical-twin-study" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Example: Identical Twin Study</h1>
+<p>Suppose a study compares left hippocampal volume for <strong>15 pairs of identical twins</strong>.</p>
+<p>Within each pair:</p>
+<ul>
+<li>One twin was diagnosed with schizophrenia</li>
+<li>The other twin was not</li>
+</ul>
+<p>Define:</p>
+<p><span class="math display">\[
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+\]</span></p>
+<p>The observed differences have:</p>
+<p><span class="math display">\[
+\bar{d}=0.1987
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+s_d=0.2383
+\]</span></p>
+<p>Because:</p>
+<p><span class="math display">\[
+n=15
+\]</span></p>
+<p>the standard error is:</p>
+<p><span class="math display">\[
+SE(\bar{d})
+=
+\frac{0.2383}{\sqrt{15}}
+\]</span></p>
+<p><span class="math display">\[
+SE(\bar{d})
+\approx0.0615
+\]</span></p>
+<p>Under:</p>
+<p><span class="math display">\[
+H_0:\mu_d=0
+\]</span></p>
+<p>the test statistic is:</p>
+<p><span class="math display">\[
+t=
+\frac{0.1987-0}
+{0.0615}
+\]</span></p>
+<p><span class="math display">\[
+t\approx3.23
+\]</span></p>
+<p>with:</p>
+<p><span class="math display">\[
+df=15-1=14
+\]</span></p>
+<p>So the observed mean difference is approximately:</p>
+<p><span class="math display">\[
+3.23
+\]</span></p>
+<p>standard errors above the null value of zero.</p>
+<hr>
+<section id="paired-t-test-in-r" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="paired-t-test-in-r"><span class="header-section-number">13.1</span> Paired t-Test in R</h2>
+<p>If the differences have already been calculated:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    pairs<span class="sc">$</span>Difference,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu =</span> <span class="dv">0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is simply a <strong>one-sample t-test on the differences</strong>.</p>
+<p>The example produces approximately:</p>
+<p><span class="math display">\[
+t=3.23
+\]</span></p>
+<p><span class="math display">\[
+df=14
+\]</span></p>
+<p><span class="math display">\[
+p=0.006
+\]</span></p>
+<p>and a 95% confidence interval of approximately:</p>
+<p><span class="math display">\[
+(0.067,\ 0.331)
+\]</span></p>
+<p>Because:</p>
+<p><span class="math display">\[
+p&lt;0.05
+\]</span></p>
+<p>we reject:</p>
+<p><span class="math display">\[
+H_0:\mu_d=0
+\]</span></p>
+<p>The data provide evidence that the population mean difference is not zero.</p>
+<hr>
+</section>
+<section id="using-paired-true" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="using-paired-true"><span class="header-section-number">13.2</span> Using <code>paired = TRUE</code></h2>
+<p>R can also calculate the differences internally.</p>
+<p>For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    pairs<span class="sc">$</span>Unaffected,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    pairs<span class="sc">$</span>Affected,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">paired =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This performs the same conceptual analysis:</p>
+<p><span class="math display">\[
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+\]</span></p>
+<p>followed by a one-sample t-test on those differences.</p>
+<hr>
+</section>
+</section>
+<section id="confidence-interval-for-a-mean-difference" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Confidence Interval for a Mean Difference</h1>
+<p>The confidence interval for the population mean difference follows the same structure as the confidence interval for a single population mean:</p>
+<p><span class="math display">\[
+\boxed{
+\bar{d}
+\pm
+t^*
+\frac{s_d}{\sqrt{n}}
+}
+\]</span></p>
+<p>For the twin example, the 95% confidence interval is approximately:</p>
+<p><span class="math display">\[
+(0.067,\ 0.331)
+\]</span></p>
+<p>Because the entire interval lies above zero, the data are consistent with a positive population mean difference under the chosen definition:</p>
+<p><span class="math display">\[
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+\]</span></p>
+<p>The confidence interval also communicates the estimated <strong>magnitude</strong> of the difference, rather than merely whether the difference is statistically significant.</p>
+<hr>
+</section>
+<section id="statistical-evidence-vs.-causality" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Statistical Evidence vs.&nbsp;Causality</h1>
+<p>A statistically significant difference does <strong>not automatically establish causation</strong>.</p>
+<p>In the twin example, the analysis provides evidence that mean left hippocampal volume differs between twins with and without a schizophrenia diagnosis.</p>
+<p>That supports a statement about <strong>association</strong>:</p>
+<blockquote class="blockquote">
+<p>Mean hippocampal volume differs between the two conditions.</p>
+</blockquote>
+<p>It does not, by itself, establish:</p>
+<blockquote class="blockquote">
+<p>Schizophrenia caused the difference in hippocampal volume.</p>
+</blockquote>
+<p>Causal conclusions depend on the <strong>study design</strong>, not simply on obtaining a small p-value.</p>
+<p>This connects back to the distinction between observational and experimental studies:</p>
+<blockquote class="blockquote">
+<p><strong>Statistical significance does not turn an observational study into a randomized experiment.</strong></p>
+</blockquote>
+<hr>
+</section>
+<section id="matched-pairs-experimental-design" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Matched-Pairs Experimental Design</h1>
+<p>Pairing can also be intentionally incorporated into an experiment.</p>
+<p>Suppose Kroger has candidate stores for an endcap-display experiment.</p>
+<p>Some stores will receive:</p>
+<ul>
+<li><strong>Treatment:</strong> endcap display</li>
+</ul>
+<p>while others receive:</p>
+<ul>
+<li><strong>Control:</strong> usual shelf placement</li>
+</ul>
+<p>Instead of randomly assigning stores without considering their characteristics, Kroger could use a <strong>matched-pairs design</strong>.</p>
+<hr>
+<section id="step-1-match-similar-units" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="step-1-match-similar-units"><span class="header-section-number">16.1</span> Step 1: Match Similar Units</h2>
+<p>Before treatment assignment, form pairs of similar stores using pre-experiment characteristics such as:</p>
+<ul>
+<li>Baseline sales</li>
+<li>Store size</li>
+<li>Customer traffic</li>
+<li>Neighborhood characteristics</li>
+</ul>
+<p>The goal is to make the stores within each pair as comparable as possible before the treatment occurs.</p>
+<hr>
+</section>
+<section id="step-2-randomize-within-each-pair" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="step-2-randomize-within-each-pair"><span class="header-section-number">16.2</span> Step 2: Randomize Within Each Pair</h2>
+<p>Within each matched pair:</p>
+<ul>
+<li>Randomly assign one store to treatment</li>
+<li>Randomly assign the other to control</li>
+</ul>
+<p>Randomization remains important.</p>
+<p>Matching improves comparability and precision, while random assignment supports causal inference.</p>
+<hr>
+</section>
+<section id="step-3-calculate-one-difference-per-pair" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="step-3-calculate-one-difference-per-pair"><span class="header-section-number">16.3</span> Step 3: Calculate One Difference Per Pair</h2>
+<p>For pair <span class="math inline">\(i\)</span>, calculate:</p>
+<p><span class="math display">\[
+d_i
+=
+\text{Sales}_{\text{endcap},i}
+-
+\text{Sales}_{\text{control},i}
+\]</span></p>
+<p>Then analyze:</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_n
+\]</span></p>
+<p>and test:</p>
+<p><span class="math display">\[
+H_0:\mu_d=0
+\]</span></p>
+<p>The key distinction is:</p>
+<blockquote class="blockquote">
+<p><strong>Matching improves precision. Random assignment supports causality.</strong></p>
+</blockquote>
+<p>They serve different purposes.</p>
+<hr>
+</section>
+</section>
+<section id="assumptions-of-the-paired-t-test" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Assumptions of the Paired t-Test</h1>
+<p>Once paired data are converted into differences:</p>
+<p><span class="math display">\[
+(X_i,Y_i)
+\rightarrow
+d_i=X_i-Y_i
+\]</span></p>
+<p>the assumptions of the paired t-test apply primarily to the <strong>differences</strong>.</p>
+<p>The main assumptions are:</p>
+<ol type="1">
+<li>There is a meaningful reason for the observations to be paired</li>
+<li>The differences are independent across pairs</li>
+<li>The differences contain no severe outliers</li>
+<li>The distribution of the differences is approximately Normal when the number of pairs is small</li>
+</ol>
+<hr>
+<section id="independence-within-a-pair-is-not-required" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="independence-within-a-pair-is-not-required"><span class="header-section-number">17.1</span> Independence Within a Pair Is Not Required</h2>
+<p>The two observations within a pair do <strong>not</strong> need to be independent.</p>
+<p>In fact, the reason for using a paired analysis is usually that they are related.</p>
+<p>For example:</p>
+<p><span class="math display">\[
+(\text{Before}_i,\text{After}_i)
+\]</span></p>
+<p>for the same store are naturally connected.</p>
+<p>That relationship is exactly what the paired analysis preserves.</p>
+<p>What needs to be independent is:</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_n
+\]</span></p>
+<p>across separate pairs.</p>
+<hr>
+</section>
+<section id="normality-applies-to-the-differences" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="normality-applies-to-the-differences"><span class="header-section-number">17.2</span> Normality Applies to the Differences</h2>
+<p>A paired t-test does <strong>not</strong> require both original variables to be Normally distributed.</p>
+<p>You do not separately need:</p>
+<p><span class="math display">\[
+X\sim N
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+Y\sim N
+\]</span></p>
+<p>Instead, the relevant quantity is:</p>
+<p><span class="math display">\[
+D=X-Y
+\]</span></p>
+<p>For small samples, we want the distribution of:</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_n
+\]</span></p>
+<p>to be reasonably consistent with a Normal distribution and free of severe outliers.</p>
+<p>Therefore:</p>
+<blockquote class="blockquote">
+<p><strong>Check the differences, not the two original columns separately.</strong></p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="checking-the-differences" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Checking the Differences</h1>
+<p>After calculating:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pairs <span class="ot">&lt;-</span> pairs <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">Difference =</span> Unaffected <span class="sc">-</span> Affected</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>we can inspect the differences directly.</p>
+<section id="histogram" class="level3" data-number="18.0.1">
+<h3 data-number="18.0.1" class="anchored" data-anchor-id="histogram"><span class="header-section-number">18.0.1</span> Histogram</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pairs, <span class="fu">aes</span>(<span class="at">x =</span> Difference)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Look for:</p>
+<ul>
+<li>Severe skewness</li>
+<li>Extreme outliers</li>
+<li>Unusual shape</li>
+</ul>
+</section>
+<section id="qq-plot" class="level3" data-number="18.0.2">
+<h3 data-number="18.0.2" class="anchored" data-anchor-id="qq-plot"><span class="header-section-number">18.0.2</span> Q–Q Plot</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(pairs<span class="sc">$</span>Difference)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(pairs<span class="sc">$</span>Difference)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For a small sample, strong departures from the line may indicate that the Normality assumption is questionable.</p>
+<p>However, with only a small number of pairs, visual diagnostics themselves are uncertain.</p>
+<p>For example, with:</p>
+<p><span class="math display">\[
+n=15
+\]</span></p>
+<p>there are relatively few observations available for judging the shape of the difference distribution.</p>
+<hr>
+</section>
+</section>
+<section id="pairing-does-not-automatically-mean-independence" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Pairing Does Not Automatically Mean Independence</h1>
+<p>Paired data can introduce another important issue.</p>
+<p>Suppose two stores are observed every week for 104 weeks.</p>
+<p>For each week:</p>
+<p><span class="math display">\[
+d_t
+=
+\text{Sales}_{8,t}
+-
+\text{Sales}_{208,t}
+\]</span></p>
+<p>It might be tempting to treat the 104 weekly differences as:</p>
+<p><span class="math display">\[
+d_1,d_2,\ldots,d_{104}
+\]</span></p>
+<p>independent observations.</p>
+<p>But these differences occur <strong>over time</strong>.</p>
+<p>Consecutive weeks may be related.</p>
+<p>This creates a potential violation of the independence assumption.</p>
+<hr>
+</section>
+<section id="time-structure-in-paired-differences" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Time Structure in Paired Differences</h1>
+<p>Suppose the difference between two stores changes systematically over time.</p>
+<p>A single overall mean:</p>
+<p><span class="math display">\[
+\bar{d}
+\]</span></p>
+<p>might conceal that pattern.</p>
+<p>For example, the differences might begin mostly negative and become increasingly positive.</p>
+<p>Then the statement:</p>
+<blockquote class="blockquote">
+<p>The average difference is 10.</p>
+</blockquote>
+<p>does not fully describe what is happening.</p>
+<p>The relationship may instead involve a <strong>time trend</strong>.</p>
+<p>This connects paired inference back to time-series analysis:</p>
+<blockquote class="blockquote">
+<p>Before reducing repeated measurements to one overall mean difference, check whether the difference itself changes systematically over time.</p>
+</blockquote>
+<hr>
+</section>
+<section id="autocorrelation" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> Autocorrelation</h1>
+<p><strong>Autocorrelation</strong> measures whether observations are related to observations from earlier time periods.</p>
+<p>For weekly differences:</p>
+<p><span class="math display">\[
+d_t
+\]</span></p>
+<p>we might ask whether:</p>
+<p><span class="math display">\[
+d_t
+\]</span></p>
+<p>is related to:</p>
+<p><span class="math display">\[
+d_{t-1}
+\]</span></p>
+<p>or:</p>
+<p><span class="math display">\[
+d_{t-2}
+\]</span></p>
+<p>and so on.</p>
+<p>An <strong>autocorrelation function (ACF)</strong> examines these relationships at different lags.</p>
+<p>For example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(differences)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A bar at lag:</p>
+<p><span class="math display">\[
+k
+\]</span></p>
+<p>measures the relationship between observations separated by:</p>
+<p><span class="math display">\[
+k
+\]</span></p>
+<p>time periods.</p>
+<p>If substantial autocorrelation exists, the observations do not provide completely independent pieces of information.</p>
+<p>That matters because the usual paired t-test standard error:</p>
+<p><span class="math display">\[
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+\]</span></p>
+<p>assumes independent differences.</p>
+<p>If observations are strongly dependent, treating all of them as independent can make the estimated uncertainty misleading.</p>
+<hr>
+</section>
+<section id="changing-means-vs.-autocorrelation" class="level1" data-number="22">
+<h1 data-number="22"><span class="header-section-number">22</span> Changing Means vs.&nbsp;Autocorrelation</h1>
+<p>Time-series diagnostics can reveal different problems.</p>
+<p>A <strong>time plot</strong> can reveal whether the mean difference changes over time.</p>
+<p>An <strong>ACF</strong> can reveal whether observations are serially dependent.</p>
+<p>These are not the same issue.</p>
+<p>For example:</p>
+<ul>
+<li>A time trend means the expected difference is changing</li>
+<li>Autocorrelation means observations at different times are related</li>
+</ul>
+<p>A dataset can have:</p>
+<ul>
+<li>A changing mean with little autocorrelation</li>
+<li>Autocorrelation around a stable mean</li>
+<li>Both</li>
+<li>Neither</li>
+</ul>
+<p>Therefore, both the <strong>structure of the mean</strong> and the <strong>dependence between observations</strong> matter.</p>
+<hr>
+</section>
+<section id="unit-of-replication" class="level1" data-number="23">
+<h1 data-number="23"><span class="header-section-number">23</span> Unit of Replication</h1>
+<p>One of the most important questions in statistical inference is:</p>
+<blockquote class="blockquote">
+<p><strong>What is the independent unit of replication?</strong></p>
+</blockquote>
+<p>Suppose we compare two study designs.</p>
+<section id="study-a-many-matched-store-pairs" class="level3" data-number="23.0.1">
+<h3 data-number="23.0.1" class="anchored" data-anchor-id="study-a-many-matched-store-pairs"><span class="header-section-number">23.0.1</span> Study A: Many Matched Store Pairs</h3>
+<p>Suppose many pairs of similar stores participate in an experiment.</p>
+<p>Each store is observed for six weeks.</p>
+<p>We calculate one sales summary for each store and then one difference for each matched pair.</p>
+<p>If there are:</p>
+<p><span class="math display">\[
+n
+\]</span></p>
+<p>independent store pairs, then the sample size is:</p>
+<p><span class="math display">\[
+n
+\]</span></p>
+<p>The independent replication comes from the <strong>different store pairs</strong>.</p>
+<hr>
+</section>
+<section id="study-b-one-store-pair-for-104-weeks" class="level3" data-number="23.0.2">
+<h3 data-number="23.0.2" class="anchored" data-anchor-id="study-b-one-store-pair-for-104-weeks"><span class="header-section-number">23.0.2</span> Study B: One Store Pair for 104 Weeks</h3>
+<p>Suppose instead that only two stores are studied, but they are observed for:</p>
+<p><span class="math display">\[
+104
+\]</span></p>
+<p>weeks.</p>
+<p>There are 104 weekly differences, but they all come from the <strong>same two stores</strong>.</p>
+<p>Those 104 weeks are not equivalent to having 104 independent store pairs.</p>
+<p>They provide more information about those particular stores, but not necessarily more independent replication across a population of stores.</p>
+<p>This distinction is critical:</p>
+<blockquote class="blockquote">
+<p><strong>More repeated observations of the same units are not the same as more independent observational units.</strong></p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="pseudoreplication" class="level1" data-number="24">
+<h1 data-number="24"><span class="header-section-number">24</span> Pseudoreplication</h1>
+<p>Treating repeated or dependent measurements as though they were independent observations can create <strong>pseudoreplication</strong>.</p>
+<p>For example:</p>
+<blockquote class="blockquote">
+<p>Two stores observed for 104 weeks</p>
+</blockquote>
+<p>does not automatically provide the same inferential information as:</p>
+<blockquote class="blockquote">
+<p>104 independent pairs of stores.</p>
+</blockquote>
+<p>Repeated observations may increase information about the particular units being studied, but they do not necessarily increase the number of independent units available for population-level inference.</p>
+<p>The effective sample size depends on the study design and dependence structure, not simply the number of rows in the dataset.</p>
+<hr>
+</section>
+<section id="choosing-paired-vs.-independent-analysis" class="level1" data-number="25">
+<h1 data-number="25"><span class="header-section-number">25</span> Choosing Paired vs.&nbsp;Independent Analysis</h1>
+<p>Before comparing two means, ask:</p>
+<blockquote class="blockquote">
+<p><strong>Can each observation in one condition be meaningfully linked to one observation in the other condition?</strong></p>
+</blockquote>
+<section id="if-yes" class="level3" data-number="25.0.1">
+<h3 data-number="25.0.1" class="anchored" data-anchor-id="if-yes"><span class="header-section-number">25.0.1</span> If Yes</h3>
+<p>The observations are paired.</p>
+<p>Calculate:</p>
+<p><span class="math display">\[
+d_i=X_i-Y_i
+\]</span></p>
+<p>and perform <strong>one-sample inference on the differences</strong>.</p>
+</section>
+<section id="if-no" class="level3" data-number="25.0.2">
+<h3 data-number="25.0.2" class="anchored" data-anchor-id="if-no"><span class="header-section-number">25.0.2</span> If No</h3>
+<p>The observations are independent samples.</p>
+<p>Compare the two population means directly using an independent-samples method.</p>
+<hr>
+</section>
+<section id="examples" class="level2" data-number="25.1">
+<h2 data-number="25.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">25.1</span> Examples</h2>
+<section id="same-customers-before-and-after" class="level3" data-number="25.1.1">
+<h3 data-number="25.1.1" class="anchored" data-anchor-id="same-customers-before-and-after"><span class="header-section-number">25.1.1</span> Same Customers Before and After</h3>
+<p>Monthly spending is recorded for the same customers before and after they join a loyalty program.</p>
+<p><strong>Paired</strong></p>
+<p>Each customer’s before measurement is linked to that same customer’s after measurement.</p>
+<hr>
+</section>
+<section id="randomized-website-experiment" class="level3" data-number="25.1.2">
+<h3 data-number="25.1.2" class="anchored" data-anchor-id="randomized-website-experiment"><span class="header-section-number">25.1.2</span> Randomized Website Experiment</h3>
+<p>One group of customers sees the current website.</p>
+<p>A different group sees a redesigned website.</p>
+<p><strong>Independent</strong></p>
+<p>There is no one-to-one correspondence between customers in the two groups.</p>
+<hr>
+</section>
+<section id="matched-stores" class="level3" data-number="25.1.3">
+<h3 data-number="25.1.3" class="anchored" data-anchor-id="matched-stores"><span class="header-section-number">25.1.3</span> Matched Stores</h3>
+<p>Treatment stores are intentionally matched with similar control stores before an experiment.</p>
+<p><strong>Paired</strong></p>
+<p>Each treatment store has a specific matched control store.</p>
+<hr>
+</section>
+<section id="different-orders-across-months" class="level3" data-number="25.1.4">
+<h3 data-number="25.1.4" class="anchored" data-anchor-id="different-orders-across-months"><span class="header-section-number">25.1.4</span> Different Orders Across Months</h3>
+<p>Delivery times from one group of orders this month are compared with a different group of orders last month.</p>
+<p><strong>Independent</strong></p>
+<p>An order this month does not correspond to one specific order from last month.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="paired-samples-workflow" class="level1" data-number="26">
+<h1 data-number="26"><span class="header-section-number">26</span> Paired-Samples Workflow</h1>
+<p>When analyzing two conditions, use the following process:</p>
+<ol type="1">
+<li><strong>Identify the observational unit.</strong></li>
+<li>Determine whether observations can be meaningfully paired.</li>
+<li>If paired, define the within-pair difference:</li>
+</ol>
+<p><span class="math display">\[
+d_i=X_i-Y_i
+\]</span></p>
+<ol start="4" type="1">
+<li>Determine the population parameter:</li>
+</ol>
+<p><span class="math display">\[
+\mu_d
+\]</span></p>
+<ol start="5" type="1">
+<li>State the hypotheses:</li>
+</ol>
+<p><span class="math display">\[
+H_0:\mu_d=0
+\]</span></p>
+<p>and the appropriate alternative.</p>
+<ol start="6" type="1">
+<li>Check the distribution and independence of the differences.</li>
+<li>Calculate:</li>
+</ol>
+<p><span class="math display">\[
+\bar{d}
+\]</span></p>
+<p><span class="math display">\[
+s_d
+\]</span></p>
+<p>and:</p>
+<p><span class="math display">\[
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+\]</span></p>
+<ol start="8" type="1">
+<li>Calculate:</li>
+</ol>
+<p><span class="math display">\[
+t=
+\frac{\bar{d}}
+{s_d/\sqrt{n}}
+\]</span></p>
+<ol start="9" type="1">
+<li>Obtain the p-value and confidence interval.</li>
+<li>Interpret the result in the context of the study.</li>
+<li>Make causal conclusions only if the study design supports them.</li>
+</ol>
+<hr>
+</section>
+<section id="overall-framework" class="level1" data-number="27">
+<h1 data-number="27"><span class="header-section-number">27</span> Overall Framework</h1>
+<p>The key idea is that a paired analysis preserves information about <strong>which observations belong together</strong>.</p>
+<p>Instead of:</p>
+<p><span class="math display">\[
+\text{Mean of Group 1}
+-
+\text{Mean of Group 2}
+\]</span></p>
+<p>while ignoring the relationships between observations, paired analysis first calculates:</p>
+<p><span class="math display">\[
+d_i=X_i-Y_i
+\]</span></p>
+<p>for each pair.</p>
+<p>The problem then becomes:</p>
+<p><span class="math display">\[
+\boxed{
+\text{Two Paired Conditions}
+\rightarrow
+\text{Within-Pair Differences}
+\rightarrow
+\text{One-Sample Inference}
+}
+\]</span></p>
+<p>The major ideas are:</p>
+<ul>
+<li><strong>Study design determines the statistical test.</strong></li>
+<li>Pair observations only when there is a meaningful one-to-one connection.</li>
+<li>A paired t-test is a <strong>one-sample t-test on differences</strong>.</li>
+<li>The parameter of interest is the population mean difference:</li>
+</ul>
+<p><span class="math display">\[
+\mu_d
+\]</span></p>
+<ul>
+<li>The sample size is the number of <strong>independent pairs</strong>, not the total number of measurements.</li>
+<li>Pairing can improve precision by removing variation between matched units.</li>
+<li>The assumptions apply primarily to the <strong>differences</strong>, not the two original columns.</li>
+<li>Independence is required <strong>across pairs</strong>, not within each pair.</li>
+<li>Repeated observations over time may introduce trends or dependence that a basic paired t-test does not capture.</li>
+<li>More repeated measurements are not equivalent to more independent units.</li>
+<li>Matching can improve precision, while <strong>random assignment</strong> is what supports a causal interpretation.</li>
+</ul>
+<p>The decision rule for comparing two conditions is therefore:</p>
+<p><span class="math display">\[
+\boxed{
+\begin{array}{c}
+\text{Can observations be meaningfully linked?}\\[4pt]
+\downarrow\\
+\text{Yes}
+\rightarrow
+\text{Paired}
+\rightarrow
+d_i=X_i-Y_i
+\rightarrow
+\text{One-Sample }t\text{-Test}\\[6pt]
+\text{No}
+\rightarrow
+\text{Independent Samples}
+\end{array}
+}
+\]</span></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -604,13 +1722,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./lecture5.html" class="pagination-link" aria-label="Lecture 5">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Lecture 5</span></span>
+      <a href="./lecture5.html" class="pagination-link" aria-label="One-Parameter Statistical Inference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">One-Parameter Statistical Inference</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lecture7.html" class="pagination-link" aria-label="Lecture 7">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Lecture 7</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./lecture7.html" class="pagination-link" aria-label="Comparing Two Population Means: Independent Samples">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Comparing Two Population Means: Independent Samples</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
