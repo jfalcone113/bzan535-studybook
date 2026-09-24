@@ -269,6 +269,7 @@ $$
 In R:
 
 ```{r}
+#| eval: false
 ab_test <- prop.test(
     x = c(1230, 1200),
     n = c(10000, 10000),
@@ -448,6 +449,7 @@ The table is:
 In R:
 
 ```{r}
+#| eval: false
 page_table <- cbind(
     Purchased = pages$Purchases,
     `Did not purchase` = pages$Visitors - pages$Purchases
@@ -812,6 +814,7 @@ approximately.
 The test can be conducted using:
 
 ```{r}
+#| eval: false
 page_test <- chisq.test(
     page_table,
     correct = FALSE
@@ -918,6 +921,7 @@ For example:
 The chi-square test can be run using:
 
 ```{r}
+#| eval: false
 two_page_table <- page_table[
     c("New", "Current"),
 ]
@@ -989,6 +993,7 @@ A **standardized residual** measures how far an observed cell count differs from
 In R:
 
 ```{r}
+#| eval: false
 round(
     page_test$stdres,
     2
@@ -1103,6 +1108,7 @@ for every cell.
 Expected counts can be inspected in R using:
 
 ```{r}
+#| eval: false
 round(
     page_test$expected,
     1
@@ -1143,6 +1149,7 @@ For example:
 ## Step 3: Construct a Contingency Table
 
 ```{r}
+#| eval: false
 table(
     Variable1 = data$variable1,
     Variable2 = data$variable2
@@ -1203,6 +1210,7 @@ Verify:
 ## Step 8: Conduct the Test
 
 ```{r}
+#| eval: false
 test <- chisq.test(
     contingency_table,
     correct = FALSE
@@ -1232,6 +1240,7 @@ If the overall test is significant, examine:
 - Standardized residuals
 
 ```{r}
+#| eval: false
 test$expected
 test$stdres
 ```
@@ -1269,6 +1278,7 @@ The codes are:
 A contingency table might be created using:
 
 ```{r}
+#| eval: false
 table(
     Homeownership = hh$homeowner_desc,
     Marital_status = hh$marital_status_code
@@ -1572,6 +1582,7 @@ $$
 Suppose:
 
 ```{r}
+#| eval: false
 channel_counts <- c(
     Store = 240,
     Website = 160,
@@ -1582,6 +1593,7 @@ channel_counts <- c(
 The test can be performed with:
 
 ```{r}
+#| eval: false
 chisq.test(
     channel_counts,
     p = c(0.50, 0.30, 0.20)
@@ -1838,12 +1850,14 @@ Depending on the method, examine:
 Use the appropriate R function:
 
 ```{r}
+#| eval: false
 prop.test()
 ```
 
 or:
 
 ```{r}
+#| eval: false
 chisq.test()
 ```
 

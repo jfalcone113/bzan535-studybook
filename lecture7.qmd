@@ -567,6 +567,7 @@ $$
 Unlike Welch's method, pooling must be requested explicitly:
 
 ```{r}
+#| eval: false
 t.test(
     outcome ~ group,
     data = my_data,
@@ -577,6 +578,7 @@ t.test(
 The argument:
 
 ```{r}
+#| eval: false
 var.equal = TRUE
 ```
 
@@ -664,6 +666,7 @@ Important features include:
 For example:
 
 ```{r}
+#| eval: false
 my_data |>
     group_by(group) |>
     summarise(
@@ -677,6 +680,7 @@ my_data |>
 A useful visualization is a boxplot:
 
 ```{r}
+#| eval: false
 ggplot(
     my_data,
     aes(
@@ -1108,6 +1112,7 @@ $$
 First summarize the groups:
 
 ```{r}
+#| eval: false
 households |>
     group_by(homeowner_desc) |>
     summarise(
@@ -1121,6 +1126,7 @@ households |>
 Then visualize:
 
 ```{r}
+#| eval: false
 ggplot(
     households,
     aes(
@@ -1134,6 +1140,7 @@ ggplot(
 Then perform Welch's two-sample t-test:
 
 ```{r}
+#| eval: false
 t.test(
     spend ~ homeowner_desc,
     data = households
@@ -1333,6 +1340,7 @@ against an appropriate alternative.
 Use Welch's method by default:
 
 ```{r}
+#| eval: false
 t.test(
     outcome ~ group,
     data = my_data
@@ -1342,6 +1350,7 @@ t.test(
 Use the pooled method only when the equal-population-variance assumption has a defensible basis:
 
 ```{r}
+#| eval: false
 t.test(
     outcome ~ group,
     data = my_data,

@@ -507,6 +507,8 @@ standard errors above the null value of zero.
 If the differences have already been calculated:
 
 ```{r}
+#| eval: false
+
 t.test(
     pairs$Difference,
     mu = 0
@@ -558,6 +560,8 @@ R can also calculate the differences internally.
 For example:
 
 ```{r}
+#| eval: false
+
 t.test(
     pairs$Unaffected,
     pairs$Affected,
@@ -798,6 +802,8 @@ Therefore:
 After calculating:
 
 ```{r}
+#| eval: false
+
 pairs <- pairs |>
     mutate(
         Difference = Unaffected - Affected
@@ -809,6 +815,8 @@ we can inspect the differences directly.
 ### Histogram
 
 ```{r}
+#| eval: false
+
 ggplot(pairs, aes(x = Difference)) +
     geom_histogram()
 ```
@@ -822,6 +830,8 @@ Look for:
 ### Q–Q Plot
 
 ```{r}
+#| eval: false
+
 qqnorm(pairs$Difference)
 qqline(pairs$Difference)
 ```
@@ -935,6 +945,8 @@ An **autocorrelation function (ACF)** examines these relationships at different 
 For example:
 
 ```{r}
+#| eval: false
+
 acf(differences)
 ```
 
