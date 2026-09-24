@@ -61,4 +61,154 @@ Systematic
 
 ## Sampling Distribution and the CLT
 
-In progress...
+### Sampling Distribution and SE
+
+Suppose you drew a different random sample of 2,500 households and recomputed the average spend each time, 1000 times. What would the distributions of those averages be? How would that be different from the the distribution of the raw values themselves?
+
+The sampling distribution is the distribution of a statistic (e.g., \bar X) across all possible repeated samples of the same size from a population.
+
+Center
+: tells us where the statistic tends to fall and whether it is centered on the true population parameter.
+
+If $E(\bar X) = \mu$, $\bar{X}$ is an unbiased estimator of $\mu$, the true value (in this case the mean).
+
+Spread
+: tells us the precision of the statistic across samples.
+
+For sample mean: $SE(\bar{X})=\frac{\sigma}{\sqrt{n}}$ where smaller SE (standard error) means less sample-to-sample variability.
+
+Standard Error measures how much a statistic would typically vary from sample to sample.
+
+### Central Limit Theorem
+
+The central limit theorem says as the sample size, $n$, gets larger, the sampling distribution of the sample mean, $bar{X}$ becomes approximately normal, regardless of the shape of the population distribution.
+
+*Rule of thumb, $n \geq 30$ is often "large enough" though more skew may require a larger $n$.
+
+The CLT allows us to build **confidence intervals** and **hypothesis tests** even when the raw data isn't normal.
+
+## Inference for the Mean
+
+When trying to estimate the mean of a population, we use a point estimate for the mean $\bar{X}$. 
+
+A point estimate is a single value calculated from a sample that is used to estimate an unknown population parameter.
+
+When doing interference, the true standard deviation, $\sigma$, is unknown. Because of this, we use the **t-distribution** to model it ($t_{n-1}$).
+
+$$\bar{X} \pm t_{\alpha/2,\;n-1}\frac{s}{\sqrt{n}}$$
+Where:
+
+- $\bar{X} \rightarrow$ point estimate of \mu
+- $t_{\alpha/2,n-1} \rightarrow$ critical t-value with n-1 degrees of freedom (desired confidence level)
+- $\frac{s}{\sqrt n} \rightarrow$ standard error
+- $t_{\alpha/2,n-1}\frac{s}{\sqrt n} \rightarrow$ margin of error
+
+> Interpretation: the procedure covers $\mu$ in $100(1-\alpha)%$ of repeated samples.
+> e.g. We are 95% confident that the mean is within...
+
+
+```{r}
+curve(
+  dt(x, df = 9),
+  from = -4,
+  to = 4,
+  lwd = 2,
+  xlab = "t",
+  ylab = "Density",
+  main = "t Distribution"
+)
+```
+
+### t vs z
+
+A t-statistic is like a z-statistic when the population standard deviation $\sigma$ is unknown and must be estimated using $s$.
+
+|                          | $z$ | $t$ |
+|--------------------------|-----|-----|
+| **Distribution** | Standard normal $N(0,1)$ | $t$-distribution |
+| **Population SD $\sigma$** | Known | Unknown |
+| **Standard error** | $\frac{\sigma}{\sqrt{n}}$ | $\frac{s}{\sqrt{n}}$ |
+| **Degrees of freedom** | None | $n-1$ |
+| **Shape** | Normal | Normal-like, heavier tails |
+| **Critical value for 95%** | $1.96$ | Depends on $df$ |
+| **Common use for means** | Less common | Most common |
+
+As $n$ gets larger, the difference between $t$ and $z$ becomes smaller and eventually negligible because $s$ becomes a more precise estimate of $\sigma$.
+
+--- 
+
+Helpful Definitions:
+
+Distribution
+: a z-statistic follows the standard normal distribution $N(0,1)$. A t-statistic follows a $t-distribution$.
+
+Population SD $\sigma$
+: if the true population SD $\sigma$ is known, use $z$. If $\sigma$ is unknown, estimate it with the sample SD $s$ and use $t$.
+
+Standard error
+: measures how much $\bar{X}$ varies across samples. With $z$, $SE=\frac{\sigma}{\sqrt{n}}$. With $t$, because $\sigma$ is unknown, we estimate it with $SE=\frac{\sigma}{\sqrt{n}}$.
+
+Degrees of freedom
+: $z$ doesn’t need degrees of freedom because $\sigma$ is known. $t$ uses $df=n-1$, which accounts for estimating variability using the sample.
+
+Shape
+: both are bell-shaped and centered at 0. The $t-distribution$ has heavier tails because estimating $\sigma$ with $s$ introduces additional uncertainty.
+
+Critical value for 95%
+: for $z$, the middle 95% is always between -1.96 and +1.96; for t, it depends on $n$ ($n-1$).
+
+Common use for means
+: knowing the true population $\sigma$ is uncommon, so $z$ is less common for inference about means. Usually $\sigma$ is unknown, making $t$ the standard choice.
+
+### Hypothesis Testing for the Mean
+
+$H_0 \rightarrow$ the Null Hypothesis: the baseline/default claim.
+$H_a \rightarrow$ the Alternative Hypothesis: what we are looking for evidence of (represents a difference/effect/change from null)
+
+Steps:
+hypothesis $\rightarrow$ significance level $\alpha$ test statistic $\rightarrow$ $p-value$ $\rightarrow$ decision $\rightarrow$ conclusion
+
+- $\alpha$ = probability of a **Type I error** (rejecting a true $H_0$)
+- $\beta$ = probability of a **Type II error** (failing to reject a false $H_0$)
+- $\text{Power} = 1-\beta$ is the probability that a hypothesis test correctly detects a real effect.
+
+| Error | What Happens | Probability | Think |
+|---|---|---|---|
+| **Type I** | Reject a true $H_0$ | $\alpha$ | False positive |
+| **Type II** | Fail to reject a false $H_0$ | $\beta$ | False negative |
+
+
+#### One-Sided t-Test and Power
+
+A **one-sided t-test** tests whether a population mean is **larger than or smaller than** a hypothesized value, depending on the specified direction.
+
+- Right-tailed: $H_A: \mu > \mu_0$
+- Left-tailed: $H_A: \mu < \mu_0$
+
+Reject $H_0$ when: $p\text{-value} \leq \alpha$
+
+## Inference for a Proportion
+
+**Inference for a proportion** uses essentially the same inference framework as inference for a mean, but the **population parameter changes**.
+
+For means, the population parameter is: $\mu = \text{population mean}$
+
+For proportions, the population parameter is: $p = \text{population proportion}$
+
+> **Same inference process, new parameter.**
+
+| | Mean $\mu$ | Proportion $p$ |
+|---|---|---|
+| **Point Estimate** | $\bar{X}$ | $\hat{p}$ |
+| **Standard Error** | $\frac{s}{\sqrt{n}}$ | $\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ |
+| **Reference Distribution** | $t_{n-1}$ | $z$ (Normal) |
+| **Confidence Interval** | $\bar{X} \pm t_{\alpha/2,n-1} \cdot SE$ | $\hat{p} \pm z_{\alpha/2} \cdot SE$ |
+| **Test Statistic ($H_0$)** | $\frac{\bar{X}-\mu_0}{s/\sqrt{n}}$ | $\frac{\hat{p}-p_0}{\sqrt{p_0(1-p_0)/n}}$ |
+
+For proportion inference, each observation is a **binary outcome**:
+
+$X_i = \begin{cases}1 & \text{success} \\ 0 & \text{failure} \end{cases}$
+
+Each observation follows a Bernoulli distribution:
+
+$X_i \sim \text{Bernoulli}(p)$ where $p$ is the true population probability or proportion of success.
