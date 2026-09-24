@@ -1,5 +1,21 @@
 # Preface {.unnumbered}
 
-BZAN 535 Study Book
+**BZAN 535 Study Book**
 
-Based on slides, arranged by yours truly.
+## Chapter Overview
+
+### Chapter 1 — Role of Statistics and Key Concepts
+
+Introduces the role of statistics in turning data into informed decisions. Covers data types and measurement scales, populations and samples, parameters and statistics, descriptive versus inferential statistics, and the distinction between observational studies and randomized experiments. Particular attention is given to the different roles of random sampling and random assignment in supporting generalization and causal inference.
+
+### Chapter 2 — Descriptive Analysis
+
+Develops the tools used to summarize and understand observed data. Covers measures of center, spread, and distribution shape; frequency tables; outliers; and common visualizations including histograms, boxplots, scatterplots, and bar charts. The chapter also introduces the `ggplot2` framework for constructing statistical visualizations in R.
+
+### Chapter 3 — Descriptive Analytics for Time Series Data
+
+Extends descriptive analysis to data observed over time. Introduces date and time manipulation with `lubridate`, time-based filtering and grouping, and visualization of temporal data. The chapter examines important time-series patterns including trend, seasonality, short-term variation, and level changes, along with techniques such as moving averages for revealing underlying patterns.
+
+### Chapter 4 — Probability Rules and Distributions
+
+Moves from describing observed data to reasoning about uncertain outcomes. Introduces probability terminology, probability rules, conditional probability, independence, and the distinction between discrete and continuous random variables. The chapter then develops four important probability distributions—Binomial, Normal, Poisson, and Exponential—and explains how to recognize, interpret, and work with each distribution in R.
