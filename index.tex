@@ -1,0 +1,8544 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={BZAN 535: Statistical Methods},
+  pdfauthor={Joseph Falcone},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{BZAN 535: Statistical Methods}
+\author{Joseph Falcone}
+\date{2026-09-17}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Table of contents}
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\bookmarksetup{startatroot}
+
+\chapter*{Preface}\label{preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\markboth{Preface}{Preface}
+
+\textbf{BZAN 535 Study Book}
+
+\section*{Chapter Overview}\label{chapter-overview}
+\addcontentsline{toc}{section}{Chapter Overview}
+
+\markright{Chapter Overview}
+
+\subsection*{Chapter 1 --- Role of Statistics and Key
+Concepts}\label{chapter-1-role-of-statistics-and-key-concepts}
+\addcontentsline{toc}{subsection}{Chapter 1 --- Role of Statistics and
+Key Concepts}
+
+Introduces the role of statistics in turning data into informed
+decisions. Covers data types and measurement scales, populations and
+samples, parameters and statistics, descriptive versus inferential
+statistics, and the distinction between observational studies and
+randomized experiments. Particular attention is given to the different
+roles of random sampling and random assignment in supporting
+generalization and causal inference.
+
+\subsection*{Chapter 2 --- Descriptive
+Analysis}\label{chapter-2-descriptive-analysis}
+\addcontentsline{toc}{subsection}{Chapter 2 --- Descriptive Analysis}
+
+Develops the tools used to summarize and understand observed data.
+Covers measures of center, spread, and distribution shape; frequency
+tables; outliers; and common visualizations including histograms,
+boxplots, scatterplots, and bar charts. The chapter also introduces the
+\texttt{ggplot2} framework for constructing statistical visualizations
+in R.
+
+\subsection*{Chapter 3 --- Descriptive Analytics for Time Series
+Data}\label{chapter-3-descriptive-analytics-for-time-series-data}
+\addcontentsline{toc}{subsection}{Chapter 3 --- Descriptive Analytics
+for Time Series Data}
+
+Extends descriptive analysis to data observed over time. Introduces date
+and time manipulation with \texttt{lubridate}, time-based filtering and
+grouping, and visualization of temporal data. The chapter examines
+important time-series patterns including trend, seasonality, short-term
+variation, and level changes, along with techniques such as moving
+averages for revealing underlying patterns.
+
+\subsection*{Chapter 4 --- Probability Rules and
+Distributions}\label{chapter-4-probability-rules-and-distributions}
+\addcontentsline{toc}{subsection}{Chapter 4 --- Probability Rules and
+Distributions}
+
+Moves from describing observed data to reasoning about uncertain
+outcomes. Introduces probability terminology, probability rules,
+conditional probability, independence, and the distinction between
+discrete and continuous random variables. The chapter then develops four
+important probability distributions---Binomial, Normal, Poisson, and
+Exponential---and explains how to recognize, interpret, and work with
+each distribution in R.
+
+\bookmarksetup{startatroot}
+
+\chapter{Role of Statistics and Key
+Concepts}\label{role-of-statistics-and-key-concepts}
+
+\section{Overview}\label{overview}
+
+\begin{itemize}
+\tightlist
+\item
+  A decision before definitions
+\item
+  Role of statistics in business
+\item
+  Data types and measurement scales
+\item
+  Populations vs.~Samples
+\item
+  Parameters vs.~Statistics
+\item
+  Study Designs: Observational vs.~Experimental
+\end{itemize}
+
+\textbf{Statistics: Business Question \(\rightarrow\) Data
+\(\rightarrow\) Analysis \(\rightarrow\) Decision}
+
+The goal is to make that pipeline rigorous, not a simple ``gut call.''
+There should be some method behind the process.
+
+\begin{itemize}
+\tightlist
+\item
+  Precisely describe what the data shows. \emph{What was the average
+  order value?}
+\item
+  Estimate what's outside the data with honest uncertainty. \emph{What
+  does our sample tell us about customers in general?}
+\item
+  Compare groups within data and decide if differences are real or
+  noise. \emph{Do customers exposed to different policies actualy behave
+  differently?}
+\item
+  Model relationships and determine if they're causal. \emph{What
+  variables are related to spending and do they actually cause some sort
+  of change?}
+\end{itemize}
+
+\section{Types of Data}\label{types-of-data}
+
+\textbf{Categorical:} qualitative values relating to characteristics.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Nomimal:} categories with \textbf{no meaniningful order}.
+  There's no mathematical sense in which is greater or less than
+  another. \emph{e.g.~red, blue, green}
+\item
+  \textbf{Ordinal:} categories \textbf{with an order} to them. Certain
+  categories correspond to higher or lower rankings, places, etc.
+  \emph{e.g.~one star, two star, three star}
+\end{itemize}
+
+\textbf{Numerical}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Interval:} numerical values with meaningful differences but no
+  true zero. A value of zero doesn't neccessarily mean ``none'', rather
+  it's just a `label' similar to any other number. \emph{e.g.~0°F, 53°F}
+\item
+  \textbf{Ratio:} numerical values with a true equal spacing and a true
+  zero. In this case, a value of zero literally means ``none'' or
+  ``nothing there''. \emph{e.g.~\$0, \$5} Because zero has an actual
+  meaning, comparisons (or ratios) like ``twice as much'' are relevant.
+\end{itemize}
+
+\section{Population vs.~Sample}\label{population-vs.-sample}
+
+\begin{itemize}
+\tightlist
+\item
+  Population: entire group of interest. This is the true group in
+  question.
+\item
+  Sample: the limited subset being observed.
+\item
+  Parameter: a description of the population. Because it involves the
+  entire group of interest, it's unknown (it's impossible to actually
+  include everyone).
+\item
+  Statistic: a computed description of the sample. Because the sample is
+  only a part of the group, meaning it's an inference that it represents
+  the true group, it's a predicted value.
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+& Population & Sample \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Described by} & Parameter & Statistic \\
+\textbf{Center} & \(\mu\) & \(\bar{x}\) \\
+\textbf{Proportion} & \(p\) & \(\hat{p}\) \\
+\textbf{Spread} & \(\sigma\) & \(s\) \\
+\end{longtable}
+}
+
+Say in reality there's 50,000 customers and you survey 40. The average
+satisfaction score of the survey is 4.2. What you really want to know is
+\(\mu = ?\) -- the average satisfaction of all 50,000 customers.
+
+Because only 40 were surveyed, you're using
+\(\text{statistic} \rightarrow \text{estimate parameter}\) to estimate
+\(\mu\). That's the foundation of \textbf{statistical inference}.
+
+Taste a spoon of soup (sample) to judge the pot (population), but only
+if you stirred it first (representative sample).
+
+\section{Two Broad Branches of
+Statistics}\label{two-broad-branches-of-statistics}
+
+\textbf{Descriptive vs.~Inferenential -- that distinction becomes
+important.}
+
+\textbf{Descriptive}: describe the data actually observed. Things like
+mean, median, standard deviation, histogram, boxplot.
+
+\begin{verbatim}
+*The customers in our sample spent an average of $75.*
+\end{verbatim}
+
+That's descriptive
+
+\textbf{Inferential:} use your sample to say something about a larger
+population. Things liek confidence intervals, hypothesis tests,
+regression, experiments.
+
+\begin{verbatim}
+*Based on the sample, we estimate RetailCo customers spend...*
+\end{verbatim}
+
+Assuming reality: inferential.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Goal
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Tools
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Output Examples
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Describe} & Tables, histograms, boxplots & Center, spread,
+shape \\
+\textbf{Infer / Predict} & Confidence intervals, hypothesis tests,
+regression, machine learning & Effects, forecasts \\
+\end{longtable}
+}
+
+\section{Statistical Tools}\label{statistical-tools}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Question
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Data
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Tool
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{What's typical/variable?} & Quantitative & Mean, SD, IQR,
+histogram, boxplot \\
+\textbf{How many are in each group?} & Categorical & Frequency table,
+bar chart \\
+\textbf{Do groups differ?} & Categorical + quantitative & Side-by-side
+boxplots, summaries \\
+\textbf{Are two quantities associated?} & Two quantitative variables &
+Scatterplot, correlation \\
+\end{longtable}
+}
+
+So you don't just randomly choose the statistical technique, the
+business question and variable types determine the appropriate tool.
+
+\section{Study Designs: Observational
+vs.~Experimental}\label{study-designs-observational-vs.-experimental}
+
+Suppose a company claims customers who use our app spend 40\% more. Does
+that mean our app causes customers to spend more? Not neccessarily. Many
+people who download the app could already be the company's most loyal
+customers. This is the problem of \textbf{confounding}.
+
+\textbf{Observational:} observe what people already chose/did. Here, you
+can establish an association, but causality isn't established merely by
+observing a difference.
+
+\textbf{Experiment (A/B):} random assignment of subjects. This
+randomization helps balance other characteristics (lurking variables)
+between groups. Therefore, differences in outcomes can support a causal
+interpretation, assuming everything else in the experiement is valid.
+
+Randomized experiments can support cause-and-effect inference, whereas
+observational studies do not by themselves; random sampling is
+separately what supports inference to a population.
+
+Random Sampling and random assignment are \textbf{not} the same thing.
+
+\begin{itemize}
+\tightlist
+\item
+  Random sampling answers ``Can I generalize this result to the
+  population.''.
+\item
+  Random Assignment answers ``Can I make a causal claim?''
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Concept
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What Is Randomized?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+When?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Purpose
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Random Sampling} & Which people from the population are selected
+for the sample & When selecting a sample & Makes the sample more
+representative of the population and supports \textbf{generalizing to
+the population} \\
+\textbf{Random Assignment} & Which treatment/group participants receive
+& When conducting an experiment & Makes treatment groups more comparable
+and supports stronger \textbf{causal conclusions} \\
+\end{longtable}
+}
+
+\bookmarksetup{startatroot}
+
+\chapter{Descriptive Analysis}\label{descriptive-analysis}
+
+\section{Overview}\label{overview-1}
+
+Raw data can be messy and overwhelming, making it difficult to interpret
+and work with. Descriptive analysis helps solve this problem by
+summarizing and exploring data in a way that turns raw numbers into
+patterns and insights that can be understood accurately and easily.
+
+There are three key questions to consider:
+
+\begin{itemize}
+\tightlist
+\item
+  What's typical?
+\item
+  How spread out is it?
+\item
+  What shape does it have?
+\end{itemize}
+
+How do we answer these questions? By examining the center, spread, and
+shape of the data -- each of which describes a different aspect of the
+observations and together, helps us draw accurate conclusions about what
+the data is telling us.
+
+Descriptive Analysis is organized around several key ideas:
+
+\begin{itemize}
+\tightlist
+\item
+  Center --- What is typical?
+\item
+  Spread --- How much does the data vary?
+\item
+  Shape --- What does the distribution look like?
+\item
+  Groups --- How do different categories or populations compare?
+\item
+  Visualization --- How can we make patterns easier to see?
+\end{itemize}
+
+The first three, center, spread, and shape, describe the distribution
+itself. Groups lets you compare distributions, while visualization is
+how you explore and communicate those characteristics. And all are
+equally important.
+
+A Quick Example: Suppose two products both sell an average of 100 units
+per week:
+
+\begin{itemize}
+\tightlist
+\item
+  Product A: 98, 101, 102, 99, 100 → extremely consistent
+\item
+  Product B: 20, 180, 40, 160, 100 → highly variable
+\end{itemize}
+
+Both products have the same average, but their weekly sales behave very
+differently. Knowing the average alone does not necessarily tell us what
+sales actually look like.
+
+They have the same center, but very different spread.
+
+Together, these tools help answer the key questions needed to understand
+a dataset before moving on to deeper analysis.
+
+\section{Center}\label{center}
+
+\textbf{What's a typical value?}
+
+Center is the measure that represents the typical or central value of a
+dataset. It describes the location around which the data tends to lie.
+
+There are two main measures of center: mean and median.
+
+\subsection{Mean}\label{mean}
+
+The \textbf{mean} is the arithmetic average of a dataset. It is
+calculated by adding all observations together and dividing by the
+number of observations.
+
+\(\bar{x} = \frac{\sum{x_i}}{n}\)
+
+Pros:
+
+\begin{itemize}
+\tightlist
+\item
+  Uses every observation in dataset.
+\item
+  Easy to calculate and interpret.
+\end{itemize}
+
+Cons:
+
+\begin{itemize}
+\tightlist
+\item
+  Sensitive to outliers.
+\item
+  Can be misleading for highly skewed distributions.
+\end{itemize}
+
+\subsection{Median}\label{median}
+
+\textbf{Median} is the middle value of a dataset after the observations
+have been ordered. It is more robust to outliers than the mean. For a
+odd number of observations, sort the data and take the middle value. For
+an even number of observations (i.e.~two middle values) take the two
+middle values and average them.
+
+Pros:
+
+\begin{itemize}
+\tightlist
+\item
+  Robust to outliers and extreme values.
+\item
+  Often better represents the center of skewed data.
+\end{itemize}
+
+Cons:
+
+\begin{itemize}
+\tightlist
+\item
+  Does not incorportate the magnitude of every observation the same way
+  the mean does.
+\item
+  Can ignore meaningful differences in the values away from the middle.
+\end{itemize}
+
+\section{Spread}\label{spread}
+
+\textbf{How much do values vary?}
+
+\textbf{Spread} describes how much the observations in a dataset vary or
+differ from one another. In other words, it tells us how dispersed the
+data is around its center.
+
+\subsection{Range}\label{range}
+
+The range measures the distance between the smallest and largest
+observations.
+
+\(\text{range} = \text{maximum} - \text{minimum}\)
+
+Pros:
+
+\begin{itemize}
+\tightlist
+\item
+  Extremely simple to calculate or understand.
+\end{itemize}
+
+Cons:
+
+\begin{itemize}
+\tightlist
+\item
+  Only considers two observations -- the largest and smallest -- so it
+  is highly sensitive to outliers.
+\end{itemize}
+
+\subsection{IQR}\label{iqr}
+
+The \textbf{IQR} measures the spread of the middle 50\% of the
+observations. In other words, how much do the middle 50\% of values
+span? Because it ignores the extreme ends, it's resilient to outliers.
+
+\(\text{IQR} = Q_3 - Q_1\)
+
+\(Q_1\) is the 25th percentile. \(Q_3\) is the 75h percentile.
+
+Conceptually, IQR looks at: \[
+\underbrace{\text{lowest 25\%}}_{\phantom{x}}
+\quad|\quad
+\underbrace{Q_1\; \longleftrightarrow\; Q_3}_{\text{middle 50\%}}
+\quad|\quad
+\underbrace{\text{highest 25\%}}_{\phantom{x}}
+\]
+
+Pros:
+
+\begin{itemize}
+\tightlist
+\item
+  Robust to outliers.
+\end{itemize}
+
+Cons:
+
+\begin{itemize}
+\tightlist
+\item
+  Does not incorportate all observations.
+\end{itemize}
+
+\subsection{Variance}\label{variance}
+
+\textbf{Variance} measures how spread out observations are around the
+mean using their squared deviations from the mean. The deviations are
+squared so that negative and positive deviations do not cancel each
+other out.
+
+To calculate:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Find the mean.
+\item
+  Find how far each observation is from the mean.
+\item
+  Square each difference.
+\item
+  Add the squared differences.
+\item
+  Divide by n-1.
+\end{enumerate}
+
+\(s^2 = \frac{\sum{(x_i - \bar{x})^2}}{n-1}\)
+
+Pros:
+
+\begin{itemize}
+\tightlist
+\item
+  Uses every observation in the dataset.
+\item
+  Measures spread specifically around the mean, so it pairs naturally
+  with the mean.
+\end{itemize}
+
+Cons: - Expressed in squared units, meaning it is less intuitive.
+
+\subsection{Standard Deviation}\label{standard-deviation}
+
+\textbf{Standard Deviation} is the square root of the variance. It
+allows for an interpretable scale of how much values differ from mean by
+putting variance back into original units.
+
+\(s = \sqrt{s^2}\)
+
+Pros:
+
+\begin{itemize}
+\tightlist
+\item
+  Easy to interpret.
+\end{itemize}
+
+Cons:
+
+\begin{itemize}
+\tightlist
+\item
+  Its magnitude depends on the scale of the data and can be misleading
+  when comparing two variables of different scales.
+\item
+  Sensitive to outliers.
+\end{itemize}
+
+\subsection{Coefficient of Variation}\label{coefficient-of-variation}
+
+The \textbf{Coefficient of Variation} measures the standard deviation
+relative to the mean. In other words, it tells you how large the
+standard deviation is compared to the mean (how big is distance based on
+mean).
+
+\(\text{CV} = \frac{\text{SD}}{\bar{x}}\)
+
+Pros:
+
+\begin{itemize}
+\tightlist
+\item
+  Can accurately compare spread of variables with different scales.
+\end{itemize}
+
+Cons:
+
+\begin{itemize}
+\tightlist
+\item
+  Not useful when mean is zero, because you cannot divide by zero.
+\item
+  Can be sensitive to outliers.
+\end{itemize}
+
+\section{Shape}\label{shape}
+
+\textbf{What does the distribution look like?}
+
+\textbf{Shape} describes the overall pattern or form of a distribution.
+It helps us understand how observations are distributed around the
+center, including whether the data is symmetric, skewed, or contains
+outliers.
+
+\subsection{Symmetric}\label{symmetric}
+
+A \textbf{symmetric} distribution has approximately the same shape on
+both sides of its center. Neither side has a substantially longer tail
+than the other.
+
+In a symmetric distribution, the mean and median tend to be relatively
+close.
+
+\subsection{Right Skewed}\label{right-skewed}
+
+A \textbf{right-skewed} distribution has a long tail extending to the
+right, toward larger values.
+
+A relatively small number of large observations stretch the distribution
+to the right and can pull the mean upward.
+
+Typically: \(\text{right skewed} \rightarrow \text{mean}>\text{median}\)
+
+\subsection{Left Skewed}\label{left-skewed}
+
+A \textbf{left-skewed} distribution has a long tail extending to the
+left, toward smaller values.
+
+A relatively small number of small observations stretch the distribution
+to the left and can pull the mean downward.
+
+Left tail \(\rightarrow\) mean pulled left \(\rightarrow\) Mean
+\textless{} Median Right tail \(\rightarrow\) mean pulled right
+\(\rightarrow\) Mean \textgreater{} Median
+
+\subsection{Outliers}\label{outliers}
+
+An \textbf{outlier} is an observation that is unusually far from the
+rest of the data.
+
+The \textbf{IQR rule} can be used to identify potential outliers.
+
+\(\text{lower bound}=Q_1-1.5(IQR)\)
+
+\(\text{upper bound}=Q_3+1.5(IQR)\)
+
+If the observation is outside of these bounds it can be flagged as a
+potential outlier.
+
+An outlier should not automatically be deleted. It is important to
+investigate its cause first. For example, an extreme observation could
+represent a data-entry error, a legitimate unusual observation, or a
+measurement/unit issue.
+
+\section{Frequency Tables}\label{frequency-tables}
+
+A \textbf{frequency table} summarizes a \textbf{categorical} variable by
+showing the count and/or proportion of observations in each category. It
+helps identify common and rare categories and understand the overall
+category mix.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Department & Count & Percent \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Grocery & 39,021 & 42.3\% \\
+Drug GM & 31,529 & 34.1\% \\
+Produce & 3,118 & 3.4\% \\
+\end{longtable}
+}
+
+\section{Visualizations}\label{visualizations}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Plot
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Data
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Main Question
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Histogram & 1 quantitative variable & What does the distribution look
+like? \\
+Boxplot & Quantitative, often by category & How does the
+distribution/spread compare? \\
+Scatterplot & 2 quantitative variables & Are the variables related? \\
+Bar chart & Categorical & How do category counts/proportions compare? \\
+Pie chart & Categorical proportions & How is the whole divided among
+categories? \\
+\end{longtable}
+}
+
+\subsection{Histograms}\label{histograms}
+
+A \textbf{histogram} shows the \textbf{distribution} of a \textbf{single
+quantitative variable} by grouping numerical values into intervals
+called bins and showing how many observations fall into each bin.
+
+Useful for identifying:
+
+\begin{itemize}
+\tightlist
+\item
+  Shape of a distribution
+\item
+  Skewness
+\item
+  Modes or peaks
+\item
+  Gaps
+\end{itemize}
+
+The bin width determines how wide each interval is and therefore how
+much detail the histogram shows
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-1-1.pdf}}
+
+\textbf{Use when: You want to see what the distribution of one
+quantitative variable looks like.}
+
+\subsection{Boxplots}\label{boxplots}
+
+A \textbf{boxplot} provides a compact summary of the
+\textbf{distribution} of a \textbf{quantitative} variable using the
+five-number \textbf{summary}:
+\(\text{Min},\ Q_1,\ \text{Median},\ Q_3,\ \text{Max}\)
+
+It is useful for examining:
+
+\begin{itemize}
+\tightlist
+\item
+  Center
+\item
+  Spread
+\item
+  Skewness
+\item
+  Potential outliers
+\item
+  Differences between groups
+\end{itemize}
+
+Boxplots are especially useful when you want to \textbf{compare
+distributions} across categories.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{factor}\NormalTok{(cyl), }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-2-1.pdf}}
+
+\textbf{Use when: You want to examine or compare the distributions of
+quantitative data, particularly across groups.}
+
+\subsection{Scatterplots}\label{scatterplots}
+
+A \textbf{scatterplot} shows the \textbf{relationship} between
+\textbf{two quantitative variables}. Each point represents one
+observation.
+
+Useful for identifying:
+
+\begin{itemize}
+\tightlist
+\item
+  Direction --- positive or negative relationship
+\item
+  Strength --- how closely the variables are related
+\item
+  Form --- linear, nonlinear, etc.
+\item
+  Outliers
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-3-1.pdf}}
+
+\textbf{Use when: You want to know whether two quantitative variables
+are related.}
+
+\subsection{Bar Charts}\label{bar-charts}
+
+A \textbf{bar chart} displays the counts or proportions of categories
+for a categorical variable. It is essentially the graphical version of a
+\textbf{frequency table}.
+
+The categories are represented by bars, and the height of each bar
+represents its count.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{factor}\NormalTok{(cyl))) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-4-1.pdf}}
+
+\textbf{Use when: You want to compare counts or proportions across
+categories.}
+
+\subsection{Pie Charts}\label{pie-charts}
+
+A \textbf{pie chart} displays \textbf{proportions of a whole} as slices
+of a circle. Larger slices represent larger proportions.
+
+Pie charts work best when there are only a \textbf{small number of
+categories}. Similar-sized slices can be difficult to compare visually,
+so a bar chart is often easier to interpret.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mtcars }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{count}\NormalTok{(cyl) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \StringTok{""}\NormalTok{, }\AttributeTok{y =}\NormalTok{ n, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(cyl))) }\SpecialCharTok{+}
+    \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{width =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{coord\_polar}\NormalTok{(}\AttributeTok{theta =} \StringTok{"y"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-5-1.pdf}}
+
+\textbf{Use when: You want to show how a small number of categories make
+up a whole.}
+
+\section{ggplot2}\label{ggplot2}
+
+ggplot2 is a data visualization package in R built by combining data,
+aesthetics, and layers.
+
+\textbf{data + aesthetics + layers}
+
+Data = what you're plotting \texttt{aes()} = which variables control
+visual properties \texttt{geom\_*()} = how the observations are drawn
+\texttt{scale\_*()} = how values are displayed \texttt{facet\_*()} =
+split into groups \texttt{labs()} = titles and labels
+\texttt{theme\_*()} = appearance
+
+\subsection{Aesthetics}\label{aesthetics}
+
+Aesthetics, specified with \texttt{aes()}, determine how variables in
+the data \textbf{are mapped to visual properties} of the graph.
+
+Common aesthetics include:
+
+\begin{itemize}
+\tightlist
+\item
+  x --- horizontal position
+\item
+  y --- vertical position
+\item
+  color --- color
+\item
+  size --- size
+\item
+  shape --- shape
+\item
+  alpha --- transparency
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ wt,}
+    \AttributeTok{y =}\NormalTok{ mpg,}
+    \AttributeTok{color =} \FunctionTok{factor}\NormalTok{(cyl)}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-6-1.pdf}}
+
+\subsection{Layers}\label{layers}
+
+\textbf{Layers} determine how the data is actually displayed. They are
+usually added with \texttt{geom\_*()} functions using \texttt{+}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-7-1.pdf}}
+
+Examples include:
+
+\texttt{geom\_point()} \texttt{geom\_histogram()}
+\texttt{geom\_boxplot()} \texttt{geom\_col()}
+
+\subsection{Mapping vs.~Setting}\label{mapping-vs.-setting}
+
+\textbf{Mapping} means a visual property \emph{varies} according to a
+variable in the data. Put it inside \texttt{aes()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ wt,}
+    \AttributeTok{y =}\NormalTok{ mpg,}
+    \AttributeTok{color =} \FunctionTok{factor}\NormalTok{(cyl)}
+\NormalTok{)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-8-1.pdf}}
+
+Different household-size categories receive different colors.
+
+\textbf{Setting} means giving a visual property one fixed value. Put it
+outside \texttt{aes()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x =}\NormalTok{ wt,}
+    \AttributeTok{y =}\NormalTok{ mpg}
+\NormalTok{    )) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-9-1.pdf}}
+
+Now every point is steel blue.
+
+\subsection{Scales}\label{scales}
+
+\textbf{Scales} control how mapped data values are displayed, such as
+transforming or formatting an axis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{scale\_y\_log10}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-10-1.pdf}}
+
+\texttt{scale\_y\_log10()} cisplays the y-axis on a logarithmic scale.
+
+\subsection{Facets}\label{facets}
+
+\textbf{Facets} split one visualization into separate plots for
+different groups.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ cyl)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-11-1.pdf}}
+
+Instead of showing every household-size group on one graph, you get a
+separate panel for each household size.
+
+\subsection{Labels}\label{labels}
+
+\texttt{labs()} controls the descriptive text on the visualization:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg, }\AttributeTok{color =} \FunctionTok{factor}\NormalTok{(cyl))) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+        \AttributeTok{title =} \StringTok{"Vehicle Weight vs. Fuel Efficiency"}\NormalTok{,}
+        \AttributeTok{subtitle =} \StringTok{"1973–74 Motor Trend road tests"}\NormalTok{,}
+        \AttributeTok{x =} \StringTok{"Weight (1,000 lbs)"}\NormalTok{,}
+        \AttributeTok{y =} \StringTok{"Miles per Gallon"}\NormalTok{,}
+        \AttributeTok{color =} \StringTok{"Cylinders"}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-12-1.pdf}}
+
+\subsection{Themes}\label{themes}
+
+Themes control the overall appearance of the plot rather than the
+underlying data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture2_files/figure-pdf/unnamed-chunk-13-1.pdf}}
+
+\bookmarksetup{startatroot}
+
+\chapter{Descriptive Analytics for Time Series
+Data}\label{descriptive-analytics-for-time-series-data}
+
+\section{Overview}\label{overview-2}
+
+For descriptive analysis, the focus was on questions such as: What is
+typical? How spread out is the data? What shape does the distribution
+have? With time series data, an additional question becomes important:
+When did it happen?
+
+Time series data is a sequence of observations collected or recorded at
+successive points in time. Because observations are ordered
+chronologically, time series data provides a dynamic view of how a
+variable changes over time, rather than a static snapshot.
+
+\begin{itemize}
+\tightlist
+\item
+  Chronological order: Observations occur sequentially over time so
+  ordering of the data matters.
+\item
+  Time index: Each oberservation is associated with a specific point in
+  time.
+\item
+  Dependence over time: Earlier and later observations may be related,
+  meaning observations may not be independent.
+\item
+  Temporal patterns: The ordering of observations allows patterns like
+  trend, seasonality, and short term variation to be identified.
+\end{itemize}
+
+Suppose a CFO says'' ``Sales dropped 15\% from Q3 to Q4.''
+
+That number by itself doesn't necessarily mean the business suddently
+got worse. Maybe sales normally decline from Q3 to Q4 and this is just a
+regular reoccurring observation.
+
+With time series data, there are three things to be distinguished:
+
+\begin{itemize}
+\tightlist
+\item
+  Trend \(\rightarrow\) Is there a long-term upward/downward movement?
+\item
+  Seasonality \(\rightarrow\) Does a pattern repeat at regular
+  intervals?
+\item
+  Noise \(\rightarrow\) Is a movement just short-term random variation?
+\item
+  Level Change \(\rightarrow\) Did the series actually shift to a
+  different level?
+\end{itemize}
+
+\section{Working with Lubridate}\label{working-with-lubridate}
+
+Why do dates matter in analytics? Dates can be used for several things,
+for example:
+
+\begin{itemize}
+\tightlist
+\item
+  Time aware filtering (e.g.~time based filtering), time aware grouping
+  (group a time period), and trend/seasonality detection.
+\item
+  Aligning events (comparing before and afters).
+\item
+  Preparing for forecasting.
+\end{itemize}
+
+Dates need to actually be dates! A date stored as text like:
+
+\texttt{\textquotesingle{}2025-08-21\textquotesingle{}}
+
+is much different from an \texttt{R\ Date} object actually representing
+August 21, 2025. The main package used when working with dates is
+\texttt{lubridate}.
+
+\subsection{Parsing Dates}\label{parsing-dates}
+
+Parsing dates is the process of converting raw string dates to an actual
+date/time object, which can then be converted into useful time
+components. Raw string dates may not always be written in a consistent
+way, therefore different functions are used based on what the text
+format is.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{ymd()} when string = YEAR \(\rightarrow\) MONTH
+  \(\rightarrow\) DAY
+\item
+  \texttt{mdy()} when string = MONTH \(\rightarrow\) DAY \(\rightarrow\)
+  YEAR
+\item
+  \texttt{dmy()} when string = DAY \(\rightarrow\) MONTH \(\rightarrow\)
+  YEAR
+\item
+  \texttt{ymd\_hms()} when string = YEAR \(\rightarrow\) MONTH
+  \(\rightarrow\) DAY \texttt{:} HH:MM:SS
+\end{itemize}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ymd}\NormalTok{(}\StringTok{"2025{-}08{-}21"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2025-08-21"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mdy}\NormalTok{(}\StringTok{"08/21/2025"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2025-08-21"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dmy}\NormalTok{(}\StringTok{"21{-}Aug{-}2025"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2025-08-21"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ymd\_hms}\NormalTok{(}\StringTok{"2025{-}08{-}21 14:30:00"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2025-08-21 14:30:00 UTC"
+\end{verbatim}
+
+Once the date is in the correct format, R can extract pieces:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{year(x)} = extract year
+\item
+  \texttt{month(x)} = extract month
+\item
+  \texttt{quarter(x)} = extract quarter
+\item
+  \texttt{wday(x)} = extract weekday
+\item
+  \texttt{hour(x)} = extract hour
+\item
+  \texttt{isoweek(x)} = extract week number of year
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{ymd\_hms}\NormalTok{(}\StringTok{"2025{-}08{-}21 14:30:00"}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2025-08-21 14:30:00 UTC"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{year}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2025
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{month}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{quarter}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{wday}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hour}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 14
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{isoweek}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 34
+\end{verbatim}
+
+Esssentially the process is \textbf{raw date string → actual date/time
+object → useful time components}
+
+Dates can also be created from combining variables that already exist.
+For example if you have \texttt{year\ =\ 2025} and \texttt{month\ =\ 8}
+you can construct an actual date.
+
+\texttt{make\_date()} use when year/month columns exist because it
+avoids rounding problems associated with fractional-year representations
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Before: year and month are separate variables}
+\NormalTok{txhousing }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{select}\NormalTok{(year, month) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{head}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 2 x 2
+   year month
+  <int> <int>
+1  2000     1
+2  2000     2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create an actual date from year and month}
+\NormalTok{TX }\OtherTok{\textless{}{-}}\NormalTok{ txhousing }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{date\_actual =} \FunctionTok{make\_date}\NormalTok{(}
+            \AttributeTok{year =}\NormalTok{ year,}
+            \AttributeTok{month =}\NormalTok{ month,}
+            \AttributeTok{day =} \DecValTok{1}
+\NormalTok{        )}
+\NormalTok{    )}
+
+\CommentTok{\# After: year and month have been combined into a date}
+\NormalTok{TX }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{select}\NormalTok{(year, month, date\_actual) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{head}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 2 x 3
+   year month date_actual
+  <int> <int> <date>     
+1  2000     1 2000-01-01 
+2  2000     2 2000-02-01 
+\end{verbatim}
+
+\subsection{Calendar Arithmetic}\label{calendar-arithmetic}
+
+Leap years can screw up calculation of dates. For example
+\texttt{ymd("2024-02-29")} is a leap year. If you subtract five years
+you'd get \texttt{2019-02-29} which doesn't exist.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d1 }\OtherTok{\textless{}{-}} \FunctionTok{ymd}\NormalTok{(}\StringTok{"2024{-}02{-}29"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+lubridate has calendar awareness operators:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d1 }\SpecialCharTok{\%m{-}\%} \FunctionTok{years}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2019-02-28"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ymd}\NormalTok{(}\StringTok{"2023{-}01{-}31"}\NormalTok{) }\SpecialCharTok{\%m+\%} \FunctionTok{months}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2023-02-28"
+\end{verbatim}
+
+\subsection{Time Windows}\label{time-windows}
+
+Once dates are represented properly, normal comparisons work:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TX }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{filter}\NormalTok{(}
+\NormalTok{        date\_actual }\SpecialCharTok{\textgreater{}=} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2005{-}01{-}01"}\NormalTok{),}
+\NormalTok{        date\_actual }\SpecialCharTok{\textless{}=} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2010{-}12{-}31"}\NormalTok{)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3,312 x 10
+   city     year month sales  volume median listings inventory  date date_actual
+   <chr>   <int> <int> <dbl>   <dbl>  <dbl>    <dbl>     <dbl> <dbl> <date>     
+ 1 Abilene  2005     1   119  1.03e7  74200      570       3.7 2005  2005-01-01 
+ 2 Abilene  2005     2   130  1.18e7  74300      581       3.7 2005. 2005-02-01 
+ 3 Abilene  2005     3   170  1.45e7  71300      661       4.3 2005. 2005-03-01 
+ 4 Abilene  2005     4   171  1.64e7  80300      650       4.2 2005. 2005-04-01 
+ 5 Abilene  2005     5   176  1.81e7  87100      660       4.2 2005. 2005-05-01 
+ 6 Abilene  2005     6   230  2.41e7  92500      664       4.1 2005. 2005-06-01 
+ 7 Abilene  2005     7   177  1.85e7  93500      657       4.1 2006. 2005-07-01 
+ 8 Abilene  2005     8   216  2.41e7  97500      638       3.9 2006. 2005-08-01 
+ 9 Abilene  2005     9   165  1.71e7  92800      644       3.9 2006. 2005-09-01 
+10 Abilene  2005    10   161  1.64e7  92300      601       3.6 2006. 2005-10-01 
+# i 3,302 more rows
+\end{verbatim}
+
+You can also make relative windows.
+
+For example, find the most recent date:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{max\_date }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(TX}\SpecialCharTok{$}\NormalTok{date\_actual, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{max\_date}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2015-07-01"
+\end{verbatim}
+
+Then go five years backward:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{start\_5y }\OtherTok{\textless{}{-}}\NormalTok{ max\_date }\SpecialCharTok{\%m{-}\%} \FunctionTok{years}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\NormalTok{start\_5y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "2010-07-01"
+\end{verbatim}
+
+Then:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{recent }\OtherTok{\textless{}{-}}\NormalTok{ TX }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{filter}\NormalTok{(date\_actual }\SpecialCharTok{\textgreater{}}\NormalTok{ start\_5y)}
+
+\FunctionTok{head}\NormalTok{(recent)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 10
+  city     year month sales   volume median listings inventory  date date_actual
+  <chr>   <int> <int> <dbl>    <dbl>  <dbl>    <dbl>     <dbl> <dbl> <date>     
+1 Abilene  2010     8   144 17504580 122000      936       6.7 2011. 2010-08-01 
+2 Abilene  2010     9   116 15475763 121300      899       6.5 2011. 2010-09-01 
+3 Abilene  2010    10   111 14570529 111900      863       6.4 2011. 2010-10-01 
+4 Abilene  2010    11   115 11422741  87900      851       6.4 2011. 2010-11-01 
+5 Abilene  2010    12   116 15289470 118300      830       6.3 2011. 2010-12-01 
+6 Abilene  2011     1    68  8834493 123300      809       6.1 2011  2011-01-01 
+\end{verbatim}
+
+So instead of hard-coding a five-year range, you're saying:
+
+Give me observations from the final five years of the dataset.
+
+For time-series data, the standard visualization is a line chart.
+
+The lecture calculates statewide median sales for each month:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TX }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{group\_by}\NormalTok{(date\_actual) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{median\_sales =} \FunctionTok{median}\NormalTok{(sales, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(date\_actual, median\_sales)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture3_files/figure-pdf/unnamed-chunk-10-1.pdf}}
+
+The conceptual structure is:
+
+\begin{itemize}
+\tightlist
+\item
+  Date → x-axis
+\item
+  Value → y-axis
+\end{itemize}
+
+Connecting observations makes the evolution of the variable visible.
+
+\texttt{scale\_x\_date()} then controls how frequently dates are
+displayed so that a long time horizon doesn't produce an unreadable
+x-axis.
+
+\subsection{Seasonality}\label{seasonality}
+
+\textbf{Seasonality} is one of the central concepts of time series data.
+
+Seasonality is a pattern that systematically repeats according to the
+calendar.
+
+It can be viewed by:
+
+Lines by year:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TX }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+        \AttributeTok{x =} \FunctionTok{month}\NormalTok{(date\_actual, }\AttributeTok{label =} \ConstantTok{TRUE}\NormalTok{),}
+        \AttributeTok{y =}\NormalTok{ sales,}
+        \AttributeTok{group =}\NormalTok{ year,}
+        \AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(year)}
+\NormalTok{    )) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture3_files/figure-pdf/unnamed-chunk-11-1.pdf}}
+
+Boxplots by month
+
+What does a typical January look like across years? What does a typical
+July look like?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{TX }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}
+        \AttributeTok{x =} \FunctionTok{month}\NormalTok{(date\_actual, }\AttributeTok{label =} \ConstantTok{TRUE}\NormalTok{),}
+        \AttributeTok{y =}\NormalTok{ sales}
+\NormalTok{    )) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Warning: Removed 568 rows containing non-finite outside the scale range
+(`stat_boxplot()`).
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture3_files/figure-pdf/unnamed-chunk-12-1.pdf}}
+
+Heatmaps are another view of seasonality
+
+\begin{verbatim}
+   2005  2006  2007  2008 ...
+\end{verbatim}
+
+Jan ■ ■ ■ ■ Feb ■ ■ ■ ■ Mar ■ ■ ■ ■ \ldots{} Dec ■ ■ ■ ■
+
+where the fill intensity represents sales.
+
+\subsection{Moving Averages}\label{moving-averages}
+
+Month-to-month fluctuations can make the underlying trend difficult to
+see. A rolling average smooths those fluctuations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{monthly\_sales }\OtherTok{\textless{}{-}}\NormalTok{ TX }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{group\_by}\NormalTok{(date\_actual) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{median\_sales =} \FunctionTok{median}\NormalTok{(sales, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    ) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{arrange}\NormalTok{(date\_actual) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{moving\_average =} \FunctionTok{rollmean}\NormalTok{(}
+\NormalTok{            median\_sales,}
+            \AttributeTok{k =} \DecValTok{12}\NormalTok{,}
+            \AttributeTok{fill =} \ConstantTok{NA}\NormalTok{,}
+            \AttributeTok{align =} \StringTok{"right"}
+\NormalTok{        )}
+\NormalTok{    )}
+
+\NormalTok{monthly\_sales}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 187 x 3
+   date_actual median_sales moving_average
+   <date>             <dbl>          <dbl>
+ 1 2000-01-01            99             NA
+ 2 2000-02-01           134             NA
+ 3 2000-03-01           167             NA
+ 4 2000-04-01           153             NA
+ 5 2000-05-01           165             NA
+ 6 2000-06-01           188             NA
+ 7 2000-07-01           181             NA
+ 8 2000-08-01           182             NA
+ 9 2000-09-01           152             NA
+10 2000-10-01           124             NA
+# i 177 more rows
+\end{verbatim}
+
+k = 12 means a 12-observation window. Because the data are monthly,
+that's a 12-month moving average.
+
+\bookmarksetup{startatroot}
+
+\chapter{Probability Rules and
+Distributions}\label{probability-rules-and-distributions}
+
+\section{Overview}\label{overview-3}
+
+This section marks the transition from \textbf{describing observed data}
+to \textbf{reasoning about uncertain outcomes}. In earlier sections, the
+focus was on concepts such as center, spread, shape, and trends. Now we
+extend that framework by asking: ``What could happen, and how likely is
+each outcome?'' Answering this requires more than descriptive
+statistics. It requires looking at \textbf{probabilities and probability
+distributions}.
+
+Things to cover:
+
+\begin{itemize}
+\tightlist
+\item
+  Probability Rules
+\item
+  Binomial Distribution
+\item
+  Normal Distribution
+\item
+  Poisson Distribution
+\item
+  Exponential Distribution
+\end{itemize}
+
+\section{Probability}\label{probability}
+
+\subsection{Probability Terminology}\label{probability-terminology}
+
+A probability is a number from 0 to 1 describing how likely an event is.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Term
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Experiment} & Random process & Send a marketing email \\
+\textbf{Outcome} & One possible result & Customer clicks \\
+\textbf{Event} & One or more outcomes you're interested in & Customer
+engages \\
+\textbf{Sample Space} & All possible outcomes & \{Click, Open, Ignore,
+Unsubscribe\} \\
+\end{longtable}
+}
+
+\subsection{Basic Probability Rules}\label{basic-probability-rules}
+
+\subsubsection{Complement Rule}\label{complement-rule}
+
+The complement rule finds the probability that an event does not happen.
+
+\[
+P(A^c)=1-P(A)
+\] If event A happens with probability P(A), its complement, written
+A\^{}c, means ``not A.''
+
+For example:
+
+If there's a 20\% chance of clicking: \(P(\text{No click})=1-.20=.80\)
+
+\subsubsection{Addition Rule}\label{addition-rule}
+
+The addition rule finds the probability that event A OR event B occurs.
+
+\[P(A\cup B)=P(A)+P(B) - P(A)\]
+
+However, that only works if Event A and Event B can occur
+simultaneously.
+
+If A and B are Mututally Exclusive: \[P(A\cup B)=P(A)+P(B)\]
+
+For example:
+
+Suppose:
+
+\begin{itemize}
+\tightlist
+\item
+  \(P(\text{opens email})=0.50\)
+\item
+  \(P(\text{clicks link})=0.20\)
+\item
+  \(P(\text{opens AND clicks})=0.15\)
+\end{itemize}
+
+Then:
+
+\(P(\text{opens OR clicks})=0.50+0.20-0.15=0.55\)
+
+Note: if mutually exclusive:
+\(P(\text{opens OR clicks})=0.50+0.20=0.70\)
+
+\subsubsection{Multiplication}\label{multiplication}
+
+The multiplication rule finds the probability that event A AND event B
+occur.
+
+If A and B are Dependent Events:
+
+\[P(A\cap B)=P(A)\times P(B\mid A)\]
+
+If A and B are Independent Events:
+
+\[P(A\cap B)=P(A)\cdot P(B)\]
+
+\subsection{Conditional Probability}\label{conditional-probability}
+
+Conditional Probability is the probability an event occurs given another
+has occured (i.e.~probability of Event A given Event B occurred)
+
+\[P(A\mid B)\]
+
+\section{Distributions}\label{distributions}
+
+\subsection{Binomial Distribution}\label{binomial-distribution}
+
+A binomial distribution models the number of successes in a fixed number
+trials, where each trial has two possible outcomes: success or failure.
+Each trial is independent and the probability of success remains
+constant.
+
+\textbf{Discrete}
+
+\[X\sim\text{Binomial}(n,p)\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(X \rightarrow \text{a discrete random variable}\)
+\item
+  \(n \rightarrow \text{number of independent trials}\)
+\item
+  \(p \rightarrow \text{probability of success}\)
+\end{itemize}
+
+\texttt{dbinom(k,\ n,\ p)} probability exactly k successes
+\texttt{pbinom(k,\ n,\ p)} probability less than or equal to k successes
+
+\subsection{Normal Distribution}\label{normal-distribution}
+
+A normal distribution models a continuous random variable with values
+that are distributed symmetrically around a mean, with values closer to
+the mean occurring more frequently than values farther from the mean.
+
+\textbf{mean = median = mode}
+
+\textbf{Continuous}
+
+\[X\sim\text{Normal}(\mu,\sigma)\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(X \rightarrow \text{a continuous random variable}\)
+\item
+  \(\mu \rightarrow \text{mean}\)
+\item
+  \(\sigma \rightarrow \text{standard deviation}\)
+\end{itemize}
+
+\texttt{dnorm(x,\ mu,\ sigma)} height of the curve at 100, not
+probability (continuous variable) \texttt{pnorm(x,\ mu,\ sigma)} area to
+the left of 100, which is a probability
+
+\begin{description}
+\tightlist
+\item[Z-score]
+How many standard deviations away from mean.
+\end{description}
+
+\(z=\frac{x-\mu}{\sigma}\)
+
+Empirical Rule
+
+\begin{itemize}
+\tightlist
+\item
+  68\% are within one standard deviation away from mean \mu\pm1\sigma
+\item
+  95\% are within two standard deviations away from mean \mu\pm2\sigma
+\item
+  99.7\% are within two standard deviations away from mean \mu\pm3\sigma
+\end{itemize}
+
+Three ways to assess whether data are approximately normally distributed
+
+\begin{itemize}
+\tightlist
+\item
+  Histogram: Shows the shape of the data (roughly symmetric,
+  bell-shaped)
+\item
+  Q-Q plot: Compares observed data to what we'd expect from a normal
+  distribution (points roughly follow a straight line)
+\item
+  Shapiro-Wilk test: Formal hypothesis test for normality (p
+  \textgreater{} 0.05: do not reject normality)
+\end{itemize}
+
+\subsection{Poisson Distribution}\label{poisson-distribution}
+
+A Poisson distribution models the number of times an event occurs within
+a fixed interval of time.
+
+\textbf{expected number of events (\(\lambda\)) = mean = variance}
+
+Discrete
+
+\[X\sim\text{Poisson}(\lambda)\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(X \rightarrow \text{number of events in the interval}\)
+\item
+  \(\lambda \rightarrow \text{average number of events per interval}\)
+\end{itemize}
+
+Function
+
+Calculates
+
+Meaning
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{dpois(k,\ lambda)} exactly k events
+\item
+  \texttt{ppois(k,\ lambda)} k or fewer events
+\end{itemize}
+
+\begin{description}
+\tightlist
+\item[Chi-Square Goodness-of-Fit Test]
+A chi-square goodness-of-fit test compares the \textbf{observed event
+counts} to the \textbf{expected counts under a Poisson distribution}.
+\end{description}
+
+\begin{itemize}
+\item
+  \(H_0\): The data are consistent with a Poisson distribution.
+\item
+  \(H_A\): The data are not consistent with a Poisson distribution.
+\item
+  \(p > 0.05\): Fail to reject \(H_0\) → data are reasonably consistent
+  with Poisson.
+\item
+  \(p < 0.05\): Reject \(H_0\) → evidence that the data do not fit a
+  Poisson distribution.
+\end{itemize}
+
+\begin{description}
+\tightlist
+\item[Overdispersion Check]
+For a Poisson distribution, the mean and variance should be
+approximately equal.
+\end{description}
+
+\[
+\frac{\text{Variance}}{\text{Mean}} \approx 1
+\]
+
+\subsection{Exponential Distribution}\label{exponential-distribution}
+
+An exponential distribution models the \textbf{time between events} in a
+Poisson process. While the Poisson distribution models \textbf{how many
+events occur in an interval}, the exponential distribution models
+\textbf{how long until the next event occurs}.
+
+\textbf{Continuous}
+
+\[
+T \sim \text{Exponential}(\lambda)
+\]
+
+\begin{itemize}
+\item
+  \(T \rightarrow \text{waiting time until the next event}\)
+\item
+  \(\lambda \rightarrow \text{average rate at which events occur}\)
+\item
+  \texttt{dexp(t,\ rate\ =\ lambda)} density at \(t\)
+\item
+  \texttt{pexp(t,\ rate\ =\ lambda)} probability the event occurs within
+  time \(t\)
+\item
+  \texttt{qexp(p,\ rate\ =\ lambda)} waiting time associated with
+  cumulative probability \(p\)
+\item
+  \texttt{rexp(n,\ rate\ =\ lambda)} generate exponential waiting times
+\end{itemize}
+
+Exponential is memoryless: meaning independent events don't remember
+what has already happened. What has occurred doesn't impact what is to
+come.
+
+\bookmarksetup{startatroot}
+
+\chapter{One-Parameter Statistical
+Inference}\label{one-parameter-statistical-inference}
+
+\section{Overview}\label{overview-4}
+
+So far, the focus has been on describing observed data and modeling
+uncertainty. Descriptive statistics summarize the data we actually
+observe. Probability distributions describe how uncertain outcomes
+behave. \textbf{Statistical inference} takes the next step: \textbf{what
+can a sample tell us about a population we cannot fully observe?}
+
+Suppose a company reports:
+
+\begin{quote}
+\emph{Average household spending last month was \$1,793.}
+\end{quote}
+
+That number may sound precise, but suppose it came from a sample of
+2,500 households rather than every household. The sample mean
+\(\bar{x} = 1793\) is known, but the population mean \(\mu\) is unknown.
+
+The goal of statistical inference is to use the observed \textbf{sample
+statistic} to learn about the unknown \textbf{population parameter},
+while explicitly accounting for sampling uncertainty.
+
+The general process is:
+
+\[\text{Population} \rightarrow \text{Sample} \rightarrow \text{Statistic} \rightarrow \text{Inference about Parameter}\]
+
+There are two major tools for doing this:
+
+\begin{description}
+\tightlist
+\item[Confidence intervals]
+Estimate a population parameter
+\item[Hypothesis tests]
+Evaluate a claim about a population parameter
+\end{description}
+
+Before either one works, however, we need to understand \textbf{sampling
+variability}.
+
+\section{Sampling}\label{sampling}
+
+A \textbf{sample} is a subset of a population that you actually observe
+or collect data from. The goal is usually to use information from the
+sample to learn about the population. This connects to statistics
+vs.~parameters (see Section 1).
+
+\begin{description}
+\tightlist
+\item[Bias]
+The estimate is consistently off from the true value (population) in a
+particular way, likely caused by poor design.
+\item[Variance]
+Sample-to-sample variation that occurs naturally, even with good design.
+Decreases as \(n\), the number of observations, decreases.
+\end{description}
+
+Common sources of bias:
+
+\begin{itemize}
+\tightlist
+\item
+  Coverage bias \(\rightarrow\) Some members of the population have
+  little or no chance of being included because the sampling method does
+  not adequately cover the population.
+\item
+  Selection bias \(\rightarrow\) The method used to select participants
+  systematically favors certain types of people over others.
+\item
+  Nonresponse bias \(\rightarrow\) People who do not respond differ
+  systematically from those who do respond in a way related to the
+  question being studied.
+\end{itemize}
+
+\[\boxed{\text{Coverage}=\text{Who can be reached}} \boxed{\text{Selection}=\text{Who gets selected}} \boxed{\text{Nonresponse}=\text{Who actually responds}}\]
+
+\textbf{Sampling Methods}
+
+\begin{description}
+\tightlist
+\item[Simple Random Sampling]
+equal chance for everyone.
+\item[Stratified Sampling]
+divide into groups, then sample from EACH group.
+\item[Cluster]
+divide into groups, randomly choose SOME groups, then sample within
+those selected groups
+\item[Systematic]
+every \(k\)-th unit after a random start
+\end{description}
+
+\section{Sampling Distribution and the
+CLT}\label{sampling-distribution-and-the-clt}
+
+\subsection{Sampling Distribution and
+SE}\label{sampling-distribution-and-se}
+
+Suppose you drew a different random sample of 2,500 households and
+recomputed the average spend each time, 1000 times. What would the
+distributions of those averages be? How would that be different from the
+the distribution of the raw values themselves?
+
+The sampling distribution is the distribution of a statistic (e.g.,
+\bar X) across all possible repeated samples of the same size from a
+population.
+
+\begin{description}
+\tightlist
+\item[Center]
+tells us where the statistic tends to fall and whether it is centered on
+the true population parameter.
+\end{description}
+
+If \(E(\bar X) = \mu\), \(\bar{X}\) is an unbiased estimator of \(\mu\),
+the true value (in this case the mean).
+
+\begin{description}
+\tightlist
+\item[Spread]
+tells us the precision of the statistic across samples.
+\end{description}
+
+For sample mean: \(SE(\bar{X})=\frac{\sigma}{\sqrt{n}}\) where smaller
+SE (standard error) means less sample-to-sample variability.
+
+Standard Error measures how much a statistic would typically vary from
+sample to sample.
+
+\subsection{Central Limit Theorem}\label{central-limit-theorem}
+
+The central limit theorem says as the sample size, \(n\), gets larger,
+the sampling distribution of the sample mean, \(bar{X}\) becomes
+approximately normal, regardless of the shape of the population
+distribution.
+
+*Rule of thumb, \(n \geq 30\) is often ``large enough'' though more skew
+may require a larger \(n\).
+
+The CLT allows us to build \textbf{confidence intervals} and
+\textbf{hypothesis tests} even when the raw data isn't normal.
+
+\section{Inference for the Mean}\label{inference-for-the-mean}
+
+When trying to estimate the mean of a population, we use a point
+estimate for the mean \(\bar{X}\).
+
+A point estimate is a single value calculated from a sample that is used
+to estimate an unknown population parameter.
+
+When doing interference, the true standard deviation, \(\sigma\), is
+unknown. Because of this, we use the \textbf{t-distribution} to model it
+(\(t_{n-1}\)).
+
+\[\bar{X} \pm t_{\alpha/2,\;n-1}\frac{s}{\sqrt{n}}\] Where:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\bar{X} \rightarrow\) point estimate of \mu
+\item
+  \(t_{\alpha/2,n-1} \rightarrow\) critical t-value with n-1 degrees of
+  freedom (desired confidence level)
+\item
+  \(\frac{s}{\sqrt n} \rightarrow\) standard error
+\item
+  \(t_{\alpha/2,n-1}\frac{s}{\sqrt n} \rightarrow\) margin of error
+\end{itemize}
+
+\begin{quote}
+Interpretation: the procedure covers \(\mu\) in \(100(1-\alpha)%
+\) of repeated samples. e.g.~We are 95\% confident that the mean is
+within\ldots{}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{curve}\NormalTok{(}
+  \FunctionTok{dt}\NormalTok{(x, }\AttributeTok{df =} \DecValTok{9}\NormalTok{),}
+  \AttributeTok{from =} \SpecialCharTok{{-}}\DecValTok{4}\NormalTok{,}
+  \AttributeTok{to =} \DecValTok{4}\NormalTok{,}
+  \AttributeTok{lwd =} \DecValTok{2}\NormalTok{,}
+  \AttributeTok{xlab =} \StringTok{"t"}\NormalTok{,}
+  \AttributeTok{ylab =} \StringTok{"Density"}\NormalTok{,}
+  \AttributeTok{main =} \StringTok{"t Distribution"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{lecture5_files/figure-pdf/unnamed-chunk-1-1.pdf}}
+
+\subsection{t vs z}\label{t-vs-z}
+
+A t-statistic is like a z-statistic when the population standard
+deviation \(\sigma\) is unknown and must be estimated using \(s\).
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.7222}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1389}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1389}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(z\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(t\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Distribution} & Standard normal \(N(0,1)\) &
+\(t\)-distribution \\
+\textbf{Population SD \(\sigma\)} & Known & Unknown \\
+\textbf{Standard error} & \(\frac{\sigma}{\sqrt{n}}\) &
+\(\frac{s}{\sqrt{n}}\) \\
+\textbf{Degrees of freedom} & None & \(n-1\) \\
+\textbf{Shape} & Normal & Normal-like, heavier tails \\
+\textbf{Critical value for 95\%} & \(1.96\) & Depends on \(df\) \\
+\textbf{Common use for means} & Less common & Most common \\
+\end{longtable}
+}
+
+As \(n\) gets larger, the difference between \(t\) and \(z\) becomes
+smaller and eventually negligible because \(s\) becomes a more precise
+estimate of \(\sigma\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Helpful Definitions:
+
+\begin{description}
+\tightlist
+\item[Distribution]
+a z-statistic follows the standard normal distribution \(N(0,1)\). A
+t-statistic follows a \(t-distribution\).
+\item[Population SD \(\sigma\)]
+if the true population SD \(\sigma\) is known, use \(z\). If \(\sigma\)
+is unknown, estimate it with the sample SD \(s\) and use \(t\).
+\item[Standard error]
+measures how much \(\bar{X}\) varies across samples. With \(z\),
+\(SE=\frac{\sigma}{\sqrt{n}}\). With \(t\), because \(\sigma\) is
+unknown, we estimate it with \(SE=\frac{\sigma}{\sqrt{n}}\).
+\item[Degrees of freedom]
+\(z\) doesn't need degrees of freedom because \(\sigma\) is known. \(t\)
+uses \(df=n-1\), which accounts for estimating variability using the
+sample.
+\item[Shape]
+both are bell-shaped and centered at 0. The \(t-distribution\) has
+heavier tails because estimating \(\sigma\) with \(s\) introduces
+additional uncertainty.
+\item[Critical value for 95\%]
+for \(z\), the middle 95\% is always between -1.96 and +1.96; for t, it
+depends on \(n\) (\(n-1\)).
+\item[Common use for means]
+knowing the true population \(\sigma\) is uncommon, so \(z\) is less
+common for inference about means. Usually \(\sigma\) is unknown, making
+\(t\) the standard choice.
+\end{description}
+
+\subsection{Hypothesis Testing for the
+Mean}\label{hypothesis-testing-for-the-mean}
+
+\(H_0 \rightarrow\) the Null Hypothesis: the baseline/default claim.
+\(H_a \rightarrow\) the Alternative Hypothesis: what we are looking for
+evidence of (represents a difference/effect/change from null)
+
+Steps: hypothesis \(\rightarrow\) significance level \(\alpha\) test
+statistic \(\rightarrow\) \(p-value\) \(\rightarrow\) decision
+\(\rightarrow\) conclusion
+
+\begin{itemize}
+\tightlist
+\item
+  \(\alpha\) = probability of a \textbf{Type I error} (rejecting a true
+  \(H_0\))
+\item
+  \(\beta\) = probability of a \textbf{Type II error} (failing to reject
+  a false \(H_0\))
+\item
+  \(\text{Power} = 1-\beta\) is the probability that a hypothesis test
+  correctly detects a real effect.
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Error
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What Happens
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Probability
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Think
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Type I} & Reject a true \(H_0\) & \(\alpha\) & False positive \\
+\textbf{Type II} & Fail to reject a false \(H_0\) & \(\beta\) & False
+negative \\
+\end{longtable}
+}
+
+\subsubsection{One-Sided t-Test and
+Power}\label{one-sided-t-test-and-power}
+
+A \textbf{one-sided t-test} tests whether a population mean is
+\textbf{larger than or smaller than} a hypothesized value, depending on
+the specified direction.
+
+\begin{itemize}
+\tightlist
+\item
+  Right-tailed: \(H_A: \mu > \mu_0\)
+\item
+  Left-tailed: \(H_A: \mu < \mu_0\)
+\end{itemize}
+
+Reject \(H_0\) when: \(p\text{-value} \leq \alpha\)
+
+\section{Inference for a Proportion}\label{inference-for-a-proportion}
+
+\textbf{Inference for a proportion} uses essentially the same inference
+framework as inference for a mean, but the \textbf{population parameter
+changes}.
+
+For means, the population parameter is: \(\mu = \text{population mean}\)
+
+For proportions, the population parameter is:
+\(p = \text{population proportion}\)
+
+\begin{quote}
+\textbf{Same inference process, new parameter.}
+\end{quote}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mean \(\mu\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Proportion \(p\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Point Estimate} & \(\bar{X}\) & \(\hat{p}\) \\
+\textbf{Standard Error} & \(\frac{s}{\sqrt{n}}\) &
+\(\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\) \\
+\textbf{Reference Distribution} & \(t_{n-1}\) & \(z\) (Normal) \\
+\textbf{Confidence Interval} & \(\bar{X} \pm t_{\alpha/2,n-1} \cdot SE\)
+& \(\hat{p} \pm z_{\alpha/2} \cdot SE\) \\
+\textbf{Test Statistic (\(H_0\))} & \(\frac{\bar{X}-\mu_0}{s/\sqrt{n}}\)
+& \(\frac{\hat{p}-p_0}{\sqrt{p_0(1-p_0)/n}}\) \\
+\end{longtable}
+}
+
+For proportion inference, each observation is a \textbf{binary outcome}:
+
+\(X_i = \begin{cases}1 & \text{success} \\ 0 & \text{failure} \end{cases}\)
+
+Each observation follows a Bernoulli distribution:
+
+\(X_i \sim \text{Bernoulli}(p)\) where \(p\) is the true population
+probability or proportion of success.
+
+\bookmarksetup{startatroot}
+
+\chapter{Comparing Two Population Means: Paired
+Samples}\label{comparing-two-population-means-paired-samples}
+
+\section{Overview}\label{overview-5}
+
+Lecture 5 introduced inference for \textbf{one population parameter}.
+
+For example, we could ask whether a population mean differs from some
+benchmark:
+
+\[
+H_0:\mu=\mu_0
+\]
+
+Now suppose we have \textbf{two sets of measurements} and want to
+compare their means.
+
+Examples include:
+
+\begin{itemize}
+\tightlist
+\item
+  Customer spending before vs.~after joining a loyalty program
+\item
+  Store sales before vs.~after a layout change
+\item
+  Measurements from matched treatment and control stores
+\item
+  Measurements from twins or other naturally matched subjects
+\end{itemize}
+
+Before choosing a statistical test, the most important question is:
+
+\begin{quote}
+\textbf{Are the observations in the two conditions independent, or are
+they meaningfully connected?}
+\end{quote}
+
+If observations can be meaningfully linked one-to-one, we have
+\textbf{paired data}.
+
+If no meaningful one-to-one relationship exists, we instead have
+\textbf{independent samples}.
+
+This distinction determines how the data should be analyzed.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Paired vs.~Independent
+Samples}\label{paired-vs.-independent-samples}
+
+Suppose a retailer measures checkout time at 20 stores.
+
+The company then installs a new checkout layout and measures checkout
+time at the \textbf{same 20 stores again}.
+
+For every store, there are two measurements:
+
+\[
+(\text{Before}_i,\text{After}_i)
+\]
+
+These observations are \textbf{paired} because each after measurement
+corresponds to the same store's before measurement.
+
+It would be inappropriate to ignore this connection and treat the 40
+measurements as unrelated observations.
+
+Instead, calculate the change within each store:
+
+\[
+d_i=\text{After}_i-\text{Before}_i
+\]
+
+Now the original problem:
+
+\[
+\text{Before vs. After}
+\]
+
+becomes:
+
+\[
+d_1,d_2,\ldots,d_n
+\]
+
+which is a \textbf{one-sample problem involving the differences}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{What Creates a Pair?}\label{what-creates-a-pair}
+
+A pair exists when an observation in one condition can be meaningfully
+linked to exactly one observation in another condition.
+
+Common forms of pairing include:
+
+\subsection{Repeated Measurements}\label{repeated-measurements}
+
+The same observational unit is measured twice.
+
+Examples:
+
+\begin{itemize}
+\tightlist
+\item
+  Same customer before and after a program
+\item
+  Same employee before and after training
+\item
+  Same store before and after a redesign
+\end{itemize}
+
+\subsection{Natural Pairs}\label{natural-pairs}
+
+Different observational units have a meaningful natural relationship.
+
+Examples:
+
+\begin{itemize}
+\tightlist
+\item
+  Identical twins
+\item
+  Siblings
+\item
+  Matched geographic locations
+\end{itemize}
+
+\subsection{Matched Pairs}\label{matched-pairs}
+
+Researchers intentionally match similar observational units before
+comparing treatments.
+
+Examples:
+
+\begin{itemize}
+\tightlist
+\item
+  Match two stores with similar historical sales
+\item
+  Match customers with similar demographics
+\item
+  Match patients with similar baseline characteristics
+\end{itemize}
+
+One member of each pair may then receive one treatment while the other
+receives another.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Why Pairing Matters}\label{why-pairing-matters}
+
+Suppose we have measurements:
+
+\[
+X_i
+\]
+
+and:
+
+\[
+Y_i
+\]
+
+for pair \(i\).
+
+Instead of analyzing the two sets separately, calculate:
+
+\[
+d_i=X_i-Y_i
+\]
+
+Each pair now contributes \textbf{one difference}.
+
+The pair, rather than each individual measurement, becomes the
+\textbf{unit of analysis}.
+
+Pairing can improve precision because characteristics shared within a
+pair are removed before the two conditions are compared.
+
+For example, stores may naturally differ because of:
+
+\begin{itemize}
+\tightlist
+\item
+  Store size
+\item
+  Customer traffic
+\item
+  Location
+\item
+  Neighborhood demographics
+\item
+  Historical sales
+\end{itemize}
+
+If the same store is measured before and after a change, much of this
+store-to-store variation is automatically controlled because each store
+is compared with itself.
+
+Conceptually:
+
+\[
+\text{Observed Difference}
+=
+\text{Condition Effect}
++
+\text{Within-Pair Noise}
+\]
+
+rather than comparing two groups containing all of the between-unit
+variation.
+
+When the measurements within pairs are meaningfully related, pairing can
+therefore reduce noise and improve precision.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Defining the Difference}\label{defining-the-difference}
+
+The direction of the difference matters.
+
+Suppose:
+
+\[
+d_i=\text{After}_i-\text{Before}_i
+\]
+
+Then:
+
+\begin{itemize}
+\tightlist
+\item
+  \(d_i>0\) means the measurement increased
+\item
+  \(d_i<0\) means the measurement decreased
+\item
+  \(d_i=0\) means there was no change
+\end{itemize}
+
+If the outcome is checkout time, for example:
+
+\[
+d_i<0
+\]
+
+would represent an improvement because checkout time decreased.
+
+But if we instead defined:
+
+\[
+d_i=\text{Before}_i-\text{After}_i
+\]
+
+then improvement would produce:
+
+\[
+d_i>0
+\]
+
+There is nothing inherently correct about one direction over the other.
+
+The important thing is to:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Define the difference explicitly
+\item
+  Keep the direction consistent
+\item
+  Interpret the sign in context
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{The Population Parameter}\label{the-population-parameter}
+
+Once the differences are defined:
+
+\[
+d_1,d_2,\ldots,d_n
+\]
+
+the parameter of interest is:
+
+\[
+\boxed{\mu_d}
+\]
+
+where:
+
+\[
+\mu_d
+=
+\text{population mean difference}
+\]
+
+The corresponding sample statistic is:
+
+\[
+\boxed{\bar{d}}
+\]
+
+where:
+
+\[
+\bar{d}
+=
+\frac{\sum d_i}{n}
+\]
+
+Therefore:
+
+\[
+\bar{d}
+\rightarrow
+\text{estimate of }
+\mu_d
+\]
+
+This is exactly the same logic used in one-sample inference:
+
+\[
+\bar{x}\rightarrow\mu
+\]
+
+except the observations are now \textbf{within-pair differences}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Hypotheses for Paired Data}\label{hypotheses-for-paired-data}
+
+If the question is whether the two conditions differ on average, the
+null hypothesis is:
+
+\[
+H_0:\mu_d=0
+\]
+
+A mean difference of zero means:
+
+\begin{quote}
+\textbf{There is no average difference between the two conditions.}
+\end{quote}
+
+The alternative depends on the research question.
+
+\subsection{Two-Sided}\label{two-sided}
+
+To test whether the conditions differ:
+
+\[
+H_a:\mu_d\neq0
+\]
+
+\subsection{Right-Tailed}\label{right-tailed}
+
+If positive differences represent the effect of interest:
+
+\[
+H_a:\mu_d>0
+\]
+
+\subsection{Left-Tailed}\label{left-tailed}
+
+If negative differences represent the effect of interest:
+
+\[
+H_a:\mu_d<0
+\]
+
+The direction depends entirely on how:
+
+\[
+d_i
+\]
+
+was defined.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Paired t-Test}\label{paired-t-test}
+
+A \textbf{paired t-test} compares the population mean difference to a
+hypothesized value, usually zero.
+
+The important insight is:
+
+\begin{quote}
+\textbf{A paired t-test is mathematically a one-sample t-test performed
+on the within-pair differences.}
+\end{quote}
+
+Once we calculate:
+
+\[
+d_i=X_i-Y_i
+\]
+
+we no longer need to think of the analysis as two separate samples.
+
+We have one sample:
+
+\[
+d_1,d_2,\ldots,d_n
+\]
+
+and ask whether its population mean differs from zero.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Standard Error of the Mean
+Difference}\label{standard-error-of-the-mean-difference}
+
+Let:
+
+\[
+s_d
+\]
+
+represent the sample standard deviation of the differences.
+
+Then:
+
+\[
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+\]
+
+where:
+
+\(n\) = number of \textbf{pairs}
+
+Notice that \(n\) is not the total number of individual measurements.
+
+If there are 15 pairs, then:
+
+\[
+n=15
+\]
+
+even though there are:
+
+\[
+30
+\]
+
+individual measurements.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Paired t-Test Statistic}\label{paired-t-test-statistic}
+
+To test:
+
+\[
+H_0:\mu_d=0
+\]
+
+the test statistic is:
+
+\[
+\boxed{
+t=
+\frac{\bar{d}-0}
+{s_d/\sqrt{n}}
+}
+\]
+
+More generally:
+
+\[
+t=
+\frac{\bar{d}-\mu_{d,0}}
+{s_d/\sqrt{n}}
+\]
+
+The degrees of freedom are:
+
+\[
+df=n-1
+\]
+
+The test statistic tells us:
+
+\begin{quote}
+\textbf{How many standard errors the observed mean difference lies from
+the value specified by the null hypothesis.}
+\end{quote}
+
+A large absolute value of \(t\) means the observed mean difference is
+far from the null value relative to the amount of sampling uncertainty.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Example: Identical Twin
+Study}\label{example-identical-twin-study}
+
+Suppose a study compares left hippocampal volume for \textbf{15 pairs of
+identical twins}.
+
+Within each pair:
+
+\begin{itemize}
+\tightlist
+\item
+  One twin was diagnosed with schizophrenia
+\item
+  The other twin was not
+\end{itemize}
+
+Define:
+
+\[
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+\]
+
+The observed differences have:
+
+\[
+\bar{d}=0.1987
+\]
+
+and:
+
+\[
+s_d=0.2383
+\]
+
+Because:
+
+\[
+n=15
+\]
+
+the standard error is:
+
+\[
+SE(\bar{d})
+=
+\frac{0.2383}{\sqrt{15}}
+\]
+
+\[
+SE(\bar{d})
+\approx0.0615
+\]
+
+Under:
+
+\[
+H_0:\mu_d=0
+\]
+
+the test statistic is:
+
+\[
+t=
+\frac{0.1987-0}
+{0.0615}
+\]
+
+\[
+t\approx3.23
+\]
+
+with:
+
+\[
+df=15-1=14
+\]
+
+So the observed mean difference is approximately:
+
+\[
+3.23
+\]
+
+standard errors above the null value of zero.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Paired t-Test in R}\label{paired-t-test-in-r}
+
+If the differences have already been calculated:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    pairs}\SpecialCharTok{$}\NormalTok{Difference,}
+    \AttributeTok{mu =} \DecValTok{0}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This is simply a \textbf{one-sample t-test on the differences}.
+
+The example produces approximately:
+
+\[
+t=3.23
+\]
+
+\[
+df=14
+\]
+
+\[
+p=0.006
+\]
+
+and a 95\% confidence interval of approximately:
+
+\[
+(0.067,\ 0.331)
+\]
+
+Because:
+
+\[
+p<0.05
+\]
+
+we reject:
+
+\[
+H_0:\mu_d=0
+\]
+
+The data provide evidence that the population mean difference is not
+zero.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{\texorpdfstring{Using
+\texttt{paired\ =\ TRUE}}{Using paired = TRUE}}\label{using-paired-true}
+
+R can also calculate the differences internally.
+
+For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    pairs}\SpecialCharTok{$}\NormalTok{Unaffected,}
+\NormalTok{    pairs}\SpecialCharTok{$}\NormalTok{Affected,}
+    \AttributeTok{paired =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This performs the same conceptual analysis:
+
+\[
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+\]
+
+followed by a one-sample t-test on those differences.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Confidence Interval for a Mean
+Difference}\label{confidence-interval-for-a-mean-difference}
+
+The confidence interval for the population mean difference follows the
+same structure as the confidence interval for a single population mean:
+
+\[
+\boxed{
+\bar{d}
+\pm
+t^*
+\frac{s_d}{\sqrt{n}}
+}
+\]
+
+For the twin example, the 95\% confidence interval is approximately:
+
+\[
+(0.067,\ 0.331)
+\]
+
+Because the entire interval lies above zero, the data are consistent
+with a positive population mean difference under the chosen definition:
+
+\[
+d_i
+=
+\text{Unaffected}_i
+-
+\text{Affected}_i
+\]
+
+The confidence interval also communicates the estimated
+\textbf{magnitude} of the difference, rather than merely whether the
+difference is statistically significant.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Statistical Evidence
+vs.~Causality}\label{statistical-evidence-vs.-causality}
+
+A statistically significant difference does \textbf{not automatically
+establish causation}.
+
+In the twin example, the analysis provides evidence that mean left
+hippocampal volume differs between twins with and without a
+schizophrenia diagnosis.
+
+That supports a statement about \textbf{association}:
+
+\begin{quote}
+Mean hippocampal volume differs between the two conditions.
+\end{quote}
+
+It does not, by itself, establish:
+
+\begin{quote}
+Schizophrenia caused the difference in hippocampal volume.
+\end{quote}
+
+Causal conclusions depend on the \textbf{study design}, not simply on
+obtaining a small p-value.
+
+This connects back to the distinction between observational and
+experimental studies:
+
+\begin{quote}
+\textbf{Statistical significance does not turn an observational study
+into a randomized experiment.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Matched-Pairs Experimental
+Design}\label{matched-pairs-experimental-design}
+
+Pairing can also be intentionally incorporated into an experiment.
+
+Suppose Kroger has candidate stores for an endcap-display experiment.
+
+Some stores will receive:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Treatment:} endcap display
+\end{itemize}
+
+while others receive:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Control:} usual shelf placement
+\end{itemize}
+
+Instead of randomly assigning stores without considering their
+characteristics, Kroger could use a \textbf{matched-pairs design}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 1: Match Similar Units}\label{step-1-match-similar-units}
+
+Before treatment assignment, form pairs of similar stores using
+pre-experiment characteristics such as:
+
+\begin{itemize}
+\tightlist
+\item
+  Baseline sales
+\item
+  Store size
+\item
+  Customer traffic
+\item
+  Neighborhood characteristics
+\end{itemize}
+
+The goal is to make the stores within each pair as comparable as
+possible before the treatment occurs.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 2: Randomize Within Each
+Pair}\label{step-2-randomize-within-each-pair}
+
+Within each matched pair:
+
+\begin{itemize}
+\tightlist
+\item
+  Randomly assign one store to treatment
+\item
+  Randomly assign the other to control
+\end{itemize}
+
+Randomization remains important.
+
+Matching improves comparability and precision, while random assignment
+supports causal inference.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 3: Calculate One Difference Per
+Pair}\label{step-3-calculate-one-difference-per-pair}
+
+For pair \(i\), calculate:
+
+\[
+d_i
+=
+\text{Sales}_{\text{endcap},i}
+-
+\text{Sales}_{\text{control},i}
+\]
+
+Then analyze:
+
+\[
+d_1,d_2,\ldots,d_n
+\]
+
+and test:
+
+\[
+H_0:\mu_d=0
+\]
+
+The key distinction is:
+
+\begin{quote}
+\textbf{Matching improves precision. Random assignment supports
+causality.}
+\end{quote}
+
+They serve different purposes.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Assumptions of the Paired
+t-Test}\label{assumptions-of-the-paired-t-test}
+
+Once paired data are converted into differences:
+
+\[
+(X_i,Y_i)
+\rightarrow
+d_i=X_i-Y_i
+\]
+
+the assumptions of the paired t-test apply primarily to the
+\textbf{differences}.
+
+The main assumptions are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  There is a meaningful reason for the observations to be paired
+\item
+  The differences are independent across pairs
+\item
+  The differences contain no severe outliers
+\item
+  The distribution of the differences is approximately Normal when the
+  number of pairs is small
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Independence Within a Pair Is Not
+Required}\label{independence-within-a-pair-is-not-required}
+
+The two observations within a pair do \textbf{not} need to be
+independent.
+
+In fact, the reason for using a paired analysis is usually that they are
+related.
+
+For example:
+
+\[
+(\text{Before}_i,\text{After}_i)
+\]
+
+for the same store are naturally connected.
+
+That relationship is exactly what the paired analysis preserves.
+
+What needs to be independent is:
+
+\[
+d_1,d_2,\ldots,d_n
+\]
+
+across separate pairs.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Normality Applies to the
+Differences}\label{normality-applies-to-the-differences}
+
+A paired t-test does \textbf{not} require both original variables to be
+Normally distributed.
+
+You do not separately need:
+
+\[
+X\sim N
+\]
+
+and:
+
+\[
+Y\sim N
+\]
+
+Instead, the relevant quantity is:
+
+\[
+D=X-Y
+\]
+
+For small samples, we want the distribution of:
+
+\[
+d_1,d_2,\ldots,d_n
+\]
+
+to be reasonably consistent with a Normal distribution and free of
+severe outliers.
+
+Therefore:
+
+\begin{quote}
+\textbf{Check the differences, not the two original columns separately.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Checking the Differences}\label{checking-the-differences}
+
+After calculating:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pairs }\OtherTok{\textless{}{-}}\NormalTok{ pairs }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{Difference =}\NormalTok{ Unaffected }\SpecialCharTok{{-}}\NormalTok{ Affected}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+we can inspect the differences directly.
+
+\subsection{Histogram}\label{histogram}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(pairs, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Difference)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Look for:
+
+\begin{itemize}
+\tightlist
+\item
+  Severe skewness
+\item
+  Extreme outliers
+\item
+  Unusual shape
+\end{itemize}
+
+\subsection{Q--Q Plot}\label{qq-plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{qqnorm}\NormalTok{(pairs}\SpecialCharTok{$}\NormalTok{Difference)}
+\FunctionTok{qqline}\NormalTok{(pairs}\SpecialCharTok{$}\NormalTok{Difference)}
+\end{Highlighting}
+\end{Shaded}
+
+For a small sample, strong departures from the line may indicate that
+the Normality assumption is questionable.
+
+However, with only a small number of pairs, visual diagnostics
+themselves are uncertain.
+
+For example, with:
+
+\[
+n=15
+\]
+
+there are relatively few observations available for judging the shape of
+the difference distribution.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Pairing Does Not Automatically Mean
+Independence}\label{pairing-does-not-automatically-mean-independence}
+
+Paired data can introduce another important issue.
+
+Suppose two stores are observed every week for 104 weeks.
+
+For each week:
+
+\[
+d_t
+=
+\text{Sales}_{8,t}
+-
+\text{Sales}_{208,t}
+\]
+
+It might be tempting to treat the 104 weekly differences as:
+
+\[
+d_1,d_2,\ldots,d_{104}
+\]
+
+independent observations.
+
+But these differences occur \textbf{over time}.
+
+Consecutive weeks may be related.
+
+This creates a potential violation of the independence assumption.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Time Structure in Paired
+Differences}\label{time-structure-in-paired-differences}
+
+Suppose the difference between two stores changes systematically over
+time.
+
+A single overall mean:
+
+\[
+\bar{d}
+\]
+
+might conceal that pattern.
+
+For example, the differences might begin mostly negative and become
+increasingly positive.
+
+Then the statement:
+
+\begin{quote}
+The average difference is 10.
+\end{quote}
+
+does not fully describe what is happening.
+
+The relationship may instead involve a \textbf{time trend}.
+
+This connects paired inference back to time-series analysis:
+
+\begin{quote}
+Before reducing repeated measurements to one overall mean difference,
+check whether the difference itself changes systematically over time.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Autocorrelation}\label{autocorrelation}
+
+\textbf{Autocorrelation} measures whether observations are related to
+observations from earlier time periods.
+
+For weekly differences:
+
+\[
+d_t
+\]
+
+we might ask whether:
+
+\[
+d_t
+\]
+
+is related to:
+
+\[
+d_{t-1}
+\]
+
+or:
+
+\[
+d_{t-2}
+\]
+
+and so on.
+
+An \textbf{autocorrelation function (ACF)} examines these relationships
+at different lags.
+
+For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{acf}\NormalTok{(differences)}
+\end{Highlighting}
+\end{Shaded}
+
+A bar at lag:
+
+\[
+k
+\]
+
+measures the relationship between observations separated by:
+
+\[
+k
+\]
+
+time periods.
+
+If substantial autocorrelation exists, the observations do not provide
+completely independent pieces of information.
+
+That matters because the usual paired t-test standard error:
+
+\[
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+\]
+
+assumes independent differences.
+
+If observations are strongly dependent, treating all of them as
+independent can make the estimated uncertainty misleading.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Changing Means
+vs.~Autocorrelation}\label{changing-means-vs.-autocorrelation}
+
+Time-series diagnostics can reveal different problems.
+
+A \textbf{time plot} can reveal whether the mean difference changes over
+time.
+
+An \textbf{ACF} can reveal whether observations are serially dependent.
+
+These are not the same issue.
+
+For example:
+
+\begin{itemize}
+\tightlist
+\item
+  A time trend means the expected difference is changing
+\item
+  Autocorrelation means observations at different times are related
+\end{itemize}
+
+A dataset can have:
+
+\begin{itemize}
+\tightlist
+\item
+  A changing mean with little autocorrelation
+\item
+  Autocorrelation around a stable mean
+\item
+  Both
+\item
+  Neither
+\end{itemize}
+
+Therefore, both the \textbf{structure of the mean} and the
+\textbf{dependence between observations} matter.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Unit of Replication}\label{unit-of-replication}
+
+One of the most important questions in statistical inference is:
+
+\begin{quote}
+\textbf{What is the independent unit of replication?}
+\end{quote}
+
+Suppose we compare two study designs.
+
+\subsection{Study A: Many Matched Store
+Pairs}\label{study-a-many-matched-store-pairs}
+
+Suppose many pairs of similar stores participate in an experiment.
+
+Each store is observed for six weeks.
+
+We calculate one sales summary for each store and then one difference
+for each matched pair.
+
+If there are:
+
+\[
+n
+\]
+
+independent store pairs, then the sample size is:
+
+\[
+n
+\]
+
+The independent replication comes from the \textbf{different store
+pairs}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Study B: One Store Pair for 104
+Weeks}\label{study-b-one-store-pair-for-104-weeks}
+
+Suppose instead that only two stores are studied, but they are observed
+for:
+
+\[
+104
+\]
+
+weeks.
+
+There are 104 weekly differences, but they all come from the
+\textbf{same two stores}.
+
+Those 104 weeks are not equivalent to having 104 independent store
+pairs.
+
+They provide more information about those particular stores, but not
+necessarily more independent replication across a population of stores.
+
+This distinction is critical:
+
+\begin{quote}
+\textbf{More repeated observations of the same units are not the same as
+more independent observational units.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Pseudoreplication}\label{pseudoreplication}
+
+Treating repeated or dependent measurements as though they were
+independent observations can create \textbf{pseudoreplication}.
+
+For example:
+
+\begin{quote}
+Two stores observed for 104 weeks
+\end{quote}
+
+does not automatically provide the same inferential information as:
+
+\begin{quote}
+104 independent pairs of stores.
+\end{quote}
+
+Repeated observations may increase information about the particular
+units being studied, but they do not necessarily increase the number of
+independent units available for population-level inference.
+
+The effective sample size depends on the study design and dependence
+structure, not simply the number of rows in the dataset.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Choosing Paired vs.~Independent
+Analysis}\label{choosing-paired-vs.-independent-analysis}
+
+Before comparing two means, ask:
+
+\begin{quote}
+\textbf{Can each observation in one condition be meaningfully linked to
+one observation in the other condition?}
+\end{quote}
+
+\subsection{If Yes}\label{if-yes}
+
+The observations are paired.
+
+Calculate:
+
+\[
+d_i=X_i-Y_i
+\]
+
+and perform \textbf{one-sample inference on the differences}.
+
+\subsection{If No}\label{if-no}
+
+The observations are independent samples.
+
+Compare the two population means directly using an independent-samples
+method.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Examples}\label{examples}
+
+\subsection{Same Customers Before and
+After}\label{same-customers-before-and-after}
+
+Monthly spending is recorded for the same customers before and after
+they join a loyalty program.
+
+\textbf{Paired}
+
+Each customer's before measurement is linked to that same customer's
+after measurement.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Randomized Website
+Experiment}\label{randomized-website-experiment}
+
+One group of customers sees the current website.
+
+A different group sees a redesigned website.
+
+\textbf{Independent}
+
+There is no one-to-one correspondence between customers in the two
+groups.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Matched Stores}\label{matched-stores}
+
+Treatment stores are intentionally matched with similar control stores
+before an experiment.
+
+\textbf{Paired}
+
+Each treatment store has a specific matched control store.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Different Orders Across
+Months}\label{different-orders-across-months}
+
+Delivery times from one group of orders this month are compared with a
+different group of orders last month.
+
+\textbf{Independent}
+
+An order this month does not correspond to one specific order from last
+month.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Paired-Samples Workflow}\label{paired-samples-workflow}
+
+When analyzing two conditions, use the following process:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Identify the observational unit.}
+\item
+  Determine whether observations can be meaningfully paired.
+\item
+  If paired, define the within-pair difference:
+\end{enumerate}
+
+\[
+d_i=X_i-Y_i
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Determine the population parameter:
+\end{enumerate}
+
+\[
+\mu_d
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  State the hypotheses:
+\end{enumerate}
+
+\[
+H_0:\mu_d=0
+\]
+
+and the appropriate alternative.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Check the distribution and independence of the differences.
+\item
+  Calculate:
+\end{enumerate}
+
+\[
+\bar{d}
+\]
+
+\[
+s_d
+\]
+
+and:
+
+\[
+SE(\bar{d})
+=
+\frac{s_d}{\sqrt{n}}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Calculate:
+\end{enumerate}
+
+\[
+t=
+\frac{\bar{d}}
+{s_d/\sqrt{n}}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Obtain the p-value and confidence interval.
+\item
+  Interpret the result in the context of the study.
+\item
+  Make causal conclusions only if the study design supports them.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Overall Framework}\label{overall-framework}
+
+The key idea is that a paired analysis preserves information about
+\textbf{which observations belong together}.
+
+Instead of:
+
+\[
+\text{Mean of Group 1}
+-
+\text{Mean of Group 2}
+\]
+
+while ignoring the relationships between observations, paired analysis
+first calculates:
+
+\[
+d_i=X_i-Y_i
+\]
+
+for each pair.
+
+The problem then becomes:
+
+\[
+\boxed{
+\text{Two Paired Conditions}
+\rightarrow
+\text{Within-Pair Differences}
+\rightarrow
+\text{One-Sample Inference}
+}
+\]
+
+The major ideas are:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Study design determines the statistical test.}
+\item
+  Pair observations only when there is a meaningful one-to-one
+  connection.
+\item
+  A paired t-test is a \textbf{one-sample t-test on differences}.
+\item
+  The parameter of interest is the population mean difference:
+\end{itemize}
+
+\[
+\mu_d
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  The sample size is the number of \textbf{independent pairs}, not the
+  total number of measurements.
+\item
+  Pairing can improve precision by removing variation between matched
+  units.
+\item
+  The assumptions apply primarily to the \textbf{differences}, not the
+  two original columns.
+\item
+  Independence is required \textbf{across pairs}, not within each pair.
+\item
+  Repeated observations over time may introduce trends or dependence
+  that a basic paired t-test does not capture.
+\item
+  More repeated measurements are not equivalent to more independent
+  units.
+\item
+  Matching can improve precision, while \textbf{random assignment} is
+  what supports a causal interpretation.
+\end{itemize}
+
+The decision rule for comparing two conditions is therefore:
+
+\[
+\boxed{
+\begin{array}{c}
+\text{Can observations be meaningfully linked?}\\[4pt]
+\downarrow\\
+\text{Yes}
+\rightarrow
+\text{Paired}
+\rightarrow
+d_i=X_i-Y_i
+\rightarrow
+\text{One-Sample }t\text{-Test}\\[6pt]
+\text{No}
+\rightarrow
+\text{Independent Samples}
+\end{array}
+}
+\]
+
+\bookmarksetup{startatroot}
+
+\chapter{Comparing Two Population Means: Independent
+Samples}\label{comparing-two-population-means-independent-samples}
+
+\section{Overview}\label{overview-6}
+
+Lecture 6 considered situations where observations from two conditions
+were \textbf{meaningfully linked}.
+
+For paired data, each pair produced one difference:
+
+\[
+d_i=X_{1i}-X_{2i}
+\]
+
+and the analysis became a one-sample inference problem involving:
+
+\[
+\mu_d
+\]
+
+Now consider a different situation.
+
+Suppose we want to compare:
+
+\begin{itemize}
+\tightlist
+\item
+  Spending by homeowners vs.~renters
+\item
+  Sales of national-brand vs.~private-brand products
+\item
+  Customers assigned to Website A vs.~Website B
+\item
+  Employees receiving one training program vs.~employees receiving
+  another
+\end{itemize}
+
+In these situations, the observations in one group do not have a
+meaningful one-to-one connection with observations in the other group.
+
+These are \textbf{independent samples}.
+
+Instead of analyzing within-pair differences, we compare the two sample
+means:
+
+\[
+\bar{X}_1-\bar{X}_2
+\]
+
+to learn about the difference between the two population means:
+
+\[
+\boxed{\mu_1-\mu_2}
+\]
+
+The major distinction is:
+
+\begin{quote}
+\textbf{Paired samples compare within-pair differences. Independent
+samples compare two separate group means.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Why Study Design Still
+Matters}\label{why-study-design-still-matters}
+
+Statistical analysis involves more than calculating a p-value.
+
+Suppose a retailer asks:
+
+\begin{quote}
+Would offering more coupons increase customer spending?
+\end{quote}
+
+There are several different questions hidden inside this problem.
+
+\subsection{Describe}\label{describe}
+
+How does spending differ between customers who use coupons and customers
+who do not?
+
+\subsection{Quantify Uncertainty}\label{quantify-uncertainty}
+
+How precisely can we estimate the difference in population mean
+spending?
+
+\subsection{Evaluate Causality}\label{evaluate-causality}
+
+Does the difference actually result from coupons, or are customers who
+use coupons already different from customers who do not?
+
+A hypothesis test addresses \textbf{sampling uncertainty}.
+
+It does not automatically eliminate:
+
+\begin{itemize}
+\tightlist
+\item
+  Confounding
+\item
+  Selection bias
+\item
+  Differences in the underlying groups
+\end{itemize}
+
+Therefore:
+
+\begin{quote}
+\textbf{Statistical significance and causal evidence are different
+questions.}
+\end{quote}
+
+The study design determines what conclusions the statistical analysis
+can support.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Paired vs.~Independent
+Samples}\label{paired-vs.-independent-samples-1}
+
+Before comparing two means, determine whether the observations are
+\textbf{paired or independent}.
+
+\section{Paired Samples}\label{paired-samples}
+
+Observations are paired when each observation in one condition has a
+meaningful one-to-one connection with an observation in the other
+condition.
+
+Examples:
+
+\begin{itemize}
+\tightlist
+\item
+  Same customer before and after treatment
+\item
+  Same store before and after a redesign
+\item
+  Identical twins
+\item
+  Matched treatment and control stores
+\end{itemize}
+
+Each pair produces:
+
+\[
+d_i=X_{1i}-X_{2i}
+\]
+
+and inference is performed on:
+
+\[
+\mu_d
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Independent Samples}\label{independent-samples}
+
+Samples are independent when the groups contain \textbf{different
+observational units} and there is no meaningful one-to-one link between
+observations across groups.
+
+Examples:
+
+\begin{itemize}
+\tightlist
+\item
+  20 randomly selected men vs.~20 independently selected women
+\item
+  Homeowners vs.~renters
+\item
+  National-brand products vs.~private-brand products
+\item
+  Customers assigned to two different website versions
+\end{itemize}
+
+Each observational unit contributes to only \textbf{one group}.
+
+The parameter of interest is:
+
+\[
+\boxed{\mu_1-\mu_2}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{The Observational Unit Determines the
+Design}\label{the-observational-unit-determines-the-design}
+
+The \textbf{observational unit} is the individual entity on which a
+measurement is taken.
+
+Before choosing a statistical test, ask:
+
+\begin{quote}
+\textbf{What is the observational unit?}
+\end{quote}
+
+and then:
+
+\begin{quote}
+\textbf{Does each observational unit contribute one measurement or a
+linked pair of measurements?}
+\end{quote}
+
+If each unit contributes to only one group:
+
+\[
+\boxed{\text{Independent Samples}}
+\]
+
+If the same unit contributes measurements under both conditions, or
+units are intentionally matched:
+
+\[
+\boxed{\text{Paired Samples}}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Example: Taste Test}\label{example-taste-test}
+
+Suppose a company wants to compare mean taste ratings for Coke and
+Pepsi.
+
+\subsection{Independent-Samples
+Design}\label{independent-samples-design}
+
+Randomly assign participants to one of two groups:
+
+\begin{itemize}
+\tightlist
+\item
+  Group 1 tastes Coke
+\item
+  Group 2 tastes Pepsi
+\end{itemize}
+
+Each participant tastes only one product.
+
+The groups are independent.
+
+\subsection{Paired Design}\label{paired-design}
+
+Every participant tastes both Coke and Pepsi.
+
+Each participant provides:
+
+\[
+(\text{Coke Rating}_i,\text{Pepsi Rating}_i)
+\]
+
+The observations are paired because both ratings come from the same
+person.
+
+The two designs answer similar questions but use different information.
+
+The paired design controls for individual differences in taste
+preferences because each participant acts as their own comparison.
+
+However, the study would need to prevent \textbf{order effects}.
+
+For example, tasting Coke first might affect a participant's Pepsi
+rating.
+
+A common solution would be to randomize which product each participant
+tastes first.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Independent Samples and the Population
+Difference}\label{independent-samples-and-the-population-difference}
+
+Suppose Group 1 has population mean:
+
+\[
+\mu_1
+\]
+
+and Group 2 has population mean:
+
+\[
+\mu_2
+\]
+
+The parameter of interest is:
+
+\[
+\boxed{\Delta=\mu_1-\mu_2}
+\]
+
+The sample estimate is:
+
+\[
+\boxed{\hat{\Delta}=\bar{X}_1-\bar{X}_2}
+\]
+
+Therefore:
+
+\[
+\bar{X}_1-\bar{X}_2
+\rightarrow
+\text{estimate of }
+\mu_1-\mu_2
+\]
+
+The direction must be defined \textbf{before interpreting the result}.
+
+For example, suppose:
+
+\[
+\Delta
+=
+\mu_{\text{Homeowners}}
+-
+\mu_{\text{Renters}}
+\]
+
+Then:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\Delta>0\) means homeowners spend more on average
+\item
+  \(\Delta<0\) means renters spend more on average
+\item
+  \(\Delta=0\) means the population means are equal
+\end{itemize}
+
+Reversing the order reverses the sign:
+
+\[
+\mu_1-\mu_2
+=
+-(\mu_2-\mu_1)
+\]
+
+Therefore:
+
+\begin{quote}
+\textbf{Always define the direction of the difference before
+interpreting it.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Hypotheses for Two Independent
+Means}\label{hypotheses-for-two-independent-means}
+
+The most common null hypothesis is:
+
+\[
+H_0:\mu_1-\mu_2=0
+\]
+
+which is equivalent to:
+
+\[
+H_0:\mu_1=\mu_2
+\]
+
+The alternative depends on the research question.
+
+\subsection{Two-Sided}\label{two-sided-1}
+
+To determine whether the population means differ:
+
+\[
+H_a:\mu_1-\mu_2\neq0
+\]
+
+\subsection{Right-Tailed}\label{right-tailed-1}
+
+To determine whether Population 1 has a larger mean:
+
+\[
+H_a:\mu_1-\mu_2>0
+\]
+
+\subsection{Left-Tailed}\label{left-tailed-1}
+
+To determine whether Population 1 has a smaller mean:
+
+\[
+H_a:\mu_1-\mu_2<0
+\]
+
+Again, the meaning of positive and negative depends on how Group 1 and
+Group 2 were defined.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Two Samples, Two Sources of
+Uncertainty}\label{two-samples-two-sources-of-uncertainty}
+
+With paired samples, uncertainty comes from the variation among the
+within-pair differences.
+
+With independent samples, we estimate:
+
+\[
+\mu_1
+\]
+
+using:
+
+\[
+\bar{X}_1
+\]
+
+and independently estimate:
+
+\[
+\mu_2
+\]
+
+using:
+
+\[
+\bar{X}_2
+\]
+
+Both estimates contain sampling uncertainty.
+
+Therefore:
+
+\[
+\bar{X}_1-\bar{X}_2
+\]
+
+has uncertainty from \textbf{both samples}.
+
+For independent samples:
+
+\[
+SE(\bar{X}_1-\bar{X}_2)
+=
+\sqrt{
+\frac{\sigma_1^2}{n_1}
++
+\frac{\sigma_2^2}{n_2}
+}
+\]
+
+In practice, the population standard deviations are usually unknown, so
+they must be estimated from the samples.
+
+An important consequence is:
+
+\begin{quote}
+\textbf{The less precise group contributes more uncertainty to the
+comparison.}
+\end{quote}
+
+For example, if:
+
+\[
+n_1=10{,}000
+\]
+
+but:
+
+\[
+n_2=20
+\]
+
+the second sample will generally contribute much more uncertainty to the
+estimated difference.
+
+A huge sample in one group does not eliminate uncertainty created by a
+small sample in the other.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Two-Sample t-Tests}\label{two-sample-t-tests}
+
+There are two major approaches for comparing two independent population
+means:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Welch's two-sample t-test}
+\item
+  \textbf{Pooled two-sample t-test}
+\end{enumerate}
+
+Both estimate the same population quantity:
+
+\[
+\mu_1-\mu_2
+\]
+
+The difference is how they estimate the uncertainty.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Welch's Two-Sample t-Test}\label{welchs-two-sample-t-test}
+
+\textbf{Welch's t-test} estimates the variance of each population
+separately.
+
+It does \textbf{not} assume that the two populations have equal
+variances.
+
+The estimated population difference is:
+
+\[
+\hat{\Delta}
+=
+\bar{X}_1-\bar{X}_2
+\]
+
+The standard error is:
+
+\[
+\boxed{
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+\]
+
+where:
+
+\(s_1\) = sample standard deviation of Group 1\\
+\(s_2\) = sample standard deviation of Group 2\\
+\(n_1\) = sample size of Group 1\\
+\(n_2\) = sample size of Group 2
+
+The test statistic is:
+
+\[
+\boxed{
+t=
+\frac{
+(\bar{X}_1-\bar{X}_2)-0
+}{
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+}
+\]
+
+More generally, if the null hypothesis specifies some difference:
+
+\[
+\Delta_0
+\]
+
+then:
+
+\[
+t=
+\frac{
+\hat{\Delta}-\Delta_0
+}{
+SE(\hat{\Delta})
+}
+\]
+
+As before, the t-statistic represents:
+
+\begin{quote}
+\textbf{How many estimated standard errors the observed difference lies
+from the null value.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Welch's Test in R}\label{welchs-test-in-r}
+
+R uses Welch's method by default when performing an independent
+two-sample t-test.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    outcome }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group,}
+    \AttributeTok{data =}\NormalTok{ my\_data}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    spending }\SpecialCharTok{\textasciitilde{}}\NormalTok{ homeowner\_desc,}
+    \AttributeTok{data =}\NormalTok{ households}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Unless otherwise specified, \texttt{t.test()} does \textbf{not} assume
+equal population variances.
+
+This makes Welch's method the standard default when there is no strong
+reason to assume that the two population variances are equal.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Pooled Two-Sample t-Test}\label{pooled-two-sample-t-test}
+
+The \textbf{pooled t-test} makes an additional assumption:
+
+\[
+\boxed{
+\sigma_1^2=\sigma_2^2=\sigma^2
+}
+\]
+
+In other words, the two populations are assumed to have the \textbf{same
+variance}.
+
+Because both samples are assumed to estimate the same population
+variance, their information can be combined into a single \textbf{pooled
+variance estimate}.
+
+The pooled variance is:
+
+\[
+\boxed{
+s_p^2
+=
+\frac{
+(n_1-1)s_1^2
++
+(n_2-1)s_2^2
+}{
+n_1+n_2-2
+}
+}
+\]
+
+The pooled standard deviation is:
+
+\[
+s_p=\sqrt{s_p^2}
+\]
+
+The standard error becomes:
+
+\[
+\boxed{
+SE_{\text{pooled}}
+=
+s_p
+\sqrt{
+\frac{1}{n_1}
++
+\frac{1}{n_2}
+}
+}
+\]
+
+The degrees of freedom are:
+
+\[
+df=n_1+n_2-2
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Pooled Test in R}\label{pooled-test-in-r}
+
+Unlike Welch's method, pooling must be requested explicitly:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    outcome }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group,}
+    \AttributeTok{data =}\NormalTok{ my\_data,}
+    \AttributeTok{var.equal =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The argument:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var.equal }\OtherTok{=} \ConstantTok{TRUE}
+\end{Highlighting}
+\end{Shaded}
+
+tells R to assume equal population variances.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Welch vs.~Pooled t-Test}\label{welch-vs.-pooled-t-test}
+
+Both methods estimate:
+
+\[
+\mu_1-\mu_2
+\]
+
+but they make different assumptions about variability.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Feature & Welch & Pooled \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Compares two independent means & Yes & Yes \\
+Assumes equal population variances & No & Yes \\
+Estimates variances separately & Yes & No \\
+Combines variance estimates & No & Yes \\
+R \texttt{t.test()} default & Yes & No \\
+\end{longtable}
+}
+
+The practical rule is:
+
+\begin{quote}
+\textbf{Use Welch's method by default unless there is a defensible
+reason to assume equal population variances.}
+\end{quote}
+
+The pooled method is appropriate only when the equal-variance assumption
+has a reasonable basis.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Why Unequal Sample Sizes
+Matter}\label{why-unequal-sample-sizes-matter}
+
+Unequal sample sizes are especially important when the groups also have
+different variances.
+
+Recall Welch's standard error:
+
+\[
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+\]
+
+Each group's contribution depends on both:
+
+\begin{itemize}
+\tightlist
+\item
+  Its variability
+\item
+  Its sample size
+\end{itemize}
+
+A group with:
+
+\begin{itemize}
+\tightlist
+\item
+  High variability
+\item
+  Small sample size
+\end{itemize}
+
+can contribute substantial uncertainty.
+
+Therefore, before comparing two means, examine:
+
+\[
+n_1,\ n_2,\ s_1,\ s_2
+\]
+
+rather than looking only at the two means.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Examine the Data Before
+Testing}\label{examine-the-data-before-testing}
+
+Before running a two-sample t-test, summarize and visualize both groups.
+
+Important features include:
+
+\begin{itemize}
+\tightlist
+\item
+  Sample size
+\item
+  Mean
+\item
+  Median
+\item
+  Standard deviation
+\item
+  Skewness
+\item
+  Outliers or unusual observations
+\end{itemize}
+
+For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_data }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{group\_by}\NormalTok{(group) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+        \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(outcome, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+        \AttributeTok{median =} \FunctionTok{median}\NormalTok{(outcome, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+        \AttributeTok{sd =} \FunctionTok{sd}\NormalTok{(outcome, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+A useful visualization is a boxplot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}
+\NormalTok{    my\_data,}
+    \FunctionTok{aes}\NormalTok{(}
+        \AttributeTok{x =}\NormalTok{ group,}
+        \AttributeTok{y =}\NormalTok{ outcome}
+\NormalTok{    )}
+\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+The statistical test should not replace descriptive analysis.
+
+Instead:
+
+\[
+\text{Describe}
+\rightarrow
+\text{Check}
+\rightarrow
+\text{Infer}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Example: National vs.~Private-Brand Soft
+Drinks}\label{example-national-vs.-private-brand-soft-drinks}
+
+Suppose we compare total observed sales for:
+
+\begin{itemize}
+\tightlist
+\item
+  National-brand 2-liter soft drinks
+\item
+  Private-brand 2-liter soft drinks
+\end{itemize}
+
+The observational unit is a:
+
+\begin{quote}
+\textbf{Soft-drink product}
+\end{quote}
+
+Each product belongs to either:
+
+\begin{itemize}
+\tightlist
+\item
+  National brand
+\end{itemize}
+
+or:
+
+\begin{itemize}
+\tightlist
+\item
+  Private brand
+\end{itemize}
+
+A national-brand product is not meaningfully paired with one particular
+private-brand product.
+
+Therefore, the samples are:
+
+\[
+\boxed{\text{Independent}}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Descriptive Statistics}\label{descriptive-statistics}
+
+Suppose the data show:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrrrr@{}}
+\toprule\noalign{}
+Brand & Products & Mean & Median & SD \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+National & 175 & 203.9 & 4.5 & 664.7 \\
+Private & 57 & 170.4 & 62.1 & 263.9 \\
+\end{longtable}
+}
+
+Several features immediately deserve attention.
+
+\subsection{Unequal Sample Sizes}\label{unequal-sample-sizes}
+
+\[
+n_{\text{National}}=175
+\]
+
+while:
+
+\[
+n_{\text{Private}}=57
+\]
+
+\subsection{Unequal Variability}\label{unequal-variability}
+
+\[
+s_{\text{National}}=664.7
+\]
+
+while:
+
+\[
+s_{\text{Private}}=263.9
+\]
+
+The national-brand group is much more variable.
+
+\subsection{Strong Skewness}\label{strong-skewness}
+
+For national brands:
+
+\[
+\text{Mean}=203.9
+\]
+
+while:
+
+\[
+\text{Median}=4.5
+\]
+
+The enormous difference between the mean and median indicates a highly
+right-skewed distribution with some extremely large observations.
+
+This is why descriptive analysis should occur \textbf{before}
+inferential analysis.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Applying Welch's Test}\label{applying-welchs-test}
+
+Define the population difference as:
+
+\[
+\Delta
+=
+\mu_{\text{National}}
+-
+\mu_{\text{Private}}
+\]
+
+Suppose the estimated means are:
+
+\[
+\bar{X}_{\text{National}}
+=
+203.89
+\]
+
+and:
+
+\[
+\bar{X}_{\text{Private}}
+=
+170.41
+\]
+
+Then:
+
+\[
+\hat{\Delta}
+=
+203.89-170.41
+\]
+
+\[
+\boxed{
+\hat{\Delta}=33.48
+}
+\]
+
+So national-brand products have an observed mean sales value
+approximately 33.48 units higher than private-brand products.
+
+But the estimate alone does not tell us how uncertain that difference
+is.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Confidence Interval for Two Independent
+Means}\label{confidence-interval-for-two-independent-means}
+
+A confidence interval for the population mean difference has the general
+form:
+
+\[
+\boxed{
+\hat{\Delta}
+\pm
+t^*SE(\hat{\Delta})
+}
+\]
+
+For Welch's method:
+
+\[
+\boxed{
+(\bar{X}_1-\bar{X}_2)
+\pm
+t^*
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+}
+\]
+
+Suppose the soft-drink example produces:
+
+\[
+95\%\text{ CI}
+=
+(-87.14,\ 154.10)
+\]
+
+This means the data are compatible with population mean differences
+ranging from approximately:
+
+\[
+-87.14
+\]
+
+to:
+
+\[
+154.10
+\]
+
+under the method's assumptions.
+
+Because the interval contains:
+
+\[
+0
+\]
+
+a population mean difference of zero remains compatible with the data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Confidence Intervals and Hypothesis
+Tests}\label{confidence-intervals-and-hypothesis-tests}
+
+For the two-sided hypotheses:
+
+\[
+H_0:\mu_1-\mu_2=0
+\]
+
+\[
+H_a:\mu_1-\mu_2\neq0
+\]
+
+the confidence interval and hypothesis test communicate closely related
+information.
+
+\subsection{If the 95\% Confidence Interval Excludes
+0}\label{if-the-95-confidence-interval-excludes-0}
+
+There is evidence against:
+
+\[
+H_0:\mu_1-\mu_2=0
+\]
+
+at the corresponding 5\% significance level.
+
+\subsection{If the 95\% Confidence Interval Contains
+0}\label{if-the-95-confidence-interval-contains-0}
+
+We fail to reject:
+
+\[
+H_0:\mu_1-\mu_2=0
+\]
+
+at the corresponding 5\% significance level.
+
+For the soft-drink example:
+
+\[
+(-87.14,\ 154.10)
+\]
+
+contains:
+
+\[
+0
+\]
+
+so we fail to reject the null hypothesis.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Failing to Reject Does Not Prove
+Equality}\label{failing-to-reject-does-not-prove-equality}
+
+This distinction is essential.
+
+Suppose:
+
+\[
+p=0.58
+\]
+
+and:
+
+\[
+95\%\text{ CI}
+=
+(-87.14,\ 154.10)
+\]
+
+We can say:
+
+\begin{quote}
+The data do not provide sufficient evidence that the two population
+means differ.
+\end{quote}
+
+We should \textbf{not} say:
+
+\begin{quote}
+The population means are equal.
+\end{quote}
+
+Why?
+
+Because the confidence interval contains many possible differences
+besides zero.
+
+For example, values such as:
+
+\[
+-50,\ 25,\ 100
+\]
+
+are also inside the interval.
+
+The data are therefore compatible with:
+
+\begin{itemize}
+\tightlist
+\item
+  Negative differences
+\item
+  No difference
+\item
+  Positive differences
+\end{itemize}
+
+The analysis has not demonstrated equality.
+
+\begin{quote}
+\textbf{Failing to find evidence of a difference is not the same as
+finding evidence of no difference.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Statistical Significance vs.~Practical
+Importance}\label{statistical-significance-vs.-practical-importance}
+
+Suppose a test finds:
+
+\[
+p<0.05
+\]
+
+That tells us the observed difference would be difficult to explain
+purely through sampling variation under the null model.
+
+It does \textbf{not} tell us whether the difference is important for the
+business.
+
+For example, a very large sample might detect:
+
+\[
+\$0.03
+\]
+
+of additional average spending.
+
+That difference might be statistically detectable but operationally
+irrelevant.
+
+Therefore, interpretation should consider:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Estimated difference
+\item
+  Confidence interval
+\item
+  Statistical evidence
+\item
+  Practical magnitude
+\item
+  Study design
+\end{enumerate}
+
+A p-value alone does not answer all of these questions.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Statistical Evidence vs.~Causal
+Evidence}\label{statistical-evidence-vs.-causal-evidence}
+
+Suppose observational data show:
+
+\[
+\bar{X}_{\text{Coupon}}
+>
+\bar{X}_{\text{No Coupon}}
+\]
+
+Even if a two-sample t-test finds a statistically significant
+difference, we cannot automatically conclude:
+
+\begin{quote}
+Coupons caused customers to spend more.
+\end{quote}
+
+Customers who use coupons may systematically differ from customers who
+do not.
+
+For example, coupon users might:
+
+\begin{itemize}
+\tightlist
+\item
+  Shop more frequently
+\item
+  Purchase larger baskets
+\item
+  Be more loyal customers
+\item
+  Differ demographically
+\end{itemize}
+
+A hypothesis test quantifies \textbf{sampling uncertainty}.
+
+It does not automatically remove \textbf{confounding}.
+
+Therefore:
+
+\begin{quote}
+\textbf{Inference about a difference and inference about causation are
+separate issues.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Example: Homeowners
+vs.~Renters}\label{example-homeowners-vs.-renters}
+
+Suppose the business question is:
+
+\begin{quote}
+How does annual Kroger spending differ between households that own their
+home and households that rent?
+\end{quote}
+
+First define the populations.
+
+Population 1:
+
+\begin{quote}
+Kroger households that own their home
+\end{quote}
+
+Population 2:
+
+\begin{quote}
+Kroger households that rent their home
+\end{quote}
+
+Define:
+
+\[
+\Delta
+=
+\mu_{\text{Owner}}
+-
+\mu_{\text{Renter}}
+\]
+
+The observational unit is:
+
+\begin{quote}
+\textbf{Household}
+\end{quote}
+
+Each household belongs to one group.
+
+There is no natural one-to-one relationship between an owner household
+and a renter household.
+
+Therefore:
+
+\[
+\boxed{\text{Independent Samples}}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Analysis Workflow in R}\label{analysis-workflow-in-r}
+
+First summarize the groups:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{households }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{group\_by}\NormalTok{(homeowner\_desc) }\SpecialCharTok{|\textgreater{}}
+    \FunctionTok{summarise}\NormalTok{(}
+        \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+        \AttributeTok{mean\_spend =} \FunctionTok{mean}\NormalTok{(spend, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+        \AttributeTok{median\_spend =} \FunctionTok{median}\NormalTok{(spend, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+        \AttributeTok{sd\_spend =} \FunctionTok{sd}\NormalTok{(spend, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+
+Then visualize:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}
+\NormalTok{    households,}
+    \FunctionTok{aes}\NormalTok{(}
+        \AttributeTok{x =}\NormalTok{ homeowner\_desc,}
+        \AttributeTok{y =}\NormalTok{ spend}
+\NormalTok{    )}
+\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Then perform Welch's two-sample t-test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    spend }\SpecialCharTok{\textasciitilde{}}\NormalTok{ homeowner\_desc,}
+    \AttributeTok{data =}\NormalTok{ households}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The output provides:
+
+\begin{itemize}
+\tightlist
+\item
+  Group means
+\item
+  Estimated difference
+\item
+  t-statistic
+\item
+  Degrees of freedom
+\item
+  p-value
+\item
+  Confidence interval
+\end{itemize}
+
+The final interpretation should report the estimated population
+difference and its uncertainty in the context of homeowner and renter
+households.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Paired vs.~Independent
+t-Tests}\label{paired-vs.-independent-t-tests}
+
+The two procedures are closely related but solve different problems.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Feature
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Paired t-Test
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Independent t-Test
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Groups & Meaningfully linked & Separate \\
+Observational units & Same/matched units & Different units \\
+Parameter & \(\mu_d\) & \(\mu_1-\mu_2\) \\
+Statistic & \(\bar{d}\) & \(\bar{X}_1-\bar{X}_2\) \\
+Source of uncertainty & Variation in differences & Variation from both
+samples \\
+Analysis & One-sample t-test on differences & Two-sample t-test \\
+Typical R argument & \texttt{paired\ =\ TRUE} & Welch default \\
+\end{longtable}
+}
+
+The first question should therefore \textbf{not} be:
+
+\begin{quote}
+Which t-test formula do I use?
+\end{quote}
+
+It should be:
+
+\begin{quote}
+\textbf{How were the data generated, and are these observations
+meaningfully linked?}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Independent-Samples
+Assumptions}\label{independent-samples-assumptions}
+
+For a two-sample t procedure, the analysis requires the observations to
+have an appropriate independence structure.
+
+Most importantly:
+
+\subsection{Independence Between
+Groups}\label{independence-between-groups}
+
+The observations in one group should not be paired with observations in
+the other group.
+
+If meaningful pairing exists, use a paired analysis instead.
+
+\subsection{Independence Within
+Groups}\label{independence-within-groups}
+
+Observations should represent independent observational units rather
+than repeated or clustered measurements being incorrectly treated as
+separate independent observations.
+
+\subsection{Distribution Shape}\label{distribution-shape}
+
+The behavior of the t procedure also depends on sample size and the
+distributions of the data.
+
+Before inference, inspect:
+
+\begin{itemize}
+\tightlist
+\item
+  Skewness
+\item
+  Extreme observations
+\item
+  Sample sizes
+\item
+  Variability
+\end{itemize}
+
+Large samples generally make inference about means more robust to
+moderate non-Normality, but extreme skewness and unusual observations
+should still be investigated.
+
+\subsection{Variance Assumption}\label{variance-assumption}
+
+Welch's test does \textbf{not} require:
+
+\[
+\sigma_1^2=\sigma_2^2
+\]
+
+The pooled test does.
+
+This is one reason Welch's method is generally preferred as the default.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Independent-Means Analysis: Full
+Workflow}\label{independent-means-analysis-full-workflow}
+
+When comparing two population means from separate groups:
+
+\section{Step 1: Identify the Observational
+Unit}\label{step-1-identify-the-observational-unit}
+
+Ask:
+
+\begin{quote}
+What does one row or measurement represent?
+\end{quote}
+
+Determine whether the two groups contain genuinely separate
+observational units.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 2: Determine Whether the Samples Are Paired or
+Independent}\label{step-2-determine-whether-the-samples-are-paired-or-independent}
+
+Ask:
+
+\begin{quote}
+Can each observation in one group be meaningfully linked to exactly one
+observation in the other?
+\end{quote}
+
+If yes:
+
+\[
+\text{Paired}
+\]
+
+If no:
+
+\[
+\text{Independent}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 3: Define the Population
+Difference}\label{step-3-define-the-population-difference}
+
+Explicitly define:
+
+\[
+\Delta=\mu_1-\mu_2
+\]
+
+before calculating or interpreting the estimate.
+
+This establishes what positive and negative values mean.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 4: Examine the Data}\label{step-4-examine-the-data}
+
+For each group, examine:
+
+\begin{itemize}
+\tightlist
+\item
+  Sample size
+\item
+  Mean
+\item
+  Median
+\item
+  Standard deviation
+\item
+  Distribution shape
+\item
+  Skewness
+\item
+  Unusual observations
+\end{itemize}
+
+Use both numerical summaries and visualizations.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 5: Estimate the
+Difference}\label{step-5-estimate-the-difference}
+
+Calculate:
+
+\[
+\hat{\Delta}
+=
+\bar{X}_1-\bar{X}_2
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 6: Quantify the
+Uncertainty}\label{step-6-quantify-the-uncertainty}
+
+Using Welch's method:
+
+\[
+SE(\hat{\Delta})
+=
+\sqrt{
+\frac{s_1^2}{n_1}
++
+\frac{s_2^2}{n_2}
+}
+\]
+
+Construct a confidence interval:
+
+\[
+\hat{\Delta}
+\pm
+t^*SE(\hat{\Delta})
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 7: Perform the Hypothesis
+Test}\label{step-7-perform-the-hypothesis-test}
+
+Usually:
+
+\[
+H_0:\mu_1-\mu_2=0
+\]
+
+against an appropriate alternative.
+
+Use Welch's method by default:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    outcome }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group,}
+    \AttributeTok{data =}\NormalTok{ my\_data}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Use the pooled method only when the equal-population-variance assumption
+has a defensible basis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(}
+\NormalTok{    outcome }\SpecialCharTok{\textasciitilde{}}\NormalTok{ group,}
+    \AttributeTok{data =}\NormalTok{ my\_data,}
+    \AttributeTok{var.equal =} \ConstantTok{TRUE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 8: Interpret in
+Context}\label{step-8-interpret-in-context}
+
+Report:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The direction of the comparison
+\item
+  The estimated mean difference
+\item
+  The confidence interval
+\item
+  The statistical evidence
+\item
+  Practical importance when relevant
+\item
+  Whether the study design supports a causal interpretation
+\end{enumerate}
+
+The statistical result should always be translated back into the
+original business question.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Overall Framework}\label{overall-framework-1}
+
+The sequence from Lectures 5--7 can now be viewed as one unified
+framework.
+
+\subsection{One Population Mean}\label{one-population-mean}
+
+Parameter:
+
+\[
+\mu
+\]
+
+Estimate:
+
+\[
+\bar{X}
+\]
+
+Method:
+
+\[
+\text{One-Sample }t
+\]
+
+\subsection{Two Linked Conditions}\label{two-linked-conditions}
+
+Parameter:
+
+\[
+\mu_d
+\]
+
+Estimate:
+
+\[
+\bar{d}
+\]
+
+Method:
+
+\[
+\text{Paired }t
+=
+\text{One-Sample }t\text{ on Differences}
+\]
+
+\subsection{Two Independent
+Populations}\label{two-independent-populations}
+
+Parameter:
+
+\[
+\mu_1-\mu_2
+\]
+
+Estimate:
+
+\[
+\bar{X}_1-\bar{X}_2
+\]
+
+Method:
+
+\[
+\text{Welch Two-Sample }t
+\]
+
+The decision process is therefore:
+
+\[
+\boxed{
+\begin{array}{c}
+\text{What population quantity are we studying?}\\[6pt]
+\downarrow\\
+\text{One Mean}
+\rightarrow
+\mu
+\rightarrow
+\text{One-Sample }t\\[8pt]
+\text{Two Means}
+\rightarrow
+\begin{cases}
+\text{Linked observations}
+\rightarrow
+\mu_d
+\rightarrow
+\text{Paired }t\\[6pt]
+\text{Separate observations}
+\rightarrow
+\mu_1-\mu_2
+\rightarrow
+\text{Welch Two-Sample }t
+\end{cases}
+\end{array}
+}
+\]
+
+The key principle is:
+
+\begin{quote}
+\textbf{The study design determines the statistical method.}
+\end{quote}
+
+Do not begin by choosing a formula.
+
+Begin by identifying:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The business question
+\item
+  The observational unit
+\item
+  The populations being compared
+\item
+  Whether observations are linked or independent
+\item
+  The population parameter being estimated
+\end{enumerate}
+
+Then choose the statistical method that matches that structure.
+
+\bookmarksetup{startatroot}
+
+\chapter{Inference for Categorical
+Data}\label{inference-for-categorical-data}
+
+\section{Overview}\label{overview-7}
+
+Previous inference methods focused primarily on \textbf{quantitative
+outcomes}.
+
+For example:
+
+\begin{itemize}
+\tightlist
+\item
+  One population mean → \(\mu\)
+\item
+  Paired mean difference → \(\mu_d\)
+\item
+  Difference between two independent means → \(\mu_1-\mu_2\)
+\end{itemize}
+
+Lecture 8 shifts the focus to \textbf{categorical outcomes}.
+
+Examples include:
+
+\begin{itemize}
+\tightlist
+\item
+  Purchase vs.~no purchase
+\item
+  Homeowner vs.~renter
+\item
+  Married vs.~unmarried
+\item
+  Store vs.~website vs.~app
+\item
+  Current page vs.~new page vs.~third page
+\end{itemize}
+
+Instead of asking questions about \textbf{means}, we now ask questions
+about:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Proportions}
+\item
+  \textbf{Counts}
+\item
+  \textbf{Associations between categorical variables}
+\item
+  \textbf{Whether observed category frequencies match an expected
+  distribution}
+\end{itemize}
+
+The main methods are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Two-proportion inference}
+\item
+  \textbf{Chi-square test of independence}
+\item
+  \textbf{Chi-square goodness-of-fit test}
+\end{enumerate}
+
+The appropriate method depends on the business question and structure of
+the categorical data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Two-Proportion Inference}\label{two-proportion-inference}
+
+Suppose a retailer conducts an A/B experiment.
+
+Each visitor is randomly assigned to either:
+
+\begin{itemize}
+\tightlist
+\item
+  Current page
+\item
+  New page
+\end{itemize}
+
+The outcome is whether the visitor:
+
+\begin{itemize}
+\tightlist
+\item
+  Purchases
+\item
+  Does not purchase
+\end{itemize}
+
+Suppose the results are:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrrr@{}}
+\toprule\noalign{}
+Page & Visitors & Purchases & Conversion Rate \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Current & 10,000 & 1,200 & 12.0\% \\
+New & 10,000 & 1,230 & 12.3\% \\
+\end{longtable}
+}
+
+The sample proportions are:
+
+\[
+\hat{p}_{Current}
+=
+\frac{1200}{10000}
+=
+0.120
+\]
+
+and:
+
+\[
+\hat{p}_{New}
+=
+\frac{1230}{10000}
+=
+0.123
+\]
+
+The estimated difference is:
+
+\[
+\hat{p}_{New}-\hat{p}_{Current}
+=
+0.123-0.120
+=
+0.003
+\]
+
+or:
+
+\[
+\boxed{0.3\text{ percentage points}}
+\]
+
+Notice that this is \textbf{0.3 percentage points}, not 0.3\%.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Population Parameter}\label{population-parameter}
+
+The population parameter is:
+
+\[
+\boxed{
+p_{New}-p_{Current}
+}
+\]
+
+where:
+
+\(p_{New}\) = population conversion rate for the new page\\
+\(p_{Current}\) = population conversion rate for the current page
+
+The sample estimate is:
+
+\[
+\boxed{
+\hat{p}_{New}-\hat{p}_{Current}
+}
+\]
+
+This follows the same general inference framework used previously:
+
+\[
+\text{Sample Statistic}
+\rightarrow
+\text{Estimate Population Parameter}
+\]
+
+Here:
+
+\[
+\hat{p}_{New}-\hat{p}_{Current}
+\rightarrow
+p_{New}-p_{Current}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Confidence Interval for Two
+Proportions}\label{confidence-interval-for-two-proportions}
+
+A confidence interval estimates the possible values of:
+
+\[
+p_1-p_2
+\]
+
+using the observed sample proportions.
+
+The standard error is:
+
+\[
+SE
+=
+\sqrt{
+\frac{
+\hat{p}_1(1-\hat{p}_1)
+}{
+n_1
+}
++
+\frac{
+\hat{p}_2(1-\hat{p}_2)
+}{
+n_2
+}
+}
+\]
+
+A 95\% confidence interval is approximately:
+
+\[
+\boxed{
+(\hat{p}_1-\hat{p}_2)
+\pm
+1.96(SE)
+}
+\]
+
+For the page experiment, the estimated difference is:
+
+\[
+0.30\text{ percentage points}
+\]
+
+and the 95\% confidence interval is:
+
+\[
+\boxed{
+(-0.61,\ 1.21)
+\text{ percentage points}
+}
+\]
+
+This interval includes:
+
+\[
+0
+\]
+
+so a population difference of zero is compatible with the data.
+
+The interval also tells us much more than simply whether the result is
+statistically significant.
+
+It describes the \textbf{range of plausible population differences}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Practical Importance}\label{practical-importance}
+
+Suppose the retailer decides that implementing the new page would only
+be worthwhile if conversion improves by at least:
+
+\[
+0.5\text{ percentage points}
+\]
+
+The confidence interval is:
+
+\[
+(-0.61,\ 1.21)
+\]
+
+This interval includes:
+
+\begin{itemize}
+\tightlist
+\item
+  Negative effects
+\item
+  No effect
+\item
+  Improvements smaller than 0.5 percentage points
+\item
+  Improvements larger than 0.5 percentage points
+\end{itemize}
+
+Therefore, the data do not precisely establish whether the improvement
+reaches the business threshold.
+
+This illustrates an important distinction:
+
+\begin{quote}
+\textbf{Statistical uncertainty and business importance are separate
+questions.}
+\end{quote}
+
+A confidence interval allows us to compare the estimated effect with a
+practically meaningful threshold rather than looking only at whether:
+
+\[
+p<0.05
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Hypothesis Test for Two
+Proportions}\label{hypothesis-test-for-two-proportions}
+
+To test whether the population conversion rates differ:
+
+\[
+H_0:
+p_{New}=p_{Current}
+\]
+
+which is equivalent to:
+
+\[
+H_0:
+p_{New}-p_{Current}=0
+\]
+
+Against the two-sided alternative:
+
+\[
+H_a:
+p_{New}\neq p_{Current}
+\]
+
+In R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ab\_test }\OtherTok{\textless{}{-}} \FunctionTok{prop.test}\NormalTok{(}
+    \AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\DecValTok{1230}\NormalTok{, }\DecValTok{1200}\NormalTok{),}
+    \AttributeTok{n =} \FunctionTok{c}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\DecValTok{10000}\NormalTok{),}
+    \AttributeTok{alternative =} \StringTok{"two.sided"}\NormalTok{,}
+    \AttributeTok{correct =} \ConstantTok{FALSE}
+\NormalTok{)}
+
+\NormalTok{ab\_test}
+\end{Highlighting}
+\end{Shaded}
+
+Here:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x} contains the number of successes
+\item
+  \texttt{n} contains the total number of observations
+\item
+  \texttt{alternative\ =\ "two.sided"} tests for any difference
+\item
+  \texttt{correct\ =\ FALSE} disables the continuity correction
+\end{itemize}
+
+For the example:
+
+\[
+p\text{-value}=0.516
+\]
+
+Because:
+
+\[
+0.516>0.05
+\]
+
+we fail to reject:
+
+\[
+H_0
+\]
+
+The experiment does not provide sufficient evidence that the population
+conversion rates differ.
+
+This does \textbf{not} prove:
+
+\[
+p_{New}=p_{Current}
+\]
+
+It means the observed data do not provide sufficient evidence of a
+difference.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Why Proportions Are Pooled for the Hypothesis
+Test}\label{why-proportions-are-pooled-for-the-hypothesis-test}
+
+There is an important difference between constructing a confidence
+interval and conducting the hypothesis test.
+
+\section{Confidence Interval}\label{confidence-interval}
+
+When constructing the confidence interval, we are \textbf{not assuming
+the population proportions are equal}.
+
+Therefore, we estimate their variability separately using:
+
+\[
+\hat{p}_1
+\]
+
+and:
+
+\[
+\hat{p}_2
+\]
+
+The standard error is:
+
+\[
+SE_{CI}
+=
+\sqrt{
+\frac{\hat{p}_1(1-\hat{p}_1)}{n_1}
++
+\frac{\hat{p}_2(1-\hat{p}_2)}{n_2}
+}
+\]
+
+\section{Hypothesis Test}\label{hypothesis-test}
+
+Under the null hypothesis:
+
+\[
+H_0:p_1=p_2
+\]
+
+we are explicitly assuming that both groups share \textbf{one common
+population proportion}.
+
+Therefore, we estimate that common proportion using the pooled sample
+proportion:
+
+\[
+\boxed{
+\hat{p}_{pool}
+=
+\frac{x_1+x_2}{n_1+n_2}
+}
+\]
+
+The hypothesis-test standard error uses:
+
+\[
+\hat{p}_{pool}
+\]
+
+because the test asks:
+
+\begin{quote}
+If the null hypothesis of equal population proportions were true, how
+much difference between the sample proportions would we expect from
+sampling variation alone?
+\end{quote}
+
+So:
+
+\begin{quote}
+\textbf{Confidence interval → keep proportions separate.}
+\end{quote}
+
+\begin{quote}
+\textbf{Hypothesis test under \(H_0:p_1=p_2\) → pool the proportions.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{From Two Groups to Several
+Groups}\label{from-two-groups-to-several-groups}
+
+Suppose the retailer introduces a third page.
+
+The results are now:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrrr@{}}
+\toprule\noalign{}
+Page & Visitors & Purchases & Conversion Rate \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Current & 10,000 & 1,200 & 12.0\% \\
+New & 10,000 & 1,230 & 12.3\% \\
+Third & 15,000 & 2,100 & 14.0\% \\
+\end{longtable}
+}
+
+Now the question becomes:
+
+\begin{quote}
+\textbf{Do conversion rates differ across the three pages?}
+\end{quote}
+
+The null hypothesis is:
+
+\[
+\boxed{
+H_0:
+p_{Current}
+=
+p_{New}
+=
+p_{Third}
+}
+\]
+
+The alternative is:
+
+\[
+\boxed{
+H_a:
+\text{Not all population conversion rates are equal}
+}
+\]
+
+With more than two groups, we can organize the data into a
+\textbf{contingency table} and use a \textbf{chi-square test}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Contingency Tables}\label{contingency-tables}
+
+A \textbf{contingency table}, also called a \textbf{two-way table},
+displays the counts corresponding to combinations of two categorical
+variables.
+
+For the page experiment, the two variables are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Page
+\item
+  Purchase outcome
+\end{enumerate}
+
+The table is:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Page & Purchased & Did Not Purchase \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Current & 1,200 & 8,800 \\
+New & 1,230 & 8,770 \\
+Third & 2,100 & 12,900 \\
+\end{longtable}
+}
+
+In R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{page\_table }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}
+    \AttributeTok{Purchased =}\NormalTok{ pages}\SpecialCharTok{$}\NormalTok{Purchases,}
+    \StringTok{\textasciigrave{}}\AttributeTok{Did not purchase}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ pages}\SpecialCharTok{$}\NormalTok{Visitors }\SpecialCharTok{{-}}\NormalTok{ pages}\SpecialCharTok{$}\NormalTok{Purchases}
+\NormalTok{)}
+
+\FunctionTok{rownames}\NormalTok{(page\_table) }\OtherTok{\textless{}{-}}\NormalTok{ pages}\SpecialCharTok{$}\NormalTok{Page}
+
+\NormalTok{page\_table}
+\end{Highlighting}
+\end{Shaded}
+
+Each visitor contributes to exactly \textbf{one cell} in the table.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Why Raw Counts Alone Can Be
+Misleading}\label{why-raw-counts-alone-can-be-misleading}
+
+Notice that the third page has:
+
+\[
+2100
+\]
+
+purchases compared with:
+
+\[
+1200
+\]
+
+for the current page.
+
+But the third page also has:
+
+\[
+15000
+\]
+
+visitors instead of:
+
+\[
+10000
+\]
+
+Therefore, comparing raw purchase counts alone would be misleading.
+
+The relevant quantities are the \textbf{conditional proportions}:
+
+\[
+\frac{\text{Purchases}}{\text{Visitors}}
+\]
+
+which give:
+
+\begin{itemize}
+\tightlist
+\item
+  Current: 12.0\%
+\item
+  New: 12.3\%
+\item
+  Third: 14.0\%
+\end{itemize}
+
+When group sizes differ, counts must be interpreted relative to the
+corresponding totals.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Chi-Square Test of
+Independence}\label{chi-square-test-of-independence}
+
+The \textbf{chi-square test of independence} determines whether two
+categorical variables are associated.
+
+For the page experiment, the variables are:
+
+\begin{itemize}
+\tightlist
+\item
+  Page assignment
+\item
+  Purchase outcome
+\end{itemize}
+
+The null hypothesis is:
+
+\[
+\boxed{
+H_0:
+\text{Page and purchase outcome are independent}
+}
+\]
+
+This can equivalently be written as:
+
+\[
+\boxed{
+H_0:
+p_{Current}
+=
+p_{New}
+=
+p_{Third}
+}
+\]
+
+The alternative is:
+
+\[
+\boxed{
+H_a:
+\text{Page and purchase outcome are associated}
+}
+\]
+
+or equivalently:
+
+\[
+H_a:
+\text{Not all population conversion rates are equal}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{What Does Independence
+Mean?}\label{what-does-independence-mean}
+
+Two categorical variables are \textbf{independent} if knowing the value
+of one does not change the distribution of the other.
+
+In this example:
+
+\begin{quote}
+Page and purchase outcome are independent if knowing which page a
+visitor sees does not change their probability of purchasing.
+\end{quote}
+
+If:
+
+\[
+P(\text{Purchase}\mid\text{Current})
+=
+P(\text{Purchase}\mid\text{New})
+=
+P(\text{Purchase}\mid\text{Third})
+\]
+
+then page and purchase are independent.
+
+If these probabilities differ, the variables are associated.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Observed vs.~Expected
+Counts}\label{observed-vs.-expected-counts}
+
+The chi-square test compares:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Observed counts} --- what actually occurred
+\item
+  \textbf{Expected counts} --- what we would expect if the null
+  hypothesis of independence were true
+\end{itemize}
+
+The observed counts are denoted:
+
+\[
+O_{ij}
+\]
+
+and the expected counts are denoted:
+
+\[
+E_{ij}
+\]
+
+The core question is:
+
+\begin{quote}
+\textbf{If these variables were really independent, what would this
+table approximately look like?}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Expected Counts Under
+Independence}\label{expected-counts-under-independence}
+
+Across all three pages:
+
+\[
+1200+1230+2100
+=
+4530
+\]
+
+visitors purchased.
+
+There are:
+
+\[
+10000+10000+15000
+=
+35000
+\]
+
+total visitors.
+
+Therefore, the overall purchase rate is:
+
+\[
+\frac{4530}{35000}
+\approx
+0.1294
+\]
+
+or:
+
+\[
+12.94\%
+\]
+
+If page and purchase outcome are independent, each page should have
+approximately this same conversion rate.
+
+For the current page:
+
+\[
+E_{\text{Current,Purchased}}
+=
+10000(0.1294)
+\approx
+1294.3
+\]
+
+More generally, expected counts are calculated as:
+
+\[
+\boxed{
+E_{ij}
+=
+\frac{
+(\text{Row Total}_i)
+(\text{Column Total}_j)
+}{
+\text{Grand Total}
+}
+}
+\]
+
+This formula preserves the observed row and column totals while
+constructing the table we would expect under independence.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Why Expected Counts Can Differ Across
+Groups}\label{why-expected-counts-can-differ-across-groups}
+
+Independence does \textbf{not} mean that every group should have
+identical counts.
+
+The third page has:
+
+\[
+15000
+\]
+
+visitors while the other pages have:
+
+\[
+10000
+\]
+
+each.
+
+Even if all three pages have exactly the same underlying conversion
+probability, we would expect more purchases from the third page simply
+because more people saw it.
+
+Therefore:
+
+\begin{quote}
+\textbf{Independence implies comparable proportions, not necessarily
+identical counts.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Pearson Chi-Square
+Statistic}\label{pearson-chi-square-statistic}
+
+The Pearson chi-square statistic measures how far the observed counts
+are from the counts expected under the null hypothesis.
+
+\[
+\boxed{
+X^2
+=
+\sum_{i,j}
+\frac{
+(O_{ij}-E_{ij})^2
+}{
+E_{ij}
+}
+}
+\]
+
+Each cell contributes:
+
+\[
+\frac{(O-E)^2}{E}
+\]
+
+to the total statistic.
+
+The logic is:
+
+\subsection{\texorpdfstring{\(O-E\)}{O-E}}\label{o-e}
+
+Measures how far the observed count is from the expected count.
+
+\subsection{Squaring}\label{squaring}
+
+\[
+(O-E)^2
+\]
+
+prevents positive and negative differences from canceling each other
+out.
+
+\subsection{\texorpdfstring{Dividing by
+\(E\)}{Dividing by E}}\label{dividing-by-e}
+
+\[
+\frac{(O-E)^2}{E}
+\]
+
+scales the discrepancy relative to the size of the expected count.
+
+Therefore:
+
+\begin{quote}
+\textbf{Larger \(X^2\) values indicate greater disagreement between the
+observed data and the null model.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Degrees of Freedom}\label{degrees-of-freedom}
+
+For a contingency table with:
+
+\begin{itemize}
+\tightlist
+\item
+  \(r\) rows
+\item
+  \(c\) columns
+\end{itemize}
+
+the degrees of freedom are:
+
+\[
+\boxed{
+df=(r-1)(c-1)
+}
+\]
+
+For the page experiment:
+
+\[
+r=3
+\]
+
+and:
+
+\[
+c=2
+\]
+
+so:
+
+\[
+df
+=
+(3-1)(2-1)
+=
+2
+\]
+
+Therefore:
+
+\[
+\boxed{df=2}
+\]
+
+Under the null hypothesis and appropriate conditions:
+
+\[
+X^2
+\sim
+\chi^2_{(r-1)(c-1)}
+\]
+
+approximately.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Chi-Square Test in R}\label{chi-square-test-in-r}
+
+The test can be conducted using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{page\_test }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(}
+\NormalTok{    page\_table,}
+    \AttributeTok{correct =} \ConstantTok{FALSE}
+\NormalTok{)}
+
+\NormalTok{page\_test}
+\end{Highlighting}
+\end{Shaded}
+
+For the three-page example:
+
+\[
+X^2=26.435
+\]
+
+with:
+
+\[
+df=2
+\]
+
+and:
+
+\[
+p\text{-value}
+=
+1.819\times10^{-6}
+\]
+
+The p-value is extremely small, so we reject:
+
+\[
+H_0
+\]
+
+and conclude that page assignment and purchase outcome are associated.
+
+Equivalently:
+
+\begin{quote}
+\textbf{There is evidence that at least two of the population conversion
+rates differ.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{What an Overall Chi-Square Test Does Not Tell
+You}\label{what-an-overall-chi-square-test-does-not-tell-you}
+
+A significant chi-square test tells us:
+
+\[
+\boxed{
+\text{Some association exists}
+}
+\]
+
+or:
+
+\[
+\boxed{
+\text{Not all population proportions are equal}
+}
+\]
+
+It does \textbf{not} automatically tell us:
+
+\begin{itemize}
+\tightlist
+\item
+  Every group differs from every other group
+\item
+  Which specific groups differ
+\item
+  Which group should be selected by the business
+\item
+  Whether the differences are practically important
+\end{itemize}
+
+For the page example, rejecting:
+
+\[
+H_0:
+p_{Current}=p_{New}=p_{Third}
+\]
+
+means the equality of all three proportions is inconsistent with the
+data.
+
+It does \textbf{not} mean:
+
+\[
+p_{Current}\neq p_{New}\neq p_{Third}
+\]
+
+in every pairwise comparison.
+
+The next step is to investigate \textbf{where the association appears}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Two-Proportion Test and Chi-Square
+Connection}\label{two-proportion-test-and-chi-square-connection}
+
+With exactly two groups and two outcomes, the contingency table is:
+
+\[
+2\times2
+\]
+
+For example:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Page & Purchased & Did Not Purchase \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+New & 1230 & 8770 \\
+Current & 1200 & 8800 \\
+\end{longtable}
+}
+
+The chi-square test can be run using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{two\_page\_table }\OtherTok{\textless{}{-}}\NormalTok{ page\_table[}
+    \FunctionTok{c}\NormalTok{(}\StringTok{"New"}\NormalTok{, }\StringTok{"Current"}\NormalTok{),}
+\NormalTok{]}
+
+\NormalTok{two\_page\_test }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(}
+\NormalTok{    two\_page\_table,}
+    \AttributeTok{correct =} \ConstantTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+For a two-sided comparison without continuity correction, the
+two-proportion test and chi-square test are mathematically connected:
+
+\[
+\boxed{
+X^2=z^2
+}
+\]
+
+Therefore, they produce the same p-value in this setting.
+
+For this example:
+
+\[
+p\approx0.516
+\]
+
+from either method.
+
+So the two-proportion test and chi-square test are not unrelated
+techniques.
+
+The two-proportion test is closely connected to the chi-square framework
+when the table is:
+
+\[
+2\times2
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Finding Where the Association
+Occurs}\label{finding-where-the-association-occurs}
+
+After obtaining a significant overall chi-square test, first examine the
+category proportions.
+
+For the page experiment:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lr@{}}
+\toprule\noalign{}
+Page & Conversion Rate \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Current & 12.0\% \\
+New & 12.3\% \\
+Third & 14.0\% \\
+\end{longtable}
+}
+
+The pooled conversion rate is approximately:
+
+\[
+12.94\%
+\]
+
+The third page appears noticeably higher than the other two.
+
+This provides a descriptive indication of where the association may be
+occurring.
+
+However, we can investigate individual cells more formally using
+\textbf{standardized residuals}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Standardized Residuals}\label{standardized-residuals}
+
+A \textbf{standardized residual} measures how far an observed cell count
+differs from what would be expected under independence, accounting for
+the cell's variability.
+
+In R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}
+\NormalTok{    page\_test}\SpecialCharTok{$}\NormalTok{stdres,}
+    \DecValTok{2}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+For the page example:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Page & Purchased & Did Not Purchase \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Current & -3.32 & 3.32 \\
+New & -2.27 & 2.27 \\
+Third & 5.10 & -5.10 \\
+\end{longtable}
+}
+
+Interpretation:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Positive residual} → more observations than expected
+\item
+  \textbf{Negative residual} → fewer observations than expected
+\item
+  \textbf{Large absolute residual} → stronger departure from
+  independence
+\end{itemize}
+
+For the third page:
+
+\[
+5.10
+\]
+
+for purchases means substantially \textbf{more purchases occurred than
+expected under independence}.
+
+Its non-purchase residual is:
+
+\[
+-5.10
+\]
+
+meaning substantially \textbf{fewer non-purchases occurred than
+expected}.
+
+This pattern helps explain the significant overall chi-square statistic.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Why Residuals Come in Opposite
+Directions}\label{why-residuals-come-in-opposite-directions}
+
+Within a row, the total number of visitors is fixed.
+
+If a page has more purchases than expected, those additional
+observations must come from somewhere.
+
+Therefore, it will also have fewer non-purchases than expected.
+
+For example:
+
+\[
+O_{\text{Purchased}}
+>
+E_{\text{Purchased}}
+\]
+
+will correspond with:
+
+\[
+O_{\text{Not Purchased}}
+<
+E_{\text{Not Purchased}}
+\]
+
+when there are only two outcome categories.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Conditions for the Chi-Square
+Approximation}\label{conditions-for-the-chi-square-approximation}
+
+Before trusting a chi-square test, check whether its assumptions are
+reasonable.
+
+\section{Independent Observations}\label{independent-observations}
+
+Observations should contribute independently.
+
+For example, each visitor should contribute one independent observation
+rather than the same visitor appearing repeatedly and being treated as
+independent observations.
+
+A huge dataset does not solve a violation of independence.
+
+\begin{quote}
+\textbf{More rows do not fix dependence among observations.}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Mutually Exclusive
+Categories}\label{mutually-exclusive-categories}
+
+Each observational unit should contribute to exactly one cell.
+
+For example, a visitor cannot simultaneously be classified as both:
+
+\begin{itemize}
+\tightlist
+\item
+  Purchased
+\item
+  Did not purchase
+\end{itemize}
+
+The categories must be mutually exclusive for the table being analyzed.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Expected Counts}\label{expected-counts}
+
+Expected counts should be sufficiently large for the chi-square
+approximation to be reliable.
+
+A simple conservative rule is:
+
+\[
+\boxed{
+E_{ij}\geq5
+}
+\]
+
+for every cell.
+
+Expected counts can be inspected in R using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(}
+\NormalTok{    page\_test}\SpecialCharTok{$}\NormalTok{expected,}
+    \DecValTok{1}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+For the page example:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Page & Purchased & Did Not Purchase \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Current & 1294.3 & 8705.7 \\
+New & 1294.3 & 8705.7 \\
+Third & 1941.4 & 13058.6 \\
+\end{longtable}
+}
+
+All expected counts are far greater than 5.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Chi-Square Test of Independence:
+Workflow}\label{chi-square-test-of-independence-workflow}
+
+When determining whether two categorical variables are associated:
+
+\section{Step 1: Identify the Observational
+Unit}\label{step-1-identify-the-observational-unit-1}
+
+Determine what one observation represents.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 2: Identify the Two Categorical
+Variables}\label{step-2-identify-the-two-categorical-variables}
+
+For example:
+
+\begin{itemize}
+\tightlist
+\item
+  Page
+\item
+  Purchase outcome
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 3: Construct a Contingency
+Table}\label{step-3-construct-a-contingency-table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(}
+    \AttributeTok{Variable1 =}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{variable1,}
+    \AttributeTok{Variable2 =}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{variable2}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 4: Examine Counts and
+Proportions}\label{step-4-examine-counts-and-proportions}
+
+Do not rely only on raw counts.
+
+Compare relevant percentages or conditional proportions.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 5: State the
+Hypotheses}\label{step-5-state-the-hypotheses}
+
+\[
+H_0:
+\text{The variables are independent}
+\]
+
+\[
+H_a:
+\text{The variables are associated}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 6: Calculate Expected
+Counts}\label{step-6-calculate-expected-counts}
+
+Conceptually:
+
+\[
+E_{ij}
+=
+\frac{
+(\text{Row Total})
+(\text{Column Total})
+}{
+\text{Grand Total}
+}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 7: Check Conditions}\label{step-7-check-conditions}
+
+Verify:
+
+\begin{itemize}
+\tightlist
+\item
+  Independent observations
+\item
+  Mutually exclusive categories
+\item
+  Adequate expected counts
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 8: Conduct the Test}\label{step-8-conduct-the-test}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(}
+\NormalTok{    contingency\_table,}
+    \AttributeTok{correct =} \ConstantTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 9: Interpret the Overall
+Result}\label{step-9-interpret-the-overall-result}
+
+If the p-value is small:
+
+\begin{quote}
+There is evidence of an association between the categorical variables.
+\end{quote}
+
+If the p-value is not small:
+
+\begin{quote}
+The data do not provide sufficient evidence of an association.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 10: Investigate the
+Pattern}\label{step-10-investigate-the-pattern}
+
+If the overall test is significant, examine:
+
+\begin{itemize}
+\tightlist
+\item
+  Conditional proportions
+\item
+  Observed vs.~expected counts
+\item
+  Standardized residuals
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{test}\SpecialCharTok{$}\NormalTok{expected}
+\NormalTok{test}\SpecialCharTok{$}\NormalTok{stdres}
+\end{Highlighting}
+\end{Shaded}
+
+This helps determine which categories appear to contribute most strongly
+to the overall association.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Example: Homeownership and Marital
+Status}\label{example-homeownership-and-marital-status}
+
+Suppose we ask:
+
+\begin{quote}
+Is homeownership associated with marital status among the households in
+these data?
+\end{quote}
+
+The two categorical variables are:
+
+\subsection{Homeownership}\label{homeownership}
+
+Possible categories include:
+
+\begin{itemize}
+\tightlist
+\item
+  Homeowner
+\item
+  Probable Owner
+\item
+  Probable Renter
+\item
+  Renter
+\item
+  Unknown
+\end{itemize}
+
+\subsection{Marital Status}\label{marital-status}
+
+The codes are:
+
+\begin{itemize}
+\tightlist
+\item
+  A = Married
+\item
+  B = Unmarried
+\item
+  U = Unknown
+\end{itemize}
+
+A contingency table might be created using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(}
+    \AttributeTok{Homeownership =}\NormalTok{ hh}\SpecialCharTok{$}\NormalTok{homeowner\_desc,}
+    \AttributeTok{Marital\_status =}\NormalTok{ hh}\SpecialCharTok{$}\NormalTok{marital\_status\_code}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The hypotheses are:
+
+\[
+H_0:
+\text{Homeownership and marital status are independent}
+\]
+
+\[
+H_a:
+\text{Homeownership and marital status are associated}
+\]
+
+Before running the test, however, we must decide which categories should
+be included.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Category Definitions Matter}\label{category-definitions-matter}
+
+Suppose the data contain categories such as:
+
+\begin{itemize}
+\tightlist
+\item
+  Unknown homeownership
+\item
+  Unknown marital status
+\item
+  Probable owner
+\item
+  Probable renter
+\end{itemize}
+
+The decision to include, combine, or exclude these categories changes
+the population represented by the analysis and therefore changes the
+interpretation.
+
+For example, removing unknown marital status means the analysis is no
+longer about:
+
+\begin{quote}
+All households in the dataset.
+\end{quote}
+
+It becomes an analysis of:
+
+\begin{quote}
+Households with known marital status.
+\end{quote}
+
+Therefore:
+
+\begin{quote}
+\textbf{Data-cleaning decisions are part of the statistical analysis
+because they determine what population the resulting inference
+describes.}
+\end{quote}
+
+Categories should not be removed simply because they are inconvenient.
+
+The decision should follow from the research question and the meaning of
+the categories.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Association Does Not Imply
+Causation}\label{association-does-not-imply-causation}
+
+Suppose the chi-square analysis finds an association between:
+
+\begin{itemize}
+\tightlist
+\item
+  Marital status
+\item
+  Homeownership
+\end{itemize}
+
+Can we conclude:
+
+\begin{quote}
+Getting married causes people to become homeowners?
+\end{quote}
+
+No.
+
+The chi-square test establishes statistical evidence of an
+\textbf{association}.
+
+It does not establish the causal mechanism behind that association.
+
+Other variables might affect both marital status and homeownership, such
+as:
+
+\begin{itemize}
+\tightlist
+\item
+  Age
+\item
+  Income
+\item
+  Household size
+\item
+  Employment
+\item
+  Geographic location
+\end{itemize}
+
+Therefore:
+
+\[
+\boxed{
+\text{Association}
+\neq
+\text{Causation}
+}
+\]
+
+The study design determines whether causal conclusions are justified.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Chi-Square Goodness-of-Fit
+Test}\label{chi-square-goodness-of-fit-test}
+
+The chi-square framework can also answer a different type of categorical
+question.
+
+Suppose a retailer expects customers to make their first purchase
+through:
+
+\begin{itemize}
+\tightlist
+\item
+  Store: 50\%
+\item
+  Website: 30\%
+\item
+  App: 20\%
+\end{itemize}
+
+These percentages represent a \textbf{specified benchmark distribution}.
+
+An independent sample of 500 customers produces:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Channel & Observed Customers & Benchmark Share \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Store & 240 & 50\% \\
+Website & 160 & 30\% \\
+App & 100 & 20\% \\
+\end{longtable}
+}
+
+The question is:
+
+\begin{quote}
+\textbf{Does the observed channel mix match the retailer's specified
+benchmark distribution?}
+\end{quote}
+
+This is a \textbf{chi-square goodness-of-fit test}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Independence
+vs.~Goodness-of-Fit}\label{independence-vs.-goodness-of-fit}
+
+These two chi-square procedures answer different questions.
+
+\section{Chi-Square Test of
+Independence}\label{chi-square-test-of-independence-1}
+
+Uses \textbf{two categorical variables}.
+
+Example:
+
+\begin{quote}
+Is page assignment associated with purchase outcome?
+\end{quote}
+
+The data form a two-way contingency table.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Chi-Square Goodness-of-Fit
+Test}\label{chi-square-goodness-of-fit-test-1}
+
+Uses \textbf{one categorical variable} and compares its observed
+distribution with specified benchmark probabilities.
+
+Example:
+
+\begin{quote}
+Does customer channel mix match 50\% store, 30\% website, and 20\% app?
+\end{quote}
+
+The distinction is:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3000}}
+  >{\raggedleft\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Variables
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Question
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Chi-square independence & 2 categorical variables & Are the variables
+associated? \\
+Chi-square goodness-of-fit & 1 categorical variable & Does its
+distribution match specified proportions? \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Expected Counts for
+Goodness-of-Fit}\label{expected-counts-for-goodness-of-fit}
+
+Suppose:
+
+\[
+n=500
+\]
+
+and the benchmark probabilities are:
+
+\[
+p_{Store}=0.50
+\]
+
+\[
+p_{Website}=0.30
+\]
+
+\[
+p_{App}=0.20
+\]
+
+Expected counts are:
+
+\[
+E_i=np_{i,0}
+\]
+
+Therefore:
+
+\subsection{Store}\label{store}
+
+\[
+E_{Store}
+=
+500(0.50)
+=
+250
+\]
+
+\subsection{Website}\label{website}
+
+\[
+E_{Website}
+=
+500(0.30)
+=
+150
+\]
+
+\subsection{App}\label{app}
+
+\[
+E_{App}
+=
+500(0.20)
+=
+100
+\]
+
+So under the benchmark:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+Channel & Observed & Expected \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Store & 240 & 250 \\
+Website & 160 & 150 \\
+App & 100 & 100 \\
+\end{longtable}
+}
+
+The chi-square statistic again measures how far observed counts are from
+expected counts.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Goodness-of-Fit Chi-Square
+Statistic}\label{goodness-of-fit-chi-square-statistic}
+
+The statistic is:
+
+\[
+\boxed{
+X^2
+=
+\sum_i
+\frac{
+(O_i-E_i)^2
+}{
+E_i
+}
+}
+\]
+
+where:
+
+\[
+E_i=np_{i,0}
+\]
+
+The logic is identical to the independence test:
+
+\begin{quote}
+Compare what we observed with what we would expect if the null model
+were correct.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Goodness-of-Fit Hypotheses}\label{goodness-of-fit-hypotheses}
+
+For the channel example:
+
+\[
+H_0:
+\begin{cases}
+p_{Store}=0.50\\
+p_{Website}=0.30\\
+p_{App}=0.20
+\end{cases}
+\]
+
+The alternative is:
+
+\[
+H_a:
+\text{The population distribution differs from the benchmark in at least one category}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Goodness-of-Fit Degrees of
+Freedom}\label{goodness-of-fit-degrees-of-freedom}
+
+If there are:
+
+\[
+k
+\]
+
+categories and their probabilities are specified in advance, then:
+
+\[
+\boxed{
+df=k-1
+}
+\]
+
+For three channels:
+
+\[
+df=3-1=2
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Goodness-of-Fit in R}\label{goodness-of-fit-in-r}
+
+Suppose:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{channel\_counts }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+    \AttributeTok{Store =} \DecValTok{240}\NormalTok{,}
+    \AttributeTok{Website =} \DecValTok{160}\NormalTok{,}
+    \AttributeTok{App =} \DecValTok{100}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The test can be performed with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{(}
+\NormalTok{    channel\_counts,}
+    \AttributeTok{p =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.50}\NormalTok{, }\FloatTok{0.30}\NormalTok{, }\FloatTok{0.20}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+For the example:
+
+\[
+X^2=1.0667
+\]
+
+\[
+df=2
+\]
+
+and:
+
+\[
+p\text{-value}=0.5866
+\]
+
+Because the p-value is not small, we fail to reject the null hypothesis.
+
+The data do not provide sufficient evidence that the population channel
+distribution differs from:
+
+\[
+50\%,30\%,20\%
+\]
+
+This does \textbf{not} prove that the true population proportions are
+exactly:
+
+\[
+50\%,30\%,20\%
+\]
+
+It means the observed differences are not sufficiently inconsistent with
+the benchmark to reject it.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{One Logic Behind Both Chi-Square
+Tests}\label{one-logic-behind-both-chi-square-tests}
+
+Both chi-square procedures follow the same basic structure:
+
+\[
+\boxed{
+\text{Observed}
+\quad\text{vs.}\quad
+\text{Expected under }H_0
+}
+\]
+
+and both use:
+
+\[
+\boxed{
+X^2
+=
+\sum
+\frac{(O-E)^2}{E}
+}
+\]
+
+What changes is \textbf{where the expected counts come from}.
+
+\subsection{Test of Independence}\label{test-of-independence}
+
+Expected counts are determined from the row and column totals:
+
+\[
+E_{ij}
+=
+\frac{
+(\text{Row Total}_i)
+(\text{Column Total}_j)
+}{
+\text{Grand Total}
+}
+\]
+
+\subsection{Goodness-of-Fit}\label{goodness-of-fit}
+
+Expected counts come from specified benchmark probabilities:
+
+\[
+E_i=np_{i,0}
+\]
+
+So the mathematical logic is the same, but the null model is different.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Choosing the Appropriate Categorical
+Method}\label{choosing-the-appropriate-categorical-method}
+
+The first step is identifying the business question.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Business Question
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Analysis
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+How much do two conversion rates differ? & Two-proportion CI and test \\
+Does conversion differ across three pages? & Chi-square test on a
+two-way table \\
+Are homeownership and marital status associated? & Chi-square test of
+independence \\
+Does channel mix match specified shares? & Chi-square goodness-of-fit
+test \\
+\end{longtable}
+}
+
+A useful decision process is:
+
+\subsection{Are You Comparing Two Population
+Proportions?}\label{are-you-comparing-two-population-proportions}
+
+For example:
+
+\begin{quote}
+Does the new page have a different conversion rate from the current
+page?
+\end{quote}
+
+Use:
+
+\[
+\boxed{\text{Two-Proportion Inference}}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Are You Examining Two Categorical
+Variables?}\label{are-you-examining-two-categorical-variables}
+
+For example:
+
+\begin{quote}
+Is purchase outcome associated with which page a customer sees?
+\end{quote}
+
+or:
+
+\begin{quote}
+Is homeownership associated with marital status?
+\end{quote}
+
+Use:
+
+\[
+\boxed{\text{Chi-Square Test of Independence}}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Are You Comparing One Categorical Variable to Predetermined
+Proportions?}\label{are-you-comparing-one-categorical-variable-to-predetermined-proportions}
+
+For example:
+
+\begin{quote}
+Does the observed channel mix match the expected 50/30/20 split?
+\end{quote}
+
+Use:
+
+\[
+\boxed{\text{Chi-Square Goodness-of-Fit Test}}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Categorical Inference
+Workflow}\label{categorical-inference-workflow}
+
+When working with categorical data:
+
+\section{Step 1: Identify the Business
+Question}\label{step-1-identify-the-business-question}
+
+Determine what comparison is actually being requested.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 2: Identify the Observational
+Unit}\label{step-2-identify-the-observational-unit}
+
+Ask:
+
+\begin{quote}
+What does one observation represent?
+\end{quote}
+
+This is essential for determining whether observations are independent.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 3: Identify the Categorical
+Variables}\label{step-3-identify-the-categorical-variables}
+
+Determine whether the problem contains:
+
+\begin{itemize}
+\tightlist
+\item
+  One categorical variable
+\item
+  Two categorical variables
+\item
+  Two groups with a binary outcome
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 4: Examine Counts and
+Proportions}\label{step-4-examine-counts-and-proportions-1}
+
+Construct:
+
+\begin{itemize}
+\tightlist
+\item
+  Frequency tables
+\item
+  Contingency tables
+\item
+  Conditional proportions
+\item
+  Bar charts when useful
+\end{itemize}
+
+Do not interpret raw counts without considering group sizes.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 5: Choose the Appropriate
+Method}\label{step-5-choose-the-appropriate-method}
+
+\[
+\begin{array}{c}
+\text{Categorical Outcome}\\
+\downarrow\\
+\begin{cases}
+\text{Two proportions}
+\rightarrow
+\text{Two-proportion inference}\\[6pt]
+\text{Two categorical variables}
+\rightarrow
+\chi^2\text{ independence}\\[6pt]
+\text{One categorical variable vs. benchmark}
+\rightarrow
+\chi^2\text{ goodness-of-fit}
+\end{cases}
+\end{array}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 6: State the Null
+Model}\label{step-6-state-the-null-model}
+
+For two proportions:
+
+\[
+H_0:p_1=p_2
+\]
+
+For independence:
+
+\[
+H_0:
+\text{The categorical variables are independent}
+\]
+
+For goodness-of-fit:
+
+\[
+H_0:
+\text{The category probabilities equal the specified benchmark}
+\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 7: Check Conditions}\label{step-7-check-conditions-1}
+
+Depending on the method, examine:
+
+\begin{itemize}
+\tightlist
+\item
+  Independence of observations
+\item
+  Mutually exclusive categories
+\item
+  Expected counts
+\item
+  Sample sizes
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 8: Conduct the
+Analysis}\label{step-8-conduct-the-analysis}
+
+Use the appropriate R function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{prop.test}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+or:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chisq.test}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 9: Interpret in
+Context}\label{step-9-interpret-in-context}
+
+Translate the statistical result back into the business question.
+
+Avoid saying only:
+
+\begin{quote}
+The p-value is significant.
+\end{quote}
+
+Instead explain \textbf{what statistical relationship the data support}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Step 10: Separate Association from
+Causation}\label{step-10-separate-association-from-causation}
+
+A statistically significant association does not automatically establish
+causality.
+
+Ask:
+
+\begin{quote}
+\textbf{How were the data generated?}
+\end{quote}
+
+Random assignment can support causal interpretation.
+
+Observational association by itself cannot.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\bookmarksetup{startatroot}
+
+\chapter{Connecting Lectures 5--8}\label{connecting-lectures-58}
+
+The inferential methods covered so far can now be organized according to
+the \textbf{type of outcome and study design}.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Question
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Parameter / Structure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Method
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+What is one population mean? & \(\mu\) & One-sample t \\
+What is the mean difference for linked observations? & \(\mu_d\) &
+Paired t \\
+How do two independent population means differ? & \(\mu_1-\mu_2\) &
+Welch two-sample t \\
+How do two population proportions differ? & \(p_1-p_2\) & Two-proportion
+inference \\
+Are two categorical variables associated? & Contingency table &
+Chi-square independence \\
+Does one categorical distribution match specified shares? &
+\(p_1,\ldots,p_k\) & Chi-square goodness-of-fit \\
+\end{longtable}
+}
+
+The broader decision process is:
+
+\[
+\boxed{
+\text{Business Question}
+\rightarrow
+\text{Outcome Type}
+\rightarrow
+\text{Study Design}
+\rightarrow
+\text{Parameter}
+\rightarrow
+\text{Statistical Method}
+\rightarrow
+\text{Interpretation}
+}
+\]
+
+The key idea remains the same:
+
+\begin{quote}
+\textbf{Do not start by choosing a statistical test. Start by
+understanding what the variables represent, how the data were generated,
+and what population question you are trying to answer.}
+\end{quote}
+
+
+
+
+\end{document}

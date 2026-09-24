@@ -65,7 +65,7 @@ Systematic
 
 Suppose you drew a different random sample of 2,500 households and recomputed the average spend each time, 1000 times. What would the distributions of those averages be? How would that be different from the the distribution of the raw values themselves?
 
-The sampling distribution is the distribution of a statistic (e.g., \bar X) across all possible repeated samples of the same size from a population.
+The sampling distribution is the distribution of a statistic (e.g., $\bar{X}$) across all possible repeated samples of the same size from a population.
 
 Center
 : tells us where the statistic tends to fall and whether it is centered on the true population parameter.
